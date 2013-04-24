@@ -1,6 +1,8 @@
-This is the makefile I use to organize/build my school notes and notes I take
-on books I read. Someday, I might publish both of those sets of notes, but for
-now, this is what I'm posting.
+I initially created this template directory for school notes, but have started
+using it to take notes on books and music I experience.
+
+Someday I may publish these sets of notes, but for now, this is what I'm
+posting.
 
 For my school notes, I structure my notes as follows:
 ```
