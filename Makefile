@@ -25,13 +25,12 @@
 #  |-- typeset_full.tex
 #  l-- typeset_phone.tex
 #
-# Phone & Full notes are formatted either as 8.5x11 or iPhone sized.
-
+# Phone & Full notes are formatted for iPhone 3G or 8.5x11 respectively
 
 # Find the notes/assignment/lab files:
 _all_generated = $(wildcard ./**/labs/l*/*.tex)
 
-# Targets.
+# Targets. I have ~4 of these (notes/labs/etc)
 PHONY = default all clean
 
 default:
