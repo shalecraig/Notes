@@ -1,0 +1,11 @@
+wget \
+    --recursive \
+    --page-requisites \
+    --convert-links \
+    --restrict-file-names=windows \
+    --domains uwaterloo.ca \
+    --no-parent \
+    --follow-ftp \
+    --reject=ova,mov,zip,rar,exe \
+    --reject=*@* \
+    https://cs.uwaterloo.ca/\~lank/CS349/ .

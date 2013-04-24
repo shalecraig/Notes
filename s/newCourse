@@ -1,0 +1,9 @@
+#/bin/sh
+
+
+echo '---Making directory'
+cp -r template new
+
+echo '---Linking templates'
+ln -sf latex_templates/typeset_full.tex new/notes/typeset_full.tex
+ln -sf latex_templates/typeset_phone.tex new/notes/typeset_phone.tex
