@@ -32,3 +32,25 @@ $tree template latex_templates
 Phone & Full notes are formatted for iPhone 3G or 8.5x11 respectively.
 
 To add a new section, run the script `s/new`.
+
+To build, run the makefile. I like to use something along the lines of
+`make -j 4` to build the notes in parallel.
+
+If you have any questions, feel free to send in pull requests.
+
+I plan on extending this to also compile `latex` for the web, but I don't have
+the patience nor need to do this right at this moment. Running `htlatex` is
+enough for the 1-offs I need right now.
+
+# Wishlist:
+- Compile using `htlatex` _and_ `pdflatex`. *3 minutes*
+
+- Do _really good_ compile-time spell-checking. *no clue*
+
+- Investigate LaTeX to markdown compilation. *1 Hour*
+
+- Clean up the makefile. *2 Hour*
+
+- Figure out how addons will work. *1 Hour*
+
+- Build in some docco integration addon. *2 Hours*
