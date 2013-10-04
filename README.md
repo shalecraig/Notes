@@ -31,7 +31,7 @@ $tree template latex_templates
 
 Phone & Full notes are formatted for iPhone 3G or 8.5x11 respectively.
 
-To add a new section, run the script `s/new`.
+To add a new section, run the script `s/newCourse`.
 
 To build, run the makefile. I like to use something along the lines of
 `make -j 4` to build the notes in parallel.
