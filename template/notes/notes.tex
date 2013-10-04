@@ -4,6 +4,44 @@
   \input{typeset_full.tex}
 \fi
 
+\usepackage{listings}
+
+% Course Name
+\title{ECON 101}
+
+% Fill in your name.
+\author{Shale Craig
+Prof: Nafeez Fatima}
+
+% Set the default pseudocode language:
+\lstset{language=Pascal}
+
+% Now we will begin writing the document.
 \begin{document}
-    Some notes, written in \LaTeX.
+    \maketitle
+
+    % Next, we need to make a Table of Contents, List of Figures and
+    % List of Tables.  You will most likely need to run LaTeX twice to
+    % get these correct.  The first pass for LaTeX to figure out the
+    % labels, and the second pass to put in the right references.
+    \tableofcontents
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% REPORT BODY
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% \main will make the \section commands numbered again,
+    %% it will also use arabic page numbers.
+    \mainmatter
+
+    \chapter{Foo} % (fold)
+    \label{cha:foo}
+        \section{foo} % (fold)
+        \label{sec:foo}
+            Some notes, written in \LaTeX.
+            \begin{lstlisting}
+foo bar baz
+            \end{lstlisting}
+        % section foo (end)
+    % chapter foo (end)
 \end{document}
+

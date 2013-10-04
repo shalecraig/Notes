@@ -49,8 +49,6 @@ enough for the 1-offs I need right now.
 
 - Investigate LaTeX to markdown compilation. *1 Hour*
 
-- Clean up the makefile. *2 Hour*
-
 - Figure out how addons will work. *1 Hour*
 
 - Build in some docco integration addon. *2 Hours*
