@@ -1,0 +1,11 @@
+#/bin/sh
+
+echo 'What is the course name?'
+read -e COURSE_NAME
+
+echo '---Making directory'
+cp -r template/ $COURSE_NAME
+
+echo '---Linking templates'
+ln latex_templates/typeset_full.tex $COURSE_NAME/notes/typeset_full.tex
+ln latex_templates/typeset_phone.tex $COURSE_NAME/notes/typeset_phone.tex
