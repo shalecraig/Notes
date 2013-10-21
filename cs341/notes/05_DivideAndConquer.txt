@@ -1,0 +1,43 @@
+Idea is to divide into subproblems of the same type, recurse, then combine.
+Example 1:
+    Find the "maxima" in a set of points (where no point is greater in y and x)
+    Pseudocode:
+        maxima(P, start, end):
+            // Assume P is sorted by x
+        1.  n = end-start
+        2.      If n == 1 return p
+        3.  a1...al = maxima(P, start, start+n/2)
+        4.  b1...bm = maxima(P, start+n/2, end)
+        5.  while(a[i].y > b[i].y)
+        6.      i++
+        7.  return [a1...ai, s1...si]
+    Analysis:
+        Let T(n) = runtime.
+        2: T(n/2)
+        3: T(n/2)
+        4-6: O(n)
+        => T(n) = 2T(n/2) + n
+        => T(n) = O(nlog(n))
+Example 2:
+    Find the closest pair of points in 2D:
+    Pseudocode: (divide vertically)
+        closestPair(P):
+        1.  if n≤3 return ...
+        2.  x_n = median of x coordinates
+        3.  PointsLeft = {P in points | P.x ≤ x_n}
+        4.  PointsRight = {P in points | P.x ≥ x_n}
+        5.  minLeft = ClosestPair(PointsLeft)
+        6.  minRight = ClosestPair(PointsRight)
+        7.  min = min(minLeft, minRight)
+        8.  for i=1...l:
+        9.      for j=i+1, i+2 (as long as p[j].y < p[i].y + min)
+        10.         min = min(min, dist(p[i], p[j]))
+        11. return min
+    Analysis:
+        2: O(n)
+        3, 4: O(n)
+        5, 6: T(n/2)
+        8: O(nlogn) time to sort by y
+        10-11: ≤8 iterations => O(1) time
+        9-11: O(n)
+        T(n) = 2T(n/2) + O(nlogn) = T(n) = Theta(nlog^2n)

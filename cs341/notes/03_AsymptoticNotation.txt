@@ -1,0 +1,36 @@
+big-O
+    upper bound
+    f(n) in O(g(n)) iff
+        there exists a c>0 and an n_0 such that
+        for all n ≥ n_0
+        f(n) ≤ cg(n)
+
+    lim f/g = c < \inf
+big-Omega:
+    lower bound
+    f(n) in Omega(g(n)) iff
+        there exists a c>0 and an n_0 such that
+        for all n ≥ n_0
+        f(n) ≥ cg(n)
+    lim f/g = c > 0
+big-Theta:
+    tight bound
+    in big-O, and big-Omega
+    lim f/g = c, 0 < c < inf
+little-o
+    loose upper bound
+    f(n) in o(g(n)) iff
+        for all c>0
+        there exists an n_0 such that
+        for all n ≥ n_0
+        f(n) ≤ cg(n)
+    lim f/g = 0
+little-omega (w)
+    loose lower bound:
+    f(n) in w(g(n)) iff
+        for all c>0
+        there exists an n_0 such that
+        for all n≥n_0
+        f(n) ≥ cg(n)
+    lim f/g = inf
+

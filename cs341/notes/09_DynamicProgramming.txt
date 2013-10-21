@@ -1,0 +1,4 @@
+Solve the problem using easier to solve sub-problems
+Create a recursive formula to generate all choices at each step
+Evaluate the formula bottom-up, using a table.
+Works well when the total number of sub-problems is small.

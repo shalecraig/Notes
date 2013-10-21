@@ -1,0 +1,32 @@
+Given n unsorted numbers, find the kth smallest
+Method 0:
+    Sort & look up index k:
+    O(nlog(n)) time
+Method 1:
+    Find the smallest & remove (repeat)
+    O(nk) time
+Method 2:
+    Build a heap, extract k smallest:
+    O(n + klog(n))
+Method 3:
+    Variant of quicksort:
+    Select(A, k):
+        if (|A|==1) return a[1]
+        x = pivot from A (At Random)
+        L = {all a in A that are < than x}
+        R = {all a in A that are ≥ thank x}
+        if (|L| ≤ k):
+            return select (L, k)
+        return select (R, k-|L|)
+    Analysis:
+        T(n) ≤ T(max{l, |A|-l})
+        Worst case l = |A| - 1 or l = 1
+        => T(n) ≤ T(n-1) + O(n)
+            = O(n^2)
+    ideally, we could pick l perfectly (l = |A| - l), which would be O(n) time!
+Method 4:
+    BFPRT's select algorithm:
+        Find a good pivot deterministically
+        Complute the approximate of x by finding the median of the same subset by recursion.
+    Break the group into n/5 groups, each with 5 items.
+    Of the medians of the groups, find the median recursively by calling select on the medians.

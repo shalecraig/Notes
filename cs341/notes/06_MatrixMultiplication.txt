@@ -1,0 +1,6 @@
+Basically, reduce matrix multiplications:
+    Assume a 2x2 matrix
+    Can do mmult on a smaller level with 7 mults (instead of 8) at the expense of additions.
+    Takes: T(n) ≤ 7T(n/2) + 18n^2
+        Winograd improved this to be T(n) ≤ 7T(n/2) + 15n^2
+    T(n) = Theta(n^{log_{2}{7}})

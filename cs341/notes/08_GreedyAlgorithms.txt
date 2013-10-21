@@ -1,0 +1,21 @@
+Find a solution to min/max problems by incrementally choosing the "best" thing at each step.
+Example 1:
+    Find the minimum number of coins that add up to x.
+    Everybody's Algorithm:
+        sort n coins by value.
+        for i=1...n
+            n[i] = floor(w/value[i])
+            w = w - n[i]value[i]
+    Works in many situations, but not all of them.
+        C = {1, 3, 6, 12, 24, 30}, sum = 48 fails
+Example 2:
+    Given n intervals, find the largest subset of disjoint intervals.
+    Idea 1: Pick shortest duration (fails)
+    Idea 2: Pick duration that conflicts with the shortest remaining duration. (fails)
+    Idea 3:
+        pick remaning duration that finishes earliest (succeeds)
+        O(n^2) naively
+        O(n log(n)) with sort & scan optimization.
+Example 3:
+    Stable Marriage problem.
+    O(n^2)

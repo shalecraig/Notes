@@ -1,0 +1,25 @@
+Summation:
+    Sum from i=1..n of i^d  = n(n+1)/2 = Theta(n^{d+1}) for any d ≥ 0
+    Sum from i=0...n of c^i = (c^{n+1} -1 )/(c - 1) = Theta(c^n) for any c>1. Otherwise, Theta(1)
+    Sum from i=1...n of 1/i = ln(n) + Theta(1)
+Recursion Tree:
+    Expand for k iterations to get a tree of terms
+    Set k to reach the base case
+    Sum accross row, then the levels
+    Generally, set k to be log_a(b)
+Master Theorem:
+    T(n) = aT(n/b) + f(n)
+
+    set d = log_b{a}, and pick \epsilon > 0
+
+    Case 1:
+        f(n) = O(n^{d-\epsilon})
+        => T(n) = Theta(n^d)
+    Case 2:
+        f(n) = Theta(n^d log^r{k})
+        => T(n) = Theta(n^d log^{r+1}{k})
+    Case 3:
+        f(n)/n^d+\epsilon is increasing
+        => T(n) = Theta(f(n))
+Guess-and-check method:
+    Pretty simple. Guess, and check.

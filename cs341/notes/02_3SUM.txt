@@ -1,0 +1,49 @@
+Specification:
+    Given a list of unsorted numbers, do three of them sum up to t?
+Brute force:
+    Pseudocode:
+        for i=1...n
+            for j=1...n
+                for k=1...n
+                    if a[i] + a[j] + a[k] == t
+                        return yes
+        return no
+Algorithm 1: try all pairs instead of triples
+    Pseudocode:
+        1. let C = {a[i] + a[j] | i,j = 1...n}
+        2. let B = {t - a[k] | k = 1...n}
+        3. if C and B have a common element:
+        4.     return Yes
+        5. return No
+    Analysis:
+        1. O(n^2) time
+        2. O(n) time
+        3. O(n^2 log(n)) time:
+            Sort A union B together, then scan to check for duplicates
+            O(n^2 + n^2 log(n)) = O(n^2)
+        Total time: O(n^2 log(n))
+Algorithm 2: sort smaller sets instead:
+    Pseudocode:
+        1.  let B = {t - a[k] | k = 1...n}
+        2.  for i=1...n
+        3.      let A[i] = {a[i] + a[j] | j=1...n}
+        4.      if A[i] and B have a common element:
+        5.          return yes.
+        6.  return no.
+    Analysis (1):
+        1. O(n) time
+        2. -
+        3. O(n) time
+        4.
+            Sort A->O(nlogn)
+            Sort B->O(nlogn)
+            Merge both lists: O(n)
+        Total time: O(n^2 logn)
+    Analysis(2):
+        1.  O(n) time
+        1.a Sort A -> O(nlogn) time
+        1.b Sort B -> O(nlogn) time
+        2. -
+        3. O(n) time
+        4. Merge 2 lists -> O(n) time
+        Total time: O(n^2 + nlog(n)) = O(n^2)

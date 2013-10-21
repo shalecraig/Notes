@@ -1,0 +1,51 @@
+Bentley's Problem:
+    Given a list of numbers, find a sub-block with a maximal sum.
+    Brute force: (O(n^3) or O(n^2))
+        Pseudocode:
+            1. ans = 0
+            2. For i=1...n
+            3.   for j=i...n
+            4.       sum = 0
+            5.       for k =i...j
+            6.           sum += a[k]
+            7.       if (sum > ans)
+            8.           ans = sum;
+            return ans
+        5-6: c(j-i + 1) ≤ cn for some c -> O(n)
+        3-7: ≤n(cn + c') ≤ cn^2 for some c' -> O(n^2)
+        2-7: ≤ n(n(cn + c') + c'') ≤ cn^3 for some c'' -> O(n^3)
+    Divide and conquer: (O(n*log(n)))
+        Pseudocode:
+            solve(A, start, end):
+                if start-end == 1:
+                    return max(A[1], 0)
+                length = (start+end)
+                middle = start+length/2
+                left = solve(A, start, middle);
+                right = solve(A, middle, end);
+                ans = max(left, right);
+                ansL = sum = 0
+                for i=middle...1:
+                    sum = sum+a[i]
+                    ansL = max(sum, ansL)
+                ansR = sum = 0
+                for j=middle...end:
+                    sum = sum+a[j]
+                    ansR = max(sum, ansR)
+                return max(ans, ansL+ansR)
+        Analysis:
+            T(n) = {
+                O(1)            if n == 1
+                2T(n/2) + O(n)  otherwise
+            }
+            => O(n*log(n)) time
+    Dynamic programming: (O(n))
+        let b[j] = max sum of overall blocks that end at j
+        ans = max(b[j])
+        b[j] = a[j] + max(b[j-1], 0)
+        Pseudocode:
+            ans = 0
+            for j = 1...n:
+                b = a[j] + max(b, 0)
+                ans = max(b, ans)
+            return ans
