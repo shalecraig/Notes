@@ -1,0 +1,431 @@
+\ifdefined\isphone
+  \input{typeset_phone.tex}
+\else
+  \input{typeset_full.tex}
+\fi
+
+\usepackage{listings}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+% Course Name
+\title{CS 348}
+
+% Fill in your name.
+\author{Shale Craig}
+
+% Set the default pseudocode language:
+\lstset{language=SQL}
+
+% Now we will begin writing the document.
+\begin{document}
+    \maketitle
+
+    % Next, we need to make a Table of Contents, List of Figures and
+    % List of Tables.  You will most likely need to run LaTeX twice to
+    % get these correct.  The first pass for LaTeX to figure out the
+    % labels, and the second pass to put in the right references.
+    \tableofcontents
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% REPORT BODY
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% \main will make the \section commands numbered again,
+    %% it will also use arabic page numbers.
+    \mainmatter
+    \part{Midterm Content} % (fold)
+    \label{prt:midterm_ _content_}
+        \chapter{Introduction} % (fold)
+        \label{cha:introduction}
+            \section{Motivation} % (fold)
+            \label{sec:motivation}
+                We're motivated to develop corporate databases in an increasingly information-oriented society.
+                How do we do this? What does the fox say? Nobody knows.
+            % section motivation (end)
+            \section{Data Management} % (fold)
+            \label{sec:data_management}
+                \emph{Objective:} to represent (a part of) the world usefully while \emph{abstracting} away the details.
+                \begin{description}
+                    \item[Intension] of data conceptually describes the schema of a database (or data). \\
+                        \verb|EMPLOYEE(SIN, NAME, ADDRESS, BIRTHDATE, SALARY)|
+                    \item[Extension] of data is actually instances of data. \\
+                        \verb|(1234, "Foo Bar", "123 Bar Street", Jan 1, 1970, 10$/h)|
+                \end{description}
+            % section data_management (end)
+            \section{Components of a Database System} % (fold)
+            \label{sec:components_of_a_database_system}
+                \begin{itemize}
+                    \item Hardware
+                    \item Software
+                        \begin{itemize}
+                            \item Application Programs
+                            \item Utility programs
+                            \item OS
+                        \end{itemize}
+                    \item Database Management System (DBMS)
+
+                        Dictates data structure with simple CRUD support through variety of concurrent access methods.
+                \end{itemize}
+
+                \begin{enumerate}
+                    \item \emph{Concurrency Control} exists so queries are externally consistent.
+                    \item \emph{Security} exists to protect data from unauthorized access (password controlled, etc).
+                    \item \emph{Integrity} exists as constraints to ensure that data in the database is accurate and meaningful.
+                    \item \emph{Recovery from Failures} protects the database from dieing.
+                \end{enumerate}
+            % section components_of_a_database_system (end)
+            \section{Data} % (fold)
+            \label{sec:data}
+                \begin{itemize}
+                    \item Is the content of the knowledge of the organization.
+                    \item \emph{Logical Files} as seen by application programmers - deals with the layout.
+                    \item \emph{Physical Files} as seen by system programmers - performance.
+                    \item Very often, the two types of files are related.
+                \end{itemize}
+            % section data (end)
+            \section{DBMS Architecture} % (fold)
+            \label{sec:dbms_architecture}
+                Exists within a dynamic environment where programs are highly linked, which leads to high maintenance cost.
+
+                We'd like to introduce independence between data and the application programs that use them, so either can be changed.
+
+                We'd like to maintain the ability to make logical changes (to the data) explicitly, without physical changes (storage media) affecting it.
+
+                \begin{description}
+                    \item[Data Definition Language]  specifies the schemas and their mappings. (DDL)
+                    \item[Data Dictionary] is the result of compilation of DDL statements in a schema.
+                    \item[Data Manipulation Language] is the commands that are issued to the host program. (DML)
+                    \item[Query Language] is a language for interactive data manipulation.
+                \end{description}
+
+            % section dbms_architecture (end)
+        % chapter introduction (end)
+        \chapter{Data Models} % (fold) 18
+        \label{cha:data_models}
+            Data Models are guidelines and structure for organizing value-based or object-based data and executing operations within constraints.
+
+            \section{Entity Relationship Model (ERM)} % (fold)
+            \label{sec:entity_relationship_model}
+                \textbf{Entity Sets} are a thing or object that can be distinctly identified (an \textit{entity}) grouped into sets.
+
+                This section glosses over terms such as ``entity'', ``relationship'', and ``relationship type''.
+
+                This is the notation that goes as follows:
+                \begin{description}
+                    \item[Librarian] (\uline{Emp\#}, Name, Salary, Addr, Allowance, Union, LibraryName)
+                \end{description}
+                This indicates that librarians have the primary key \textit{Emp\#}, and the attributes specified afterwards (Name, Salary, etc).
+            % section entity_relationship_model (end)
+            \section{Entity-Relationship Diagram (RD)} % (fold)
+            \label{sec:entity_relationship_diagram_}
+                This is an extension of UML that we can quickly convert to something actually useful.
+
+                \subsection{Structure} % (fold)
+                \label{sub:structure}
+                    This is a UML-like graph.
+                    Since you probably don't know about the dialect of UML that this professor wants us to know, here's a quick primer of what you need to know:
+                    \begin{description}
+                        \item[Entity Types] are specified by rectangles.
+                        These connect to Relationship Types and Attributes.
+                        \item[Relationship Types] are specified by diamonds
+                        These connect $\ge$two Entity Types.
+                        \item[Attributes] are specified by ellipses.
+                        These connect to single Entity Types.
+                    \end{description}
+                % subsection structure (end)
+                \subsection{Constraints} % (fold)
+                \label{sub:constraints}
+                    We can establish constraints on these as follows:
+                    \subsubsection{Primary Keys} % (fold)
+                    \label{ssub:primary_keys}
+                        There are two types of keys:
+                        \begin{description}
+                            \item[Candidate Keys] are minimal sets of attributes whose values identify an entity at all times.
+                            \item[Primary Keys] are the main way of identifying an entity.
+                            They tend to be candidate keys.
+                        \end{description}
+                    % subsubsection primary_keys (end)
+                    \subsubsection{Cardinality} % (fold)
+                    \label{ssub:cardinality}
+                        We can force the number of entities (i.e. the cardinality of the ones involved) using UML-like $(x, y)$ notation on relationships.
+
+                        Generally, it's expressed as $(\text{min}, \text{max})$.
+                        The restrictions are $0\le x$, and $y$ can be any number or a $*$\footnote{The star indicates ``any''.}.
+                    % subsubsection cardinality (end)
+                    \subsubsection{Existence Constraints} % (fold)
+                    \label{ssub:existence_constraints}
+                        By designing our ERD properly, we can create an entity $A$ which is totally dependent if every existence of $A$ is always associated with another entity through a relationship.
+                    % subsubsection existence_constraints (end)
+                % subsection constraints (end)
+                \subsection{Extended ERM (EERM)} % (fold)
+                \label{sub:extended_erm}
+                    \subsubsection{Generalization and Specialization} % (fold)
+                    \label{ssub:generalization_and_specialization}
+
+                        We can extend what ERM specifies by using inheritance.
+
+                        We can express the similar properties using the concept of \textbf{generalization}\footnote{He tends to enjoy the ``is-a'' concept more than the phrase ``generalization''.
+                        I like the word ``inheritance'' more.}.
+
+                        By adding a tree-structure, we can specify our ERDs with a tree-like structure.
+                        Parent entities are connected to triangle blocks that say ``ISA'' to their children.
+                    % subsubsection generalization_and_specialization (end)
+                    \subsubsection{Aggregation} % (fold)
+                    \label{ssub:aggregation}
+                        Supposing that we want to construct relationships to relationships\footnote{An example of this is that a \textit{Student} may \textit{Participate} in a \textit{Project}.
+                        There is a relationship \textit{Eval} between the \textit{Student}, \textit{Participate}, and \textit{Project} and a \textit{Report}.
+                        This is an example of this idea.}.
+                        In this case, we can make a box around the elements from the first relation (almost like they're an ``entity''), and connect the relationship in the box to the external relationships desired.
+                    % subsubsection aggregation (end)
+                % subsection extended_erm (end)
+            % section entity_relationship_diagram_ (end)
+        % chapter data_models (end)
+        \chapter{Storage Systems and File Structures} % (fold) 43
+        \label{cha:storage_systems_and_file_structures}
+            \section{Introduction} % (fold)
+            \label{sec:introduction}
+                Data is stored on primary or secondary storage.
+                \subsection{Primary Storage} % (fold)
+                \label{sub:primary_storage}
+                    Primary storage tends to be faster (caches, dynamic random-access memory (DRAM)); it's fast but expensive.
+                % subsection primary_storage (end)
+                \subsection{Secondary Storage} % (fold)
+                \label{sub:secondary_storage}
+                    Secondary storage tends to be larger than large, but it's also very slow.
+                % subsection secondary_storage (end)
+                \subsection{Disk Storage Devices} % (fold)
+                \label{sub:disk_storage_devices}
+                    Disks are the most common type of secondary storage, and can hold up to terabytes.
+
+                    They are constructed of \textit{disk packs} of \textit{magnetic disks} connected to a rotating spindle.
+                    The disks have concentric circular \textit{tracks} on each surface.
+                    Tracks with the same diameter form a \textit{cylinder}.
+                    Each track is divided into equal size units called \textit{blocks} or \textit{pages}.
+
+                    Pages are moved into main memory on demand.
+                    Since the access time is ~$30$ms, and the CPU takes nano-seconds to process things, I/O is the bottleneck.
+                % subsection disk_storage_devices (end)
+            % section introduction (end)
+            \section{Reducing Latency and Page Accesses} % (fold)
+            \label{sec:reducing_latency_and_page_accesses}
+                We store pages containing related information near to each other to help predict the next pages\footnote{Is this called the principle of locality?}.
+                \subsection{Accessing Data Through a Cache} % (fold)
+                \label{sub:accessing_data_through_a_cache}
+                    Files are a sequence of records stored on disk blocks.
+
+                    Records can be \textbf{fixed-length} or \textbf{variable} length, and can span only one block.
+
+                    Physical disk blocks allocated to hold records of a file can be \textit{contiguous}, \textit{linked}, or \textit{indexed}.
+                % subsection accessing_data_through_a_cache (end)
+                \subsection{Ordered Files} % (fold)
+                \label{sub:ordered_files}
+                    Ordered files (or \textit{sequential files}) are records kept sorted by the values of an ordering field.
+
+                    Insertion can be expensive, so some implementations use an \textit{overflow file} for new records to improve insertion.
+
+                    Binary searches are used within a file to find it according to its ordering field value.
+                % subsection ordered_files (end)
+            % section reducing_latency_and_page_accesses (end)
+        % chapter storage_systems_and_file_structures (end)
+        \chapter{Indexing Structures for Files} % (fold)
+        \label{cha:indexing_structures_for_files}
+            \section{Introduction} % (fold)
+            \label{sec:introduction}
+                Given an attribute value, we want to retrieve all records that match that attribute.
+                Indexes are great, looking up according to an index we can get optimized lookup\footnote{Looking up a non-index, we don't though.}.
+                This speedup is great, but it comes at cost of an index file.
+            % section introduction (end)
+            \section{Types of Indexes} % (fold)
+            \label{sec:types_of_indices}
+                There are a few types of indexes:
+                \begin{description}
+                    \item[Search Key] is the set of attributes on which an index is built and not the one that's always built.
+                    \item[Primary Index] is the index that the index for a set of entities is built around.
+                    Usually, this is the search key\footnote{In the cases where the primary index isn't the search key, the search key is known as the secondary index.}.
+                    \item[Ordered] is a term referring to the search key ordering in the index file.
+                    Often they are ordered, but if they're not the primary index, they are \textit{unordered}.
+                \end{description}
+            % section types_of_indices (end)
+            \section{B$^+$ Trees} % (fold)
+            \label{sec:b_trees}
+                B$^+$ trees are dynamic index-based data structures that are made up index and data blocks.
+                They are a special type of tree optimized to reduce the number of page misses.
+                \subsection{Specification} % (fold)
+                \label{sub:specification}
+                    For a B$^+$ tree of order $m$ and a maximum data node size of $d$\footnote{Often, $m \ne d$.}, we work under the constraints:
+                    \begin{itemize}
+                        \item All values are in leaf (``data'') nodes.
+                        \item All leaves are on the same level.
+                        \item With the exception of the root, every node has $[\floor{\frac{m-1}{2}}, m-1]$ keys, which are sorted in ascending order.
+                        \item An internal (``index'') node with $k$ keys has $k+1$ pointers to children on the next level\footnote{The children correspond to the partition induced on the key space by the $k$ keys.}.
+                        \item Data nodes have $[\floor{\frac{d}{2}}, d]$ sorted records.
+                    \end{itemize}
+                % subsection specification (end)
+                Modifying this tree is supposed to run in pretty efficient (amortized) time.
+                \subsection{Insertion} % (fold)
+                \label{sub:insertion}
+                    Insertion can be expressed as the following pseudocode:
+                    \begin{verbatim}
+    insert(node n, btree b):
+        node = b.findLeaf(n)
+        while (true):
+            node.insert(n)
+            if (!node.isOverflow())
+                return
+            if (node.isRoot()):
+                split(node)
+                return
+            n = split(node)
+            node = n.getParent;
+                    \end{verbatim}
+                    Basically, we insert into the node.
+                    If we don't have enough room inside the data node, we split it (and insert the split nodes into the parent structure).
+
+                    \subsubsection{Split - Data Node} % (fold)
+                    \label{ssub:split_data_node}
+                        In the case that we call split on a data (leaf) node $n_j$, we create a new node $n_{j+1}$ that will contain half the records of the old root node.
+                        For an odd number of records, keep the extra record in node $n_j$.
+                        Promote\footnote{Just clone the value, don't remove it from the data node.} the largest key value to the parent index node.
+                    % subsubsection split_data_node (end)
+                    \subsubsection{Split - Index Node} % (fold)
+                    \label{ssub:split_index_node}
+                        In the case that we call split on a index node with keys $k_j \to k_{j+n}$, we partition the values into $[k_j \cdots k_{j+ n/2 - 1}]$ and $[k_{j+ n/2 + 1} \cdots  k_{j+n}]$.
+                        For an odd number of records, keep the extra record in node $n_j$.
+                        Move\footnote{Move, not clone.} the key $k_j$ to the parent node, and keep pointers to the left and right nodes in the data structure.
+                    % subsubsection split_index_node (end)
+                % subsection insertion (end)
+                \subsection{Deletion} % (fold)
+                \label{sub:deletion}
+                    Deletion seems like a pretty annoying algorithm because leaf height needs to be maintained, but it's surprisingly simple:
+                    \begin{verbatim}
+    def delete(index idx, bTree b):
+        node toDelete = b.find(idx)
+        entry = toDelete.getEntry()
+        while (entry != null):
+            node parent = entry.parent
+            parent.remove(entry)
+            if (!parent.isUnderFlow()):
+                return
+            if (parent.isRoot()):
+                collapseRoot()
+            if (!parent.leftNeighbor.isMinimal()):
+                redistribute(parent, parent.leftNeighbor)
+            merge(parent, parent.leftNeighbor);
+            entry = parent.getEntry()
+                    \end{verbatim}
+                    \subsubsection{Redistribute - Data} % (fold)
+                    \label{ssub:redistribute_data}
+                        Redistribute records as evenly as possible between two siblings, updating the parent key accordingly.
+                    % subsubsection redistribute_data (end)
+                    \subsubsection{Redistribute - Index} % (fold)
+                    \label{ssub:redistribute_index}
+                        Redistribute indexes as evenly as possible between two siblings, updating the parent key accordingly.
+                    % subsubsection redistribute_index (end)
+                    \subsubsection{Merge - Data} % (fold)
+                    \label{ssub:merge_data}
+                        Merge the two data blocks into one (move the records from right to left), and delete the parent entry that divided the two.
+                    % subsubsection merge_data (end)
+                    \subsubsection{Merge - Index} % (fold)
+                    \label{ssub:merge_index}
+                        One sibling has below minimum, while the other has minimum.
+                        Merge the two, and delete the parent key separating the two.
+                    % subsubsection merge_index (end)
+                % subsection deletion (end)
+            % section b_trees (end)
+        % chapter indexing_structures_for_files (end)
+        \chapter{Relational Model} % (fold) 76
+        \label{cha:relational_model}
+            Relational models are used to design and model relational databases, foo'!
+
+            \section{Terminology} % (fold)
+            \label{sec:terminology}
+                We only have one data structuring tool - a \textbf{relation}.
+                We can express relations as $D_1 \times \cdots \times D_n = \{ <a_1, \cdots, a_n > | a_i \in D_i, \forall i\}$.
+                We call $r = <a_1, \cdots a_n>$ a relation on $n$-sets;
+                i.e. $r$ is a set of \textbf{tuples} (often called \textbf{rows}).
+                We call $D_j$ the $j^{\text{th}}$ domain of $r$, where $r$ is of degree $n$.
+
+                When writing databases, we use the \textbf{Closed World Assumption} to govern what exists - the assumption that everything not currently know to be true is false\footnote{i.e. if I don't know about it, it must not exist.}.
+
+                \textbf{Relational schemes} define the composition (intension) of a relation.
+
+                \textbf{Domains} are the limited scope that an attribute is valid under.
+            % section terminology (end)
+            \section{Key Propagation} % (fold)
+            \label{sec:key_propogation}
+                For many:many relationships (i.e. many \verb|doctor|s may be the \verb|attendingDoctor| for a many \verb|patient|s), it's a good idea to keep keys joining the two in a separate relation.
+            % section key_propogation (end)
+            \section{Constraints} % (fold)
+            \label{sec:constraints}
+                \subsection{Inherent Constraints} % (fold)
+                \label{sub:inherent_constraints}
+                    Inside a relationship, there are a few basic constraints:
+                    \begin{itemize}
+                        \item We need to have a \textit{Candidate Key} that is a minimal set of attributes to uniquely identify tuples.
+                        This candidate key cannot be repeated.
+                        \item We need to have a \textit{Primary Key} that cannot be updated, duplicated, nor contain nulls.
+                    \end{itemize}
+                % subsection inherent_constraints (end)
+                \subsubsection{Domain Constraints} % (fold)
+                \label{ssub:domain_constraints}
+                    In core SQL-99, we can limit attribute values using the \verb|check| constraint or creating a new domain.
+                    The domain is used in schema declarations, and is a schema element:
+                    \begin{verbatim}
+    create DOMAIN grades char(1)
+        check (value in ('A', 'B', 'C', 'D', 'F'));
+                    \end{verbatim}
+                    We can use this ``type'' later:
+                    \begin{verbatim}
+    create table Transcript (
+        ...,
+        grade grades,
+        ...
+    )
+                    \end{verbatim}
+                % subsubsection domain_constraints (end)
+                \subsubsection{Foreign Key (Referential Integrity) Constraints} % (fold)
+                \label{ssub:foreign_key_referential_integrity_constraints}
+                    Given that a set of attributes $FK \subseteq R_1$ is a \textit{foreign key} that references $R_2$, we have two constraints to satisfy:
+                    \begin{enumerate}
+                        \item The attributes of $FK$ are defined on the same domains as the primary key $PK$ of $R_2$.
+                        \item A value of $FK$ either occurs as a value of $PK$, or $FK$ is null.
+                    \end{enumerate}
+                    We say that $R_1$ references $R_2$\footnote{He took extra time to point out that $R_1$ is the \textit{referencing} relation, and that $R_2$ is the \textit{referenced} relation with respect to this foreign key constraint.}
+                % subsubsection foreign_key_referential_integrity_constraints (end)
+            % section constraints (end)
+            \section{Tables} % (fold)
+            \label{sec:tables}
+                We use tables as our basic type of represent relations.
+
+                The SQL syntax is as follows:
+                \begin{verbatim}
+    create table <tname> (
+        (columnDec)+
+        [, (tableConstraint)]
+    );
+    columnDec =
+        <colName> <colDataType> [default <value>][(colConstraint)+];
+    colConstraint = {
+        not null |
+        [constraint <name>] unique |
+        primary key |
+        check (search_cond) |
+        references <tname> [<colName>] [(refEffect)]
+    }
+    tableConstraint = [constraint name] {
+        UNIQUE (<colName>+) |
+        foreign key (<colName>+) references <tname> [(refEffect)]
+    }
+    refEffect = on {update | delete} (effect)
+    effect = {
+        set null |
+        no action (restrict) |
+        cascade |
+        set default
+    }
+                \end{verbatim}
+            % section tables (end)
+        % chapter relational_model (end)
+    % part midterm_ _content_ (end)
+\end{document}
