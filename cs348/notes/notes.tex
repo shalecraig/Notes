@@ -72,7 +72,7 @@
                     \item \emph{Concurrency Control} exists so queries are externally consistent.
                     \item \emph{Security} exists to protect data from unauthorized access (password controlled, etc).
                     \item \emph{Integrity} exists as constraints to ensure that data in the database is accurate and meaningful.
-                    \item \emph{Recovery from Failures} protects the database from dieing.
+                    \item \emph{Recovery from Failures} protects the database from dying.
                 \end{enumerate}
             % section components_of_a_database_system (end)
             \section{Data} % (fold)
@@ -128,8 +128,8 @@
                     \begin{description}
                         \item[Entity Types] are specified by rectangles.
                         These connect to Relationship Types and Attributes.
-                        \item[Relationship Types] are specified by diamonds
-                        These connect $\ge$two Entity Types.
+                        \item[Relationship Types] are specified by diamonds.
+                        These connect $\ge$ two Entity Types.
                         \item[Attributes] are specified by ellipses.
                         These connect to single Entity Types.
                     \end{description}
@@ -143,7 +143,7 @@
                         \begin{description}
                             \item[Candidate Keys] are minimal sets of attributes whose values identify an entity at all times.
                             \item[Primary Keys] are the main way of identifying an entity.
-                            They tend to be candidate keys.
+                            They must be a candidate key.
                         \end{description}
                     % subsubsection primary_keys (end)
                     \subsubsection{Cardinality} % (fold)
@@ -152,6 +152,8 @@
 
                         Generally, it's expressed as $(\text{min}, \text{max})$.
                         The restrictions are $0\le x$, and $y$ can be any number or a $*$\footnote{The star indicates ``any''.}.
+
+						The restrictions are written next to the corresponding entity.
                     % subsubsection cardinality (end)
                     \subsubsection{Existence Constraints} % (fold)
                     \label{ssub:existence_constraints}
@@ -169,7 +171,7 @@
                         I like the word ``inheritance'' more.}.
 
                         By adding a tree-structure, we can specify our ERDs with a tree-like structure.
-                        Parent entities are connected to triangle blocks that say ``ISA'' to their children.
+                        Parent entities are connected to triangle blocks that say ``IS-A'' to their children.
                     % subsubsection generalization_and_specialization (end)
                     \subsubsection{Aggregation} % (fold)
                     \label{ssub:aggregation}
@@ -196,12 +198,12 @@
                 % subsection secondary_storage (end)
                 \subsection{Disk Storage Devices} % (fold)
                 \label{sub:disk_storage_devices}
-                    Disks are the most common type of secondary storage, and can hold up to terabytes.
+                    Disks are the most common type of secondary storage, and can hold terabytes.
 
                     They are constructed of \textit{disk packs} of \textit{magnetic disks} connected to a rotating spindle.
                     The disks have concentric circular \textit{tracks} on each surface.
                     Tracks with the same diameter form a \textit{cylinder}.
-                    Each track is divided into equal size units called \textit{blocks} or \textit{pages}.
+                    Each track is divided into equal size units called \textit{blocks} or \textit{pages}. 
 
                     Pages are moved into main memory on demand.
                     Since the access time is ~$30$ms, and the CPU takes nano-seconds to process things, I/O is the bottleneck.
@@ -209,7 +211,7 @@
             % section introduction (end)
             \section{Reducing Latency and Page Accesses} % (fold)
             \label{sec:reducing_latency_and_page_accesses}
-                We store pages containing related information near to each other to help predict the next pages\footnote{Is this called the principle of locality?}.
+                We store pages containing related information near to each other since applications are likely to read them next\footnote{Is this called the principle of locality?}.
                 \subsection{Accessing Data Through a Cache} % (fold)
                 \label{sub:accessing_data_through_a_cache}
                     Files are a sequence of records stored on disk blocks.
@@ -222,9 +224,11 @@
                 \label{sub:ordered_files}
                     Ordered files (or \textit{sequential files}) are records kept sorted by the values of an ordering field.
 
-                    Insertion can be expensive, so some implementations use an \textit{overflow file} for new records to improve insertion.
+                    Insertion can be expensive,
+					so some implementations use an \textit{overflow file} for new records to improve insertion.
+					This is periodically merged with the ordered file.
 
-                    Binary searches are used within a file to find it according to its ordering field value.
+                    Binary searches are used within a file to find a record with a given value of the ordering field.
                 % subsection ordered_files (end)
             % section reducing_latency_and_page_accesses (end)
         % chapter storage_systems_and_file_structures (end)
@@ -233,7 +237,8 @@
             \section{Introduction} % (fold)
             \label{sec:introduction}
                 Given an attribute value, we want to retrieve all records that match that attribute.
-                Indexes are great, looking up according to an index we can get optimized lookup\footnote{Looking up a non-index, we don't though.}.
+                Indexes are great, 
+				since when looking up according to an index we can get optimized lookup\footnote{We don't have optimized lookup for a non-index.}.
                 This speedup is great, but it comes at cost of an index file.
             % section introduction (end)
             \section{Types of Indexes} % (fold)
@@ -259,12 +264,18 @@
                         \item All leaves are on the same level.
                         \item With the exception of the root, every node has $[\floor{\frac{m-1}{2}}, m-1]$ keys, which are sorted in ascending order.
                         \item An internal (``index'') node with $k$ keys has $k+1$ pointers to children on the next level\footnote{The children correspond to the partition induced on the key space by the $k$ keys.}.
-                        \item Data nodes have $[\floor{\frac{d}{2}}, d]$ sorted records.
+                        \item Data nodes have $[\floor{\frac{d}{2}}, d]$ sorted records, and a pointer to the next data node.
                     \end{itemize}
                 % subsection specification (end)
-                Modifying this tree is supposed to run in pretty efficient (amortized) time.
+				Modifying this tree runs in logarithmic time.
+					
+				The data nodes of a B$^+$ tree contain pointers to the next data node for efficient iteration.
+				The code to update this the next data node would be found in the functions \emph{split} and \emph{merge}.
+
                 \subsection{Insertion} % (fold)
                 \label{sub:insertion}
+
+				
                     Insertion can be expressed as the following pseudocode:
                     \begin{verbatim}
     insert(node n, btree b):
@@ -290,7 +301,7 @@
                     % subsubsection split_data_node (end)
                     \subsubsection{Split - Index Node} % (fold)
                     \label{ssub:split_index_node}
-                        In the case that we call split on a index node with keys $k_j \to k_{j+n}$, we partition the values into $[k_j \cdots k_{j+ n/2 - 1}]$ and $[k_{j+ n/2 + 1} \cdots  k_{j+n}]$.
+					In the case that we call split on a index node with keys $k_j \to k_{j+n}$, we partition the values into $[k_j \cdots k_{j+ \lfloor\frac{n}{2}\rfloor - 1}]$ and $[k_{j+ \lfloor\frac{n}{2}\rfloor + 1} \cdots  k_{j+n}]$.
                         For an odd number of records, keep the extra record in node $n_j$.
                         Move\footnote{Move, not clone.} the key $k_j$ to the parent node, and keep pointers to the left and right nodes in the data structure.
                     % subsubsection split_index_node (end)
@@ -341,8 +352,8 @@
             \section{Terminology} % (fold)
             \label{sec:terminology}
                 We only have one data structuring tool - a \textbf{relation}.
-                We can express relations as $D_1 \times \cdots \times D_n = \{ <a_1, \cdots, a_n > | a_i \in D_i, \forall i\}$.
-                We call $r = <a_1, \cdots a_n>$ a relation on $n$-sets;
+                We can express relations as $D_1 \times \cdots \times D_n = \{ \langle a_1, \cdots, a_n \rangle | \forall i: a_i \in D_i\}$.
+                We call $r = \langle a_1, \cdots a_n\rangle$ a relation on $n$-sets;
                 i.e. $r$ is a set of \textbf{tuples} (often called \textbf{rows}).
                 We call $D_j$ the $j^{\text{th}}$ domain of $r$, where $r$ is of degree $n$.
 
@@ -364,7 +375,8 @@
                     \begin{itemize}
                         \item We need to have a \textit{Candidate Key} that is a minimal set of attributes to uniquely identify tuples.
                         This candidate key cannot be repeated.
-                        \item We need to have a \textit{Primary Key} that cannot be updated, duplicated, nor contain nulls.
+					\item We need to have a \textit{Primary Key} that cannot be updated, duplicated,
+						nor contain nulls (\textbf{entity integrity rule})
                     \end{itemize}
                 % subsection inherent_constraints (end)
                 \subsubsection{Domain Constraints} % (fold)
@@ -372,14 +384,14 @@
                     In core SQL-99, we can limit attribute values using the \verb|check| constraint or creating a new domain.
                     The domain is used in schema declarations, and is a schema element:
                     \begin{verbatim}
-    create DOMAIN grades char(1)
-        check (value in ('A', 'B', 'C', 'D', 'F'));
+    CREATE DOMAIN Grades CHAR(1)
+        CHECK (VALUE IN ('A', 'B', 'C', 'D', 'F'));
                     \end{verbatim}
                     We can use this ``type'' later:
                     \begin{verbatim}
     create table Transcript (
         ...,
-        grade grades,
+        grade Grades,
         ...
     )
                     \end{verbatim}
