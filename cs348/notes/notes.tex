@@ -203,7 +203,7 @@
                     They are constructed of \textit{disk packs} of \textit{magnetic disks} connected to a rotating spindle.
                     The disks have concentric circular \textit{tracks} on each surface.
                     Tracks with the same diameter form a \textit{cylinder}.
-                    Each track is divided into equal size units called \textit{blocks} or \textit{pages}. 
+                    Each track is divided into equal size units called \textit{blocks} or \textit{pages}.
 
                     Pages are moved into main memory on demand.
                     Since the access time is ~$30$ms, and the CPU takes nano-seconds to process things, I/O is the bottleneck.
@@ -237,7 +237,7 @@
             \section{Introduction} % (fold)
             \label{sec:introduction}
                 Given an attribute value, we want to retrieve all records that match that attribute.
-                Indexes are great, 
+                Indexes are great,
 				since when looking up according to an index we can get optimized lookup\footnote{We don't have optimized lookup for a non-index.}.
                 This speedup is great, but it comes at cost of an index file.
             % section introduction (end)
@@ -264,18 +264,18 @@
                         \item All leaves are on the same level.
                         \item With the exception of the root, every node has $[\floor{\frac{m-1}{2}}, m-1]$ keys, which are sorted in ascending order.
                         \item An internal (``index'') node with $k$ keys has $k+1$ pointers to children on the next level\footnote{The children correspond to the partition induced on the key space by the $k$ keys.}.
-                        \item Data nodes have $[\floor{\frac{d}{2}}, d]$ sorted records, and a pointer to the next data node.
+                        \item Data nodes have $[\floor{\frac{d}{2}}, d]$ sorted records, and a pointer to the next and previous data node.
                     \end{itemize}
                 % subsection specification (end)
 				Modifying this tree runs in logarithmic time.
-					
-				The data nodes of a B$^+$ tree contain pointers to the next data node for efficient iteration.
-				The code to update this the next data node would be found in the functions \emph{split} and \emph{merge}.
+
+				The data nodes of a B$^+$ tree contain pointers to the next and previous data node for efficient iteration.
+				The code to update this the next and previous data node would be found in the functions \emph{split} and \emph{merge}.
 
                 \subsection{Insertion} % (fold)
                 \label{sub:insertion}
 
-				
+
                     Insertion can be expressed as the following pseudocode:
                     \begin{verbatim}
     insert(node n, btree b):
