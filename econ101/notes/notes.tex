@@ -1,0 +1,1560 @@
+\ifdefined\isphone
+  \input{typeset_phone.tex}
+\else
+  \input{typeset_full.tex}
+\fi
+
+% TODO: move this into the template
+\usepackage{siunitx}
+\sisetup{
+  group-four-digits = true,
+  group-separator = {,}
+}
+
+% Course Name
+\title{ECON 101}
+
+% Fill in your name.
+\author{Shale Craig \\
+Prof: Nafeez Fatima}
+
+% Now we will begin writing the document.
+\begin{document}
+    \maketitle
+
+    % Next, we need to make a Table of Contents, List of Figures and
+    % List of Tables.  You will most likely need to run LaTeX twice to
+    % get these correct.  The first pass for LaTeX to figure out the
+    % labels, and the second pass to put in the right references.
+    \tableofcontents
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% REPORT BODY
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% \main will make the \section commands numbered again,
+    %% it will also use Arabic page numbers.
+    \mainmatter
+
+    \subsection*{Preface} % (fold)
+    \label{sub:preface}
+        Notes about prof:
+
+        \begin{enumerate}
+            \item She has a toddler, and needs to miss hanging out with him to teach us.
+        \end{enumerate}
+    % subsection preface (end)
+
+    \part{First Midterm Content} % (fold)
+    \label{prt:first_ _midterm_ _content_}
+
+        \chapter{What is Economics?} % (fold)
+        \label{cha:what_is_economics_}
+            \section{Wants and Scarcity} % (fold)
+            \label{sec:wants_and_scarcity}
+                \begin{description}
+                    \item[Wants] economic problems arise because we desire (want) more than we can get.
+                    \item[Scarcity] scarcity is the inability to satisfy our wants.
+                    \item[Choices] we make choices in the face of scarcity.
+                    \item[Incentive] incentives are the reward (or threat) that encourages a choice to be made.
+                \end{description}
+            % section wants_and_scarcity (end)
+
+            % Microeconomics & macroeconomics
+            \section{Economics} % (fold)
+            \label{sec:economics}
+                \begin{description}
+                    \item[Economics] study of how people choose to allocate their limited resources to satisfy their nearly unlimited wants.
+                        \begin{itemize}
+                            \item Essentially, this is human behavior.
+                        \end{itemize}
+                    \item[Micro Economics] study of how people choose to allocate their limited resources to satisfy their nearly unlimited wants.
+                    \item[Macro Economics] is the study of the performance of the national and global economies.
+                \end{description}
+            % section economics (end)
+
+            There's an underlying theme of ``Two big questions'' here, so I'm going to riff on that a bit.
+            It's not in the book, so here we go:
+
+            Two Big Economic Questions Are:
+            \begin{enumerate}
+                \item How do choices end up determining \emph{what}, \emph{how}, and \emph{for whom} are goods and services produced?
+                    TODO: this needs to be cleaned up.
+                    \begin{enumerate}
+                        \item What?
+
+                            This question is answered with ``Economics provides some answers to these questions''
+                        \item How?
+                            \begin{description}
+                                \item[Goods and Services] are the objects that people value and produce to satisfy humans.
+                            \end{description}
+                            \begin{enumerate}
+                                \item Goods and Services can be instrumented by the \emph{factors of production}.
+                                      Doing this shows us how they are created.
+                                \[ Y = F ( L, T, K, H, A) \]
+                                Where:
+                                \begin{enumerate}
+                                    \item[$Y$] is the profit
+                                    \item[$L$] is the labour
+                                    \item[$T$ or $N$] is the land (``gifts of nature'')
+                                    \item[$H$] is the human capital
+                                    \item[$A$] is technology
+                                    \item[$K$] is the capital
+                                \end{enumerate}
+                            \end{enumerate}
+                        \item What?
+                            \begin{enumerate}
+                                \item Land earns \emph{rent}.
+                                \item Labor earns \emph{wages}.
+                                \item Capital earns \emph{interest}.
+                                \item Entrepreneurship earns \emph{profit}.
+                            \end{enumerate}
+                    \end{enumerate}
+                \item When do choices made for \emph{self-benefit} also promote \emph{social-benefit}?
+
+                    People make decisions for self-benefit, but sometimes they come out working for social-benefit.
+
+                    Social interest is measured in both \emph{efficiency} and \emph{equity}.
+                    \begin{description}
+                        \item[Efficiency] is achieved when goods are used to produce goods \& services cheaply and in perfect quantity.
+                        \item[Equity] is achieved when income equals are equal (socialism).
+                    \end{description}
+
+                    We'd like to pose the question:
+
+                    Is it possible that when each one of us makes choices that are in our self-interest, it also turns out that these choices are also in the social interest?
+
+                \item Economic Way of Thinking:
+
+                    \begin{itemize}
+                        \item A choice is a trade-off between what we want and what is attainable
+                        \item People make rational choices by comparing benefits and costs
+                        \item Benefit is what you gain from something
+                        \item Cost is what you must give up to get something
+                        \item Most choices are ``how-much'' choices made at the margin
+                        \item Choices respond to incentives
+                    \end{itemize}
+
+                    Another way to put it: (she wrote this)
+
+                    \begin{enumerate}
+                        \item All economic questions arise because we want more than what we can get
+                        \item Our inability to meet all our wants is called \emph{scarcity}
+                        \item Because we face \emph{scarcity}, we make choices
+                        \item The choices we make are influenced by the incentives we face
+                        \item Choices involve \emph{trade-offs}
+                        \item People make rational choices by comparing benefits (MB) and costs (MC)
+                    \end{enumerate}
+
+                    \begin{description}
+                        \item[Opportunity Cost] is the best forgone alternative when you make a choice
+
+                            She used the example of her toddler that she doesn't see when she teaches us.
+
+                            Ex:
+                            Cost of skipping University and going directly to the workforce.
+
+                            \begin{tabular}{c|c|c}
+                                Type & Name & Value \\ \hrulefill
+                                Explicit Costs & Tuition & $8$ x \SI{6000}[\$]{} \\
+                                Explicit Costs & Books \& Materials & $8$ x \SI{1500}[\$]{} \\
+                                Implicit Costs & Lost Salary        & $4$ x \SI{20000}[\$]{} \\
+                            \end{tabular}
+
+                            TODO: some of those should've been negative.
+                    \end{description}
+            \end{enumerate}
+
+            % Positive and normative economics
+            \section{Positive \& normative Statements} % (fold)
+            \label{sec:positive_&_normative_statements}
+                \begin{description}
+                    \item[Positive Statements] are statements about what is.
+                        \begin{itemize}
+                            \item Definite statements that can be checked against facts
+                        \end{itemize}
+                    \item[Normative statements] are opinion-based statements about what \emph{ought to} be.
+                        \begin{itemize}
+                            \item They cannot be tested
+                            \item XYZ is ``too''\ldots
+                            \item Everyone ``should''\ldots
+                        \end{itemize}
+                \end{description}
+                Should be able to identify statements that are positive or normative.
+                Look for the words ``should'' or ``ought''.
+            % section positive_&_normative_statements (end)
+
+            TODO: Format to put Choices and trade-offs in it's own section. It was in that ``big economic questions'' section
+            % Choices and trade-offs
+            \section{The Economic System and the Environment} % (fold)
+            \label{sec:the_economic_system_and_the_environment}
+                The environment provides to the economy goods and services, and the economy uses these.
+                As a byproduct, there is pollution and waste.
+                In Classic economy, we take this as a closed (unmodifiable) system.
+                Environmental economy disputes this.
+            % section the_economic_system_and_the_environment (end)
+
+            % Appendix - graphs in economics
+            \section{Graphs in Economics} % (fold)
+            \label{sec:graphs_in_economics}
+                We should be able to graph after doing this section.
+                Also, correlation \& stuff.
+
+                \subsection{Economic Models} % (fold)
+                \label{sub:economic_models}
+                    An abstraction from reality that consist of economic variables.
+
+                    Three different types of graphs:
+                    \begin{itemize}
+                        \item Time-series graphs (PT Metropolis OTS/TS)
+                        \item Cross-section graphs
+                        \item Scatter plots
+                    \end{itemize}
+
+                    Characterizing models:
+                    Assume models can be expressed as a function.
+                    \begin{description}
+                        \item[Positive Relationships] are when $\frac{dy}{dx} > 0$. i.e when the slope is positive.
+                        \item[Negative Relationships] are when $\frac{dy}{dx} < 0$. i.e when the slope is negative. Also known as inverse relationship.
+                        \item[Convex Curve] $|\frac{d^2y}{dx^2}| > 0$. i.e. the under-part creates a cave.
+                        \item[Concave Curve] $|\frac{d^2y}{dx^2}| < 0$ i.e. the under-part doesn't create a cave.
+                        \item[Linear] (Curve) $\frac{d^2y}{dx^2} = 0$
+                    \end{description}
+
+                    Lines:
+                    \begin{align*}
+                        y &= a + by
+                    \end{align*}
+                    Where the parameters are: $a$ is the $y$-intercept and $b$ is the slope.
+                    \begin{align*}
+                        \text{Slope} &= \frac{\text{Rise}}{\text{Run}} \\
+                                     &= \frac{\Delta y}{\Delta x}
+                    \end{align*}
+                % subsection economic_models (end)
+            % section graphs_in_economics (end)
+        % chapter what_is_economics_ (end)
+
+        \chapter{The Economic Problem} % (fold)
+        \label{cha:the_economic_problem}
+            We care about the Production of Goods and services that rely on the factors of production.
+
+            Production of goods and services,
+            \begin{enumerate}
+                \item Inputs/factors of production
+                    \begin{align*}
+                        ( L, T, K, H, A)
+                    \end{align*}
+                \item Existing technology, $A$
+            \end{enumerate}
+
+            \section{Opportunity Cost and Production Possibility Curve} % (fold)
+            \label{sec:opportunity_cost_and_production_possibility_curve}
+                \begin{description}
+                    \item[Production Possibility Frontier] (PPF) shows all combinations of two goods producable using existing tech and available resources.
+
+                        i.e. the tradeoff between $n$ of $x$ vs $m$ of $y$ that you can make for a fixed total cost.
+
+                        Anything above the curve represents scarcity.
+                        Anything on the curve represents efficient resource use.
+                        Anything below the curve represents inefficiency, and is an opportunity (capitalism)
+                    \item[Production Efficiency] exist on all points on the frontier, where in order to produce one more of anything, we must produce one less of something else.
+                    \item[Inefficient Points] are the points under the PPF.
+                    \item[Tradeoffs] are made to move from one point on the PPF frontier to another.
+                    \item[Forgone] cost is that of the thing being omitted. The opportunity cost of something is the highest valued alternative foregone.
+                    \item[Marginal Cost] of a good or service is the opportunity of producing one more unit of it.
+                    \item[Preferences] are what people like and dislike
+                    \item[Marginal Benefit] of a good or service is the benefit received from consuming one or more unit of it. We measure this by what a person is willing to pay for it.
+                    \item[Principle of Decreasing Marginal Benefit] is that when we have more of any good, the smaller the marginal benefit is.
+                    \item[Marginal Benefit Curve] shows the relationship between the marginal benefit of a good, and when it is consumed.
+                    \item[Allocative Efficiency] is when we cannot produce more of anything without stopping producing something more important.
+                    \item[Technological Change] is when tech changes and effects how we can grow our economy.
+                    \item[Capital Accumulation] is the growth of capital resources.
+                \end{description}
+                \textbf{Sustainability} is a thorn in the thigh of environmental growth. It is the American dream, that children will be better-off than their parents.
+
+
+
+                \begin{description}
+                    \item[Production Possibilities Frontier] (PPF) is the boundary between combinations of goods and services that can be produced.
+                    \item[Ceteris Paribus] means ``all else remains the same'' (except what we're considering). See \href{https://en.wikipedia.org/wiki/Ceteris_paribus}{Wikipedia} for more.
+                \end{description}
+                We can talk about the different ontology of resources:
+                \begin{itemize}
+                    \item Depletable resources are resources that can be depleted
+                    \item Renewable Resources are resources that are replenished naturally
+                \end{itemize}
+                \begin{itemize}
+                    \item Current reserves are resources that can be extracted at current prices
+                    \item Potential reserves are resources that may be available at higher costs
+                    \item Resource endowments is the natural occurrence of resources
+                \end{itemize}
+            % section opportunity_cost_and_production_possibility_curve (end)
+            % (2).Absolute and comparative advantage
+            \section{Advantage} % (fold)
+            \label{sec:advantage}
+                \begin{description}
+                    \item[Comparative Advantage] is that a person can perform the activity at a lower opportunity cost than anyone else.
+                    \item[Absolute Advantage] is that the person is more productive than others.
+                \end{description}
+            % section advantage (end)
+            % (3).Gains from trade & economic growth
+            \section{Gains From Trade} % (fold)
+            \label{sec:gains_from_trade}
+                \begin{description}
+                    \item[Learning-By-Doing] is when a body specializes by repeatedly doing (or producing) a good or service.
+                    \item[Dynamic Comparative Advantage] is what a body gains a comparative advantage by learning-by-doing.
+                \end{description}
+            % section gains_from_trade (end)
+            % (4).Free vs. fair trade
+            \section{Free v Fair Trade} % (fold)
+            \label{sec:free_v_fair_trade}
+                Free trade allows traders to trade across boundaries without interference from their respective governments.
+
+                \begin{description}
+                    \item[Fair Trade] contributes to development by offering better trading conditions and securing rights.
+                    \item[Firm] is an economic unit that hires factors of production
+                    \item[Market] is any arrangement that enables buyers and sellers to interact
+                    \item[Property Rights] are the social arrangements that govern ownership, use, and disposal of resources
+                    \item[Money] is... money.
+                \end{description}
+            % section free_v_fair_trade (end)
+            % (5).Sustainability
+        % chapter the_economic_problem (end)
+
+        \chapter{Demand and Supply} % (fold)
+        \label{cha:demand_and_supply}
+            Prices act as incentives.
+            \begin{description}
+                \item[Demand] is the marginal benefit curve of the relationship between the willingness and ability to pay, correlating the price and quantity demanded.
+                \item[Supply] is the marginal cost curve of the relationship between the price and the quantity supplied.
+                \item[Competitive Markets] are markets that enough buyers and sellers so no single player can influence the price.
+                \item[Money Price] is the number of dollars that must be given up for it.
+                \item[Relative Price] is an opportunity cost, measured in terms of one money price to another. This is usually what we mean.
+            \end{description}
+            % (1).Law of demand & demand curve, change in quantity demanded and change in demand, law of supply and supply curve, change in quantity supplied and change in supply
+            \section{Supply and Demand} % (fold)
+            \label{sec:demand_curve}
+                \begin{description}
+                    \item[Quantity Demanded] $Q_d$ is the amount that consumers plan to buy at a given price.
+                    \item[Quantity supplied] $Q_s$ is the amount that producers can produce at a given price.
+                \end{description}
+
+                The \textbf{Law of Demand} states that the higher a price $P$ of a good is, the smaller the quantity that is demanded  $Q_d$; same with vice versa.
+
+                \begin{description}
+                    \item[Substitution Effect] dictates that as the price of a good increases people seek substitutes; this causes quantity demanded to decrease.
+                    \item[Income Effect] dictates that as a price increases relative to income it becomes un-affordable; this causes quantity demand to decrease.
+                \end{description}
+                When the price goes up, $Q_d$ decreases, and $Q_s$ increases. Same with vice versa.
+
+                The \textbf{Demand Curve} is the $\approx \frac{1}{x}$ curve that shows the relationship between the quantity demanded and its price; this can be tabulated in a \emph{Demand schedule} instead of a graph.
+
+                Six main factors that change demand are:
+                \begin{itemize}
+                    \item Prices of related goods
+                    \item Expected future prices
+                    \item Income
+                    \item Expected future income and credit
+                    \item Population
+                    \item Preferences
+                \end{itemize}
+
+                A \emph{substitute} is a good that can be substituted, and a \emph{complement} is a good that can be used in conjunction with another good.
+
+                We can categorize \textbf{normal goods} as goods that increase in demand as income increases.
+                Goods that have demand decrease are named \textbf{inferior goods}.
+
+                \textbf{Supply} reflects a decision about which items were produced.
+                \begin{description}
+                    \item[Quantity Supplied] of a good or service is the amount that producers plan to sell in a given time period.
+                \end{description}
+
+                The \textbf{Law of Supply} states:
+
+                Other things remaining the same, a price $P$ increase leads to a increased $Q_s$.
+                Similarly, reducing the price $P$ causes $Q_s$ to decrease as well.
+
+                The \textbf{Supply Curve} is the $\approx x^2$ curve that shows the relationship between the quantity supplied and its price; this can be tabulated in a \emph{Supply Schedule} instead of a graph.
+
+                The lowest price that would be supplied is called the \emph{marginal cost}.
+            % section demand_curve (end)
+            % (2).Equilibrium price and quantity
+            \section{Equilibrium - Price and Quantity} % (fold)
+            \label{sec:equilibrium_price_and_quantity}
+                \begin{description}
+                    \item[Equilibrium Price] is the price at the intersection of demanded quantity and quantity supplied.
+                    \item[Equilibrium Quantity] is the quantity bought and sold at the equilibrium price.
+                \end{description}
+
+                Having a price above the equilibrium price creates a surplus that forces the price down.
+                Having a price below the equilibrium price creates a shortage that forces the price up.
+            % section equilibrium_price_and_quantity (end)
+            % (3).Shift of the demand curve and shift of the supply curve
+                Modifying the Supply Curve or the demand curve modifies the different locations of the Equilibrium point.
+                Be smart and think - you can predict where it ends up.
+            % (4).Predicting changes in price and quantity
+        % chapter demand_and_supply (end)
+    % part first_ _midterm_ _content_ (end)
+
+    \part{Second Midterm} % (fold)
+    \label{prt:second_ _midterm_}
+        \chapter{Elasticity} % (fold)
+        \label{cha:elasticity}
+            \section{Price Elasticity of Demand and Supply} % (fold)
+            \label{sec:price_elasticity_of_demand_and_supply}
+                \begin{description}
+                    \item[Price Elasticity of Demand] measures how demanders respond to a change in the price of a good, and how changes will affect price and quantity demanded.
+                    \item[Income Elasticity of Demand] measures how demanders respond to a change in income
+                    \item[Cross Elasticity of Demand] measures how strongly demanders respond to the change in the price of another good.
+                    \item[Price Elasticity of Supply] measures how strongly suppliers respond to a change in the price of a good.
+                    \item[Price Elasticity of demand] is a units-free measure of the responsiveness of the quantity demanded of a good to a change in its price, \emph{ceteris paribus}.
+                \end{description}
+
+                In general, \textbf{elasticity measures responsiveness}.
+                It effectively measures how much demanders respond to a variable price.
+
+                We can calculate elasticity as follows:
+                \begin{align*}
+                    \frac{\text{\% change in quantity demanded}}{\text{\% change in price}}
+                \end{align*}
+
+                \begin{itemize}
+                    \item We express the change in price as a percentage of the \emph{average price} - the average of the initial and the new price.
+                    \item We express the change in the quantity demanded as a percentage of the \emph{average quantity demanded} - the average of the initial and new quantity.
+                \end{itemize}
+
+                By using the \textbf{average price} and the \textbf{average quantity}, we get the same elasticity value regardless of whether the price rises or falls.
+
+                \begin{enumerate}
+                    \item The ratio of two proportionate changes is the same as the ratio of two percentage changes.
+                    \item The measure is units free.
+                    \item The demand elasticity formula is negative because price and quantity move in different directions.
+                    This means we get to use magnitude/absolute value of the \textbf{price elasticity of demand}.
+                    We don't measure slope because the units may change (i.e. cents $\to$ \$).
+                \end{enumerate}
+
+                \begin{description}
+                    \item[Inelastic Demand] is when the quantity demanded doesn't change when the price changes.
+                    Price Elasticity of demand $< 1$ is \emph{inelastic demand}.
+                    The demand curve is completely vertical.
+                    \item[Elastic Demand] is non-inelastic demand.
+                    Price Elasticity of demand $> 1$ is \emph{elastic demand}.
+                    \item[Perfectly Elastic Demand] is when the price elasticity of demand is $\infty$.
+                \end{description}
+            % section price_elasticity_of_demand_and_supply (end)
+
+            % (2).Relationship between price elasticity of demand and total revenue
+            \section{Relationship Between Price Elasticity of Demand and Total Revenue} % (fold)
+            \label{sec:relationship_between_price_elasticity_of_demand_and_total_revenue}
+                \begin{description}
+                    \item[Total Revenue] from the sale of goods or services is the price of good multiplied by the quantity sold.
+                \end{description}
+                \begin{itemize}
+                    \item \emph{Elastic} demand means that a 1\% price cut increases quantity sold by $> 1 \%$, so total revenue increases.
+                    \item \emph{Inelastic} demand means that a 1\% price cut increases quantity sold by $< 1 \%$, so total revenue decreases.
+                    \item \emph{Unit Elastic} demand means that a 1\% price cut increases quantity sold by exactly$ 1 \%$, so total revenue stays the same.
+                \end{itemize}
+
+                \begin{description}
+                    \item[Total Revenue Test] is a method of estimating the price elasticity of demand from the change in total revenue from a price change.
+                    Basically, we reverse-engineer the $\delta$revenue to find the type of demand.
+                \end{description}
+                We can influence the elasticity of demand using one of these three:
+                \begin{itemize}
+                    \item Closeness of substitutes.
+
+                        When substitutes are closer to the real deal, the more elastic the demand is.
+                    \item Proportion of income spent on the good.
+
+                        The larger the proportion of income consumers spend on a good, the larger the elasticity of demand.
+                    \item The time since the last price change.
+
+                        The more time that consumers have to adjust to a price change, or the longer it can be stored without losing value, the more elastic the demand is for the good.
+                \end{itemize}
+            % section relationship_between_price_elasticity_of_demand_and_total_revenue (end)
+            \section{Cross Elasticity of Demand and Income Elasticity of Demand} % (fold)
+            \label{sec:cross_elasticity_of_demand_and_income_elasticity_of_demand}
+
+                The \textbf{cross elasticity of demand} is a measure of how responsive the demand for a good is to the change of the price of a substitute or complement.
+
+                We can calculate it as follows:
+                \begin{align*}
+                    \frac{\text{
+                    \% change in quantity demanded
+                    }}{\text{
+                    \% change in price of substitute or complement
+                    }}
+                \end{align*}
+
+                In general, the cross elasticity is signed.
+                For a \textbf{substitute}, it's positive.
+                For a \textbf{complement}, it's negative.
+
+                As the price of a substitute rises, the quantity of the product rises.
+                As the price of a complement rises, the quantity of the product decreases.
+
+                The \textbf{Income of Demand} measures how quantity demanded responds to a change in income.
+
+                It can be calculated as:
+                \begin{align*}
+                    \frac{\text{
+                    \% change in quantity demanded
+                    }}{\text{
+                    \% change of income
+                    }}
+                \end{align*}
+                \begin{description}
+                    \item[Income Elastic]  goods have elasticity of demand $>1$, and are \emph{normal goods}
+                    \item[Income Inelastic]  goods have elasticity of demand is in $0<1$, and are \emph{normal goods}
+                    \item[Inferior Goods]  goods have elasticity of demand of $<0$.
+                \end{description}
+
+                The \textbf{elasticity of supply} measures the how quantity supplied responds to a change in price of a good.
+
+                It can be calculated as:
+                \begin{align*}
+                    \frac{\text{
+                    \% change in quantity supplied
+                    }}{\text{
+                    \% change in price
+                    }}
+                \end{align*}
+
+                \begin{description}
+                    \item[Perfectly Inelastic] supplyis if the supply curve is vertical and the elasticity of supply is $0$
+                    \item[Unit Elastic] supply is if the supply curve is linear and passes through the origin
+                    \item[Perfectly Elastic] supply is horizontal and the elasticity of supply is infinite.
+                \end{description}
+
+                The elasticity of supply depends on:
+                \begin{itemize}
+                    \item Resource substitution possibilities
+                    \item Time frame for supply decision
+                \end{itemize}
+
+                What happens when the price of a good changes?
+                How does it impact another group.
+                (that's cross elasticity of demand).
+
+                If I increase Pepsi by 10\%, the quantity requested by Coca-Cola will go up.
+                Coca-Cola is a substitute for Pepsi.
+
+                The more time that passes after a price change, the greater the elasticity of supply is.
+                \begin{description}
+                    \item[Momentary Supply] is perfectly inelastic - there is no change to supply as the price changes.
+                        This is the period of time immediately after a price change.
+                    \item[Short-run Supply] is somewhat inelastic.
+                        It is how the quantity responds to a price change when only some tech adjustments are made.
+                    \item[Long-run Supply] is the most elastic.
+                        It is the asymptotic behavior once all adjustments are made.
+                \end{description}
+            % section cross_elasticity_of_demand_and_income_elasticity_of_demand (end)
+        % chapter elasticity (end)
+
+        \setcounter{chapter}{7}
+        \chapter{Utility \& Demand} % (fold)
+        \label{cha:utility_&_demand}
+
+            ``Marginal utility theory'' can be used derive the downward-sloping demand curve.
+            It also explains the factors that change demand.
+            Finally, the theory also reinforces the power of marginal analysis in determining the utility-maximizing allocation of consumer budgets.
+
+            \section{Consumer's Choice} % (fold)
+            \label{sec:consumer_s_choice}
+                Consumers choices are limited by income, and can only buy goods they can afford.
+                They have choices within their financial ability.
+                Consumers will generally choose the combinations of goods and services that maximizes their utility.
+
+                \subsection{Total Utility} % (fold)
+                \label{sub:total_utility}
+                    \begin{description}
+                        \item[Total Utility] is the benefit a person gets from consuming goods.
+                            The more that people consume, the higher the utility is.
+                    \end{description}
+                % subsection total_utility (end)
+
+                \subsection{Cardinal and Ordinal Utility Theory} % (fold)
+                \label{sub:cardinal_and_ordinal_utility_theory}
+                    \begin{description}
+                        \item[Cardinal Utility] is an antiquated system that numerically evaluates the \textbf{utility} of objects in a unit named the \textbf{util}.
+                        \item[Ordinal Utility] is a (modern) system where utility of goods are compared (and are therefore preferred).
+                            Magnitudes of difference has no meaning.
+                        \item[Utilitarianism] is the doctrine that dictates that maximization of utility is a moral criterion to organize society.
+                    \end{description}
+                % subsection cardinal_and_ordinal_utility_theory (end)
+                \subsection{Maximizing Utility} % (fold)
+                \label{sub:maximizing_utility}
+                    \begin{description}
+                        \item[Marginal Utility] is the change in total utility that results from a one-unit change in the volume consumed of a good.
+                            Essentially, there is a \emph{diminishing marginal utility} of consuming more and more of a good.
+                    \end{description}
+                % subsection maximizing_utility (end)
+            % section consumer_s_choice (end)
+            \section{Marginal Utility Theory} % (fold)
+            \label{sec:marginal_utility_theory}
+                The theory postulates that houses chooses the consumption possibility permutation that maximizes their total utility.
+                We call this chosen combination the \textbf{consumer equilibrium}.
+
+                \subsection{Maximizing Utility} % (fold)
+                \label{sub:maximizing_utility}
+                    \begin{description}
+                        \item[Marginal Utility Per Dollar] is the marginal utility of a good divided by its price.
+                            In other words, it's the obtained utility of a good by spending an extra dollar.
+                    \end{description}
+                % subsection maximizing_utility (end)
+                \subsection{Utility-Maximizing Rule} % (fold)
+                \label{sub:utility_maximizing_rule}
+                    For good $x$, we call the marginal utility $MU_x$, and the price $P_x$.
+
+                    The marginal utility per dollar is:
+                    \begin{align*}
+                        \frac{MU_x}{P_x}
+                    \end{align*}
+                    When choosing between two goods, we want to pick choices to maximize the amount spent where $\frac{MU_a}{P_a} = \frac{MU_b}{P_b}$.
+
+                    If $\frac{MU_a}{P_a} > \frac{MU_b}{P_b}$, then we are spending too much on $b$ and not enough on $a$.
+
+                    Generally, we want t equalize the two marginal utilities per dollar.
+                % subsection utility_maximizing_rule (end)
+                \subsection{Marginal Utility Theory} % (fold)
+                \label{sub:marginal_utility_theory}
+                    Marginal Theory Predicts the change of demand:
+                    \begin{itemize}
+                        \item A fall in the price of a substitute decreases a demand in the good being substituted out.
+                        \item A rise in income increases the demand for normal goods.
+                    \end{itemize}
+                % subsection marginal_utility_theory (end)
+                \subsection{New Budget Equation} % (fold)
+                \label{sub:new_budget_equation}
+                    In 2-dimensional budgets, we can express budget constraints as the following equation:
+                    \begin{align*}
+                        P_\alpha Q_\alpha + P_\beta Q_\beta = Y
+                    \end{align*}
+                    Where $P_x$ and $Q_x$ are the price and quantity of good $x$ sold, respectively.
+                % subsection new_budget_equation (end)
+                \subsection{Algorithm for Decision Making Using Marginal Utility} % (fold)
+                \label{sub:algorithm_for_decision_making_using_marginal_utility}
+                    Given the table below,
+                    \begin{table}[h]
+                        \centering
+                        \begin{tabular}{ | l | l | l || l | l | l | }
+                        \hline
+                        Quantity & MU & $\frac{MU}{\$}$ & Quantity & MU & $\frac{MU}{\$}$ \\ \hline \hline
+                        4 & 28 & 7.00 & 10 & 5 & 1.25 \\ \hline
+                        5 & 26 & 6.50 & 9 & 7 & 1.75 \\ \hline
+                        6 & 24 & 6.00 & 8 & 10 & 2.50 \\ \hline
+                        7 & 22 & 5.50 & 7 & 13 & 3.25 \\ \hline
+                        8 & 20 & 5.00 & 6 & 20 & 5.00 \\ \hline
+                        9 & 17 & 4.25 & 5 & 22 & 5.50 \\ \hline
+                        10 & 16 & 4.00 & 4 & 24 & 6.00 \\ \hline
+                        \end{tabular}
+                    \end{table}
+                    we begin iterating from 0 of each element, and choose the element that gives us (for each value) the best marginal utility per dollar.
+                    \footnote{This is an optimization problem. I think it's called the integer backpack problem, but our solution \textbf{should} work.}
+                % subsection algorithm_for_decision_making_using_marginal_utility (end)
+                \subsection{Predictions From Marginal Utility Theory} % (fold)
+                \label{sub:predictions_from_marginal_utility_theory}
+                    Well, we can tell a few things using that graph I referred to earlier:
+
+                    \begin{itemize}
+                        \item As the price decreases, the marginal utility per dollar increases.
+                            More of that item will be purchased.\footnote{Ok, duh. That's obvious.}
+                        \item As the amount available to spend\footnote{This is usually income inside micro-economics} increases, the amount purchased will increase.\footnote{Ok, duh. That's obvious too.}
+                    \end{itemize}
+                % subsection predictions_from_marginal_utility_theory (end)
+            % section marginal_utility_theory (end)
+            \section{Paradox of value} % (fold)
+            \label{sec:paradox_of_value}
+                \subsection{Surplus} % (fold)
+                \label{sub:surplus}
+                    We can define two variables to do with surplus as follows:
+                    \begin{description}
+                        \item[PS] is the Producer Surplus - the difference between what producers receive for sale of a good and (the minimum) they'd choose to accept when selling a good.
+                        \item[CS] is the Consumer Surplus - the difference between what consumers pay for of a good and (the maximum of) what they'd choose to pay when selling a good.
+                    \end{description}
+                    For either party, this is the ``money surplus'' after a transaction.
+                % subsection surplus (end)
+                \subsection{Paradox of Value} % (fold)
+                \label{sub:paradox_of_value}
+                    Simply put,
+                    when the marginal utility of an item is large, so too will be the cost.
+
+                    For example, the marginal utility of diamonds is large, so even though the total utility is small, their price is high.
+                    Similarly, the marginal utility of water is small, so even though the total utility is large, their price is low.
+
+                    In terms of marginal utility per dollar, the two are the same.
+                % subsection paradox_of_value (end)
+            % section paradox_of_value (end)
+            \section{Overconsumption and Social Norms} % (fold)
+            \label{sec:overconsumption_and_social_norms}
+                \subsection{Behavioral Economics} % (fold)
+                \label{sub:behavioral_economics}
+                    Behavioral Economics studies the brain's (in)ability to rationalize economic decisions, and how these influence the markets.
+                    There are three impediments to rational choice:
+                    \begin{description}
+                        \item[Bounded Rationality] is the heuristics used when faced with uncertainty.
+                        \item[Bounded Will-Power] is the sub-optimal will-power that prevents us from making decisions that we know are wrong and will regret.
+                        \item[Bounded Self-Interest] is the self-interest that allows us to suppress helping others.
+                    \end{description}
+                % subsection behavioral_economics (end)
+                \subsection{Some Behaviours} % (fold)
+                \label{sub:some_behaviours}
+                    Here are a few effects observed by economists:
+                    \begin{description}
+                        \item[Endowment Effect] is the tendency for people to value something more highly because they own it.
+                        \item[Neuro-Economics] is the study of how the brain operates during economic decision making.
+                        \item[Controversy] exists in economics between the role of economics in the future.
+                            One group believes it should be in examining \textbf{how} decisions are made.
+                            Another group believes it should be in examining \textbf{the effect} of decisions on the market.
+                    \end{description}
+                % subsection some_behaviours (end)
+                \subsection{Over-Consumption and Social Norms} % (fold)
+                \label{sub:over_consumption_and_social_norms}
+                    In traditional economics and in times of scarcity, more is better than less.
+                    Since the environmental impact needs to be considered, this isn't always true.
+
+                    One could stipulate that an equation exists as follows:
+                    \begin{align*}
+                        \text{Environmental Impact} &= (\text{Population})(\text{Affluence})(\text{Technology})
+                    \end{align*}
+                    Where:
+                    \begin{description}
+                        \item[Population] is the number of people
+                        \item[Affluence] is measured in terms of wealth per person
+                        \item[Technology] is measured in environmental impact per dollar.
+                    \end{description}
+                    Ecologically speaking, if  technology can't keep up with affluence and population, we're \verb|(@*\$&|'d.
+                % subsection over_consumption_and_social_norms (end)
+                \subsection{Easterlin Paradox} % (fold)
+                \label{sub:easterlin_paradox}
+                    The \textbf{Easterlin Paradox} prescribes that income and happiness are positively related, but the derivative of happiness is negative.
+                    \footnote{WTF how is this a paradox? Nobody knows, but this is math. Anything goes, for the un-initiated and un-thinking public.}
+                % subsection easterlin_paradox (end)
+                \subsection{Social Motives for Consumption} % (fold)
+                \label{sub:social_motives_for_consumption}
+                    We can say that consumption is effected by a few social motives:
+                    \begin{description}
+                        \item[Bandwagon Effect] is the desire to consume because others do too.
+                        \item[Snob Effect] is the desire to consume because others do not.
+                        \item[Veblen Effect] is the effect of buying something due to the prestige that comes with buying it.
+                    \end{description}
+                % subsection social_motives_for_consumption (end)
+            % section overconsumption_and_social_norms (end)
+        % chapter utility_&_demand (end)
+        \chapter{Possibilities, Preferences, and Choices} % (fold)
+        \label{cha:possibilities_preferences_and_choices}
+            \section{Preferences and Indifference Curve} % (fold)
+            \label{sec:preferences_and_indifference_curve}
+                \subsection{Preferences and Indifference Curve} % (fold)
+                \label{sub:preferences_and_indifference_curve}
+                    We can define an indifference curve as $f(x) \alpha \frac{1}{x}$.
+                    All points above the curve are preferred to points on (and below) the indifference curve.
+                    A consumer is Indifferent to all points on one curve.
+
+                    A \textbf{preference map} is a series of indifference curves, almost like a gradient field.
+
+                    The slope at any point of an indifference curve is the \textbf{marginal rate of substitution} - i.e. the rate that the consumer is willing to trade one good for another.
+                % subsection preferences_and_indifference_curve (end)
+                \subsection{Marginal Rate of Substitution} % (fold)
+                \label{sub:marginal_rate_of_substitution}
+                    The rate a person is willing to give up good $y$ to get an additional good $x$ while remaining indifferent is called the \textbf{marginal rate of substitution} (MRS).\footnote{MRS is measured as the absolute derivative.}
+
+                    The fact that the MRS decreases as we increase $x$ (i.e. $\lim_{x \to \infty}$) is called the \textbf{diminishing marginal rate of substitution} - i.e. that the marginal rate of substitution diminishes.
+                % subsection marginal_rate_of_substitution (end)
+                \subsection{Degree of Substitutability} % (fold)
+                \label{sub:degree_of_substitutability}
+                    The shape of indifference curves reveals the amount that two goods can be substituted for each other.
+                    We can categorize these as follows:
+                    \begin{description}
+                        \item[Perfect Substitutes] are substances that consumers are willing to substitute for one another at a constant rate.\footnote{Think of gum brands.}
+                        This is categorized by the equation for the utility:
+                        \begin{align*}
+                            U(x, y) &= ax + by
+                        \end{align*}
+                        \item[Perfect Complements] are goods that are consumed in fixed proportions together.\footnote{Think of left/right shoes.}
+                        They can be characterized by the utility equation:
+                        \begin{align*}
+                            U(x, y) &= \min(ax, by)
+                        \end{align*}
+                    \end{description}
+
+                % subsection degree_of_substitutability (end)
+            % section preferences_and_indifference_curve (end)
+            % Possibilities, Preferences, and Choices
+            \section{Budget Schedule and Budget Line} % (fold)
+            \label{sec:budget_schedule_and_budget_line}
+                \subsection{Budget Line} % (fold)
+                \label{sub:budget_line}
+                    A \textbf{budget line} describes the limit to an organism's consumption choices.
+                    Generally, the line is of the form of $y = mx + b$, where $m < 0$ and $b > 0$.
+                    A valid choice is any point at or below\footnote{This is called ``inside'' the budget line} the line, and invalid ones are above the line\footnote{Similarly, this is called ``outside'' the budget line.}.
+
+                    \begin{description}
+                        \item[Divisible Goods] can be bought at any point in a line (i.e. 3.564345 lb of flour)
+                        \item[Indivisible Goods] can be bought at integer points in a line (i.e. 4.0000 cars)
+                    \end{description}
+                % subsection budget_line (end)
+                \subsection{Budget Equation} % (fold)
+                \label{sub:budget_equation}
+                    In an efficient budget, we get the following:
+                    \begin{align*}
+                        \text{Expenditure} &= \text{Income}
+                    \end{align*}
+
+                    If your only expenditure was movies and pop, this equation would look like (from prior):
+                    \begin{align*}
+                        P_P Q_P + P_M Q_M &= Y \\
+                        Q_P &= \frac{Y}{P_P} - \frac{P_M}{P_P}Q_M
+                    \end{align*}
+                    Equivalently, expressing $Q_P$ as the second line allows us to define the following terms:
+                    \begin{description}
+                        \item[Real Income] in terms of pop is $\frac{Y}{P_P}$.
+                            Equivalently, this is the point on the budget line where it meets the $y$-axis (assuming $y$ is for Pop).
+                        \item[Relative Price] of a movie in terms of pop is $\frac{P_M}{P_P}$.
+                            Equivalently, this is the magnitude of the slope of the budget line.
+                            It shows us how many pops must be forgone for one movie.
+                    \end{description}
+                    Since the \textbf{relative price} is an \textbf{opportunity cost}, the relative price of a movie in terms of pops gives us the opportunity cost of a movie in terms of pops forgone.
+
+                    \textbf{Changes of Price} modify the slope of the budget line and the intercept of the line that the item being changed is plotted on.
+                    \footnote{i.e. if Burgers are being plotted on the $x$-axis, then only the $x$-intercept will be changed.}
+
+                    \textbf{Changes of Income} move the budget line to a parallel line that represents less or more money.
+                % subsection budget_equation (end)
+            % section budget_schedule_and_budget_line (end)
+            \section{Deriving an Individuals Demand Curve to Predict Choices} % (fold)
+            \label{sec:deriving_an_individuals_demand_curve_to_predict_choices}
+                Efficient people tend to make the best choice by picking something on the budget line that is on the highest attainable indifference curve.
+                Usually it follows that the marginal rate of substitution between the two goods is equal to the relative price of the two goods.\footnote{That's because the two lines must be tangential at this point. Check out a graph (not included D: )}
+
+                We know that the \textbf{MRS} is a measure of how much someone is willing to give up a good.
+                Similarly, the \textbf{Relative Price} of two goods shows how much the user must give up of one good to get another.
+
+                When the two are equal, the consumer is just\footnote{i.e. barely} willing to give up what they must give up to improve.
+
+                \subsection{Changes in Price} % (fold)
+                \label{sub:changes_in_price}
+                    Changes of price is called the \textbf{Price Effect}\footnote{Wtf, I know.}.
+
+                    During price changes, the indifference curves don't change, but the budget line rotates.
+
+                    For normal goods, falling prices always increase the quantity consumed.
+
+                    For inferior goods, increasing income leads to a decrease in quantity consumed.
+                % subsection changes_in_price (end)
+                \subsection{Changes on Income} % (fold)
+                \label{sub:changes_on_income}
+                    Changes of price is called the \textbf{Income Effect}\footnote{Wtf, I know.}.
+
+                    During price changes, the indifference curves don't change, but the budget strafes sideways.
+                % subsection changes_on_income (end)
+                \subsection{Substitution Effect} % (fold)
+                \label{sub:substitution_effect}
+                    The \textbf{Substitution Effect} is how a change in price modifies the quantity of items bought and the consumer remains on the same indifference curve.\footnote{Pictorially, this doesn't make any sense to me. Since when the prices change, the budget line rotates, it almost surely must intersect a new indifference curve. I suppose if both prices change at the same time, this is possible.}
+                    This means that when the relative price falls, the consumer always substitutes more of that good for others.
+                % subsection substitution_effect (end)
+                \subsection{Income Effect} % (fold)
+                \label{sub:income_effect}
+                    As income increases, \textbf{Income Effect} implies that we can move from one indifference curve to another.
+
+                    For normal goods, the income effect reinforces the substitution effect and is the second reason why the demand curve slopes downward.
+                % subsection income_effect (end)
+            % section deriving_an_individuals_demand_curve_to_predict_choices (end)
+            \section{Work-Leisure Choices} % (fold)
+            \label{sec:work_leisure_choices}
+                We can apply this thinking to the decision between the ``goods'' of work and leisure.
+
+                You buy leisure by not supplying labor and by forgoing income.
+                The ``price'' of leisure is the wage rate forgone.
+
+                By changing the wage rate, we can find a person's labor supply curve.
+                By increasing the wage, the substitution effect makes leisure more expensive and the person tends not to take leisure.
+
+                As wages increase, we choose different indifference curves to attain.
+                In fact, once wages increase past a certain point, people decide to spend less time at work\footnote{Make lots of money, work less. Sounds good to me.}.
+            % section work_leisure_choices (end)
+            % (4).Work-leisure choices
+        % chapter possibilities_preferences_and_choices (end)
+
+        \chapter{Organizing Production} % (fold)
+        \label{cha:organizing_production}
+            \section{Firms} % (fold)
+            \label{sec:firms}
+                We're learning about how decisions are made by firms, and how they affect society.
+                The sole objective of a firm is maximizing profit; the incentive of elimination or of acquisition drives this objective.
+            % section firms (end)
+            \section{Explicit and Implicit Cost} % (fold)
+            \label{sec:explicit_and_implicit_cost}
+                Profit is the difference between total revenue ($TR$) and total cost ($TR$).
+                \begin{align*}
+                    \text{Profit} &= \text{Total Revenue} - \text{Total Cost} \\
+                    &= TR - TC \\
+                    TR &= P_x Q_x
+                \end{align*}
+                There is a difference between accounting profit and economic profit.
+
+                \begin{description}
+                     \item[Accounting Profit] is the firm's revenues minus expenses and deprecation.
+                     \item[Economic Profit] is the total revenue minus total cost, where the total cost is measured as the opportunity cost of production.
+                 \end{description}
+                 \subsection{Economic Cost of Production} % (fold)
+                 \label{sub:economic_cost_of_production}
+                    The opportunity cost of production is the value of the best alternative, expressed in money.
+
+                    The opportunity cost of production is the sum of the cost of resources:
+                    \begin{enumerate}
+                        \item Bought in the market - since the alternative is having cold, hard cash.
+                        \item Owned by the firm - since they implicitly rent it from themselves.
+                        This rate is effectively economic deprecation and interest forgone.
+                        \item Supplied by the firm's owner - since the owner supplies entrepreneurship || labor, this is how much they're losing through labor and expected entrepreneurship profit\footnote{This is also sometimes called the normal profit.}
+                    \end{enumerate}
+                 % subsection economic_cost_of_production (end)
+                 \subsection{Firm Decision Making Process} % (fold)
+                 \label{sub:firm_decision_making_process}
+                    Firms must make five basic decisions to maximize profit:
+                    \begin{enumerate}
+                        \item What/how much to produce
+                        \item How to produce
+                        \item How to organize and compensate managers and workers
+                        \item How to market and price products
+                        \item What to produce, and what to buy from other firms\footnote{This decision is called the ``make-buy'' decision.}
+                    \end{enumerate}
+                    Similarly, a firm has the constraints of:
+                    \begin{description}
+                        \item[Technology] constrains what firms can accomplish using their capital and labor\footnote{Alternatively, it's a function that converts labor and capital into goods}.
+                        \item[Information] occludes what data a firm can use to predict the future.
+                        \item[Market] constrains the firm by what customers willing to pay, and the efforts of other firms.
+                    \end{description}
+                 % subsection firm_decision_making_process (end)
+            % section explicit_and_implicit_cost (end)
+            \section{Technological and Economic Efficiency} % (fold)
+            \label{sec:technological_and_economic_efficiency}
+                \textbf{Tech Efficiency} is the phenomenon that occurs when a firm produces a specified level of output by using minimal inputs.
+                Better stated, a technology $A$ is inefficient if at least one other technology $B$ is ``less expensive'' than $A$ in at least one input, and is equal in all other inputs.
+
+                \textbf{Economic Efficiency} is the phenomenon that occurs when a firm produces a given output at minimal cost, comparing the relative costs of capital and labor.
+
+                All economically efficient production processes are technologically efficient.
+                The reverse is not true.
+
+                \subsection{Information and Organization} % (fold)
+                \label{sub:information_and_organization}
+                    Firms organize production by allocating resources using these two systems:
+                    \begin{description}
+                        \item[Command Systems] are rigid tree-like system to pass commands to sub-systems.
+                        These are better when it is easy to monitor individual performance.
+                        \item[Incentive Systems] are systems that use market mechanisms to \textit{convince} individual workers to maximize the firm's profit.
+                        These are better when it is hard to monitor individual performance.
+                    \end{description}
+                % subsection information_and_organization (end)
+                \subsection{Principal-Agent Problem} % (fold)
+                \label{sub:principal_agent_problem}
+                    The problem of devising compensation rules to induce an agent to act in the interests of a principal\footnote{Stockholders of a firm are the principals, and the managers of a firm are their agents.} is named the \textbf{Principal-Agent Problem}.
+
+                    We can solve this problem with a combination of:
+                    \begin{description}
+                        \item[Ownership] of the firm incentivizes agents to operate efficiently, by converting them to principals as well.
+                        \item[Incentive Pay] links individual compensation (and therefore goals) to the monetary success of the firm.
+                        \item[Long-Term Contracts] ties agents long-term awards to the long-term performance of the firm.
+                    \end{description}
+                % subsection principal_agent_problem (end)
+                \subsection{Business Types} % (fold)
+                \label{sub:business_types}
+                    There are three types of businesses:
+                    \begin{description}
+                        \item[Sole Proprietorships]are a type of firm where a single owner has \textit{unlimited liability} for all debts of the firm.
+                        \item[Partnerships] are a type of firm where two or more owners have \textit{unlimited liability} and an agreed upon management and profit division structures.
+                        \item[Corporations] are a type of firm owned by one or more stockholders who are only liable for the amount of their initial investment\footnote{This is usually in the form of the paper value of their stock.}
+                    \end{description}
+                % subsection business_types (end)
+            % section technological_and_economic_efficiency (end)
+            \section{Markets and the Competitive Environment} % (fold)
+            \label{sec:markets_and_the_competitive_environment}
+                \section{Market Types} % (fold)
+                \label{sec:market_types}
+                    \begin{description}
+                        \item[Perfect Competition] is where there are \textit{many} \textit{indistinguishable} firms selling \textit{identical products} to \textit{many buyers} with \textit{low entry costs} and no \textit{occlusion}.
+                        \item[Monopolistic Competition] is when there are \textit{many} firms that produce marginally \textit{differentiated products} and has a \textit{small amount of market power}.
+                        \item[Oligopoly] is when there are a \textit{small number} of firms producing products in a market with \textit{barriers to entry}.
+                        \item[Monopoly] is when all output is \textit{produced by one firm} with \textit{no close substitutes} and \textit{high barriers to entry}.
+                    \end{description}
+                    \subsection{Market Concentration} % (fold)
+                    \label{sub:market_concentration}
+                        We can evaluate market concentration using two measures:
+                        \begin{description}
+                            \item[Four-Firm Concentration Ratio] is the percentage of total industry sales accounted for by the four largest firms.
+                            \item[Herfindahl-Hirschman Index] (HHI) is the square percentage market share $MS_x$ of each firm $x$ over the largest $50$ firms in the industry.
+                            \begin{align*}
+                                \text{HHI} &=
+                                \frac{\sum{MS_x^2}}{\sum_{r \in \text { top 50 firms in the industry.}}{MS_r}}
+                            \end{align*}
+                            Lower scores $~0$ imply highly competitive markets.
+                            Higher scores $~10,000$ imply a monopoly.
+                        \end{description}
+                        While the above methods establish a good measure of concentration, they fail to address geographical scope, barriers to entry, and the correspondence between the market and firms in the industry.
+                    % subsection market_concentration (end)
+                    \subsection{Markets vs Firms} % (fold)
+                    \label{sub:markets_vs_firms}
+                        Firms coordinate production more effectively than markets since they are driven by efficiency gains vs the market.
+                        \footnote{It took me a while to understand this, but they're talking about how firms can coordinate their production more effectively than markets due to the firms individual drive to be increasingly efficient.
+                        For example, it's hard for a market to move to outsourced production, but individual firms may be able to do this to consolidate their dealings with others.
+                        Of course, this is expressed in four bullet points for reasons that escape me.}
+
+                        Firms can capitalize on:
+                        \begin{itemize}
+                            \item Lower transactional costs
+                            \item Economies of scale
+                            \item Economies of scope
+                            \item Economies of team production
+                        \end{itemize}
+                    % subsection markets_vs_firms (end)
+                % section market_types (end)
+            % section markets_and_the_competitive_environment (end)
+            \section{Sustainable Business and Green Business} % (fold)
+            \label{sec:sustainable_business_and_green_business}
+                Sustainable businesses are ones that have no negative impact on global or local:
+                \begin{itemize}
+                    \item Environment
+                    \item Community
+                    \item Society
+                    \item Economy
+                \end{itemize}
+                Sustainable businesses are ones that meet the needs of current society without compromising the ability of future generations to meet their own needs.
+                \subsection{Triple Bottom Line} % (fold)
+                \label{sub:triple_bottom_line}
+                    ``People, planet and profit'' succinctly describes the triple bottom line and the goal of sustainability.
+
+                    \begin{description}
+                        \item[Profit] is the real economic impact that the organization has on its economic environment
+                        \item[Planet] is the sustainable practices that protect and ensure that natural capital is available in the future.
+                        \item[People] are the fair and beneficial business practices toward labor, community, and the region of the business.
+                    \end{description}
+                % subsection triple_bottom_line (end)
+            % section sustainable_business_and_green_business (end)
+        % chapter organizing_production (end)
+
+        \chapter{Output and Costs} % (fold)
+        \label{cha:output_and_costs}
+            Firms make decisions to \textbf{maximize profit}.
+            \section{Laws of Production} % (fold)
+            \label{sec:laws_of_production}
+                The factors of production are termed the firm's \textbf{plant}.
+                \subsection{Short Run} % (fold)
+                \label{sub:short_run}
+                    In the \textbf{short run}, the plant is fixed.
+
+                    Other resources (labor, raw materials, energy, etc) can be changed in the short run.
+                    Decisions to change things in the short run are easily reversed.
+                % subsection short_run (end)
+                \subsection{Long Run} % (fold)
+                \label{sub:long_run}
+                    The \textbf{long run} is the time frame in which the quantities of all resources can be varied.
+                    These decisions are generally irreversible, and involve \textbf{sunk cost}s that cannot be changed\footnote{If an asset has no resale value, the amount paid is a sunk cost.}
+                % subsection long_run (end)
+                \subsection{Sunk Cost} % (fold)
+                \label{sub:sunk_cost}
+                    Behavioral Economics predicts that sunk costs affect actors decisions, since humans are loss aversive and act irrationally.
+
+                    The \textbf{sunk cost fallacy} is the irrational decisions that humans make because they feel obliged to take advantage of opportunities that are accidentally yield of sunk costs.
+                    Colloquially, this is known as \textit{throwing good money after bad}.
+                % subsection sunk_cost (end)
+            % section laws_of_production (end)
+            \section{Product Curves} % (fold)
+            \label{sec:product_curves}
+                To increase \textit{short run} output, a firm must increase the variable amount of labor employed.
+                Three concepts define the relationship between output and quantity of labor:
+                \begin{itemize}
+                    \item Total Product
+                    \item Marginal Product
+                    \item Average Product
+                \end{itemize}
+                We can create graphs\footnote{They call these curves.
+                For whatever reason, the words ``plot'' and ``graph'' are anathema to these people.} of how the different products above change with respect to labor employed.
+                \subsection{Total Product Curve} % (fold)
+                \label{sub:total_product_curve}
+                    The \textbf{Total Product} ($TP$ or $Q$) is the total output produced in a given period.
+
+                    The curve for this ``product'' evaluates production wrt labor employed.
+                    Points below the line are attainable but inefficient; points above the line are unattainable.
+                    Points on the line are efficient and attainable.
+                % subsection total_product_curve (end)
+                \subsection{Marginal Product Curve} % (fold)
+                \label{sub:marginal_product_curve}
+                    The \textbf{Marginal Product} ($MP$, $\delta TP/\delta L$ or $\delta Q/ \delta L$) of labor is the change in total product that by increasing labor employed by one.
+
+                    As with all marginal \verb|xyz|'s, this curve is effectively the derivative of the total product curve.
+                    Initially, there are increasing marginal returns, but there are diminishing marginal returns past a certain point.
+
+                    The increase is due to a specialization and a division of labor\footnote{The phrase ``context switch'' comes to mind.}.
+
+                    The diminishing return arises from the lack of capital and space to work in.
+
+                    \subsubsection{Law of Diminishing Return} % (fold)
+                    \label{ssub:law_of_diminishing_return}
+                        The law of diminishing returns states:
+                        \begin{quote}
+                            As a firm uses more of a variable input with a given quantity of fixed inputs, the marginal product of the variable input \textit{eventually diminishes}.
+                        \end{quote}
+                    % subsubsection law_of_diminishing_return (end)
+                % subsection marginal_product_curve (end)
+                \subsection{Average Product Curve} % (fold)
+                \label{sub:average_product_curve}
+                    The \textbf{Average Product} of labor is equal to the average product per quantity of labor employed\footnote{Obviously}.
+                % subsection average_product_curve (end)
+            % section product_curves (end)
+            \section{Short Run Cost Curves} % (fold)
+            \label{sec:short_run_cost_curves}
+                We describe how cost changes as total product changes using three concepts and types of cost curves:
+                \begin{itemize}
+                    \item Total Cost
+                    \item Marginal Cost
+                    \item Average Cost
+                \end{itemize}
+                \subsection{Total Cost Curve} % (fold)
+                \label{sub:total_cost_curve}
+                    Total cost $TC$ is the cost of \textit{all} resources used.
+                    This is broken into fixed cost ($TFC$) which is the fixed inputs for all output quantities, and variable cost ($TVC$) which is the variable inputs that change with output quantities.
+                    \begin{align*}
+                        TC &= TFC + TVC
+                    \end{align*}
+                % subsection total_cost_curve (end)
+                \subsection{Marginal Cost Curves} % (fold)
+                \label{sub:marginal_cost_curves}
+                    The \textbf{Marginal Cost} ($MC$) is the increase in cost that results from a one-unit increase in total product.
+                    Over a range with \textbf{increasing marginal returns}, marginal cost falls as output increases due to specialization.
+                    Over a range with \textbf{decreasing marginal returns}, marginal cost rises as output increases.
+                % subsection marginal_cost_curves (end)
+                \subsection{Average Total Cost Curve} % (fold)
+                \label{sub:average_cost_curve}
+                    The average total cost is expressed as $ATC$.
+                    Similar to \textit{total cost}, average cost can be separated into \textbf{average fixed cost} ($AFC$) and \textbf{average variable cost} ($AVC$).
+                    Similar to total cost,
+                    \begin{align*}
+                        ATC &= AFC + AVC
+                    \end{align*}
+                % subsection average_cost_curve (end)
+                \subsection{Short-Run Cost} % (fold)
+                \label{sub:short_run_cost}
+                    A corollary of diminishing return is that output produced by any new worker is successively smaller.
+                % subsection short_run_cost (end)
+                \subsection{The Affects of Technology on Cost and Productivity Curves} % (fold)
+                \label{sub:the_affects_of_technology_on_cost_and_productivity_curves}
+                    Technological change influences both productivity and cost curves.
+
+                    Increasing productivity shifts all product curves upward, and cost curves downward.
+
+                    If tech increases capital and reduces the labor needed, fixed costs increase increase and variable costs decrease.
+                % subsection the_affects_of_technology_on_cost_and_productivity_curves (end)
+                \subsection{The Affects of Prices of Factors of Production on Cost and Productivity Curves} % (fold)
+                \label{sub:the_affects_of_prices_of_factors_of_production_on_cost_and_productivity_curves}
+                    Increasing \textit{fixed} cost increases $TC$, and $ATC$, but $MC$ remains the same.
+
+                    Increasing \textit{variable} cost increases $TC$, $ATC$, and $MC$ curves upward.
+                % subsection the_affects_of_prices_of_factors_of_production_on_cost_and_productivity_curves (end)
+            % section short_run_cost_curves (end)
+            \section{Long Run Cost Curves} % (fold)
+            \label{sec:long_run_cost_curves}
+                \subsection{Production Function} % (fold)
+                \label{sub:production_function}
+                    The long-run cost depends on a \textbf{production function} defined as the relationship between the maximum output attainable and the quantities of labor and capital available.
+                % subsection production_function (end)
+                \subsection{Diminishing Marginal Product of Capital} % (fold)
+                \label{sub:diminishing_marginal_product_capital}
+                    The \textbf{marginal product of capital} is the increase in output resulting from an increase in the amount of capital employed with a constant amount of labor.
+                % subsection diminishing_marginal_product_capital (end)
+                \subsection{Average Cost Curve} % (fold)
+                \label{sub:average_cost_curve}
+                    The long-run average cost curve is a planning curve which option minimizes cost of producing a given output range.
+                % subsection average_cost_curve (end)
+                \subsection{Doing Things at Scale} % (fold)
+                \label{sub:doing_things_at_scale}
+                    \begin{description}
+                        \item[Economies of Scale] are features of technology that lead to a falling long-run average cost as output increases.
+                        \item[Diseconomies of Scale] are features of technology that lead to an increasing long-run average cost as output increases.
+                        \item[Constant Returns to Scale] are features of technology that lead to a constant long-run average cost as output increases.
+                    \end{description}
+                % subsection doing_things_at_scale (end)
+                \subsection{Minimum Efficient Scale} % (fold)
+                \label{sub:minimum_efficient_scale}
+                    The minimum efficient scale is the smallest quantity of output at which the long-run average cost reaches its lowest level.
+                    If the Long-Run average cost has a minimum cost, this is it.
+                % subsection minimum_efficient_scale (end)
+            % section long_run_cost_curves (end)
+        % chapter output_and_costs (end)
+    % part second_ _midterm_ (end)
+
+    \part{Final Stretch} % (fold)
+    \label{prt:final_ _stretch_}
+        \chapter{Perfect Competition} % (fold)
+        \label{cha:perfect_competition}
+            To study competitive markets, we need to see what happens when competition is as fierce and extreme as possible.
+            We say that these markets display \textbf{Perfect Competition}.
+
+            There are a few types of markets:
+            \begin{itemize}
+                \item Perfect Competition
+                \item Monopolistic Competition (TODO: Ref this)
+                \item Oligopoly (TODO: Ref this)
+                \item Monopoly (See Chapter~\ref{cha:monopoly})
+            \end{itemize}
+            \section{Characteristics of Perfect Competition} % (fold)
+            \label{sec:characteristics_of_perfect_competition}
+                Perfect competition occurs in an industry where there is:
+                \begin{itemize}
+                    \item Many firms sell identical products to many buyers.
+                    \item There are no restrictions on entry to the industry.
+                    \item Established firms have no advantages over new ones.
+                    \item Sellers and Buyers are well informed on pricing and products of all firms in the industry.
+                \end{itemize}
+                Firms who are in perfect competition face the maximal amount of competition through the many competing firms, each of which produces an identical product.
+                \subsection{How Perfect Competition Arises} % (fold)
+                \label{sub:how_perfect_competition_arises}
+                    Perfect competition arises when both these conditions are met:
+                    \begin{itemize}
+                        \item Firm's minimum efficient scale is small relative to the market demand.
+                        We know that the minimum efficient scale is the smallest output level at which the LRAC\footnote{What's an LRAC?} reaches the minimum.
+                        \item Each firm produce indistinguishable products.
+                    \end{itemize}
+                % subsection how_perfect_competition_arises (end)
+                \subsection{Price Takers} % (fold)
+                \label{sub:price_takers}
+                    \textbf{Price Takers} are firms that cannot individually influence the price of a good or service.
+
+                    In a market with perfect competition, all firms are price takers.
+                % subsection price_takers (end)
+                \subsection{Economic Profit and Revenue} % (fold)
+                \label{sub:economic_profit_and_revenue}
+                    The main goal of a firm is to maximize \textbf{economic profit}, which is revenue less cost.
+
+                    The total cost is the opportunity cost of production, which includes normal profit.
+
+                    i.e.:
+                    \begin{align*}
+                        \text{economic profit} &= \text{total revenue} - \text{total cost} \\
+                        \text{total cost} &= \text{opportunity cost of production} \\
+                        \text{total revenue} &= (\text{price})(\text{quantity}) \\
+                        &= P Q \\
+                        &= TR
+                    \end{align*}
+                    The marginal revenue is the change in total revenue that results from a one-unit increase in quantity sold.
+                    Effectively,
+                    \begin{align*}
+                        MR &= \frac{dTR}{dQ}
+                    \end{align*}
+                % subsection economic_profit_and_revenue (end)
+            % section characteristics_of_perfect_competition (end)
+            \section{Profit Maximizing Condition} % (fold)
+            \label{sec:profit_maximizing_condition}
+                Firms want to maximize their economic profit, so they must decide:
+                \begin{itemize}
+                    \item How to produce at a minimum cost\footnote{It does this by operating with the plant that minimizes LRAC (TODO: What is LRAC?)}
+                    \item What quantity to output
+                    \item Whether to enter or exit a market
+                \end{itemize}
+
+                A perfectly competitive firm chooses output that maximizes economic output.
+                Said otherwise, they're trying to maximize $TR - TC$.
+
+                In a perfect competition, since the marginal cost (\textsc{MC}) eventually increases and the marginal revenue (\textsc{MR}) is constant, we can look for the point where $\textsc{MR} == \textsc{MC}$.
+
+                On a table-like question, find the column that maximizes this profit.
+            % section profit_maximizing_condition (end)
+            \section{Break-Even and Shut-Down Points} % (fold)
+            \label{sec:break_even_and_shut_down_points}
+                \textbf{Break-Even} points are points where the firm makes zero profit.
+
+                When a firm is making an economic loss, it needs to decide to either exit the market or remain in the market.
+                If it remains in the market, it must decide to either \textbf{shut down} temporarily, or to produce goods.
+                These decision points will be based on the firm's economic best interest.
+                We can say that the economic cost can be tabulated as follows:
+                \begin{align*}
+                    \text{Economic loss} &= (\text{Total fixed cost}) + (\text{total variable cost}) - (\text{total revenue}) \\
+                    &= \textsc{TFC} + \textsc{Q}(\textsc{AVC}) - \textsc{Q}(\textsc{P})
+                \end{align*}
+                When a firm shuts down, $Q=0$ and the firm still needs to pay the \textsc{TFC}.
+                Alternatively, if \textsc{ATC} exceeds the price, the loss exceeds the \textsc{TFC}, and the firm shuts down.
+
+                At the shutdown point (i.e. the economic advantage of production is 0), the firm is indifferent between producing and shutting down.
+            % section break_even_and_shut_down_points (end)
+            \section{Market Supply in the Short Run} % (fold)
+            \label{sec:market_supply_in_the_short_run}
+                The short-run market supply curve shows the quantity supplied by all firms in the market at each price when each firm's plant and the number of firms stay the same.
+
+                When the supply curve is equal to the \textsc{AVC}, some firms will produce the shutdown quantity, and others will produce zero.
+                The market is perfectly elastic.
+
+                By increasing the demand\footnote{By this, we shift the demand-curve to the right}, the price and quantity produced increased.
+                Vice versa holds.
+
+                \subsection{Profits and Losses in the Short Run} % (fold)
+                \label{sub:profits_and_losses_in_the_short_run}
+                    Maximum profit is not always a positive economic profit.
+                    Depending on the value of the marginal cost v.s. the marginal revenue, sometimes the lowest point on the average total cost curve is sometimes (and sometimes not) an economically profitable position.
+                % subsection profits_and_losses_in_the_short_run (end)
+                \subsection{Profits and Losses in the Long Run} % (fold)
+            % section market_supply_in_the_short_run (end)
+            \section{Entry and Exit} % (fold)
+            \label{sec:entry_and_exit}
+                We're trying to determine how firms decide to enter/leave the market.
+
+                Firms will leave when they incur an economic loss.
+                Firms will enter an industry when existing firms make an economic profit.
+                \subsection{Entry} % (fold)
+                \label{sub:entry}
+                    The entrance of a firm creates an increased market supply, which results in a reduced market price.
+                % subsection entry (end)
+                \subsection{Exit} % (fold)
+                \label{sub:exit}
+                    When firms incur an economic loss, they will leave.
+                    This reduces the market supply, and thus the market price.
+                % subsection exit (end)
+            % section entry_and_exit (end)
+            \section{Changes in Demand} % (fold)
+            \label{sec:changes_in_demand}
+                \subsection{Decreasing Demand} % (fold)
+                \label{sub:decreasing_demand}
+
+                    By decreasing demand, the market demand curve shifts leftward.
+                    Thus, the price and quantity decreases.
+
+                    Since this is now below each firm's minimum average cost, some firms incur economic losses.
+                    The economic losses cause some firms to exit in the long run, which decreases the market supply.
+
+                    As the price rises, the quantity produced by all firms decreases overall, but each firm makes more individually.
+
+                    A new equilibrium is formed at the new equal minimum average total cost.
+
+                    In the initial and new long-run equilibrium, the number of firms in the market achieving equilibrium is lower.
+                % subsection decreasing_demand (end)
+                \subsection{Increasing Demand} % (fold)
+                \label{sub:increasing_demand}
+                    By increasing demand, the demand curve is shifted rightward.
+                    The price and quantity increases.
+                    Due to low barrier, firms enter and increase the short-run supply.
+                    As the supply increases, the price falls, and the market quantity continues to increase.
+
+                    Net-net, the only difference between the initial and new long-run equilibrium is that there are is a larger number of firms producing the equilibrium quantity in the new equilibrium.
+                % subsection increasing_demand (end)
+            % section changes_in_demand (end)
+            \section{External Economics and Diseconomies} % (fold)
+            \label{sec:external_economics_and_diseconomies}
+                \begin{description}
+                    \item[External Economics] are factors beyond the control of an individual firm that lower the firm's costs as industry output increases.
+                    \item[External Diseconomies] are factors beyond the control of an individual firm that raise the firm's costs as industry output increases.
+                \end{description}
+                In the absence of the External Economics and Diseconomies, a firm's cost remains constant as the market output changes.
+
+                In the absence of external economies and external diseconomies, an increase in demand doesn't change price.
+
+                In the presence of external economies, an increase in demand lowers prices.
+
+                In the presence of external diseconomies, an increase in demand raises prices.
+
+                We call the price curve as demand changes the \textbf{long-run market supply curve}.
+            % section external_economics_and_diseconomies (end)
+            \section{New Technologies} % (fold)
+            \label{sec:new_technologies}
+                New technology always lowers costs.
+                Firms that adopt new tech make an economic profit.
+
+                A new tech enables firms to produce at lower average cost and/or lower marginal cost.
+                This shifts their cost curves downward.
+
+                New tech firms enter, and old tech firms must either adapt or die.
+
+                The industry supply increases, and the supply curve shifts rightwards.
+                The price falls, and the quantity increases.
+
+                Eventually, a new long-run equilibrium emerges where all firms use the new technology.
+            % section new_technologies (end)
+            \section{Efficient Resource Usage} % (fold)
+            \label{sec:efficient_resource_usage}
+                Resources are used efficiently when nobody can be made better without making a someone else becomes worse off.
+
+                A consumer's demand curve shows how the best budget allocation changes as the price of a good changes.
+                Consumers then get the most value out of their resources at all points along their demand curves.
+                Without external benefits, the market demand curve is the marginal social benefit curve.
+
+                A competitive firm's supply curve shows how the profit-maximizing quantity changes as the price of a good changes.
+                Firms get the most value out of their resources at all points along their supply curves.
+                Without external cost, the market supply curve is the marginal social cost curve.
+            % section efficient_resource_usage (end)
+            \section{Equilibrium and Efficiency} % (fold)
+            \label{sec:equilibrium_and_efficiency}
+                At competitive equilibrium, resources are used efficiently.
+                This means that the amount demanded is the amount supplied.
+
+                The gains from trade for consumers is measured by consumer surplus.
+
+                The gains from trade for producers is measured by producer surplus.
+
+                Total gains from trade is equal to the total surplus.
+                In the long-run, the total surplus is maximized.
+            % section equilibrium_and_efficiency (end)
+        % chapter perfect_competition (end)
+        \chapter{Monopoly} % (fold)
+        \label{cha:monopoly}
+            Monopolies are markets with only one seller but many buyers.
+            Since the monopoly is the sole producer of a product, the demand curve is the market demand curve.
+
+            A monopoly is a market where:
+            \begin{itemize}
+                \item No close substitute exists for a given good or service.
+                \item Markets have a high barrier to entry.
+            \end{itemize}
+
+            There are three different types of barriers to entry:
+            \begin{description}
+                \item[Natural] - When economies of scale enable one firm to supply the entire market at the lowest possible cost.
+                \item[Ownership] - When one firm owns a significant portion of a key resource.
+                \item[Legal] - When entrance to a market is restricted by a public franchise\footnote{Like the Canada Post}, Government License\footnote{Like a license to sell cell-phones, practice engineering, etc.}, a Patent, or a Copyright.
+            \end{description}
+
+            \section{Price-Setting Strategies} % (fold)
+            \label{sec:price_setting_strategies}
+                Monopolies set their own price.
+                If a monopoly raises the price, they do not need to worry about competitors.
+
+                \begin{description}
+                    \item[Single-Price Monopoly] is a firm that must sell each unit for the same price.
+                    \item[Price Discrimination] is the practice of variable pricing depending on the customer.
+                \end{description}
+
+                The average revenue (\textsc{AR}) of a monopolist is the market demand curve.
+
+                The total revenue (\textsc{TR}) is the price multiplied by the quantity sold ($\textsc{TR} = PQ$)
+                The marginal revenue (\textsc{MR}) is the change in total revenue that results from a one-unit increase in the quantity sold.
+                For a single-price monopoly, the marginal revenue is less than the price at each level of output ($MR < P$).
+
+                To sell more, monopolies must set a lower price.
+                When this happens, we effect the TR by:
+                \begin{itemize}
+                    \item Lowering the price creates a revenue loss
+                    \item Increasing the quantity increases revenue
+                \end{itemize}
+
+                A single-price monopoly's marginal revenue is related to the elasticity of demand for that good.
+                Elastic demand means that a fall in price brings an increase in total revenue.
+                Inelastic demand means that a fall in price brings a decrease in total revenue.
+                If the demand is unit elastic, a fall in price doesn't change total revenue.
+
+                The total revenue is maximized when the marginal revenue is 0.
+
+                In monopolies, demand is always elastic.
+            % section price_setting_strategies (end)
+            \section{Price and Output Decision} % (fold)
+            \label{sec:price_and_output_decision}
+                The monopoly sets the price where they can make the most profit.
+
+                A monopoly makes profit when $\textsc{MR} = \textsc{MC}$.
+
+                Monopolies may make economic profits in the long run, and ones that incur economic losses may shut down temporarily in the short run, or exit the market in the long run.
+
+                Compared to perfect competition, monopolies produce a smaller output for a higher price.
+
+                There is no relationship between the quantity supplied and the price defined by the marginal cost curve, since the price comes from the market demand curve.
+            % section price_and_output_decision (end)
+            \section{Single-Price Monopoly vs Competition} % (fold)
+            \label{sec:single_price_monopoly_vs_competition}
+                \subsection{Surpluses} % (fold)
+                \label{sub:surpluses}
+                    Some of the lost consumer surplus goes to the monopoly as a producer surplus, but not all of it.
+
+                    Consumer surplus shrinks since they pay higher prices, and they get less of the good.
+
+                    The producer surplus shrinks since the price raise reduces the quantity sold.
+                % subsection surpluses (end)
+                \subsection{Rent-Seeking Equilibrium} % (fold)
+                \label{sub:rent_seeking_equilibrium}
+                    Any surplus is called \textbf{economic rent}, and the act of pursuing this wealth is called \textbf{rent seeking}.
+
+                    Rent seekers pursue their goals in two ways:
+                    \begin{itemize}
+                        \item Buy a monopoly
+                        \item Create a monopoly
+                    \end{itemize}
+                % subsection rent_seeking_equilibrium (end)
+            % section single_price_monopoly_vs_competition (end)
+            \section{Price Discrimination} % (fold)
+            \label{sec:price_discrimination}
+                When different prices are set for different audiences, we call this \textbf{price discrimination}.
+
+                To be able to price discriminate, a monopoly must:
+                \begin{itemize}
+                    \item Identify different buyer types.
+                    \begin{itemize}
+                        \item Through units of a good, such as quantity discounts.
+                        \item Among groups of buyers, such as restrictions on airline tickets and advance purchasers.
+                    \end{itemize}
+                    \item Sell a product that cannot be resold.
+                \end{itemize}
+
+                Firms can increase their profit through price discrimination.
+                \textbf{Perfect price discrimination} occurs if a firm is able to sell each unit at the highest price anyone is willing to pay\footnote{Tweeted on \href{https://twitter.com/shalecraig/status/405013136597475329}{Nov 25}}.
+
+                \subsection{Rent Seeking with Price Discrimination} % (fold)
+                \label{sub:rent_seeking_with_price_discrimination}
+                    Monopolies that price discriminate better, are more efficient and have close output to the competitive output.
+
+                    This is different than perfect competition in two ways:
+                    \begin{itemize}
+                        \item Monopoly captures the entire consumer surplus.
+                        \item Increased economic profit attracts more rent-seeking activities, which lead to inefficiencies.
+                    \end{itemize}
+                % subsection rent_seeking_with_price_discrimination (end)
+            % section price_discrimination (end)
+            \section{Regulation} % (fold)
+            \label{sec:regulation}
+                \begin{description}
+                    \item[Regulations] are the rules administrated by government to influence price, quantities, entry, etc.
+                    \item[Deregulation] is the process of removing regulations.
+                \end{description}
+
+                There are two main theories on how regulation works:
+                \begin{description}
+                    \item[Social Interest Theory] is where regulation relentlessly seeks out inefficiency.
+                    \item[Capture Theory] is where regulation serves the self-interest of producers, who capture regulators.
+                \end{description}
+                \subsection{Regulating Natural Monopolies} % (fold)
+                \label{sub:regulating_natural_monopolies}
+                    When cost and demand create natural monopolies, quantity produced is less than the efficient quantity.
+
+                    Governments regulate natural monopolies to fix this by using a \textbf{marginal cost pricing rule} that sets the price equal to the monopoly's marginal cost.
+                    Since the quantity demanded at the marginal cost price is the efficient quantity, this works.
+                % subsection regulating_natural_monopolies (end)
+            % section regulation (end)
+            Comparing price and output between monopoly and perfect competition
+        % chapter monopoly (end)
+    % part final_ _stretch_ (end)
+
+    % Government in Action - I think we're skipping this.
+    % (1).Demand and marginal benefit
+    % (2).Supply and marginal cost
+    % (3).Efficiency of competitive market
+    % (4).Surpluses and shortages, price ceilings & price floor
+    % (5). Minimum wage and rent control
+    % (6).Taxes and subsidies
+
+    % Monopolistic Competition
+    % (1).Characteristics of monopolistic competition
+    % (2).Price and output in monopolistic competition
+
+    % Oligopoly
+    % (1).What is oligopoly?
+    % (2).The kinked demand curve
+    % (3).Dominant firm oligopoly & Oligopoly games
+
+    % Time permitting:
+    % Market Failure and Government
+    % (1).Positive and negative externalities in production and consumption
+    % (2).Private cost and social cost
+    % (3).Private benefit and social benefit
+    % (4).Pollution and Pollution control
+    % (5).Economic solutions to pollution control
+
+    % Public Goods and Common Resources
+    % (1).Non rival & non excludability
+    % (2).Public goods and bads
+    % (3).The free rider problem
+    % (4).The tragedy of the commons
+\end{document}
+% Currently on slide 77 of Chapter 13.
