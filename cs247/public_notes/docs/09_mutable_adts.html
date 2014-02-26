@@ -1,0 +1,49 @@
+<!DOCTYPE html>  <html> <head>   <title>09_mutable_adts.cpp</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="05_tut1.html">                 05_tut1.cpp               </a>                                           <a class="source" href="06_adt_design.html">                 06_adt_design.cpp               </a>                                           <a class="source" href="07_handle_classes.html">                 07_handle_classes.cpp               </a>                                           <a class="source" href="08_designing_an_adt.html">                 08_designing_an_adt.cpp               </a>                                           <a class="source" href="09_mutable_adts.html">                 09_mutable_adts.cpp               </a>                                           <a class="source" href="10_singleton_design.html">                 10_singleton_design.cpp               </a>                                           <a class="source" href="11_error_handling.html">                 11_error_handling.cpp               </a>                                           <a class="source" href="12_exceptions.html">                 12_exceptions.cpp               </a>                                           <a class="source" href="13_resource_acquisition_is_initialization.html">                 13_resource_acquisition_is_initialization.cpp               </a>                                           <a class="source" href="14_make.html">                 14_make.sh               </a>                                           <a class="source" href="15_makefile.html">                 15_makefile.mak               </a>                                           <a class="source" href="16_interface_specifications.html">                 16_interface_specifications.h               </a>                                           <a class="source" href="17_namespaces.html">                 17_namespaces.cpp               </a>                                           <a class="source" href="18_namespaces_example.html">                 18_namespaces_example.cpp               </a>                                           <a class="source" href="19_uml.html">                 19_uml.cpp               </a>                                           <a class="source" href="20_substitutability.html">                 20_substitutability.cpp               </a>                                           <a class="source" href="AccountExample.html">                 AccountExample.cpp               </a>                                           <a class="source" href="TDD.html">                 TDD.cpp               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               09_mutable_adts.cpp             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <ul>
+<li><p><strong>Mutable ADT - objects can change value</strong></p></li>
+<li><p><strong>Immutable ADT - objects that cannot change value</strong></p></li>
+</ul>
+
+<blockquote>
+  <ul>
+  <li><p>int, float, bool, string, AccountNo, Date</p></li>
+  <li><p>can always change the value of a varaible through assignment</p></li>
+  </ul>
+</blockquote>
+
+<ul>
+<li>Mutable ADTs tend to reflect real-world entries</li>
+</ul>
+
+<blockquote>
+  <ul>
+  <li><p>student marks, health record, bank account</p></li>
+  <li><p>may want to disallow copy construction</p></li>
+  </ul>
+</blockquote>
+
+<hr />             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/* snip */</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Rational example:</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="n">Rational</span> <span class="n">r</span><span class="p">;</span> <span class="c1">// r is set to: 0/1</span>
+<span class="n">Rational</span> <span class="n">s</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="c1">// s is set to: 0/1</span>
+<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">r</span><span class="p">;</span> <span class="c1">// input 10/1</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>if Rational is mutable, we have r = 10/1, s = <strong>10</strong>/1</p>
+
+<p>if Rational is immutable: r = 10/1, s = <strong>0</strong>/1</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;r= &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">r</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, s =&quot;</span><span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="cm">/* snip */</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <hr />
+
+<p>Person example (Java example)</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="n">Person</span> <span class="n">myperson</span><span class="p">(</span><span class="s">&quot;Danny O&#39;Leary&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">Date</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="n">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">myperson</span><span class="p">.</span><span class="n">DOB</span><span class="p">().</span><span class="n">toString</span><span class="p">());</span>
+<span class="n">Date</span> <span class="n">mydate</span> <span class="o">=</span> <span class="n">myperson</span><span class="p">.</span><span class="n">DOB</span><span class="p">();</span>
+<span class="n">myDate</span><span class="p">.</span><span class="n">setMonth</span><span class="p">(</span><span class="n">myDate</span><span class="p">.</span><span class="n">Month</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>this call can be problematic if multiple variables share the same mutable object</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">myperson</span><span class="p">.</span><span class="n">DOB</span><span class="p">();</span> 
+<span class="cm">/* snip */</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <hr />
+
+<p>When building an immutable ADT</p>
+
+<ol>
+<li><p>data members must be private</p></li>
+<li><p>no mutators</p></li>
+<li><p>non-essential methods are const</p></li>
+<li><p>Accessors return a copy of the requested value, not a reference to the value</p></li>
+<li><p>>> creator makes a new copy of r</p></li>
+<li><p>assignment, copy constructor make deep copies</p></li>
+<li><p>data members are immutable, or assign to copies of values</p></li>
+</ol>
+
+<p><strong>Basically, immutable adts cannot be changed</strong></p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

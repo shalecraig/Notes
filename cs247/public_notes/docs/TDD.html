@@ -1,0 +1,57 @@
+<!DOCTYPE html>  <html> <head>   <title>TDD.cpp</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="05_tut1.html">                 05_tut1.cpp               </a>                                           <a class="source" href="06_adt_design.html">                 06_adt_design.cpp               </a>                                           <a class="source" href="07_handle_classes.html">                 07_handle_classes.cpp               </a>                                           <a class="source" href="08_designing_an_adt.html">                 08_designing_an_adt.cpp               </a>                                           <a class="source" href="09_mutable_adts.html">                 09_mutable_adts.cpp               </a>                                           <a class="source" href="10_singleton_design.html">                 10_singleton_design.cpp               </a>                                           <a class="source" href="11_error_handling.html">                 11_error_handling.cpp               </a>                                           <a class="source" href="12_exceptions.html">                 12_exceptions.cpp               </a>                                           <a class="source" href="13_resource_acquisition_is_initialization.html">                 13_resource_acquisition_is_initialization.cpp               </a>                                           <a class="source" href="14_make.html">                 14_make.sh               </a>                                           <a class="source" href="15_makefile.html">                 15_makefile.mak               </a>                                           <a class="source" href="16_interface_specifications.html">                 16_interface_specifications.h               </a>                                           <a class="source" href="17_namespaces.html">                 17_namespaces.cpp               </a>                                           <a class="source" href="18_namespaces_example.html">                 18_namespaces_example.cpp               </a>                                           <a class="source" href="19_uml.html">                 19_uml.cpp               </a>                                           <a class="source" href="20_substitutability.html">                 20_substitutability.cpp               </a>                                           <a class="source" href="AccountExample.html">                 AccountExample.cpp               </a>                                           <a class="source" href="TDD.html">                 TDD.cpp               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               TDD.cpp             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>TDD:
+    Don't write any production code without writing a failing test
+    Don't write any more test code than you need to fail test
+    Don't write any more prod code than needed to pass test
+    Refactor
+    Repeat
+Properties of TDD:
+    +
+        Precise specs
+        tends to lead to more testing
+        regression testing is free
+        outside-in development
+        leads to simpler designs
+        time to write prod code is less
+    -
+        more time consuming
+        tests have to be really good
+        tests can be hard to maintain
+Test strategies:
+    black-box testing - test the desired functionality of code without considering code structure
+        Ex:
+            Date (int y, string m, int d)
+                valid normal dates
+                valid abnormal dates
+                invalid dates
+                leap year, non-leap years
+                all valid months
+                normal, abnormal days per month
+    White-box testing - used to ensure that test suite covers entire program
+        statement coverage
+        loop coverage
+        path coverage
+        ex:</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="n">Date</span><span class="o">::</span><span class="n">Date</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="n">string</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">)</span> <span class="o">:</span> <span class="n">d_</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">y_</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">invalidYear</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="k">throw</span> <span class="p">...</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">invalidMonth</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="k">throw</span> <span class="p">...</span>
+                <span class="p">}</span>
+                <span class="n">etc</span><span class="p">...</span>
+                <span class="n">month</span> <span class="o">=</span> <span class="n">Month</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+            <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <pre><code>Boundary Testing - testing inputs that are barely valid, barely invalid, barely within a class of inputs.
+    ex:
+        Feb 29, 1900, 2000, 2100
+    Boundary cases:
+        Off by one values
+        null pointer
+        empty containers
+        containers with one element
+        aliases
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="n">Self</span><span class="o">-</span><span class="n">testin</span> <span class="n">Objects</span> <span class="o">-</span> <span class="n">assertions</span> <span class="n">that</span> <span class="n">check</span> <span class="n">code</span> <span class="n">assumptions</span>
+    <span class="n">pre</span><span class="o">-</span><span class="n">conditions</span> <span class="n">are</span> <span class="n">checked</span>
+    <span class="n">post</span><span class="o">-</span><span class="n">conditions</span> <span class="n">are</span> <span class="n">checked</span>
+    <span class="n">invariants</span>
+    <span class="n">i</span><span class="p">.</span><span class="n">e</span><span class="p">.</span> <span class="n">has</span> <span class="s">&quot;assers&quot;</span> <span class="n">and</span> <span class="n">other</span> <span class="n">commands</span><span class="p">.</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

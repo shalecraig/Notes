@@ -1,0 +1,37 @@
+state: (model)
+    current player's turn
+    contents of hands
+    what is on the board
+    what has been discarded (by who)
+    what is in the deck
+    current scores
+    randomseed
+
+
+
+
+class controller {
+    clickRage() {
+        playerType = computer player
+        computerPlyaer.promptForInput
+    }
+    clickCard(int cardIndex) {
+        if (canBePlayed(card)) {
+            remove card from hand (restartButton)
+            player++
+        } else if (canDropCards(player)) {
+            remove card from hand (player)
+        }
+    }
+    clickRestartGame() {
+        shuffle deck
+        clear hands
+        scores = [0];
+        deal out deck
+        set first player
+    }
+
+    clickQuit() {
+        clear deck, hands, and quit, etc.
+    }
+}

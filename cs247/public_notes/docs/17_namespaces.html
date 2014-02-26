@@ -1,0 +1,64 @@
+<!DOCTYPE html>  <html> <head>   <title>17_namespaces.cpp</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="05_tut1.html">                 05_tut1.cpp               </a>                                           <a class="source" href="06_adt_design.html">                 06_adt_design.cpp               </a>                                           <a class="source" href="07_handle_classes.html">                 07_handle_classes.cpp               </a>                                           <a class="source" href="08_designing_an_adt.html">                 08_designing_an_adt.cpp               </a>                                           <a class="source" href="09_mutable_adts.html">                 09_mutable_adts.cpp               </a>                                           <a class="source" href="10_singleton_design.html">                 10_singleton_design.cpp               </a>                                           <a class="source" href="11_error_handling.html">                 11_error_handling.cpp               </a>                                           <a class="source" href="12_exceptions.html">                 12_exceptions.cpp               </a>                                           <a class="source" href="13_resource_acquisition_is_initialization.html">                 13_resource_acquisition_is_initialization.cpp               </a>                                           <a class="source" href="14_make.html">                 14_make.sh               </a>                                           <a class="source" href="15_makefile.html">                 15_makefile.mak               </a>                                           <a class="source" href="16_interface_specifications.html">                 16_interface_specifications.h               </a>                                           <a class="source" href="17_namespaces.html">                 17_namespaces.cpp               </a>                                           <a class="source" href="18_namespaces_example.html">                 18_namespaces_example.cpp               </a>                                           <a class="source" href="19_uml.html">                 19_uml.cpp               </a>                                           <a class="source" href="20_substitutability.html">                 20_substitutability.cpp               </a>                                           <a class="source" href="AccountExample.html">                 AccountExample.cpp               </a>                                           <a class="source" href="TDD.html">                 TDD.cpp               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               17_namespaces.cpp             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>Namespace pollution is a problem.</p>
+
+<p>It causes clashes among global names in a large multimodule program.</p>
+
+<p>Analogy: telephone codes:
+ (country code)(area code)(number)(extensions)</p>
+
+<p>namespace - used to package related definitions in a commonly named scope</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="k">namespace</span> <span class="n">Lib1</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="n">f</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">namespace</span> <span class="n">Lib2</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="n">f</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="n">g</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>calls Lib2's method (not Lib1's method)</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="n">f</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">h</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Qualifies the namespace of the method you are calling
+-> calls Lib1's Method</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="n">Lib1</span><span class="o">::</span><span class="n">f</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/* snip */</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Can re-open the namespace in other files. Ex:</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/* new file */</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <hr />             </td>             <td class="code">               <div class="highlight"><pre><span class="k">namespace</span> <span class="n">Lib1</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>new method defined in the file.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="n">herpDerpMcGurp</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="cm">/* snip */</span>
+<span class="k">namespace</span> <span class="n">RatADT</span> <span class="p">{</span>
+    <span class="k">class</span> <span class="nc">Rational</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Usually, we would write this to call these methods:</p>
+
+<pre><code> RatADT::Rational::Rational(...) {...}
+ RatADT::Rational RatADT::operator+(...) {...}
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">public</span><span class="o">:</span>
+        <span class="n">Rational</span><span class="p">(</span><span class="kt">int</span> <span class="n">num_0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">denom</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="n">Rational</span> <span class="k">operator</span><span class="o">+</span> <span class="p">(</span><span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* snip */</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Referenceing namespace members:</p>
+
+<ul>
+<li><p>Using declarations will add Rational to the visible namespace</p>
+
+<pre><code> Using RatADT::Rational;
+</code></pre></li>
+<li><p>Makes Rational visible or a name in current scope</p></li>
+<li>Will clash with local names</li>
+<li><p>Using directive:</p>
+
+<pre><code> Using namespace RatADT;
+</code></pre>
+
+<ul><li>Makes namespace member visible as if they had been declared outside their namespace.</li>
+<li>Local declarations supersede them</li>
+<li>Can have ambiguous names if member of multiple namespaces are made visible with using directives</li></ul></li>
+</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/* snip */</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Note on etiquette:</p>
+
+<p><strong>don't use "using":</strong></p>
+
+<ul>
+<li><p>inisde a header</p>
+
+<ul><li>it will be included for everything <em>importing</em> the header, making the namespace basically global. Stuff will break.</li></ul></li>
+<li><p>before an #include directive:</p>
+
+<ul><li>It will mess up the namespaces of the included files.</li></ul></li>
+</ul>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

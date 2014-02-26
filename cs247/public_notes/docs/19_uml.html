@@ -1,0 +1,60 @@
+<!DOCTYPE html>  <html> <head>   <title>19_uml.cpp</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="05_tut1.html">                 05_tut1.cpp               </a>                                           <a class="source" href="06_adt_design.html">                 06_adt_design.cpp               </a>                                           <a class="source" href="07_handle_classes.html">                 07_handle_classes.cpp               </a>                                           <a class="source" href="08_designing_an_adt.html">                 08_designing_an_adt.cpp               </a>                                           <a class="source" href="09_mutable_adts.html">                 09_mutable_adts.cpp               </a>                                           <a class="source" href="10_singleton_design.html">                 10_singleton_design.cpp               </a>                                           <a class="source" href="11_error_handling.html">                 11_error_handling.cpp               </a>                                           <a class="source" href="12_exceptions.html">                 12_exceptions.cpp               </a>                                           <a class="source" href="13_resource_acquisition_is_initialization.html">                 13_resource_acquisition_is_initialization.cpp               </a>                                           <a class="source" href="14_make.html">                 14_make.sh               </a>                                           <a class="source" href="15_makefile.html">                 15_makefile.mak               </a>                                           <a class="source" href="16_interface_specifications.html">                 16_interface_specifications.h               </a>                                           <a class="source" href="17_namespaces.html">                 17_namespaces.cpp               </a>                                           <a class="source" href="18_namespaces_example.html">                 18_namespaces_example.cpp               </a>                                           <a class="source" href="19_uml.html">                 19_uml.cpp               </a>                                           <a class="source" href="20_substitutability.html">                 20_substitutability.cpp               </a>                                           <a class="source" href="AccountExample.html">                 AccountExample.cpp               </a>                                           <a class="source" href="TDD.html">                 TDD.cpp               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               19_uml.cpp             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p><strong>UML</strong>: Unified Markup Language</p>
+
+<p>Relevant: <a href="http://todo.com">Martin Fowler's UML textbook</a></p>             </td>             <td class="code">               <div class="highlight"><pre><span class="o">----------------------------------------------</span>
+<span class="o">|</span> <span class="n">name</span>                                       <span class="o">|</span>
+<span class="o">----------------------------------------------</span>
+<span class="o">|</span> <span class="n">fields</span>                                     <span class="o">|</span>
+<span class="o">----------------------------------------------</span>
+<span class="o">|</span> <span class="o">+</span> <span class="n">operations</span>                                <span class="o">|</span>
+<span class="o">----------------------------------------------</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>In operations, there are different shapes that indicate public/private/etc:</p>
+
+<ul>
+<li><p>+ public</p></li>
+<li><p>- private</p></li>
+<li><p># protected</p></li>
+<li><p>static (underlined)</p></li>
+<li><p><em>pure virtual</em></p></li>
+</ul>
+
+<hr />
+
+<p><strong><em>Association</em></strong></p>
+
+<ul>
+<li><p>A line means that there is an association between classes</p></li>
+<li><p>With addition of arrow heads, we have movement (info) i.e. who knows about who.</p></li>
+</ul>
+
+<hr />
+
+<h2>UML:</h2>
+
+<ul>
+<li><p>Boxes:</p>
+
+<ul><li><p>name</p></li>
+<li><p>fields</p></li>
+<li><p>operations</p></li></ul></li>
+<li><p>Associations (arrows)</p>
+
+<ul><li><p>Show that two items are "connected", or "associated" with each other.</p></li>
+<li><p>Multiplicities - constrain the number of allowable links in an association (1..m &lt;=&gt; 0&le;n&le;m)</p></li>
+<li><p>Association class - link attributes (i.e. link members passed between one class and another)</p></li></ul></li>
+<li><p>Aggregation (clear diamonds)</p>
+
+<ul><li>"Part of" relation between an aggregate (collection) and its members. ("Purchase Order" has an aggregation of "products")</li></ul></li>
+<li><p>Composition (opaque diamonds)</p>
+
+<ul><li>"Part of" relation between a composite object and its components. ("catalog item" is part of a "catalog")</li></ul></li>
+<li><p>Generalization (clear triangles):</p>
+
+<ul><li>Sub-type (parent/child class relationship)</li></ul></li>
+</ul>
+
+<hr />
+
+<h2>UML:</h2>
+
+<ul>
+* 
+</ul>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

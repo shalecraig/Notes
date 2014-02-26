@@ -1,0 +1,64 @@
+<!DOCTYPE html>  <html> <head>   <title>11_error_handling.cpp</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="05_tut1.html">                 05_tut1.cpp               </a>                                           <a class="source" href="06_adt_design.html">                 06_adt_design.cpp               </a>                                           <a class="source" href="07_handle_classes.html">                 07_handle_classes.cpp               </a>                                           <a class="source" href="08_designing_an_adt.html">                 08_designing_an_adt.cpp               </a>                                           <a class="source" href="09_mutable_adts.html">                 09_mutable_adts.cpp               </a>                                           <a class="source" href="10_singleton_design.html">                 10_singleton_design.cpp               </a>                                           <a class="source" href="11_error_handling.html">                 11_error_handling.cpp               </a>                                           <a class="source" href="12_exceptions.html">                 12_exceptions.cpp               </a>                                           <a class="source" href="13_resource_acquisition_is_initialization.html">                 13_resource_acquisition_is_initialization.cpp               </a>                                           <a class="source" href="14_make.html">                 14_make.sh               </a>                                           <a class="source" href="15_makefile.html">                 15_makefile.mak               </a>                                           <a class="source" href="16_interface_specifications.html">                 16_interface_specifications.h               </a>                                           <a class="source" href="17_namespaces.html">                 17_namespaces.cpp               </a>                                           <a class="source" href="18_namespaces_example.html">                 18_namespaces_example.cpp               </a>                                           <a class="source" href="19_uml.html">                 19_uml.cpp               </a>                                           <a class="source" href="20_substitutability.html">                 20_substitutability.cpp               </a>                                           <a class="source" href="AccountExample.html">                 AccountExample.cpp               </a>                                           <a class="source" href="TDD.html">                 TDD.cpp               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               11_error_handling.cpp             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p><strong>Error Handling</strong></p>
+
+<p>In general, about 50% of your code could be handling errors.</p>
+
+<p>Why is this bad?</p>
+
+<ul>
+<li><p>50% of the code will be error handling</p></li>
+<li><p>it will be hard to see what the code is doing.</p></li>
+</ul>
+
+<p>Exceptions can be triggered by unusual condition or situation that precludes a function from completing normally</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="n">ifstream</span> <span class="n">infile</span><span class="p">;</span>
+<span class="n">infile</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;data&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">infile</span><span class="p">.</span><span class="n">good</span><span class="p">())</span> <span class="p">{</span>
+    <span class="cm">/* error handling */</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Error opening file &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">infile</span><span class="p">.</span><span class="n">eof</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">infile</span> <span class="o">&gt;&gt;</span> <span class="n">name</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">infile</span><span class="p">.</span><span class="n">bad</span><span class="p">())</span> <span class="p">{</span>
+        <span class="cm">/* error handling */</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">infile</span><span class="p">.</span><span class="n">fail</span><span class="p">())</span> <span class="p">{</span>
+        <span class="cm">/* error handling */</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="cm">/* process data */</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <hr />             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*snip*/</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Suggested - try-catch block:</p>
+
+<p>Exception handling:</p>
+
+<ul>
+<li><p>separates error-handling code from "normal" code</p></li>
+<li><p>separates risky from nonrisky code</p></li>
+<li><p>exceptions cannot be ignored</p></li>
+</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/* risk-free code */</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="cm">/* code that can throw exceptions */</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">exceptType1</span> <span class="o">&amp;</span><span class="n">e1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* error handling */</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">exceptType2</span> <span class="o">&amp;</span><span class="n">e2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* error handling */</span>
+<span class="p">}</span>
+<span class="cm">/* risk-free code */</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <hr />             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*snip*/</span>
+<span class="n">Rational</span><span class="o">::</span> <span class="n">Rational</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">denom</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">denom</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>in C++, we can throw integers, strings, or objects</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="cm">/* throw 0; */</span>
+        <span class="cm">/* throw &quot;Wrong&quot;; */</span>
+        <span class="cm">/* throw DivideByZeroException(); */</span>
+        <span class="k">throw</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <hr />             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*snip*/</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p><strong>Creating error objects</strong></p>             </td>             <td class="code">               <div class="highlight"><pre><span class="k">class</span> <span class="nc">Rational</span> <span class="p">{</span>
+    <span class="cm">/* code for the Rational class */</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Error object</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">class</span> <span class="nc">DivideByZeroException</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">DivideByZeroException</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="o">:</span> <span class="n">num_</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{}</span>
+        <span class="kt">int</span> <span class="n">num</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">num_</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="cm">/*...*/</span>
+    <span class="k">public</span> <span class="n">Rational</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">denom</span> <span class="o">=</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="cm">/*...*/</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

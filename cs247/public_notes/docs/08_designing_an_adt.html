@@ -1,0 +1,58 @@
+<!DOCTYPE html>  <html> <head>   <title>08_designing_an_adt.cpp</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="05_tut1.html">                 05_tut1.cpp               </a>                                           <a class="source" href="06_adt_design.html">                 06_adt_design.cpp               </a>                                           <a class="source" href="07_handle_classes.html">                 07_handle_classes.cpp               </a>                                           <a class="source" href="08_designing_an_adt.html">                 08_designing_an_adt.cpp               </a>                                           <a class="source" href="09_mutable_adts.html">                 09_mutable_adts.cpp               </a>                                           <a class="source" href="10_singleton_design.html">                 10_singleton_design.cpp               </a>                                           <a class="source" href="11_error_handling.html">                 11_error_handling.cpp               </a>                                           <a class="source" href="12_exceptions.html">                 12_exceptions.cpp               </a>                                           <a class="source" href="13_resource_acquisition_is_initialization.html">                 13_resource_acquisition_is_initialization.cpp               </a>                                           <a class="source" href="14_make.html">                 14_make.sh               </a>                                           <a class="source" href="15_makefile.html">                 15_makefile.mak               </a>                                           <a class="source" href="16_interface_specifications.html">                 16_interface_specifications.h               </a>                                           <a class="source" href="17_namespaces.html">                 17_namespaces.cpp               </a>                                           <a class="source" href="18_namespaces_example.html">                 18_namespaces_example.cpp               </a>                                           <a class="source" href="19_uml.html">                 19_uml.cpp               </a>                                           <a class="source" href="20_substitutability.html">                 20_substitutability.cpp               </a>                                           <a class="source" href="AccountExample.html">                 AccountExample.cpp               </a>                                           <a class="source" href="TDD.html">                 TDD.cpp               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               08_designing_an_adt.cpp             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>Summary of ADT design decisions (what we need to explicitly choose to do)</p>
+
+<ul>
+<li><p>Legal Values, legal Default value?</p></li>
+<li><p>using the explicit keyword in constructors</p></li>
+<li><p>Accessors, mutators</p></li>
+<li><p>function overloading (for flexible interfaces)</p></li>
+<li><p>operator overloading</p></li>
+<li><p>const parameters, methods</p></li>
+<li><p>member v.s.. non-member methods</p></li>
+<li><p>essential methods (using ours or the compiler's)</p></li>
+<li><p>using a mutattable or immutatable ADT</p></li>
+<li><p>information hiding</p></li>
+</ul>
+
+<hr />             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/* top */</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <ul>
+<li>We're designing a <strong>money ADT</strong></li>
+</ul>
+
+<p><em>Requirements:</em></p>
+
+<ul>
+<li><p>Must hold place value of up to two decimal places</p></li>
+<li><p>Must hold positive and negative values</p></li>
+<li><p>Must hold the currency</p></li>
+<li><p>Must hold very large values with perfect precision (loss of precision would result in $10^100 + $1 = $10^100)</p></li>
+</ul>
+
+<p>Data Representation:</p>
+
+<ul>
+<li><p>No floats!</p></li>
+<li><p>Keep an integer value</p></li>
+<li><p>Possibly an array of digits</p></li>
+</ul>
+
+<p>Default Constructor, copy constructor</p>
+
+<ul>
+<li><p>define the constructor:</p>
+
+<ul><li><p>int -> Money</p></li>
+<li><p>Rational -> Money</p></li></ul></li>
+</ul>
+
+<p>Explicit:</p>
+
+<ul>
+<li><p>value: Money -> string</p></li>
+<li><p>dollars: Money -> String</p></li>
+<li><p>cent: money -> string</p></li>
+<li><p>+, -</p></li>
+</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/* Money ADT */</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <ul>
+<li>operator* : Money * Rational</li>
+</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/* nonmember functions/methods: */</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <ul>
+<li><p>Operator >>, Operator&lt;&lt; ==, !=, >, >=, &lt;, &lt;=</p></li>
+<li><p>Copy constructor, operator=</p></li>
+</ul>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

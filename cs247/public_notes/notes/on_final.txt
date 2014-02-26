@@ -1,0 +1,10 @@
+ADT Design
+Exceptions/robust code
+Modular, separate compilation
+namespaces
+Interface Specification
+UML
+OO Principles
+OO Design Patterns (Purpose, UML, Snippets of implementation)
+Testing - knowledge
+Generics/Templates
