@@ -47,8 +47,6 @@ enough for the 1-offs I need right now.
 
 - Do _really good_ compile-time spell-checking. *no clue*
 
-- Investigate LaTeX to markdown compilation. *1 Hour*
-
 - Figure out how addons will work. *1 Hour*
 
 - Build in some docco integration addon. *2 Hours*
