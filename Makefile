@@ -27,15 +27,20 @@
 
 
 # Find the notes/assignment/lab files:
-_typeset_note_tex = $(wildcard ./**/notes/typeset*.tex)
+_typeset_full_notes_tex = $(wildcard ./**/notes/typeset_full*.tex)
+_typeset_phone_notes_tex = $(wildcard ./**/notes/typeset_phone*.tex)
+_typeset_note_tex = $(_typeset_full_notes_tex) $(_typeset_phone_notes_tex)
 _typeset_note_pdfs = $(_typeset_note_tex:%.tex=%.pdf)
+_typeset_notes_for_mds_unfiltered = $(wildcard ./**/notes/notes.tex)
+_typeset_notes_for_mds_in_tex = $(filter-out ./se380/notes/notes.tex, $(_typeset_notes_for_mds_unfiltered))
+_typeset_note_mds = $(_typeset_notes_for_mds_in_tex:%.tex=%.md)
 _wkrpt_tex = $(wildcard ./**/uw-wkrpt-*.tex )
 _wkrpt_pdfs = $(_wkrpt_tex:%.tex=%.pdf)
 _assignment_tex = $(wildcard ./**/assignments/a*/a*.tex)
 _assignment_pdfs = $(_assignment_tex:%.tex=%.pdf)
 _lab_tex = $(wildcard ./**/labs/l*/*.tex)
 _lab_pdfs = $(_lab_tex:%.tex=%.pdf)
-_all_generated = $(_typeset_note_pdfs) $(_assignment_pdfs) $(_lab_pdfs) $(_wkrpt_pdfs)
+_all_generated = $(_typeset_note_pdfs) $(_assignment_pdfs) $(_lab_pdfs) $(_wkrpt_pdfs) $(_typeset_note_mds)
 
 # Targets.
 PHONY = list clean default all notes assignments labs wkrpts
@@ -66,6 +71,13 @@ wkrpts: $(_wkrpt_pdfs)
 
 clean:
 	@rm -rf $(_all_generated)
+
+# All notes that don't have sub-.text files in that dir.
+.SECONDEXPANSION:
+%.md: %.tex $$(dir $$<)notes.tex Makefile
+	@echo "Making $@ using $^"
+	@# TODO: make this just need to call pdflatex. There's a flag for this directory stuff.
+	@( pushd `dirname $<` && pandoc -s notes.tex -o notes.md && popd );
 
 # Will run pdflatex on all tex files that match a pdf target and are in the same
 # directory as a notes.tex
