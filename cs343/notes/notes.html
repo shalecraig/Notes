@@ -1,0 +1,2014 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>CS 343</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">CS 343</h1>
+</div>
+<h1 id="cha:control_flow">Control Flow</h1>
+<dl>
+<dt>Control Flow</dt>
+<dd><p>is the order or flow in which individual statements are executed evaluated in a program.</p>
+</dd>
+<dt>Multi-Exit Loops</dt>
+<dd><p>have at least one <code>break</code> in the middle, not just in the end.</p>
+<pre><code>for (;;) {
+    cin &gt;&gt; d;
+    if (cin.fail()) break;
+    ...
+}
+                </code></pre>
+</dd>
+<dt>Flag Variables</dt>
+<dd><p>are used to explicitly implement control flow.</p>
+<pre><code>bool flag1 = false;
+while (!flag1) {
+    cin &gt;&gt; d;
+    if (cin.fail()) flag1 = true;
+    else {
+        ...
+    }
+}
+                </code></pre>
+<p>They are the variable equivalent to a <code>goto</code>, since they can be set, reset, and tested at arbitrary locations in a program.</p>
+</dd>
+<dt>Static Multi-Level Exit</dt>
+<dd><p>occurs when the program exits (<code>return</code>s or <code>goto</code>s) at multiple levels which are known exit points are known at compile-time.</p>
+<pre><code>L1 : {
+    C1
+    L2: switch ( ... ) {
+        L3: while (true) {
+            ... break L1;
+            ... break L2;
+            ... break L3;
+        }
+    }
+}
+                </code></pre>
+<p>We can use multi-level exit to remove flag variables and to remove duplicate code.</p>
+</dd>
+<dt>goto</dt>
+<dd><p>goes to a line.</p>
+<p>Only use goto to perform static multi-level exit (i.e. to simulate a labeled break and continue).</p>
+</dd>
+</dl>
+<h1 id="cha:exceptions">Exceptions</h1>
+<h2 id="sec:dynamic_multi_level_exit">Dynamic Multi-Level Exit</h2>
+<p>We can extract code to create new methods (called <em>modularization</em>), but this doesn’t work with labels since labels have only routine scope.</p>
+<pre><code>// To illustrate the note, this will not compile.
+void rtn ( ... ) {
+    B2: for ( ... ) {
+        if ( ... ) break B1;
+    }
+}
+B1: for ( ... ) {
+    rtn ( ... );
+}
+            </code></pre>
+<dl>
+<dt>Dynamic Multi-Level Exit</dt>
+<dd><p>allows us to extend call and return semantics to go in the <em>reverse</em> direction, so given <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> calls <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> calls <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" />, we <em>can</em> transfer from <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> back to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" />, skipping <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />.</p>
+</dd>
+<dt>Non-Local Transfer</dt>
+<dd><p>allows a routine to return from <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" />, skip <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> and go directly to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" />. It’s a generalization of the <em>multi-exit loop</em> and <em>multi-level exit</em>. We can accomplish this using a <em>label variable</em>.</p>
+<pre><code>label L;
+void a (int i) {
+    if ( ... ) goto L;
+}
+void b (int i ) {
+    // L1 is a label.
+    L1: L = L1;
+}
+void c (int i ) {
+    // L2 is a label.
+    L2: L = L1;
+}
+                </code></pre>
+<p>We go directly to the stack position that corresponds to the label, then change the PC to go to the label (<em>transfer point</em>) in the routine.</p>
+<p>Since it can be set dynamically, control flow can’t always be statically determined. Similar to <code>goto</code>s, we can break the stack really easily using labels.</p>
+<p>In <span style="font-variant: small-caps;">C</span>, <code>jmp_buf</code> declares a label variable, <code>setjmp</code> initializes a label variable, and <code>longjmp</code> goes to a label variable.</p>
+</dd>
+</dl>
+<h2 id="sec:traditional_approaches">Traditional Approaches</h2>
+<p>Without non-local transfer, we have a few options:</p>
+<dl>
+<dt>return codes</dt>
+<dd><p>are special values returned that signal the caller to perform “special” control flow logic.</p>
+<p>This mixes exceptions with normal return values and makes code difficult to read. Additionally, it’s easy to “not expect” these directives as output.</p>
+</dd>
+<dt>status flags</dt>
+<dd><p>are values in shared global status flag being modified.</p>
+<p>This can be delayed or overwritten by concurrent threads.</p>
+</dd>
+<dt>fix-up routines</dt>
+<dd><p>are global or local routines called for an exception event to handle errors.</p>
+<p>This increases the number of parameters, this increases the cost of each call when they’re not used.</p>
+</dd>
+</dl>
+<h2 id="sec:exception_handling">Exception Handling</h2>
+<p>Exceptional events are events that occur at low frequency, and are ancillary to an algorithm.</p>
+<p>Exception handling mechanisms (<span style="font-variant: small-caps;">ehm</span>) actively force programmers to work with exceptions, which allows programs to become more robust.</p>
+<h2 id="sec:execution_environment">Execution Environment</h2>
+<p>How exception handling mechanisms are implemented depends on the environment they’re placed in.</p>
+<p>The <code>finally</code> clause in Java and other languages exists to allow cleanup and deallocation code. This makes it hard to unwind the stack, because it sometimes needs to drop back into “finally world” before continuing propagating the error thrown.</p>
+<p>Given multiple stacks, exception handling becomes incredibly sophisticated - can exceptions be propagated between stacks?</p>
+<h2 id="sec:terminology">Terminology</h2>
+<dl>
+<dt>execution</dt>
+<dd><p>is a language unit where exceptions can be raised.</p>
+</dd>
+<dt>execution type</dt>
+<dd><p>is the type of an execution.</p>
+</dd>
+<dt>exception</dt>
+<dd><p>is an instance of an exception type.</p>
+</dd>
+<dt>raise (throw)</dt>
+<dd><p>is the operation that causes an exception.</p>
+</dd>
+<dt>propagation</dt>
+<dd><p>directs control flow from a raise in the source to a handler.</p>
+</dd>
+<dt>propagation mechanism</dt>
+<dd><p>is the mechanism (or rules) used to locate the handler for a thrown exception.</p>
+<p>Most mechanisms give precedence to handlers most recently created in the call stack.</p>
+</dd>
+<dt>handler</dt>
+<dd><p>is a nested code block responsible for handling a raised exception. It can handle by either returning, re-raising the same exception, or by raising a new exception.</p>
+</dd>
+<dt>guarded block</dt>
+<dd><p>is a language block with associated handlers (i.e. a <code>try-catch</code>-block).</p>
+</dd>
+<dt>unguarded block</dt>
+<dd><p>is a language block with no associated handlers.</p>
+</dd>
+<dt>termination</dt>
+<dd><p>is when control cannot return to where it was raised and the stack is unwound.</p>
+</dd>
+<dt>resumption</dt>
+<dd><p>is when control flow can return to the raise point.</p>
+</dd>
+<dt>stack unwinding</dt>
+<dd><p>is when all blocks on the faulting stack from the raise block to the guarded block are terminated, and destructors of objects are called.</p>
+</dd>
+<dt>EHM</dt>
+<dd><p>refers to the overall Exception Handling Mechanism. It refers to the 4-tuple of: Exception Type + Raise + Propagation + Handlers + Exception Instance.</p>
+</dd>
+</dl>
+<h2 id="sec:control_flow_types">Control Flow Types</h2>
+<p>Routine and exceptional control-flow can be characterized by two properties:</p>
+<ul>
+<li><p>Static/Dynamic call: routine/exception being called is looked up statically or dynamically</p></li>
+<li><p>Static/Dynamic return: after a routine or handler completes, it returns to its static or dynamic context (definition or caller).</p></li>
+</ul>
+<p>We can tabulate this as the following:</p>
+<p>[h] [tbl:control-flow]</p>
+<p><span> r || c | c</span> &amp; static call/raise &amp; dynamic call/raise<br />static return &amp; sequel &amp; termination exception<br />dynamic return &amp; routine &amp; routine-pointer, virtual-routine, resumption</p>
+<h2 id="sec:static_propagation_sequel">Static Propagation (Sequel)</h2>
+<p><strong>Sequels</strong> are routines with no return value that code continues at the end of the block where the sequel is declared<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<pre><code>void foo() {
+    int i = 0;
+    {
+        sequel S1( ... ) { printf(&quot;one&quot;); i++; }
+        {
+            sequel S2( ... ) { printf(&quot;two&quot;); i++; }
+        } // S2 returns to here.
+        printf (&quot;foo&quot;);
+    } // S1 returns to here.
+    printf (&quot;bar&quot;)
+    if (i == 0) {
+        S1();
+    } else if (i == 1) {
+        S2();
+    }
+}
+/*
+ * prints:
+ *     foo
+ *     bar
+ *     one
+ *     bar
+ *     two
+ *     foo
+ *     bar
+ */
+                </code></pre>
+<p>An advantage is that the handler is statically known, so it is super-duper efficient. A disadvantage is that sequels only work for monolithic programs because it must be statically nested where it is used (no re-use of “generic” sequels). This also prevents code from being separately compiled.</p>
+<h2 id="sec:dynamic_propagation">Dynamic Propagation</h2>
+<p>Both <strong>termination</strong> and <strong>resumption</strong> have dynamic raise; this works for separately-compiled programs, but is slower at runtime (lookup is not known statically).</p>
+<h3 id="sub:termination">Termination</h3>
+<p>Termination allows us to pass control from the start of propagation to a handler, then returns to a predefined position.</p>
+<p>Three different basic termination forms for <em>non-recoverable</em> operations:</p>
+<ol>
+<li><p><strong>nonlocal</strong> - general mechanism for block transfer on the call stack, but has a goto problem.</p></li>
+<li><p><strong>terminate</strong> - limited mechanism for block transfer on the call stack.</p>
+<pre><code>label L;
+void f ( ... ) {
+    ...
+    goto L;
+}
+int main() {
+    L = L1;
+    f (...);
+L1:
+S1: L = L2;
+    f (...);
+L2:
+S2: ;
+}
+                        </code></pre></li>
+<li><p><strong>retry</strong> - combination of termination with special handler semantics</p>
+<pre><code>char readfiles( char *files[], int N) {
+    int i = 0, value;
+    ifstream infile;
+    infile.open( files[i] );
+    while (true) {
+        try {
+            ... infile &gt;&gt; value ...;
+        } retry (Eof) {
+            i += 1;
+            infile.close();
+            if (i == N) goto Finished;
+            ... infile.open( files[i] ) ...; // try again.
+        }
+    }
+    : Finished;
+}
+                        </code></pre>
+<p>Since this is easily simulated, it’s not usually supported directly.</p></li>
+</ol>
+<p>Exception handlers can generate an arbitrary number of exceptions, and so can destructors.</p>
+<p>Destructors that throw errors during propagation cause the program to terminate:</p>
+<pre><code>struct E {}
+struct C {
+    ~C() { throw E(); }
+}
+try {
+    C x;
+    throw E(); // Program terminates
+} catch ( E ) { ... }
+                    </code></pre>
+<p>This is generally because we cannot start the second exception without a handler to deal with the first exception, the first one is left hanging.</p>
+<h3 id="sub:resumption">Resumption</h3>
+<p>In resumption, control transfers to a handler, and dynamically returned.</p>
+<pre><code>_Event E {}; // uC++ exception label
+void f() {
+    _Resume E();
+    cout &lt;&lt; &quot;control returns here&quot; &lt;&lt; endl;
+}
+void uMain::main() {
+    try {
+        f();
+    } CatchResume ( E ) { cout &lt;&lt; &quot;handler 1&quot; &lt;&lt; endl; }
+    try {
+        f();
+    } CatchResume ( E ) { cout &lt;&lt; &quot;handler 2&quot; &lt;&lt; endl; }
+}
+/*
+ * output:
+ *     handler1
+ *     control returns here
+ *     handler2
+ *     control returns here
+ */
+                    </code></pre>
+<h2 id="sec:implementation">Implementation</h2>
+<p>To implement termination and resumption, the raise needs to know the last guarded block with a handler for the raised exception type.</p>
+<p>One approach is to associate a label variable with each exception type, re-setting the label variable whenever you enter and exit guarded blocks. This is millions of operations.</p>
+<p>For termination, it is necessary to unwind the stack due to activations that contain objects with destructors and finalizers; we linearly unwind the stack this way.</p>
+<p>If we assume there are very few exceptions compared to try entries and exits, we should choose to unwind the stack when implementing this for ourselves.</p>
+<h2 id="sec:exceptional_control_flow">Exceptional Control-Flow</h2>
+<p>In this section we give an example of what control flow looks like for the following snippet</p>
+<pre><code>{
+    try {
+        try {
+            try {
+                {
+                    try {
+                        throw E5();
+                    } catch ( E7 ) {
+                        ...
+                    } catch ( E8 ) {
+                        ...
+                    } catch ( E9 ) {
+                        ...
+                    }
+                }
+            } catch ( E4 ) {
+                ...
+            } catch ( E5 ) {
+                ...
+            } catch ( E6 ) {
+                ...
+            }
+        } catch ( E3 ) {
+            ...
+        }
+    } catch ( E5 ) {
+        ... resume/retry/terminate ... // where do these go?
+    } catch ( E2 ) {
+        ...
+    }
+                </code></pre>
+<h2 id="sec:additional_features">Additional Features</h2>
+<h3 id="sub:derived_exception_type">Derived Exception Type</h3>
+<p><strong>derived exception types</strong> is a word for inherited exception types which allows us to catch exceptions with different levels of specificity. Exception type inheritance allows the handlers to match multiple exceptions.</p>
+<p>When subclassing, it is best catch an exception by reference, because the exception will be truncated otherwise.</p>
+<pre><code>struct B {};
+struct D : public B {};
+try {
+    throw D();
+} catch (B &amp; e) {
+    ... dynamic_cast&lt;D&gt;(e); ...
+}
+                </code></pre>
+<h3 id="sub:catch_any">Catch-Any</h3>
+<p><strong>Catch-any</strong> is a mechanism to match anything, so we can finalize and deallocate variables.</p>
+<p>In java, this is a simple “finally” block, or mimed within an <code>catch (Exception)</code> block.</p>
+<h3 id="sub:exception_parameters">Exception Parameters</h3>
+<p><strong>Exception parameters</strong> allow passing information from the raiser to a handler, usually in ivars of the exception object.</p>
+<h3 id="sub:exception_list">Exception List</h3>
+<p><strong>Exception List</strong> is a part of a routine’s prototype that specifies about what types of exceptions can be thrown by the routine by its caller. This helps detect static detection of invalid exceptions, and runtime detection of where the exception can be converted into a special failure exception.</p>
+<h1 id="cha:coroutine">Coroutine</h1>
+<p>A <strong>Coroutine</strong> is a routine that can suspend at some point, and be resumed from that point when control returns. Think of it as a routine which uses pauses to hold state, and continues from the same point.</p>
+<p>[t]<span>1</span></p>
+<p>In exams and assignments, coroutines containing <em>any</em> state usually receive zero marks.</p>
+<p>The state of a coroutine is a 3-tuple:</p>
+<dl>
+<dt>Execution location</dt>
+<dd><p>which is the <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=PC" alt="PC" title="PC" /> starting at the beginning, and remembered at each suspend.</p>
+</dd>
+<dt>Execution state</dt>
+<dd><p>which is the stack for that coroutine</p>
+</dd>
+<dt>Execution status</dt>
+<dd><p>is a flag indicating if the coroutine is <code>active</code>, <code>inactive</code>, or <code>terminated</code>.</p>
+</dd>
+</dl>
+<p>There are two different types of coroutines:</p>
+<dl>
+<dt>Semi-Coroutines</dt>
+<dd><p>have the ability to return execution to the caller, or call sub-routines.</p>
+</dd>
+<dt>Full-Coroutines</dt>
+<dd><p>have the ability to pass execution to any other coroutine.</p>
+</dd>
+</dl>
+<p>Internally, the implementation of both types of coroutines in <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>are the same, but how we use them is different.</p>
+<h2 id="sec:coroutine_structure_in_uc">Coroutine Structure in <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span></h2>
+<p>There is a <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>extension <code>_Coroutine</code> class that looks like the following:</p>
+<pre><code>_Coroutine Fibonacci {
+    int fn;
+    void main() {
+        int fn1, fn2;
+        fn = 0; fn1 = fn;
+        suspend();
+        fn = 1; fn2 = fn1; fn1 = fn;
+        suspend();
+        while (true) {
+            fn = fn1 + fn2;
+            fn2 = fn1;
+            fn1 = fn;
+            suspend();
+        }
+    }
+  public:
+    int next() {
+        resume();
+        return fn;
+    }
+}
+                </code></pre>
+<p>There’s no execution state, and a main method that is suspended &amp; resumed. Each instance of a coroutine has its own stack.</p>
+<p>On initialization, <code>main</code> is executed until the first <code>suspend</code> call. Subsequent <code>resume</code> calls continue from the previous <code>suspend</code> call.</p>
+<p>We can recursive functionality of coroutines to write simple iterators.</p>
+<h3 id="sub:coroutine_construction">Coroutine Construction</h3>
+<p>The simplest way to write a coroutine is to write a standalone program, and convert it to a coroutine.</p>
+<p>We can convert a normal program to a coroutine by:</p>
+<ul>
+<li><p>Putting processing code into the main</p></li>
+<li><p>Converting reads and writes to suspend calls.</p></li>
+<li><p>Use interface members and variables to transfer data to &amp; from the coroutine.</p></li>
+</ul>
+<h3 id="sub:full_coroutines">Full-Coroutines</h3>
+<p>Semi-coroutines activate the member routine that activated it. Full-coroutines activate (and re-activate) any other coroutine.</p>
+<p>The method <code>resume</code> activates the current coroutine (<code>uThisCoroutine</code>), and <code>suspend</code> activates the last <code>resume</code>r. In other words, we can call <code>B-&gt;resume</code> from the execution stack of <code>A-&gt;resume</code>, and control passes to coroutine <code>B</code> from <code>A</code>.</p>
+<p>To have references from <code>A</code> to <code>B</code> and vice versa, we can pass in pointers, or creating a setter for the <code>ivar</code> in the one instantiated first.</p>
+<p>When terminating a coroutine, execution control returns to its creator.</p>
+<h2 id="sec:coroutine_implementation">Coroutine Implementation</h2>
+<p>We can implement coroutines using either the callers stack (stackless), or creating a separate stack (stackful). Stackless coroutines can only suspend to the main coroutine.</p>
+<h3 id="sub:python">Python</h3>
+<p>Python implements the yield keyword that allows coroutines to return values, but not to pass control to other coroutines. It thus has no full coroutine implementation.</p>
+<h1 id="cha:concurrency">Concurrency</h1>
+<dl>
+<dt>Threads</dt>
+<dd><p>schedule execution separately and independently from other threads.</p>
+</dd>
+<dt>Processes</dt>
+<dd><p>are program components that have at least one thread, and has the same state information as a coroutine.</p>
+</dd>
+<dt>Tasks</dt>
+<dd><p>are similar to processes, except it shares memory with other tasks. Tasks are sometimes called light-weight processes (LWP).</p>
+</dd>
+<dt>Parallel Execution</dt>
+<dd><p>is when 2 or more operations occur simultaneously, which only occurs with multiple CPUs.</p>
+</dd>
+<dt>Concurrent Execution</dt>
+<dd><p>is any situation where parallel execution appears to happen.</p>
+</dd>
+</dl>
+<h2 id="sec:why_concurrency">Why Concurrency</h2>
+<p>By dividing work between multiple threads, we can capitalize on resources available to us to decrease the time it takes to execute our program.</p>
+<h2 id="sec:why_concurrency_is_hard">Why Concurrency is Hard</h2>
+<p>People can do a small number of things concurrently, but fail at large numbers of things, and even more when they interact with each other.</p>
+<p>We need to be able to determine how and why to break up a problem into parts, decide how they react, and how reactions occur.</p>
+<p>We finally need to reason about and debug multiple execution paths that execute in a non-deterministic order.</p>
+<h2 id="sec:concurrent_hardware">Concurrent Hardware</h2>
+<p>All types of concurrency<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> is trivially possible for a single processor (<strong>uniprocessor</strong>). We only need to context and switch threads on the CPU, and use pointers to share memory between tasks to have concurrent problems in uniprocessor systems. The bigger issue is that every computer has multiple CPUs these days.</p>
+<p>In <strong>multiprocessor</strong> systems, we can still share memory using pointers. In distributed systems, pointers don’t point to the same things, so we’re pretty much screwed in that case.</p>
+<h2 id="sec:execution_states">Execution States</h2>
+<p>A thread can be in any of the states {new, ready, running, blocked, halted }, which are switched between in response to events.</p>
+<p>Since events are non-deterministic, basic operations (such as increment) are unsafe.</p>
+<h2 id="sec:threading_model">Threading Model</h2>
+<dl>
+<dt>Threading Model</dt>
+<dd><p>defines the relationship between CPUs and threads in a system.</p>
+</dd>
+<dt>Kernel Threads</dt>
+<dd><p><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> are provided by the OS to manage CPUs. Kernel threads are scheduled across the CPUs.</p>
+</dd>
+</dl>
+<p>Having more kernel threads than CPUs allows the OS to provide multiprocessing. A process may have multiple kernel threads to provide parallelism. User threads are a low-cost structuring mechanism.</p>
+<p>This relationship between user threads, kernel threads, and CPUs can be compared as the following:</p>
+<dl>
+<dt>Kernel Threading</dt>
+<dd><p>1:1:C - 1 user thread maps to 1 kernel thread</p>
+</dd>
+<dt>Generalized Kernel Threading</dt>
+<dd><p>M:M:C - <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> user threads map to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" />kernel threads <a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</p>
+</dd>
+<dt>User Threading</dt>
+<dd><p>N:1:C - <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=N" alt="N" title="N" /> user threads map to 1 kernel thread.</p>
+</dd>
+<dt>User Threading</dt>
+<dd><p>N:M:C - <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=N" alt="N" title="N" /> user threads map to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> kernel threads<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>.</p>
+</dd>
+</dl>
+<p>Often, we omit the number of CPUs in our ratio. We can even add <strong>nano thread</strong>s on top of user threads, and <strong>virtual machine</strong>s under the OS.</p>
+<ul>
+<li><p>1:1:C</p></li>
+</ul>
+<h2 id="sec:concurrent_systems">Concurrent Systems</h2>
+<p>Concurrent systems can be split into 3 major types:</p>
+<ol>
+<li><p>Systems that attempt to discover concurrency - there is a limit to how much can be discovered.</p></li>
+<li><p>Systems that provide concurrency through implicit constructs - concurrency is built using specialized mechanisms</p></li>
+<li><p>Systems that provide concurrency through explicit constructs - concurrency is explicitly managed</p></li>
+</ol>
+<p>In fact, both of these are complementary, and can be built into the same system. <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>has only explict mechanisms. Some systems only have a single technique, but this is limited and awkward; when it comes to concurrency controls, more is better.</p>
+<h2 id="sec:speedup">Speedup (Amdahl’s Law)</h2>
+<p>Program speedup can be denoted <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S_c%20%3D%20%5Cfrac%7BT_1%7D%7BT_C%7D" alt="S_c = \frac{T_1}{T_C}" title="S_c = \frac{T_1}{T_C}" />, where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> is the number of CPUs, and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_1" alt="T_1" title="T_1" /> is the time taken for sequential execution.</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20S_c%20%26%3D%20%5Cfrac%7BT_1%7D%7BT_C%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20%5Cfrac%7B1%7D%7B%281-P%29%20%2B%20%5Cfrac%7BP%7D%7BC%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+                S_c &amp;= \frac{T_1}{T_C} \\
+                &amp;= \frac{1}{(1-P) + \frac{P}{C}}
+            \end{aligned}" title="\begin{aligned}
+                S_c &amp;= \frac{T_1}{T_C} \\
+                &amp;= \frac{1}{(1-P) + \frac{P}{C}}
+            \end{aligned}" /><br /></p>
+<p>Where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=P" alt="P" title="P" /> is the proportion of a progam that can be made parallel, and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> is the degree of concurrency.</p>
+<p>As we take <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Clim_%7BC%20%5Cto%20%5Cinfty%7D" alt="\lim_{C \to \infty}" title="\lim_{C \to \infty}" />, we get the maximum speedup:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20S_%7Bmax%7D%20%26%3D%20%5Cfrac%7B1%7D%7B1-P%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+                S_{max} &amp;= \frac{1}{1-P}
+            \end{aligned}" title="\begin{aligned}
+                S_{max} &amp;= \frac{1}{1-P}
+            \end{aligned}" /><br /></p>
+<h3 id="sub:sample_question">Sample Question</h3>
+<p>This is a sample question from the W12 Midterm:</p>
+<p><strong>Question:</strong> A program has 4 sequential stages, where each stage takes the following <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=N" alt="N" title="N" /> units of time to execute: <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S_1%20%3D%205" alt="S_1 = 5" title="S_1 = 5" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S_2%20%3D%2020" alt="S_2 = 20" title="S_2 = 20" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S_3%20%3D%2015" alt="S_3 = 15" title="S_3 = 15" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S_4%20%3D%2060" alt="S_4 = 60" title="S_4 = 60" />. Stages <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S_2" alt="S_2" title="S_2" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S_4" alt="S_4" title="S_4" /> are modified is increase their speed (i.e, reduce the time to execute)by <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=10" alt="10" title="10" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=20" alt="20" title="20" /> times, respectively. Show the steps in computing the total speedup for the program after the modification.<br /></p>
+<p><strong>Solution:</strong> We can calculate the speedup <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S_C" alt="S_C" title="S_C" /> as the sequential speed <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_1" alt="T_1" title="T_1" /> over the concurrent speed <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_C" alt="T_C" title="T_C" />:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20S_C%20%26%3D%20%5Cfrac%7BT_1%7D%7BT_C%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20%5Cfrac%7BS_1%20%2B%20S_2%20%2B%20S_3%20%2B%20S_4%7D%7BS_1%20%2B%20%5Cfrac%7BS_2%7D%7B10%7D%20%2B%20S_3%20%2B%20%5Cfrac%7BS_4%7D%7B20%7D%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20%5Cfrac%7B5%20%2B%2020%20%2B%2015%20%2B%2060%7D%7B5%20%2B%202%20%2B%2015%20%2B%203%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+                    S_C &amp;= \frac{T_1}{T_C} \\
+                    &amp;= \frac{S_1 + S_2 + S_3 + S_4}{S_1 + \frac{S_2}{10} + S_3 + \frac{S_4}{20}} \\
+                    &amp;= \frac{5 + 20 + 15 + 60}{5 + 2 + 15 + 3} \\
+                    &amp;= 4
+                \end{aligned}" title="\begin{aligned}
+                    S_C &amp;= \frac{T_1}{T_C} \\
+                    &amp;= \frac{S_1 + S_2 + S_3 + S_4}{S_1 + \frac{S_2}{10} + S_3 + \frac{S_4}{20}} \\
+                    &amp;= \frac{5 + 20 + 15 + 60}{5 + 2 + 15 + 3} \\
+                    &amp;= 4
+                \end{aligned}" /><br /></p>
+<p>Thus the overall speedup is by <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=4" alt="4" title="4" /> times.</p>
+<h2 id="sec:thread_creation">Thread Creation</h2>
+<p>We need the following 3 things to adequately specify concurrency:</p>
+<ol>
+<li><p>Thread creation<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p></li>
+<li><p>Synchronization between threads</p></li>
+<li><p>Communication between threads</p></li>
+</ol>
+<p>In <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>, we use <code>_Task</code>s to emulate a cobegin segment.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a></p>
+<p>The slowest path through all tasks synchronizing is called the <strong>critical path</strong>.</p>
+<h3 id="sub:uc__tasks"><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>_Tasks</h3>
+<p>Tasks are threads in <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>. Calling the destructor causes the current thread to wait until the task completes execution.</p>
+<pre><code>_Task T1 {
+    void main() {}
+}
+_Task T2 {
+    void main() { int temp = 1; }
+}
+
+void uMain::main() {
+    T1 *t1 = new T1; // start execution of T1 from its main.
+    ...
+    T2 *t2 = new T2; // start execution of T2 from its main.
+    ...
+    delete t1; // wait for T1 to complete
+    ...
+    delete t2; // wait for T2 to complete
+}
+                </code></pre>
+<p>This structure allows us to “kick off” the same <code>_Task</code> multiple times with different arguments.</p>
+<h2 id="sec:termination_synchronization">Termination Synchronization</h2>
+<p>A thread finishes when</p>
+<ul>
+<li><p>It completes execution</p></li>
+<li><p>It throws an error</p></li>
+<li><p>It is killed by its parent (not in <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>)</p></li>
+<li><p>The parent terminates (not in <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>)</p></li>
+</ul>
+<p>We may trigger/react to termination to implement functionality.</p>
+<h2 id="sec:divide_and_conquer">Divide and Conquer</h2>
+<p>We use divide-and-conquer to take advantage of work that can be done individually then merged. Using divide and conquer, work done individually should look the same.</p>
+<p>Task creation order doesn’t matter, but deletion order may, depending on the critical path through the tasks.</p>
+<h2 id="sec:synchronization_and_communication_during_execution">Synchronization and Communication During Execution</h2>
+<p>Synchronization happens when one thread happens when one thread waits for another to execute until a certain point. This is useful for threads waiting to transfer information from one thread to another.</p>
+<p>One way to do this is using a <strong>busy wait</strong>, which is bad.</p>
+<h2 id="sec:communication">Communication</h2>
+<p>After synchronization, threads can transfer information many ways. In the same memory, the information can be transfered by value or address. In different memories<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>, transferring information by value is easiest.</p>
+<h2 id="sec:critical_section">Critical Section</h2>
+<p>Threads may want to modify shared resources (such as a linked list). Multiple threads operating on the same object is problematic. While this is not a problem while operations are <strong>atomic</strong>, so we need to find a way to do this for our code.</p>
+<p>We call area inside an atomic operation the <strong>critical section</strong>, and the act of preventing simultaneous execution <strong>mutual exclusion</strong>.</p>
+<p>We can serialize all access, but this fails when there are many readers.</p>
+<h2 id="sec:static_variables">Static Variables</h2>
+<p>Static variables are shared between all objects of that class, and may need mutual exclusion.</p>
+<p>The only exception for this is in task constructors, which are naturally mutually exclusive in <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>. It’s highly suggested not to use static variables in a concurrent program.</p>
+<h2 id="sec:mutual_exclusion">Mutual Exclusion</h2>
+<p>Mutual exclusion requires that all the following clauses are true.</p>
+<ol>
+<li><p>Only one thread can be in a critical section at a time</p></li>
+<li><p>The underlying system guarantees all threads get some CPU time.</p></li>
+<li><p>Threads not in critical sections should not prevent threads from executing critical sections.</p></li>
+<li><p>We should always return to select a thread to enter a critical section.<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a></p></li>
+<li><p>The number of threads allowed to enter a critical section after a given thread requests to enter it should be capped, so there is no <strong>starvation</strong> going on.</p></li>
+</ol>
+<h2 id="sec:self_testing_critical_section">Self-Testing Critical Section</h2>
+<p>We can create self-testing critical sections by setting critical sections that abort if another thread is currently messing up our stuff:</p>
+<pre><code>void criticalSection () {
+    ::CurrTid = &amp;uThisTask();
+    for (int i=1; i&lt;100; i++) {
+        if (::CurrTid != &amp;uThisTask()) {
+            uAbort(&quot;interference&quot;);
+        }
+    }
+}
+                </code></pre>
+<h2 id="sec:software_solutions">Software Solutions</h2>
+<p>Software Solutions to this problem must solve the problems presented in the list above.</p>
+<h3 id="sub:lock">Lock</h3>
+<p>Locks have a <em>status</em> flag that indicates if a thread is in a critical section:</p>
+<pre><code>foo() {
+    while (lock == CLOSED) {}
+    lock = CLOSED;
+    criticalSection();
+    lock = OPEN;
+}
+                </code></pre>
+<p><strong>This strategy breaks rule 1.</strong></p>
+<h3 id="sub:alternation">Alternation</h3>
+<p>The alternation strategy is one where a thread will go only if it is not the last one to progress through:</p>
+<pre><code>foo() {
+    while (last == me) {}
+    criticalSection();
+    last = me;
+}
+                </code></pre>
+<p><strong>This strategy breaks rule 3.</strong></p>
+<h3 id="sub:declaration_of_intent">Declaration of Intent</h3>
+<p>The declaration of intent strategy is one where threads politely wait until no others want to enter.</p>
+<pre><code>foo() {
+    me = WANT_IN;
+    while (you == WANT_IN) {}
+    criticalSection();
+    me = DONT_WANT_IN;
+}
+                </code></pre>
+<p><strong>This strategy breaks rule 4.</strong></p>
+<h3 id="sub:retract_intent">Retract Intent</h3>
+<p>The retraction of intent strategy is one where threads politely submit &amp; resubmit requests to execute the critical section.</p>
+<pre><code>foo() {
+    while (true) {
+        me = WANT_IN;
+        if (you == DONT_WANT_IN) break;
+        me = DONT_WANT_IN;
+        while (you == WANT_IN) {}
+    }
+    criticalSection();
+    me = DONT_WANT_IN;
+}
+                </code></pre>
+<p><strong>This strategy breaks rule 4.</strong></p>
+<h3 id="sub:prioritized_entry">Prioritized Entry</h3>
+<p>From subsection [sub:retract<sub>i</sub>ntent], we can add the ability to be a high priority thread:</p>
+<pre><code>foo() {
+    if (this.priority == HIGH) {
+        me = WANT_IN;
+        while (you == WANT_IN) {}
+    } else {
+        while (true) {
+            me = WANT_IN;
+            if (you == DONT_WANT_IN) break;
+            me = DONT_WANT_IN;
+            while (you == DONT_WANT_IN) {}
+        }
+    }
+}
+                </code></pre>
+<p><strong>This strategy breaks rule 5.</strong></p>
+<h3 id="sub:dekker">Dekker</h3>
+<p>The Dekker algorithm doesn’t break any rules. It uses a mixture of declared intention and alternation to achieve its goals:</p>
+<pre><code>foo() {
+    while (true) {
+        me = WANT_IN;
+        if (you == DONT_WANT_IN) break;
+        if (last == &amp;me) {
+            me = DONT_WANT_IN;
+            while (last == &amp;me) {} // wait for last == somebody else.
+        }
+    }
+}
+                </code></pre>
+<p>This strategy makes no assumptions about atomicity, and works on a machine where bits are scrambled during simultaneous assignment.</p>
+<h3 id="sub:peterson">Peterson</h3>
+<p>The Peterson algorithm doesn’t break any rules. It uses a pointer to the last requester, and checks that no others want to go into the critical section:</p>
+<pre><code>foo() {
+    while (true) {
+        me = WANT_IN;
+        last = &amp;me;
+        while (last == me &amp;&amp; you == WANT_IN) {} //spin
+        criticalSection();
+        me = DONT_WANT_IN;
+    }
+}
+                </code></pre>
+<p>While this doesn’t break any rules, it assumes atomicity in assignment, and fails when bits are scrambled during simultaneous assignment.</p>
+<h3 id="sub:n_thread_prioritized_entry"><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" />-Thread Prioritized Entry</h3>
+<p>In a case where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" /> threads want to enter a critical section, we modify the Peterson algorithm to use an array for priorities: We wait for all intents that are more important than us, then wait for all less-important coroutines to complete.</p>
+<pre><code>foo() {
+    // step 1: wait for intents with higher priority to run:
+    do {
+        intents[priority] = WANT_IN;
+        for (j = priority -1; j&gt;= 0; --j) {
+            if (intents[i] == WANT_IN) {
+                intents[priority] = DONT_WANT_IN;
+                while (intents[i] == WANT_IN) {} // spin
+                break;
+            }
+        }
+    } while (intents[priority] == DONT_WANT_IN);
+    // step 2: wait for intents with lower priority to complete:
+    for (j = priority+1; j&lt;N; j++) {
+        while (intents[j] == WANT_IN) {} //spin
+    }
+    criticalSection();
+    intents[priority] = DONT_WANT_IN;
+}
+                </code></pre>
+<p><strong>This strategy breaks rule 5.</strong> There are no algorithms that use only <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" /> bits<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a>, are deterministically (non-probabilistically) correct, and assume atomic assignment.</p>
+<h3 id="sub:n_thread_bakery_tickets"><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" />-Thread Bakery (Tickets)</h3>
+<p>In this implementation, we find the maximum value as “ticket number” in the array, and set our value to that. We then wait until we have the lowest ticket number in the array. In the case that multiple values are found in the array with the same ticket number, we also ensure we are the lowest priority with that value.</p>
+<pre><code>foo() {
+    ticket[priority] = 0;
+    int max = 0;
+    for (int j = 0; j&lt; n; j++) {
+        int v = ticket[j];
+        if (v != INT_MAX &amp;&amp; max &lt; v) max = v;
+    }
+    max += 1;
+    ticket[priority] = max;
+    for (int j = 0; j &lt; n; j++) {
+        while (ticket[j] &lt; max || (ticket[j] == max &amp;&amp; j &lt; priority)) {} // spin
+    }
+    criticalSection();
+    ticket[priority] = INT_MAX;
+}
+                </code></pre>
+<p>Since tickets cannot increase indefinitely, this is probabilistically correct. This also takes <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=nm" alt="nm" title="nm" /> bits (<img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=m%20%3D%2032" alt="m = 32" title="m = 32" /> for an int, for example).</p>
+<h3 id="sub:n_thread_peterson"><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=N" alt="N" title="N" />-Thread Peterson</h3>
+<p>This modification of the Peterson algorithm uses a round-based race section to find the “loser”.</p>
+<pre><code>foo() {
+    for (int i = 1; i&lt;N; i++) {
+        intents[myId] == i; //current round
+        turns[i] = myId; // MULTI-WAY RACE ALLCAPS
+L:      for (int k=1; k&lt;=n; k++) {
+            if (k != myId &amp;&amp; intents[k] &gt;= i &amp;&amp; turns[i] == myId) goto L;
+        }
+    }
+    criticalSection();
+    intents[myId] = 0;
+}
+                </code></pre>
+<p>There are <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n-1" alt="n-1" title="n-1" /> rounds, and each round has a loser, which implies that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n%20-%20%5Ctext%7Bround%7D" alt="n - \text{round}" title="n - \text{round}" /> winners are promoted. This can be implemented in only <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=2n%5Cceil%7B%5Clg%20n%7D" alt="2n\ceil{\lg n}" title="2n\ceil{\lg n}" /> bits, but assumes atomic assignments.</p>
+<h3 id="sub:tournament_taubenfeld_buhr">Tournament (Taubenfeld-Buhr)</h3>
+<p>TODO: Determine how this works. TODO: High-Priority: Determine how this works. Explaining this strategy was on the F13 midterm and the W13 final.</p>
+<h3 id="sub:arbiter">Arbiter</h3>
+<p>We can always create an <em>arbiter</em> task that controls entry to the critical section.</p>
+<pre><code>client () {
+    intent[me] = true;
+    while (!serving[me]) {} //spin
+    criticalSection();
+    intent[me] = false;
+    while (serving[me]) {} // wait for the arbiter to unblock me.
+}
+arbiter () {
+    while (true) {
+        for (; intent[i]; i = (i+1)%5) {} // busy wait
+        serving[i] = true;
+        while (intent[i] = true) {} // busy wait
+        serving[i] = false;
+    }
+}
+                </code></pre>
+<p>This implements mutual exclusion between the arbiter and each waiting client.</p>
+<h2 id="sec:hardware_solutions">Hardware Solutions</h2>
+<p>Software solutions are limited by relying only on shared information between threads. Hardware solutions introduce a level below the software level, which allow us to make assumptions about execution (mainly atomicity). This only works on a single CPU - distributed programs don’t have this hardware benefit.</p>
+<p>We use hardware instructions to get great operations that are able to observe values <em>while</em> modifying them.</p>
+<h3 id="sub:test_set_instruction">Test/Set Instruction</h3>
+<p>The test/set instruction just does that. It returns the old value while setting the value to the new value:</p>
+<pre><code>testSet(type newValue, type* lock) {
+    ret = lock;
+    lock = newValue;
+    return ret;
+}
+foo() {
+    while (testSet(CLOSED, lock) == CLOSED) {}
+    criticalSection();
+    lock = OPEN;
+}
+                </code></pre>
+<p>In a multi-CPU computer, somewhere in hardware<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> must guarantee multiple CPUs produce consistent output for this instruction.</p>
+<h3 id="sub:swap_instruction">Swap Instruction</h3>
+<p>The swap instruction performs a swap of two values:</p>
+<pre><code>swap(type&amp; a, type&amp; lock) {
+    int temp;
+    temp = a;
+    a = lock;
+    lock = temp;
+}
+foo() {
+    dummy = CLOSED;
+    do {
+        swap(dummy, lock);
+    } while (dummy == CLOSED);
+    criticalSection();
+    lock = OPEN;
+}
+                </code></pre>
+<h3 id="sub:compare_assign_instruction">Compare/Assign Instruction</h3>
+<p>The compare and assign (caa) instruction does assignment only if the two values being compared are equal<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a>.</p>
+<pre><code>bool caa(type&amp; value, type comp, type newValue) {
+    if (value == comp) {
+        val = newValue;
+        return true;
+    }
+    return false;
+}
+foo() {
+    while (!caa(lock, OPEN, CLOSED)) {}
+    lock = OPEN;
+}
+                </code></pre>
+<h3 id="sub:mellor_crummey_and_scott_mcs">Mellor-Crummey and Scott (MCS)</h3>
+<p>MCS provides a service bound by linking waiting threads on a queue and servicing queue in FIFO.</p>
+<pre><code>struct MCS::Node {
+    size_t waiting;
+    Node *next;
+}
+MCS::acquire(Node &amp;n) {
+    Node *pred;
+    n.next = NULL;
+    pred = fetchStore(&amp;last, &amp;n); // pred = last, last = n
+    if (pred != NULL) {
+        n.waiting = true;
+        pred-&gt;next = &amp;n;
+        while (n.waiting) {} // spin
+    }
+}
+MCS::release(Node &amp;n) {
+    if (n.next == NULL) {
+        if (caa(&amp;last, &amp;n, NULL)) return; // the last is NULL, so nobody is waiting.
+        while (n.next == NULL) {};
+    }
+    n.next-&gt;waiting = false; // start the next node.
+}
+foo() {
+    MCS::Node n;
+    Lock.acquire(n);
+    criticalSection();
+    Lock.release(n);
+}
+                </code></pre>
+<h1 id="cha:lock_abstraction">Lock Abstraction</h1>
+<p>To build synchronization or mutual exclusion mechanisms, we build locks.</p>
+<h2 id="sec:lock_ontology">Lock Ontology</h2>
+<p>There are a bunch of different types of lock:</p>
+<dl>
+<dt>Spinning Locks</dt>
+<dd><p>busy wait until an event occurs. In uniprocessor systems, this lock can explicitly terminate its time slice by calling <code>yield</code>. In multiprocessor systems, it’s better to begin <code>yield</code>ing after <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" /> event checks fail.</p>
+</dd>
+<dt>Blocking (Queueing) Locks</dt>
+<dd><p>do not busy wait, but are unblocked by a mechanism until an event occurs.</p>
+</dd>
+</dl>
+<h2 id="sec:spin_lock">Spin Lock</h2>
+<p>Spin locks are implemented using busy waiting, which loops checking for an event:</p>
+<pre><code>while (testSet(lock) == CLOSED); // spin
+            </code></pre>
+<p>This is slow, since it loops until someone else opens the lock, or until it is pre-empted (i.e. when its time-slice ends). We can increase efficiency by yielding after the checking fails:</p>
+<pre><code>while (testSet(lock) == CLOSED) uThisTask().yield();
+            </code></pre>
+<p>Even better, adaptive spin-locks modify the number of times that they fail before they yield<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a>.</p>
+<h3 id="sub:implementation">Implementation</h3>
+<p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>provides the non-yielding spin lock <code>uSpinLock</code> and a yielding spin lock <code>uLock</code>:</p>
+<pre><code>class uSpinLock {
+    public:
+        uSpinLock(); // initializes to open
+        void acquire();
+        void tryacquire();
+        void release();
+}
+class uLock {
+    public:
+        uLock( unsigned int value = 1);
+        void acquire();
+        bool tryacquire();
+        void release();
+}
+                </code></pre>
+<p>Starvation can theoretically occur, but it’s rarely a problem.</p>
+<p>Since <code>uSpinLock</code> is non-preemptive, no other tasks may execute on that processor once the lock is acquired<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a>. The <code>uLock</code> provided is non-preemptive and so can be used for both synchronization and mutual exclusion.</p>
+<p>The method <code>tryacquire</code> makes one attempt, but does not wait.</p>
+<p>There is no problem with calling release extra times. In fact, release can be used to signal availability.</p>
+<h2 id="sec:blocking_locks">Blocking Locks</h2>
+<p>Blocking locks only make one check for openness before blocking. The releaser only needs to detect the blocked thread and transferring the lock.</p>
+<p>In general, all blocking locks have:</p>
+<ul>
+<li><p>State to facilitate lock semantics</p></li>
+<li><p>A list of blocked acquirers</p></li>
+<li><p>A spin lock to protect list access and state modification</p></li>
+</ul>
+<h3 id="sub:synchronization_lock">Synchronization Lock</h3>
+<p>The sync lock is used solely to block tasks waiting to be synchronized, and it only has the ability to block.</p>
+<p>The acquiring task always blocks, and releases are lost when there is no waiting task.</p>
+<p>Often, these are called condition locks.</p>
+<h4 id="ssub:implementation">Implementation</h4>
+<p>There are two types of synchronization locks:</p>
+<dl>
+<dt>External Locking</dt>
+<dd><p>uses external locks to protect task lists</p>
+</dd>
+<dt>Internal Locking</dt>
+<dd><p>uses internal locks to protect task lists</p>
+</dd>
+</dl>
+<p>For both implementations, we need to use a binary semaphore to modify or read the task list.</p>
+<p>For external implementations, we need to acquire the right to modify the list beforehand. Since we block after modifying the list, we need to release the modification right inside the acquire method:</p>
+<pre><code>uSpinLock* m = ...;
+foo() {
+    m.acquire();
+    syncLock.acquire(m);
+}
+
+acquire(uSpinLock &amp; m) {
+    // add to list
+    m.release();
+    // Point A
+    // yield and block
+}
+                    </code></pre>
+<p>This is so awkward, and can still be interrupted at point <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" />.</p>
+<h4 id="ssub:ucondlock">uCondLock</h4>
+<p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>provides an internal synchronization lock, <code>uCondLock</code>.</p>
+<pre><code>class uCondLock {
+    public:
+        uCondLock();
+
+        /**
+         * Returns false if there are tasks blocked on the queue and true otherwise.
+         */
+        bool empty();
+
+        /**
+         * Used to block a task from the queue of a condition.
+         * This is a blocking call, and re-acquires its argument owner-lock before returning.
+         */
+        void wait(uOwnerLock &amp;lock);
+
+        /**
+         * Used to un-block a task from the queue of a condition.
+         * Tasks are blocked in FIFO order.
+         */
+        void signal();
+
+        /**
+         * Un-blocks all tasks.
+         */
+        void broadcast();
+}
+                    </code></pre>
+<h3 id="sub:binary_semaphore">Binary Semaphore</h3>
+<p>Dijkstra invented the binary semaphore as a blocking equivalent of a yielding spin-lock.</p>
+<p>This provides synchronization <em>and</em> mutual exclusion, since it remembers state about an event.</p>
+<p>The man who invented this concept is dutch, and so are the names for acquire and release:</p>
+<dl>
+<dt>Prolagen (P)</dt>
+<dd><p>is the acquire method. It is called prior the critical section.</p>
+</dd>
+<dt>Verlagen (V)</dt>
+<dd><p>is the release method.</p>
+</dd>
+</dl>
+<p>Semaphores with only two states (open/closed) are called <strong>binary semaphores</strong>.</p>
+<h4 id="ssub:implementation">Implementation</h4>
+<p>The implementation is really just a 3-tuple of:</p>
+<ul>
+<li><p>Blocking task list</p></li>
+<li><p><code>cnt</code> indicates if event has occurred (i.e. if it is open.</p></li>
+<li><p>A spin lock to protect the state.</p></li>
+</ul>
+<p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>does not provide a binary semaphore, since all binary semaphores are really just counting semaphores that only count up to 1.</p>
+<pre><code>BinSem::P() {
+    lock.acquire();
+    if (closed == true) {
+        // add to blocked list
+        // yield, block, and release lock
+        lock.acquire(); // re-acquire the lock.
+    }
+    closed = true;
+    lock.release();
+}
+
+BinSem::V() {
+    lock.acquire();
+    if (blocked.isEmpty()) {
+        closed = false;
+    } else {
+        // remove from blocked list, and make it ready.
+    }
+    lock.release();
+}
+                    </code></pre>
+<h3 id="sub:mutex_lock">Mutex Lock</h3>
+<p>Restricting a lock to only performing mutual exclusion allows us to separate lock usage between synchronization and mutual exclusion while allowing us to optimize based on the singular function of the lock.</p>
+<p>Mutex locks are divided into two types:</p>
+<dl>
+<dt>Single Acquisition</dt>
+<dd><p>locks are ones that can only be acquired by the lock owner once (recursively).</p>
+</dd>
+<dt>Multiple Acquisition</dt>
+<dd><p>locks are ones that can be acquired by the lock any number multiple times<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a>.</p>
+</dd>
+</dl>
+<h4 id="ssub:implementation">Implementation</h4>
+<p>The easiest implementation is just to add an owner state to a binary semaphore. Some other implementations put the owner at the front of the queue, but this is messier.</p>
+<h4 id="ssub:uownerlock">uOwnerLock</h4>
+<p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>provides a multiple-acquisition mutex-lock, <code>uOwnerLock</code>.</p>
+<pre><code>class uOwnerLock {
+  public:
+    uOwnerLock();
+
+    /**
+     * Returns NULL if there is no owner.
+     */
+    uBaseTask *owner();
+
+    /**
+     * Returns the number of times the lock has been acquired by the owner.
+     */
+    unsigned int times();
+
+    /**
+     * Refer to uLock.acquire();
+     */
+    void acquire();
+
+    /**
+     * Refer to uLock.tryacquire();
+     */
+    bool tryacquire();
+
+    /**
+     * Refer to uLock.release();
+     */
+    void release();
+}
+                    </code></pre>
+<h4 id="ssub:stream_locks">Stream Locks</h4>
+<p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>offers a special mutex for I/O based on <code>uOwnerLock</code> named <code>osacquire</code> and <code>isacquire</code> for output and input streams respectively.</p>
+<p>The two are classes that acquire the object at the beginning of their lives (constructor), and release the object at the end of their lives (destructor).</p>
+<h3 id="sub:counting_semaphore">Counting Semaphore</h3>
+<p>By changing the boolean in the binary semaphore to an integer that represents the number of remaining “events”, we can:</p>
+<ul>
+<li><p>Have critical sections that allow <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" /> simultaneous tasks.</p></li>
+<li><p>Allow <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" /> tasks to execute only after a certain task has completed.</p></li>
+</ul>
+<h4 id="ssub:implementation">Implementation</h4>
+<p>We can implement thins by changing the flag into a counter and setting it to the maximum on creation. Then we’d decrement on acquisition, and increment it on release:</p>
+<pre><code>CntSem::P() {
+    lock.acquire();
+    --cnt;
+    if (cnt &lt; 0) {
+        // add self to lock&#39;s blocked list
+        // magically yield, block, and release lock.
+        lock.acquire();
+    }
+    lock.release();
+}
+CntSem::V() {
+    lock.acquire();
+    ++cnt;
+    if (cnt &lt;= 0) {
+        // remove task from blocked list and make ready
+    }
+    lock.release();
+}
+                    </code></pre>
+<h4 id="ssub:usemaphore">uSemaphore</h4>
+<p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>provides a counting semaphore named <code>uSemaphore</code> which offers more than just a binary semaphore:</p>
+<pre><code>class uSemaphore {
+  public:
+    uSemaphore(unsigned int counter = 1);
+    /**
+     * Decrements the semaphore counter.
+     * If the semaphore counter is &gt;= 0 the caller continues, otherwise it blocks.
+     */
+    void P();
+
+    /**
+     * TryP returns true if the semaphore has been acquired and false otherwise (it basically is P without blocking)
+     */
+    bool tryP();
+
+    /**
+     * Wakes up the task blocked for the longest time if there are tasks blocked on the semaphore.
+     * [times is the number of tasks woken up]
+     */
+    void V(unsigned int times = 1);
+
+    /**
+     * Returns the value of the semaphore counter:
+     *  n&lt;=0  means abs(n) tasks are blocked and the semaphore is locked
+     *  n&gt;0 means that there are n tasks that are allowed to acquire the semaphore, and it is unlocked.
+     */
+    int counter() const;
+
+    /**
+     * Returns false if there are threads blocked on the semaphore (and true otherwise).
+     */
+    bool empty() const;
+}
+                    </code></pre>
+<h3 id="sub:barrier">Barrier</h3>
+<p>A barrier coordinates a group of tasks performing a concurrent operation surrounded by sequential operations. Thus, it is only for synchronization and not mutual exclusion.</p>
+<p>Barriers are initialized to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" />, the number of tasks they will hold before allowing them to continue.</p>
+<p>Tasks call <code>block</code>. The <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" />th task will allow all tasks to continue.</p>
+<p>These can only be used for mutual exclusion.</p>
+<h4 id="ssub:ubarrier">uBarrier</h4>
+<p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>barriers are thread-safe coroutines where the main can be resumed by the final task arriving at the barrier<a href="#fn16" class="footnoteRef" id="fnref16"><sup>16</sup></a>.</p>
+<pre><code>_Cormonitor uBarrier {
+  protected:
+    void main { for (;;) { suspend(); } }
+  public:
+    uBarrier( unsigned int total );
+
+
+    /**
+     * returns the number of tasks being synchronized
+     */
+    unsigned int total() const;
+
+
+    /**
+     * returns the number of currently waiting tasks
+     */
+    unsigned int waiters() const;
+
+
+    /**
+     * resets the number of tasks synchronizing to to &#39;total&#39;
+     */
+    void reset( unsigned int total );
+
+
+    /**
+     * Wait for the nth thread. The nth thread unblocks and calls the last.
+     */
+    virtual void block();
+
+
+    /**
+     * This is implicitly called by the last task to arrive to the barrier.
+     */
+    virtual void last() { resume (); }
+}
+                    </code></pre>
+<p>We can create a barrier by inheriting <code>uBarrier</code>, and redefining <code>main</code> and possibly the block method. We may even want to initialize main from a constructor. Here’s an example of us creating a barrier:</p>
+<pre><code>_Cormonitor Accumulator : public uBarrier {
+    int total_;
+    uBaseTask* nth_;
+    void main() {
+        nth = &amp;uThisTask();
+        suspend();
+    }
+  public:
+    Accumulator( int rows ) : uBarrier ( rows ), total_(0), nth_(0) {}
+    void block( int subtotal ) {total += subtotal; uBarrier::block(); }
+    int total() { return total_; }
+    uBaseTask* nth() { return nth_; }
+}
+
+_Task Adder {
+    int *row, size;
+    Accumulator &amp;acc;
+    void main() {
+        int subtotal = 0;
+        for (unsigned int r = 0; r&lt;size; r++) subtotal += row[r];
+        acc.block(subtotal);
+    }
+  public:
+    Adder (int row[], int size, Accumulator &amp;acc) :
+        size( size ), row( row ), acc( acc ) {}
+}
+                    </code></pre>
+<h2 id="sec:lock_programming">Lock Programming</h2>
+<h3 id="sub:synchronization_locks">Synchronization Locks</h3>
+<p>Synchronization locks are weak, since we need to provide external mutual exclusion because they are weak.</p>
+<h3 id="sub:precedence_graph">Precedence Graph</h3>
+<p><code>P</code> and <code>V</code> in conjunction with <span style="font-variant: small-caps;">cobegin</span> are as powerful as the <span style="font-variant: small-caps;">start</span> and <span style="font-variant: small-caps;">wait</span> commands.</p>
+<p>Given a list of statements where the result is compounded in some parts, we can use the graph to analyze which code and data depend on each other:</p>
+<pre><code>                    S1: a := 1
+                    S2: b := 1
+                    S3: c := a + b
+                    S4: d := 2 * a
+                    S5: e := c + d
+                </code></pre>
+<p>By analyzing what data and code depends on each other, we can create a graph of dependencies, as seen in Figure [fig:precedence<sub>g</sub>raph].</p>
+<p>[fig:precedence<sub>g</sub>raph] <img src="images/precedence_graph.png" alt="image" /></p>
+<p>We can equivalently express this initial code using a bunch of semaphores:</p>
+<pre><code>                    Semaphore L1(0), L2(0), L3(0), L4(0)
+                    COBEGIN
+                        BEGIN a:= 1; v(L1); END;
+                        BEGIN b:= 2; v(L2); END;
+                        BEGIN P(L1); P(L2); c :=a + b; v(L3); END;
+                        BEGIN P(L1); d := 2 * a; v(L4); END;
+                        BEGIN P(L3); P(L4); e := c + d; END;
+                    COEND
+                </code></pre>
+<p>Similarly, we can create a process graph as seen in Figure [fig:process<sub>g</sub>raph].</p>
+<p>[fig:process<sub>g</sub>raph] <img src="images/proccess_graph.png" alt="image" /></p>
+<h3 id="sub:buffering">Buffering</h3>
+<p>In most cases, tasks communicate in a single direction using a queue, where producers push to the queue, and consumers pop from the queue.</p>
+<h4 id="ssub:unbounded_buffer">Unbounded Buffer</h4>
+<p>Two tasks will communicate through a queue of unbounded length. The producer may work faster than the consumer, but this is ok since the buffer is infinite length. Consumers need to wait for producers to add if they work faster than the producer.</p>
+<pre><code>#define QueueSize infinity
+
+int front = back = 0;
+int Elements[QueueSize];
+uSemaphore signal(0);
+
+void Producer::main() {
+    while (true) {
+        // append to queue
+        signal.V();
+    }
+    queue.append(END_SIGNAL);
+}
+void Consumer::main() {
+    while (true) {
+        signal.P();
+        value = queue.pop();
+        if (value == END_SIGNAL) break;
+        // use the value
+    }
+}
+                    </code></pre>
+<p>This is an instance where a semaphore is used for synchronization.</p>
+<p>The problem with unbounded buffers is that they take infinite memory<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a>.</p>
+<h4 id="ssub:bounded_buffer">Bounded Buffer</h4>
+<p>Because the queue is like bounded, producers need to wait if the buffer is full.</p>
+<p>We’re going to use two counting semaphores for the finite length of the shared queue:</p>
+<pre><code>uSemaphore full(0), empty(QueueSize);
+void Producer::main() {
+    for (...) {
+        item = ...
+        empty.P(); // Reserve a space in the queue to append our value.
+        queue.append(item);
+        full.V(); // Indicate that there is a takeable item in the queue
+    }
+}
+void Consumer::main() {
+    for (...) {
+        full.P(); // reserve the right to take a value
+        x = queue.pop();
+        empty.V(); // increase the number of values remaining
+        ...
+    }
+}
+                    </code></pre>
+<p>This produces decent concurrency, but definitely not maximum concurrency. This also allows multiple producers and multiple consumers.</p>
+<h3 id="sub:lock_techniques">Lock Techniques</h3>
+<p>We want to implement a split binary semaphore - a collection of semaphores which at most one has the value 1.</p>
+<p>We use a technique named <strong>baton passing</strong> which passes a (conceptual) baton<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a> between different tasks that wait on it. The baton is acquired in entry and exit protocol, and is passed from signaller to signalled task.</p>
+<pre><code>class BinSem {
+    queue&lt;Task&gt; blocked;
+    bool inUse;
+    SpinLock lock;
+  public:
+    BinSem( bool usage = false ) : inUse( usage ) {}
+    void P() {
+        lock.acquire(); // Pick up baton. Now we are &#39;allowed&#39; to access state.
+        if ( inUse ) {
+            // add self to lock&#39;s blocked list
+            // yield, block and release lock at the same time
+
+            // When unblocked:
+            // We&#39;ve been passed the baton. Now we can access state.
+        }
+        inUse = true;
+        lock.release();
+    }
+    void V() {
+        lock.acquire(); // Pick up the baton. Now we are &#39;allowed&#39; to access state.
+        if (!blocked.isEmpty()) {
+            // remove the task from the blocked list and make it ready.
+            // At this point, we&#39;ve passed the baton, and cannot access state
+        } else {
+            inUse = false;
+            lock.release();
+        }
+    }
+}
+                </code></pre>
+<h3 id="sub:readers_and_writer_problem">Readers and Writer Problem</h3>
+<p>When there are multiple tasks that share reading and writing to a resource, we want to ensure that we are able to allow multiple concurrent readers while serializing access for writer tasks (writers may read as part of their write process).</p>
+<p>We’re going to use split binary semaphores to segregate 3 kinds of tasks: arrivers, readers, and writers.</p>
+<h4 id="ssub:solutions_1_6">Solutions 1-6</h4>
+<p>These solutions have various problems. Here is an itemized list:</p>
+<ul>
+<li><p>If we allow the readers to go first, it starves the writers.</p></li>
+<li><p>If we allow the writers to go first, it starves the readers<a href="#fn19" class="footnoteRef" id="fnref19"><sup>19</sup></a>.</p></li>
+<li><p>When tasks exit, they should activate the type that isn’t their own. The problem this creates is that due to the way that they can be condensed, readers that arrive after a writer may be reading stale data. We should service readers and writers in <strong>temporal order</strong>.</p></li>
+<li><p>When groups arrive, we should concatenate spans readers with no writers in between. The textbook argues that <em>Now we lose kind of waiting task!</em>. I’m unsure of what this means<a href="#fn20" class="footnoteRef" id="fnref20"><sup>20</sup></a>.</p></li>
+<li><p>If we create a “next up” chair... I don’t really understand this one.</p></li>
+<li><p>If we create a ticked method (See Sub-Section [sub:n<sub>t</sub>hread<sub>b</sub>akery<sub>t</sub>ickets]), we can get readers and writers to take a ticket before releasing the baton. Starvation is not an issue, but this isn’t efficient.</p></li>
+<li><p>If we had a list of private semaphores... I don’t really understand this one either.</p></li>
+</ul>
+<h4 id="ssub:solution_7">Solution 7</h4>
+<p>Generally speaking, we want a solution that provides:</p>
+<ol>
+<li><p>Execution in temporal order</p></li>
+<li><p>A smaller (or simpler) solution</p></li>
+<li><p>An efficient solution</p></li>
+</ol>
+<p>We are going to create an ad-hoc solution that uses questionable split-binary semaphores and baton-passing.</p>
+<p>Tasks wait in temporal order for an entry semaphore. Writers wait on the writer chair until readers leave the resource, holding the baton until all readers leave. Semaphore lock is only used for mutual exclusion.</p>
+<pre><code>uSemaphore entry_q(1);
+uSemaphore lock(1), writer_q(0);
+void Reader::main() {
+    entry_q.P(); // entry protocol.
+    lock.P();
+    r_cnt++;
+    lock.V();
+    entry_q.V(); // put the baton down
+    ...
+    lock.P(); // exit protocol
+    r_cnt--;
+    criticalSection();
+    if (r_cnt == 0 &amp;&amp; w_cnt == 1) { // if last reader and there is a writer waiting
+        lock.V();
+        writer_q.V(); // pass the baton.
+    } else {
+        lock.V();
+    }
+}
+void Writer::main() {
+    entry_q.P(); // entry protocol
+    lock.P();
+    if (r_cnt &gt; 0) { // are there readers waiting?
+        w++;
+        lock.V();
+        writer_q.P(); // wait for readers
+        w_cnt--; // unblock with baton
+    } else {
+        lock.V();
+    }
+    criticalSection();
+    entry_q.V();
+}
+
+                    </code></pre>
+<h1 id="cha:concurrent_errors">Concurrent Errors</h1>
+<h2 id="sec:race_condition">Race Condition</h2>
+<p>Race conditions occur when we are missing synchronization or mutual exclusion. Two or more tasks race along assuming that synchronization or mutual exclusion has occurred. The easiest way to locate errors is through thought experiments, which are personally taxing.</p>
+<h2 id="sec:no_progress">No Progress</h2>
+<h3 id="sub:live_lock">Live-Lock</h3>
+<p>Live-lock is when there is indefinite postponement. This is essentially caused by poor scheduling in an entry protocol. To fix this, there always is some mechanism to break ties on simultaneous arrival that deals effectively with live-lock.</p>
+<h3 id="sub:starvation">Starvation</h3>
+<p>When a selection algorithm ignores <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n%5Cge1" alt="n\ge1" title="n\ge1" /> tasks so they are never executed, the <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" /> tasks are starved.</p>
+<p>While infinite starvation is very rare in real codebases, short-term starvation can occur and is problematic.</p>
+<p>Like a live-lock (see Sub-Section [sub:live<sub>l</sub>ock]), this includes situations where the starving task may only really switch between active, ready, and possibly blocked states.</p>
+<h3 id="sub:dead_lock">Dead-Lock</h3>
+<p>Deadlock is a state when <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cge1" alt="\ge1" title="\ge1" /> processes are waiting for an event that will never occur.</p>
+<h4 id="ssub:synchronization_deadlock">Synchronization Deadlock</h4>
+<p>This occurs when <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cge1" alt="\ge1" title="\ge1" /> processes are waiting for synchronization that will never occur.</p>
+<h4 id="ssub:mutual_exclusion_deadlock">Mutual Exclusion Deadlock</h4>
+<p>This occurs when processes fail to acquire resources protected by mutual exclusion. There are 5 conditions for mutex-based deadlock to happen:</p>
+<ol>
+<li><p>There exists more than 1 shared resource requiring mutual exclusion.</p></li>
+<li><p>A process holds a resource while waiting for access to a resource held by another process (hold and wait).</p></li>
+<li><p>Once a process has gained access to a resource, the runtime system cannot get it back (no preemption).</p></li>
+<li><p>There exists a circular wait of processes on resources.</p></li>
+<li><p>These conditions must occur simultaneously.</p></li>
+</ol>
+<h2 id="sec:deadlock_prevention">Deadlock Prevention</h2>
+<p>We want to eliminate at least one<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a> of the conditions required for a deadlock from an algorithm to force deadlock to never occur.</p>
+<h3 id="sub:synchronization_prevention">Synchronization Prevention</h3>
+<p>We can eliminate all synchronization from the program to prevent synchronization-based deadlock. This removes communication, which means that they must generate results through side-effects (ew).</p>
+<h3 id="sub:mutual_exclusion_prevention">Mutual Exclusion Prevention</h3>
+<p>We can eliminate deadlock by eliminating any 1 or more of the 5 conditions:</p>
+<dl>
+<dt>No mutual exclusion</dt>
+<dd><p>In many cases, it is impossible to do this while maintaining concurrency.</p>
+</dd>
+<dt>No hold and wait</dt>
+<dd><p>We can implement this by not giving any resources to a process unless all requested resources can be given. This poorly utilizes resources, and introduces the possibility that we may starve a thread.</p>
+</dd>
+<dt>Allow Preemption</dt>
+<dd><p>Since preemption is dynamic, we cannot apply this statically.</p>
+</dd>
+<dt>No Circular Wait</dt>
+<dd><p>We can prevent circular wait from happening by only acquiring resources according to an ordering. Threads can only acquire a resource <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_j" alt="R_j" title="R_j" /> if they hold no resources <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_i" alt="R_i" title="R_i" /> where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=i%20%5Cge%20j" alt="i \ge j" title="i \ge j" />.</p>
+</dd>
+<dt>Prevent Simultaneous Occurrence</dt>
+<dd><p>We can do this by proving that the four previous rules cannot occur at the same time<a href="#fn22" class="footnoteRef" id="fnref22"><sup>22</sup></a>.</p>
+</dd>
+</dl>
+<h2 id="sec:deadlock_avoidance">Deadlock Avoidance</h2>
+<p>Unlike deadlock prevention, deadlock avoidance monitors all blocking and allocation and detects the formation of deadlocks. This gives us better resource allocation at the expense of overhead.</p>
+<p>[t]<span>1</span></p>
+<p>The difference between Deadlock Prevention and Deadlock Avoidance (Sections [sec:deadlock<sub>p</sub>revention] and  [sec:deadlock<sub>a</sub>voidance]) has been on past exams.</p>
+<h3 id="sub:banker_s_algorithm">Banker’s Algorithm</h3>
+<p>The bankers algorithm is an iterative approach: We require threads <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_i" alt="T_i" title="T_i" /> to declare the maximum number of each type of resource that they need to complete<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a> execution. Knowing the total available resources, we check that at least one thread is able to complete to execution<a href="#fn24" class="footnoteRef" id="fnref24"><sup>24</sup></a> every time we allocate a resource.</p>
+<p>This algorithm works, but it is limited to instances where all threads will declare how much they need prior to execution.</p>
+<h3 id="sub:allocation_graphs">Allocation Graphs</h3>
+<p>One way to check for potential allocation is by analyzing graphs of resource allocation, as seen in Figure [fig:allocation<sub>g</sub>raph].</p>
+<p>[fig:allocation<sub>g</sub>raph] <img src="images/allocation_graph.png" alt="image" /></p>
+<p>Once we have our graph, we use reductions from a complicated graph to less complicated but equivalent graphs to locate deadlocks. Cycles existing in our graph indicate that we have a deadlock.</p>
+<p>Since detecting cycles is slow, and it needs to be done at every allocation and de-allocation step, this is expensive.</p>
+<h2 id="sec:deadlock_detection_and_recovery">Deadlock Detection and Recovery</h2>
+<p>The idea is instead of preventing deadlocks from happening, let’s just recover when they do.</p>
+<p>We only really have to check for a deadlock when a resource can’t be allocated immediately<a href="#fn25" class="footnoteRef" id="fnref25"><sup>25</sup></a>. Recovery involves preempting<a href="#fn26" class="footnoteRef" id="fnref26"><sup>26</sup></a> <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cge1" alt="\ge1" title="\ge1" /> processes, and restarting them at their beginning, or at a safe point. This isn’t safe, since the victim may have made changes prior to preemption.</p>
+<h1 id="cha:indirect_communication">Indirect Communication</h1>
+<p><code>P</code> and <code>V</code> are low-level primitives that protect critical sections, and establish synchronization between locks. This can be complicated, and can be incorrectly placed. Split-binary semaphores, and baton passing is hard too. We need higher language-level facilities that give us these things for free.</p>
+<h2 id="sec:critical_regions">Critical Regions</h2>
+<p>Using the pseudocode-like language which we used for <span style="font-variant: small-caps;">cobegin</span> and <span style="font-variant: small-caps;">coend</span> (see SubSection [sub:precedence<sub>g</sub>raph]):</p>
+<ul>
+<li><p>We can indicate shared variables (i.e. <code>v</code> is protected by the <code>MutexLock</code> named <code>v_lock</code>:</p>
+<pre><code>VAR v: SHARED INTEGER MutexLock v_lock;
+                    </code></pre></li>
+<li><p>Access to shared variables is only possible from within a <span style="font-variant: small-caps;">region</span> statement:</p>
+<pre><code>REGION v DO                 v_lock.acquire();
+    // critical section     v++; // etc
+END REGION                  v_lock.release();
+                    </code></pre></li>
+<li><p>As explained in SubSection [ssub:mutual<sub>e</sub>xclusion<sub>d</sub>eadlock], ordering these <span style="font-variant: small-caps;">region</span> calls can create deadlock.</p></li>
+</ul>
+<p>This implementation prevents simultaneous reads. If we modified it so we can read outside the critical section, we may be reading partially updated information (ew).</p>
+<h2 id="sec:conditional_critical_regions">Conditional Critical regions</h2>
+<p>In our make-believe language, we’re going to introduce a condition that must be true inside the mutual exclusion blocks:</p>
+<pre><code>REGION v DO
+    AWAIT conditional-expression
+    ...
+END REGION
+            </code></pre>
+<p>If <code>conditional-expression</code> is false, the lock is released, and entry is re-started.</p>
+<h2 id="sec:monitor">Monitor</h2>
+<p>A monitor is an abstract data type that combines shared data with serializing modification. The key feature offered by a monitor is its differentiating set of <strong>mutex members</strong><a href="#fn27" class="footnoteRef" id="fnref27"><sup>27</sup></a>. Of the mutex members, only one may be actively executed at a time. Managing tasks entering and exiting from the mutex is managed automatically by the mutex.</p>
+<p>Basically, each monitor has a lock which is <code>P</code>ed on entry to a monitor member, and <code>V</code>ed on exit.</p>
+<pre><code>class MonitorDemo {
+    MutexLock mLock;
+    int v;
+  public:
+    int x() {
+        mLock.P();
+        int temp;
+        try {
+            ...
+            temp = retVal;
+            mLock.V();
+        } catch(Err &amp;e) {
+            mLock.V();
+            throw; // re-throw
+        }
+        return temp;
+    }
+}
+            </code></pre>
+<p>Unhandled exceptions implicitly release the lock so the monitor can continue to function. Recursive entry is allowed<a href="#fn28" class="footnoteRef" id="fnref28"><sup>28</sup></a>. Also, the destructor is blocked by a mutex, so threads can’t be caught inside a monitor.</p>
+<h2 id="sec:scheduling_synchronization">Scheduling (Synchronization)</h2>
+<p>A monitor may want to schedule tasks in an order different from the order they arrive.</p>
+<dl>
+<dt>External Scheduling</dt>
+<dd><p>occurs outside the monitor and is accomplished using the accept statement.</p>
+</dd>
+<dt>Internal Scheduling</dt>
+<dd><p>occurs inside the monitor and is accomplished using the condition variables with signal and wait.</p>
+</dd>
+</dl>
+<h3 id="sub:external_scheduling">External Scheduling</h3>
+<p>In a nutshell, accept statements block the active task on the acceptor stack and makes a task ready from the specified mutex member queue. Signals move a task from the specified condition to the signaled stack.</p>
+<p>We use the <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span><code>_Accept</code> statement to control which mutex can accept calls. By preventing members from accepting calls at different times, we can control scheduling of tasks. The <code>_Accept</code> statement defines what cooperation must occur for the accepting task to proceed:</p>
+<pre><code>_Monitor BoundedBuffer {
+    int front, back, count;
+    int elements[20];
+  public:
+    BoundedBuffer() : front(0), back(0), count(0) {}
+    _Nomutex int query() { return count; }
+    [_Mutex] void insert( int elem );
+    [_Mutex] int remove();
+};
+void BoundedBuffer::insert(int elem) {
+    if (coint == 20) _Accept( remove );
+    elements[back] = elem;
+    back = (back+1) % 20;
+    count ++;
+}
+void BoundedBuffer::remove() {
+    if (count == 0) _Accept( insert );
+        // waits for insert to be called, then continues.
+    int elem = elements[front];
+    front = (front + 1)%20;
+    count -= 1;
+    return elem;
+}
+                </code></pre>
+<p>This implicitly queues tasks that wait outside the monitor for either <code>insert</code> or <code>remove</code> operations. Accepters block until a call to the specified mutex member occurs. When the accepter blocks, it is added to a stack of blocked accepters (across all methods). External scheduling is simple because unblocking (signalling) is implicit.</p>
+<h3 id="sub:internal_scheduling">Internal Scheduling</h3>
+<p>In a nutshell, implict scheduling occurs when a task waits in or exits from a mutex member, and a new task is selected first from the A/S<a href="#fn29" class="footnoteRef" id="fnref29"><sup>29</sup></a> stack, then the entry queue. Scheduling occurs for tasks inside the monitor, where <strong>condition</strong>s are used to create a queue of waiting tasks. A task waits by waiting for a <code>uCondition x</code> to be true by calling <code>x.wait()</code>. This atomically puts it at the back of the condition queue, and allows another task into the monitor by releasing the monitor lock.</p>
+<p>The <code>uCondition.empty</code> method returns false if there are tasks blocked on the queue. Similarly, the <code>uCondition.front</code> method returns an integer value stored with the task at the front of the condition queue.</p>
+<p>A task on a condition queue can be made ready by signaling the condition <code>x.signal()</code><a href="#fn30" class="footnoteRef" id="fnref30"><sup>30</sup></a>. This readies the task, but it waits until the currently executing task is out of the monitor before continuing. The dual of the <code>signal</code> method, <code>x.block()</code> unblocks the thread and blocks the signaler.</p>
+<p>Generally, the entry queue is a fifo list of calling tasks to the monitor.</p>
+<h2 id="sec:readers_writer">Readers/Writer</h2>
+<p>See Subsection [sub:readers<sub>a</sub>nd<sub>w</sub>riter<sub>p</sub>roblem] to see the statement.</p>
+<p>We can use monitors to implement solutions to the readers/writer problem much more elegantly than if we were only using the <code>uSemaphore</code> construct. Here is a sample of the final solution proposed, using monitors instead:</p>
+<pre><code>_Monitor ReadersWriter {
+    int rcnt, wcnt;
+  public:
+    ReadersWriter() : rcnt(0), wcnt(0) {}
+    void endRead() {
+        --rcnt;
+    }
+    void endWrite() {
+        wcnt = 0;
+    }
+    void startRead() {
+        if (wcnt &gt; 0) _Accept( endWrite );
+        rcnt++;
+    }
+    void startWrite() {
+        if (wcnt &gt; 0) _Accept ( endWrite );
+        else while ( rcnt &gt; 0 ) _Accept( endRead );
+        wcnt = 1;
+    }
+}
+            </code></pre>
+<h2 id="sec:condition_signal_and_wait_vs_counting_semaphore">Condition Signal and Wait vs Counting Semaphore P and V</h2>
+<p>We’d like to draw the distinction between these different types:</p>
+<p>Calling the <code>wait</code> method always blocks, while <code>P</code> only blocks if the semaphore’s value is less than or equal to 0.</p>
+<p>Calling a <code>signal</code> is lost, while calling <code>V</code> before <code>P</code> affects the <code>P</code>.</p>
+<p>Calling a <code>V</code> may start multiple simultaneous tasks while multiple <code>signals</code> only start one task at a time since they must exit serially through the monitor.</p>
+<p>We can simulate <code>V</code> and <code>P</code> through a monitor:</p>
+<pre><code>_Monitor semaphore {
+    int sem;
+    uCondition semcond;
+  public:
+    semaphore(int cnt = 1) : sem (cnt) {}
+    void P() {
+        if (sem == 0) semcond.wait();
+        --sem;
+    }
+    void V(int incr = 1) {
+        sem += incr;
+        for (int i=0; i&lt;incr; i++) semcond.signal();
+    }
+}
+            </code></pre>
+<h2 id="sec:monitor_types">Monitor Types</h2>
+<p>Through different languages and implementations, there are subtle different ways that monitors can be implemented. These are usually based on their scheduling of the monitor when tasks wait, signal, and exit.</p>
+<p>Scheduling is the ordering of priorities for re-entering the mutex by different thread categories:</p>
+<dl>
+<dt>C</dt>
+<dd><p>are the calling threads that haven’t entered the mutex yet.</p>
+</dd>
+<dt>W</dt>
+<dd><p>signalled (waiting) threads are the threads that were blocked then moved to a ready queue.</p>
+</dd>
+<dt>S</dt>
+<dd><p>signaller threads are the ones that have signalled another thread and released control until completion<a href="#fn31" class="footnoteRef" id="fnref31"><sup>31</sup></a>.</p>
+</dd>
+</dl>
+<p>To say that C &lt; W &lt; S means that when the mutex is choosing the next thread, it will choose the S threads before W, and before C threads.</p>
+<p>Monitors may either implicitly (statement) or explicitly signal (automatic signal). Monitors that implicitly signal may wait on condition variables or an explicit signal statement like <code>waitUntil logicalExpression</code>. Monitors that explicitly signal call methods similar to <code>signal</code>/<code>signalWait</code>.</p>
+<p>Additionally, some monitors may be constrained to always return (leave the monitored method) as they signal.</p>
+<p>Refer to Table [tbl:useful-control-flow] for ten different types of control flow that are practically useful.</p>
+<p>[h] [tbl:useful-control-flow]</p>
+<p><span>| c || l | l | p<span>3cm</span> | </span> <strong>Signal Type</strong> &amp; <strong>Priority</strong> &amp; <strong>No Priority</strong> &amp; <strong>notes</strong><br />Blocking &amp; &amp; &amp; The blocking variant requires the signaller to recheck the waiting condition in the case of a barging task. The non-blocking variant requires the signalled task to check the waiting condition in the case of a barging task.<br />Non-Blocking &amp; &amp; &amp; Both types have no barging (more on this later). The non-blocking variant optimizes signal before return, and the blocking variant handles internal cooperation within the monitor.<br />Quasi-Blocking &amp; &amp; &amp; This makes cooperation incredibly difficult.<br />Immediate Return &amp; &amp; &amp; Not powerful to handle most cases, but are simple to use in the most common case.<br />Implicit Signal &amp; &amp; &amp; Good for prototyping but poor performance.<br /></p>
+<h2 id="sec:java_and_c">Java and C#</h2>
+<p>Java’s concurrency constraints are descendants of Modula-3.</p>
+<h2 id="sec:threading_model">Threading Model</h2>
+<p>It basically defines a thread that extends a runnable:</p>
+<pre class="sourceCode java" language="Java"><code class="sourceCode java">    <span class="kw">interface</span> Thread <span class="kw">implements</span> Runnable {
+        <span class="kw">public</span> Thread();
+        <span class="kw">public</span> Thread(String name);
+        <span class="kw">public</span> String <span class="fu">getName</span>();
+        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setName</span>(String name);
+        <span class="kw">public</span> <span class="dt">void</span> <span class="fu">run</span>();
+        <span class="kw">public</span> <span class="kw">synchronized</span> <span class="dt">void</span> <span class="fu">start</span>();
+        <span class="kw">public</span> <span class="dt">final</span> <span class="dt">void</span> <span class="fu">join</span>(); <span class="co">// waits for the thread to die</span>
+        <span class="kw">public</span> <span class="dt">static</span> Thread <span class="fu">currentThread</span>(); <span class="co">// returns the current thread</span>
+        <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">yield</span>(); <span class="co">// yields the processor immediately</span>
+    }
+                </code></pre>
+<p>Similarly in <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>, we have the <code>uBaseTask</code> that all tasks inherit from:</p>
+<pre><code>    class myTask extends Thread {
+        private int arg;
+        private int result;
+        public myTask( ... ) { ... } // task constructor
+        public void run() { ... } // task main
+        public void result() { return result; }
+    }
+                </code></pre>
+<p>Java’s implementation starts threads when users call the <code>start</code> method, and termination synchronization is accomplished by calling <code>join</code>. Returning a result on thread termination is accomplished by adding member methods to the thread.</p>
+<h2 id="sec:the_synchronized_keyword">The Synchronized Keyword</h2>
+<p>In Java, <code>synchronized</code> class members help preserve mutual exclusion (should be named something along the lines of <code>_Mutex</code>).</p>
+<h2 id="sec:wait_notify_and_notifyall">Wait, Notify, and NotifyAll</h2>
+<p>All classes have one implicit condition variable and these routines to manipulate it:</p>
+<pre><code>public wait();
+public notify();
+public notifyAll();
+                </code></pre>
+<h3 id="sub:implementing_a_barrier">Implementing a Barrier</h3>
+<p>Let’s walk through some common pitfalls of implementing barriers (or anything) using <code>wait</code>/<code>notify</code>/<code>notifyAll</code>.</p>
+<pre><code>class Barrier {
+    private int n;
+    private count = 0;
+    private generation = 0;
+    public Barrier(int n) { this.n = n }
+    public synchronized void block() {
+        int mygen = generation;
+        count++;
+        if (count &lt; n) {
+            // We need the while loop because interrupted exceptions can cause unwanted operations.
+            // Yes, a better way to do this would be to `deal with&#39; the InterruptedException on occurance.
+            while (mygen == generation)
+                try {
+                    wait();
+                } catch (InterruptedException e) {}
+        } else {
+            // If we merely decrement the counter, an un-blocker that re-enters before others leave causes... bad things.
+            count = 0;
+            generation++;
+            notifyAll();
+        }
+    }
+}
+                    </code></pre>
+<h3 id="sub:implementing_conditions">Implementing Conditions</h3>
+<p>We can’t implement <code>_Mutex</code>-style conditions in Java, since that would allow us to hold the mutex while waiting for a condition to be true (that someone in tern needs access to the monitor to modify. You get the idea.).</p>
+<h1 id="cha:direct_communication">Direct Communication</h1>
+<p>While monitors work well for shared objects that therefore need mutual exclusion. Communication using a monitor is indirect, and clunky.</p>
+<h2 id="sec:task">Task</h2>
+<p>A task is like a coroutine since it has a distinguished member which has its own execution state. Unlike coroutines, tasks have their own thread. Public members of a task implicitly have the <code>_Mutex</code> term; an external scheduler blocks the task’s thread.</p>
+<p>Refer to Table [tbl:exec-properties] to see some differences between different constructs.</p>
+<p>[h] [tbl:exec-properties]</p>
+<p><span>| l | l || r | r | </span> &amp;<br /><strong>Thread</strong> &amp; <strong>Stack</strong> &amp; <strong>No S/ME</strong><a href="#fn32" class="footnoteRef" id="fnref32"><sup>32</sup></a> &amp; <strong>S/ME</strong><br />No &amp; No &amp; class &amp; monitor<br />No &amp; Yes &amp; coroutine &amp; coroutine-monitor<br />Yes &amp; No &amp; <em>reject</em><a href="#fn33" class="footnoteRef" id="fnref33"><sup>33</sup></a> &amp; <em>reject</em><br />Yes &amp; Yes &amp; <em>reject?</em> &amp; coroutine-monitor<br /></p>
+<h2 id="sec:scheduling">Scheduling</h2>
+<p>A task may want to schedule access to itself by other tasks in a non-temporal order. Similar to monitors, we can do this through either internal or external scheduling.</p>
+<h3 id="sub:external_scheduling">External Scheduling</h3>
+<p>Just like a monitor, tasks can use the <code>_Accept</code> statement to control which mutex members of a task can accept calls.</p>
+<p>The when-accept setup can be expressed as the context-free-grammar:</p>
+<pre><code>S -&gt; T | T ELSE
+T -&gt; WHEN ACCEPT CODE | T or T
+WHEN -&gt; _When(CONDITION) | {nothing}
+ACCEPT -&gt; _Accept(METHOD)
+METHOD -&gt; [method] | METHOD, METHOD
+ELSE -&gt; _Else { ... }
+                </code></pre>
+<p>In the CFG, <code>CODE</code> is executed after only after the <code>_Accept</code> returns.</p>
+<p>Like a switch statement, if the accepts are conditional and false the statement does nothing.</p>
+<p>The optional if-like-statement <code>_When</code> only allows execution of the <code>_Accept</code> to progress if calls to the method exist, and the condition evaluates to true.</p>
+<p>If there is an <code>_Else</code> clause and no <code>_Accept</code> can be executed immediately, the <code>_Else</code> is executed.</p>
+<h4 id="ssub:accepting_order">Accepting Order</h4>
+<p>Whenever a thread accepts, this is what happens:</p>
+<ul>
+<li><p>Acceptor calls <code>_Accept(M1)</code>.</p></li>
+<li><p>Acceptor is pushed on the acceptor/signalled stack.</p></li>
+<li><p>The accepted method is added to the acceptor/signalled stack.</p></li>
+<li><p>Normal/implicit scheduling occurs according to C &lt; W &lt; S (See Section [sec:monitor<sub>t</sub>ypes] on monitor types/notation).</p></li>
+<li><p>After that accept call has completed or the caller waits<a href="#fn34" class="footnoteRef" id="fnref34"><sup>34</sup></a></p></li>
+</ul>
+<h3 id="sub:accepting_the_destructor">Accepting the Destructor</h3>
+<p>To terminate tasks, we sometimes want to have a <code>join</code> method. We could implement this as part of our main method’s bajillion <code>_Accept</code> statements, since it allows us to access the contents of the task after termination.</p>
+<p>Alternatively, we can just <code>_Accept</code> on the destructor like many of our other methods:</p>
+<pre><code>void Foo::main() {
+    while (true) {
+        _Accept( ~Foo ) {
+            break;
+        } or ....
+    }
+}
+                </code></pre>
+<p>The semantics for accepting a destructor aren’t the same as a normal mutex member. When destructors are called, the caller is pushed on the acceptor/signalled stack instead of the acceptor.</p>
+<p>This allows it to clean up before it terminates.</p>
+<p>After destruction, the task behaves a monitor since threads can only enter once at a time anyways.</p>
+<p>Through an unspecified process, the destructor can reactiveat any blocked tasks on condition variables and/or the acceptor/signalled stack.</p>
+<h3 id="sub:internal_scheduling">Internal Scheduling</h3>
+<p>This is almost identical to monitor scheduling. See SubSection [sub:internal<sub>s</sub>cheduling].</p>
+<h2 id="sec:increasing_concurrency">Increasing Concurrency</h2>
+<p>Given that you have <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cge2" alt="\ge2" title="\ge2" /> tasks involved in direct communication<a href="#fn35" class="footnoteRef" id="fnref35"><sup>35</sup></a>, it is still possible to increase concurrency on both sides.</p>
+<h3 id="sub:server_side">Server Side</h3>
+<p>When using <code>_Task</code>s, you have some concurrency when you’re using <code>_Accept</code> statements for methods. You have a bit more concurrency by only doing administration in the external method and doing work in the <code>_Task</code> of executing the method as follows:</p>
+<pre><code>_Task server {
+  public:
+    void mem1(...) { S1.copy-in}
+    voig main() {
+        _Accept( mem1 ) { S1.work }
+    }
+}
+                </code></pre>
+<h4 id="ssub:internal_buffers">Internal Buffers</h4>
+<p>We can use internal buffers to send messages between client and server. Since the size is greater than 1, clients can get in and out of the server faster.</p>
+<p>The problem is that unless the average production and consumption time is the same, the buffer will always be full or empty. Since the buffer is inside the task, clients still need to wait for the task to append things to it. Clients that require responses are super messed as well.</p>
+<p>One way is to have a worker task that aggregates and “handles” calls for the server. The number of workers needs to balance between the number of clients to maximize concurrency throughout the application (or else we have the unbounded buffer problem).</p>
+<h4 id="ssub:administration">Administration</h4>
+<p>Administrators are servers that do nothing other than manage multiple client and worker tasks. They delegate, receive, verify, route, and check work.</p>
+<p>Administrators make no calls since that may block them. Since they are the heart of the communication channels, this would be bad.</p>
+<p>Typical worker types are:</p>
+<dl>
+<dt>timer</dt>
+<dd><p>prompts the administrator at specified intervals</p>
+</dd>
+<dt>notifier</dt>
+<dd><p>performs a potentially blocking wait for an external event</p>
+</dd>
+<dt>simple worker</dt>
+<dd><p>performs work given to them and returns results to an administrator</p>
+</dd>
+<dt>complex worker</dt>
+<dd><p>performs work given to them and interacts directly to the of the work</p>
+</dd>
+<dt>courier</dt>
+<dd><p>performs a potentially blocking call on behalf of the administrator</p>
+</dd>
+</dl>
+<h3 id="sub:client_side">Client Side</h3>
+<p>While servers can try to make a clients delay as short as possible, not all servers do it.</p>
+<p>We can overcome variable wait for the server to process a request by using asynchronous calls. These calls require implicit buffering between client and server to store the client’s arguments from the call. Though <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>doesn’t provide this functionality, we can (simply?) construct asynchronous from synchronous and vice versa.</p>
+<h4 id="ssub:returning_values">Returning Values</h4>
+<p>If a client doesn’t need results, asynchronous calls are simple.</p>
+<p>When we need to return results, life isn’t as simple. We can divide calls into two calls:</p>
+<pre><code>callee.start(args);
+// do other work
+x = callee.finish(); // equivalent to join.
+                    </code></pre>
+<p>The caller blocks on the finish statement for the result. Depending on implementations, sometimes we need to implement a polling system where the <code>finish</code> method polls the server for status until it’s completed.</p>
+<h4 id="ssub:tickets">Tickets</h4>
+<p>Another form of protocol is a token or a ticket.</p>
+<p>It calls twice:</p>
+<ul>
+<li><p>Transmits the arguments and immediately returns the ticket.</p></li>
+<li><p>The second call passes the ticket and blocks for the result.</p></li>
+</ul>
+<p>This can be bad if the caller doesn’t retrieve the result.</p>
+<h4 id="ssub:call_back_routine">Call-Back Routine</h4>
+<p>Callers can register a callback routine with the server task. Usually, callers will release a mutex lock in the callback, and wait for it in the <code>finish</code> call.</p>
+<p>The advantage is that servers don’t need to store the result and can drop it off immediately. The other advantage is that the client can write the callback routine.</p>
+<p>The disadvantage is that the client gets to write the callback routine.</p>
+<h4 id="ssub:futures">Futures</h4>
+<p>A future prevents exposing the explicit protocol on how this returning values is implemented. This means that callers don’t need to know how to:</p>
+<ul>
+<li><p>Poll</p></li>
+<li><p>Handle callbacks</p></li>
+</ul>
+<p>Futures are sub-types of the objects that they extend.</p>
+<p>We can use futures as follows:</p>
+<pre><code>future = callee.work(args);
+...
+// obtains result, blocking if necessary
+i = future + ...
+                    </code></pre>
+<p>Futures are guaranteed to return empty results immediately. They are lazily loaded by another thread in the future, when the result is ready. Callers using the future before it is filled are blocked implicitly.</p>
+<p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>implements two types of templated futures:</p>
+<dl>
+<dt>Explicit-Storage-Management future</dt>
+<dd><p>(<code>Future_ESM&lt;T&gt;</code>) must be allocated and deallocated by the client.</p>
+</dd>
+<dt>Implicit-Storage-Management future</dt>
+<dd><p>(<code>Future_ISM&lt;T&gt;</code>) allocates and frees storage when no longer in use.</p>
+</dd>
+</dl>
+<p>We focus on <code>Future_ISM</code>s, since they’re simpler, but less efficient.</p>
+<h3 id="sub:using_futures">Using Futures</h3>
+<p>We can use futures on either client or server code.</p>
+<h4 id="ssub:futures_for_client_code">Futures for Client Code</h4>
+<p>Here is an example of using a future for client-side stuff.</p>
+<pre><code>#include &lt;uFuture.h&gt;
+Server s;
+Future_ISM f[10];
+for (int i=0; i&lt;10; i+=1)
+    f[i] = server.perform(i); // start async call
+
+...
+for (int i=0; i&lt;10; i+=1)
+    osacquire(cout) &lt;&lt; f[i] &lt;&lt; &quot; &quot; &lt;&lt; f[i]() &lt;&lt; endl;
+                    </code></pre>
+<p>The header for <code>Future_ISM</code> is as follows:</p>
+<pre><code>template &lt;typename T&gt;
+class Future_ISM/Future_ESM { // _Mutex?
+  public:
+    /**
+     * Returns true iff the async call has completed.
+     */
+    bool available();
+
+    /**
+     * Returns a read-only copy of the future.
+     * Blocks if the future is unavailable.
+     * Raise an exception if one comes from the server.
+     */
+    operator()();
+
+    /**
+     * Returns a read-only copy of the future result.
+     * Can only be performed if available is true
+     */
+    operator T();
+
+    /**
+     * Returns true iff the future is cancelled
+     */
+    bool cancelled();
+
+    /**
+     * Attempts to cancel the async call the future refers to.
+     * Clients are unblocked and thrown a Cancellation exception is thrown.
+     */
+    void cancel();
+
+    /**
+     * uC++ error thrown.
+     */
+    _Event Cancellation{};
+
+    /**
+     * Marks the future as empty so it can be re-used.
+     */
+    void reset();
+
+    /**
+     * Make the result available in the future.
+     * No documentation on what the return type is.
+     */
+    bool delivery(T result);
+
+    /**
+     * Forcibly enclose the exception into the future
+     */
+    bool exception(uBaseEvent *ex);
+}
+                    </code></pre>
+<h4 id="ssub:_select_statement">_Select Statement</h4>
+<p>Like <code>_Accept</code> statements, <code>_Select</code> statements are provided to <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>for our immense benefit.</p>
+<p>Essentially, they wait for some boolean combination of futures to be true.</p>
+<pre><code>_Select(f1 || f2) {
+    ...
+}
+                    </code></pre>
+<p>The block will only be executed once either <code>f1</code> or <code>f2</code> has returned.</p>
+<pre><code>_When(conditions) _Select (f1) {
+    ...
+} or _When (conditions) _Select (f2) {
+    ...
+}
+                    </code></pre>
+<p>We can prevent <code>_Select</code> statements from being blocking using a terminating <code>_Else</code> clause:</p>
+<pre><code>_Select(cond1)
+    ...
+_When(cond2) _Else
+    ...
+                    </code></pre>
+<p>As usual, <code>_Else</code> clauses must be the last clause of a select statement. If a <code>_While</code> guard is omitted, then the <code>_Else</code> clause is executed, and control continues.</p>
+<h2 id="sec:go">Go</h2>
+<p>Go is a cool language:</p>
+<p>[h] [tbl:go<sub>c</sub>oncurrency]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp; goroutines are started with the go command<br />Synchronization &amp; Yes &amp; Channel with buffer size 0<br />Direct Communication &amp; Yes &amp; Channel with buffer size 0<br />Buffered communication &amp; Yes &amp; Channel with buffer size <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n%3E0" alt="n&gt;0" title="n&gt;0" /><br />Internal Scheduling &amp; ??? &amp;<br />External Scheduling &amp; ??? &amp;<br /></p>
+<h1 id="cha:other_approaches_to_concurrency">Other Approaches to Concurrency</h1>
+<h2 id="sec:atomic_data_structures">Atomic Data Structures</h2>
+<p>Using CAA/V (See SubSection [sub:compare<sub>a</sub>ssign<sub>i</sub>nstruction]) to build custom things. We can use this to implement linked lists and queues. This is lock free (no locks), and is wait free (provides a bound).</p>
+<h2 id="sec:coroutines">Coroutines</h2>
+<h3 id="sub:boost">C++ Boost</h3>
+<p>Provides coroutines with:</p>
+<ol>
+<li><p>Stacks</p></li>
+<li><p>Semi and Full coroutines</p></li>
+<li><p>No recursion</p></li>
+<li><p>Single interface</p></li>
+</ol>
+<p>These coroutines are passed as parameters to the method (a coroutine object that you call “yield” on)</p>
+<h3 id="sub:simula">Simula</h3>
+<p>Simula has coroutines with:</p>
+<ol>
+<li><p>Stacks</p></li>
+<li><p>Semi and Full coroutines</p></li>
+<li><p>Recursion</p></li>
+</ol>
+<h2 id="sec:languages_with_concurrency_constructs">Languages With Concurrency Constructs</h2>
+<h3 id="sub:ada_95">Ada 95</h3>
+<p>This language is like <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>.</p>
+<p>[h] [tbl:ada<sub>c</sub>oncurrency]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; Yes &amp;<br />Buffered Communication &amp; Yes &amp;<br />Internal Scheduling &amp; No &amp; Requeue can be used to make a blocking call to another mutex member.<br />External Scheduling &amp; Yes &amp;<br /></p>
+<h3 id="sub:concurrent_c_">Concurrent C++</h3>
+<p>[h] [tbl:concurrent<sub>c</sub>pp]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; ?? &amp;<br />Buffered Communication &amp; No &amp;<br />Internal Scheduling &amp; Yes &amp;<br />External Scheduling &amp; Yes &amp;<br /></p>
+<h3 id="sub:linda">Linda</h3>
+<p>[h] [tbl:linda]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; Yes &amp;<br />Buffered Communication &amp; Yes &amp;<br />Internal Scheduling &amp; ?? &amp;<br />External Scheduling &amp; ?? &amp;<br /></p>
+<h3 id="sub:actors">Actors</h3>
+<p>Actors are administrators.</p>
+<p>[h] [tbl:actors]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; Yes &amp;<br />Buffered Communication &amp; Yes &amp;<br />Internal Scheduling &amp; n/a &amp;<br />External Scheduling &amp; n/a &amp;<br /></p>
+<h4 id="ssub:scala">Scala</h4>
+<p>[h] [tbl:scala]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; Yes &amp;<br />Buffered Communication &amp; Yes &amp; Threads are tasks with a public atomic message-queue.<br />Internal Scheduling &amp; Yes &amp;<br />External Scheduling &amp; No &amp;<br /></p>
+<h3 id="sub:openmp">OpenMP</h3>
+<p>Uses <code>#pragma</code> to communicate concurrency to the compiler.</p>
+<p>[h] [tbl:open<sub>m</sub>p]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; Yes &amp;<br />Buffered Communication &amp; Yes &amp; This is a C++ extension - you can build it.<br />Internal Scheduling &amp; ??? &amp;<br />External Scheduling &amp; ??? &amp;<br /></p>
+<h2 id="sec:threads_and_locks_library">Threads and Locks Library</h2>
+<h3 id="sub:java_concurrency">Java Concurrency</h3>
+<p>[h]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; Yes &amp;<br />Buffered Communication &amp; Yes &amp;<br />Internal Scheduling &amp; Yes &amp;<br />External Scheduling &amp; No &amp;<br /></p>
+<p>[tbl:java]</p>
+<p>scraig believes he’s used concurrency in Java, so he didn’t really bother taking notes for this section.</p>
+<h3 id="sub:pthreads">PThreads</h3>
+<p>PThreads is to C as <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>is to C++. See Table [tbl:pthreads].</p>
+<p>[h] [tbl:pthreads]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; Yes &amp;<br />Buffered Communication &amp; Self-implemented &amp;<br />Internal Scheduling &amp; Yes &amp; No-priority, nonblocking<br />External Scheduling &amp; Self-implemented &amp;<br /></p>
+<h3 id="sub:c_11">C++11</h3>
+<p>[h] [tbl:cpp<sub>1</sub>1]</p>
+<p><span>| r || c | c |</span> Feature &amp; Provided? &amp; Notes<br />Threads &amp; Yes &amp;<br />Direct Communication &amp; Yes &amp;<br />Buffered Communication &amp; Yes &amp;<br />Internal Scheduling &amp; Yes &amp;<br />External Scheduling &amp; Yes &amp;<br /></p>
+<h1 id="cha:optimization">Optimization</h1>
+<p>We want things to be fast, because slowness is bad. There are three types of speedup:</p>
+<dl>
+<dt>Reordering</dt>
+<dd><p>data and code is reordered</p>
+</dd>
+<dt>Eliding</dt>
+<dd><p>remove unnecessary data, accesses and computation</p>
+</dd>
+<dt>Replication</dt>
+<dd><p>(concurrency) allows us to duplicate stuff because of physical limitations (light, etc)</p>
+</dd>
+</dl>
+<h2 id="sec:sequential_model">Sequential Model</h2>
+<p>Program execution is in sequential program order.</p>
+<p>In this model, we can reorder and elide operations that can be reordered or are unnecessary. We can even overlap code execution by executing concurrently (parallelism), but concurrency is limited.</p>
+<h2 id="sec:concurrent_model">Concurrent Model</h2>
+<p>In the concurrent model, there’s everything we’ve talked about this term. Most concurrent applications are large sections of sequential code followed by small sections of concurrent code.</p>
+<p>Concurrent sections can be corrupted by implicit serial optimizations, so we need to identify concurrent code and restrict its optimization.</p>
+<h3 id="sub:disjoint_reordering">Disjoint Reordering</h3>
+<p>TODO: Not sure what all the <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=W%20%5Cto%20R" alt="W \to R" title="W \to R" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=W%20%5Cto%20W" alt="W \to W" title="W \to W" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R%20%5Cto%20W" alt="R \to W" title="R \to W" /> stuff is. It’s in section 10.2</p>
+<p>There are two concurrency model terms we need to know:</p>
+<dl>
+<dt>Atomically Consistent</dt>
+<dd><p>there is an absolute ordering and a global clock. In this model, every operation is ordered by real time and everyone must see the exact same ordering. If A happens before B in real time, then everyone must observe that A happens before B.</p>
+</dd>
+<dt>Sequentially Consistent</dt>
+<dd><p>A sequence <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S" alt="S" title="S" /> is said to be Sequentially Consistent (SC) if there exists at least one sequential (serial) re-ordering <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S%27" alt="S&#39;" title="S&#39;" /> of tasks such that an assignment of a variable <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=X" alt="X" title="X" /> by task <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_1%20%5Cin%20S" alt="T_1 \in S" title="T_1 \in S" /> then read by task <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_2%20%5Cin%20S" alt="T_2 \in S" title="T_2 \in S" /> is the same as the value of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=X" alt="X" title="X" /> written and read by <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_1" alt="T_1" title="T_1" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_2" alt="T_2" title="T_2" /> in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S%27" alt="S&#39;" title="S&#39;" />.</p>
+<p>In this model, there is a global ordering of writes, but no global clock of the time of the write. In a sequentially consistent model, everyone must see the same ordering of writes. However, this ordering does not have to match the real time ordering. Even though a write A happens before a write B in real time, as long as everyone observes the same ordering (say B before A), the system is still sequentially consistent. <em>But</em>, writes from a single task cannot be reordered.</p>
+</dd>
+</dl>
+<h3 id="sub:eliding">Eliding</h3>
+<p>Eliding (See the beginning of Chapter [cha:optimization]) can cause errors due to copying flags to registers, and removing sleeps necessary to wait for signals<a href="#fn36" class="footnoteRef" id="fnref36"><sup>36</sup></a>.</p>
+<h3 id="sub:overlapping">Overlapping</h3>
+<p>Implicit parallelism must synchronize before using values modified in multiple threads.</p>
+<h2 id="sec:corruption">Corruption</h2>
+<p>We make implicit assumptions about sequential execution that fails in concurrent code.</p>
+<h3 id="sub:memory">Memory</h3>
+<p>To have sequential consistency, hardware must serialize memory access and modification.</p>
+<p>Reads and writes can arrive in any order, and the reordering we implement support must be no different than the range a time-slice reordering provides. To read <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" />, we need to wait for writing <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> to complete before this happens.</p>
+<p>One way to do this is to buffer writes. CPUs wait on reads until data arrives.</p>
+<p>We can increase performance by disjointly reordering from <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=W%20%5Cto%20R" alt="W \to R" title="W \to R" /> to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R%20%5Cto%20W" alt="R \to W" title="R \to W" />. In fact, reads can bypass a buffer if the address is not waiting to write, which is bad.</p>
+<p>As the number of processors increase, we’d want to use more buffers, but this would allow parallel reads.</p>
+<p>To increase concurrency, we can eliminate serializing writes, which would allow <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R%20%5Cto%20W" alt="R \to W" title="R \to W" /> reordering from <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=W%20%5Cto%20R" alt="W \to R" title="W \to R" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=W%20%5Cto%20R" alt="W \to R" title="W \to R" /> reordering from <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R%20%5Cto%20W" alt="R \to W" title="R \to W" />. These are bad, so we can’t do it.</p>
+<h3 id="sub:cache">Cache</h3>
+<h3 id="sub:review">Review</h3>
+<p>CPUs are fast, memory is slow. The disk is the slowest.</p>
+<p>We have billions of bytes, but only few registers, so we move frequently accessed data to registers. When we have more data than registers, we load memory dynamically. To prevent multiple threads from thrashing memory when they context switch, we use a hardware cache to stage data without pushing to memory.</p>
+<p>By using multi-level caches, we get more and more size, but less speed.</p>
+<h3 id="sub:cache_coherence">Cache Coherence</h3>
+<p>Caches exist for each processor, which means that values are duplicated. As we move things up the hierarchy, it becomes invalid as other ones write them and needs to be invalidated.</p>
+<dl>
+<dt>Cache Coherence</dt>
+<dd><p>is a hardware protocol ensuring duplicate values are updated</p>
+</dd>
+<dt>Cache Consistency</dt>
+<dd><p>is the name of the entire topic, and the time that caches eventually become consistent.</p>
+</dd>
+</dl>
+<h3 id="sub:registers">Registers</h3>
+<p>Each processor has a bunch of registers that aren’t concurrent.</p>
+<p>Loading a variable into a register hides its value from the main memory. It’s impossible to peek at registers of a processor.</p>
+<p>The <strong>volatile</strong> keyword means that variables updating the main memory happens faster.</p>
+<h3 id="sub:out_of_order_execution">Out of Order Execution</h3>
+<p>Cache and memory buffers will perform simple instruction reordering for reads and writes over small sections of code.</p>
+<p>This can mess up things like entry protocols, etc.</p>
+<h2 id="sec:selectively_disabling_optimizations">Selectively Disabling Optimizations</h2>
+<p>We can do a few things to prevent optimizations, but most of these are compiler-specific, and diverse.</p>
+<p>Refer to the course notes for the list of compiler-specific modifications.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Though relevant, a discussion with classmates came to the conclusion that mentioned that he doesn’t know of any languages that implement this feature.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>the three types are multithreading for multiple threads, multitasking for multiple tasks, and multiprocessing for multiple processes<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>also known as <strong>Virtual Processes</strong><a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Java works this way<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p><span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>works this way<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>Thread creation is a primitive operation that cannot be made by fitting other operations together.<a href="#fnref6">↩</a></p></li>
+<li id="fn7"><p>These segments are effectively parallelism between threads.<a href="#fnref7">↩</a></p></li>
+<li id="fn8"><p>For example, they are in a distributed system.<a href="#fnref8">↩</a></p></li>
+<li id="fn9"><p>I’m not sure what this is about. The terms <strong>Liveness</strong> and <strong>indefinite postponement</strong> are in this.<a href="#fnref9">↩</a></p></li>
+<li id="fn10"><p>No, this is not <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=O%28n%29" alt="O(n)" title="O(n)" /><a href="#fnref10">↩</a></p></li>
+<li id="fn11"><p>The hardware bus, specifically<a href="#fnref11">↩</a></p></li>
+<li id="fn12"><p>Some alternate implementations use inequality instead of equality.<a href="#fnref12">↩</a></p></li>
+<li id="fn13"><p>Apparently this is usually implemented using a *shudder* <span style="font-variant: small-caps;">pid</span> controller.<a href="#fnref13">↩</a></p></li>
+<li id="fn14"><p>Apparently it is used extensively in the <span><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmu" alt="\mu" title="\mu" />C++</span>kernel.<a href="#fnref14">↩</a></p></li>
+<li id="fn15"><p>Apparently some implementations can be released any number of times, while some only need to be released once.<a href="#fnref15">↩</a></p></li>
+<li id="fn16"><p>The macro named “_Cormonitor” is defined to be “_Mutex _Coroutine”. Not that you’d know what a monitor is yet, see Section [sec:monitor].<a href="#fnref16">↩</a></p></li>
+<li id="fn17"><p>A producer moving faster than a consumer will cause the buffer to grow with respect to time. See Sub-Section [sub:buffering].<a href="#fnref17">↩</a></p></li>
+<li id="fn18"><p>The baton is implemented as a semaphore.<a href="#fnref18">↩</a></p></li>
+<li id="fn19"><p>If it is 80% readers and 20% writers, course notes claim this works experimentally.<a href="#fnref19">↩</a></p></li>
+<li id="fn20"><p>I’d postulate that this means that we’ll have more waiters, but I’m not sure.<a href="#fnref20">↩</a></p></li>
+<li id="fn21"><p>Hopefully we can eliminate more than only one of the conditions. Doing this will increase concurrency.<a href="#fnref21">↩</a></p></li>
+<li id="fn22"><p>There’s always one dumb rule.<a href="#fnref22">↩</a></p></li>
+<li id="fn23"><p>For example, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=T_3" alt="T_3" title="T_3" /> needs 5 of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_1" alt="R_1" title="R_1" />, 9 of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_2" alt="R_2" title="R_2" />, 0 of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_3" alt="R_3" title="R_3" />, and 1 of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_4" alt="R_4" title="R_4" />.<a href="#fnref23">↩</a></p></li>
+<li id="fn24"><p>We check that releasing resources allows others to complete until all threads are done.<a href="#fnref24">↩</a></p></li>
+<li id="fn25"><p>Checking every <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=t" alt="t" title="t" /> seconds is a second option, but I scraig postulates that a two-pronged approach is best. There is no comment about a two-pronged approach in the course notes.<a href="#fnref25">↩</a></p></li>
+<li id="fn26"><p>Preemption here means basically killing, restarting, or rewinding to a <em>safe point</em>.<a href="#fnref26">↩</a></p></li>
+<li id="fn27"><p>Short for mutual-exclusion member.<a href="#fnref27">↩</a></p></li>
+<li id="fn28"><p>Otherwise monitors wouldn’t be able to call their own methods, and recursion would be impossible without boilerplate code.<a href="#fnref28">↩</a></p></li>
+<li id="fn29"><p>I believe that A/S is accept/signal.<a href="#fnref29">↩</a></p></li>
+<li id="fn30"><p>Empty signals are lost.<a href="#fnref30">↩</a></p></li>
+<li id="fn31"><p>This doesn’t make intuitive sense. TODO: verify.<a href="#fnref31">↩</a></p></li>
+<li id="fn32"><p>Synchronization/Mutual Exclusion<a href="#fnref32">↩</a></p></li>
+<li id="fn33"><p>This was marked with reject in the textbook, but it doesn’t have justification behind what we’re rejecting. Maybe it’s the concept. Maybe it’s the student.<a href="#fnref33">↩</a></p></li>
+<li id="fn34"><p>I don’t know of a reason. TODO: when does this happen? TODO: this doesn’t make grammatical sense.<a href="#fnref34">↩</a></p></li>
+<li id="fn35"><p>A good example is a server-client relationship.<a href="#fnref35">↩</a></p></li>
+<li id="fn36"><p>While it isn’t the best thing to do, it is still valid code.<a href="#fnref36">↩</a></p></li>
+</ol>
+</section>
+</body>
+</html>

@@ -1,6 +1,5 @@
 ---
-authors:
-- Shale Craig
+generator: pandoc
 title: CS 343
 ...
 
@@ -84,13 +83,23 @@ this doesn’t work with labels since labels have only routine scope.
 
 Dynamic Multi-Level Exit
 :   allows us to extend call and return semantics to go in the *reverse*
-    direction, so given $A$ calls $B$ calls $C$, we *can* transfer from
-    $C$ back to $A$, skipping $B$.
+    direction, so given
+    ![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A") calls
+    ![B](http://chart.apis.google.com/chart?cht=tx&chl=B "B") calls
+    ![C](http://chart.apis.google.com/chart?cht=tx&chl=C "C"), we *can*
+    transfer from
+    ![C](http://chart.apis.google.com/chart?cht=tx&chl=C "C") back to
+    ![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A"), skipping
+    ![B](http://chart.apis.google.com/chart?cht=tx&chl=B "B").
 
 Non-Local Transfer
-:   allows a routine to return from $C$, skip $B$ and go directly to
-    $A$. It’s a generalization of the *multi-exit loop* and *multi-level
-    exit*. We can accomplish this using a *label variable*.
+:   allows a routine to return from
+    ![C](http://chart.apis.google.com/chart?cht=tx&chl=C "C"), skip
+    ![B](http://chart.apis.google.com/chart?cht=tx&chl=B "B") and go
+    directly to
+    ![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A"). It’s a
+    generalization of the *multi-exit loop* and *multi-level exit*. We
+    can accomplish this using a *label variable*.
 
         label L;
         void a (int i) {
@@ -234,7 +243,7 @@ We can tabulate this as the following:
 
 [h] [tbl:control-flow]
 
-<span> r || c | c</span> & static call/raise & dynamic call/raise\
+r || c | c & static call/raise & dynamic call/raise\
 static return & sequel & termination exception\
 dynamic return & routine & routine-pointer, virtual-routine, resumption
 
@@ -242,7 +251,7 @@ Static Propagation (Sequel) {#sec:static_propagation_sequel}
 ---------------------------
 
 **Sequels** are routines with no return value that code continues at the
-end of the block where the sequel is declared[^1].
+end of the block where the sequel is declared[^1^](#fn1).
 
     void foo() {
         int i = 0;
@@ -489,7 +498,7 @@ A **Coroutine** is a routine that can suspend at some point, and be
 resumed from that point when control returns. Think of it as a routine
 which uses pauses to hold state, and continues from the same point.
 
-[t]<span>1</span>
+[t]1
 
 In exams and assignments, coroutines containing *any* state usually
 receive zero marks.
@@ -497,8 +506,9 @@ receive zero marks.
 The state of a coroutine is a 3-tuple:
 
 Execution location
-:   which is the $PC$ starting at the beginning, and remembered at each
-    suspend.
+:   which is the
+    ![PC](http://chart.apis.google.com/chart?cht=tx&chl=PC "PC")
+    starting at the beginning, and remembered at each suspend.
 
 Execution state
 :   which is the stack for that coroutine
@@ -517,13 +527,15 @@ Full-Coroutines
 :   have the ability to pass execution to any other coroutine.
 
 Internally, the implementation of both types of coroutines in
-<span>$\mu$C++</span>are the same, but how we use them is different.
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++are
+the same, but how we use them is different.
 
-Coroutine Structure in <span>$\mu$C++</span> {#sec:coroutine_structure_in_uc}
---------------------------------------------
+Coroutine Structure in ![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++ {#sec:coroutine_structure_in_uc}
+--------------------------------------------------------------------------------------------
 
-There is a <span>$\mu$C++</span>extension `_Coroutine` class that looks
-like the following:
+There is a
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++extension
+`_Coroutine` class that looks like the following:
 
     _Coroutine Fibonacci {
         int fn;
@@ -642,7 +654,7 @@ execute in a non-deterministic order.
 Concurrent Hardware {#sec:concurrent_hardware}
 -------------------
 
-All types of concurrency[^2] is trivially possible for a single
+All types of concurrency[^2^](#fn2) is trivially possible for a single
 processor (**uniprocessor**). We only need to context and switch threads
 on the CPU, and use pointers to share memory between tasks to have
 concurrent problems in uniprocessor systems. The bigger issue is that
@@ -668,8 +680,8 @@ Threading Model
 :   defines the relationship between CPUs and threads in a system.
 
 Kernel Threads
-:   [^3] are provided by the OS to manage CPUs. Kernel threads are
-    scheduled across the CPUs.
+:   [^3^](#fn3) are provided by the OS to manage CPUs. Kernel threads
+    are scheduled across the CPUs.
 
 Having more kernel threads than CPUs allows the OS to provide
 multiprocessing. A process may have multiple kernel threads to provide
@@ -682,13 +694,20 @@ Kernel Threading
 :   1:1:C - 1 user thread maps to 1 kernel thread
 
 Generalized Kernel Threading
-:   M:M:C - $M$ user threads map to $M$kernel threads [^4].
+:   M:M:C - ![M](http://chart.apis.google.com/chart?cht=tx&chl=M "M")
+    user threads map to
+    ![M](http://chart.apis.google.com/chart?cht=tx&chl=M "M")kernel
+    threads [^4^](#fn4).
 
 User Threading
-:   N:1:C - $N$ user threads map to 1 kernel thread.
+:   N:1:C - ![N](http://chart.apis.google.com/chart?cht=tx&chl=N "N")
+    user threads map to 1 kernel thread.
 
 User Threading
-:   N:M:C - $N$ user threads map to $M$ kernel threads[^5].
+:   N:M:C - ![N](http://chart.apis.google.com/chart?cht=tx&chl=N "N")
+    user threads map to
+    ![M](http://chart.apis.google.com/chart?cht=tx&chl=M "M") kernel
+    threads[^5^](#fn5).
 
 Often, we omit the number of CPUs in our ratio. We can even add **nano
 thread**s on top of user threads, and **virtual machine**s under the OS.
@@ -710,74 +729,112 @@ Concurrent systems can be split into 3 major types:
     concurrency is explicitly managed
 
 In fact, both of these are complementary, and can be built into the same
-system. <span>$\mu$C++</span>has only explict mechanisms. Some systems
-only have a single technique, but this is limited and awkward; when it
-comes to concurrency controls, more is better.
+system.
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++has
+only explict mechanisms. Some systems only have a single technique, but
+this is limited and awkward; when it comes to concurrency controls, more
+is better.
 
 Speedup (Amdahl’s Law) {#sec:speedup}
 ----------------------
 
-Program speedup can be denoted $S_c = \frac{T_1}{T_C}$, where $C$ is the
-number of CPUs, and $T_1$ is the time taken for sequential execution.
+Program speedup can be denoted ![S\_c =
+\\frac{T\_1}{T\_C}](http://chart.apis.google.com/chart?cht=tx&chl=S_c%20%3D%20%5Cfrac%7BT_1%7D%7BT_C%7D "S_c = \frac{T_1}{T_C}"),
+where ![C](http://chart.apis.google.com/chart?cht=tx&chl=C "C") is the
+number of CPUs, and
+![T\_1](http://chart.apis.google.com/chart?cht=tx&chl=T_1 "T_1") is the
+time taken for sequential execution.
 
-$$\begin{aligned}
+\
+![\\begin{aligned} S\_c &= \\frac{T\_1}{T\_C} \\\\ &= \\frac{1}{(1-P) +
+\\frac{P}{C}}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20S_c%20%26%3D%20%5Cfrac%7BT_1%7D%7BT_C%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20%5Cfrac%7B1%7D%7B%281-P%29%20%2B%20%5Cfrac%7BP%7D%7BC%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                 S_c &= \frac{T_1}{T_C} \\
                 &= \frac{1}{(1-P) + \frac{P}{C}}
-            \end{aligned}$$
+            \end{aligned}")\
 
-Where $P$ is the proportion of a progam that can be made parallel, and
-$C$ is the degree of concurrency.
+Where ![P](http://chart.apis.google.com/chart?cht=tx&chl=P "P") is the
+proportion of a progam that can be made parallel, and
+![C](http://chart.apis.google.com/chart?cht=tx&chl=C "C") is the degree
+of concurrency.
 
-As we take $\lim_{C \to \infty}$, we get the maximum speedup:
+As we take ![\\lim\_{C \\to
+\\infty}](http://chart.apis.google.com/chart?cht=tx&chl=%5Clim_%7BC%20%5Cto%20%5Cinfty%7D "\lim_{C \to \infty}"),
+we get the maximum speedup:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} S\_{max} &= \\frac{1}{1-P}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20S_%7Bmax%7D%20%26%3D%20%5Cfrac%7B1%7D%7B1-P%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                 S_{max} &= \frac{1}{1-P}
-            \end{aligned}$$
+            \end{aligned}")\
 
 ### Sample Question {#sub:sample_question}
 
 This is a sample question from the W12 Midterm:
 
 **Question:** A program has 4 sequential stages, where each stage takes
-the following $N$ units of time to execute: $S_1 = 5$, $S_2 = 20$,
-$S_3 = 15$, $S_4 = 60$. Stages $S_2$ and $S_4$ are modified is increase
-their speed (i.e, reduce the time to execute)by $10$ and $20$ times,
+the following ![N](http://chart.apis.google.com/chart?cht=tx&chl=N "N")
+units of time to execute: ![S\_1 =
+5](http://chart.apis.google.com/chart?cht=tx&chl=S_1%20%3D%205 "S_1 = 5"),
+![S\_2 =
+20](http://chart.apis.google.com/chart?cht=tx&chl=S_2%20%3D%2020 "S_2 = 20"),
+![S\_3 =
+15](http://chart.apis.google.com/chart?cht=tx&chl=S_3%20%3D%2015 "S_3 = 15"),
+![S\_4 =
+60](http://chart.apis.google.com/chart?cht=tx&chl=S_4%20%3D%2060 "S_4 = 60").
+Stages ![S\_2](http://chart.apis.google.com/chart?cht=tx&chl=S_2 "S_2")
+and ![S\_4](http://chart.apis.google.com/chart?cht=tx&chl=S_4 "S_4") are
+modified is increase their speed (i.e, reduce the time to execute)by
+![10](http://chart.apis.google.com/chart?cht=tx&chl=10 "10") and
+![20](http://chart.apis.google.com/chart?cht=tx&chl=20 "20") times,
 respectively. Show the steps in computing the total speedup for the
 program after the modification.\
 
-**Solution:** We can calculate the speedup $S_C$ as the sequential speed
-$T_1$ over the concurrent speed $T_C$:
+**Solution:** We can calculate the speedup
+![S\_C](http://chart.apis.google.com/chart?cht=tx&chl=S_C "S_C") as the
+sequential speed
+![T\_1](http://chart.apis.google.com/chart?cht=tx&chl=T_1 "T_1") over
+the concurrent speed
+![T\_C](http://chart.apis.google.com/chart?cht=tx&chl=T_C "T_C"):
 
-$$\begin{aligned}
+\
+![\\begin{aligned} S\_C &= \\frac{T\_1}{T\_C} \\\\ &= \\frac{S\_1 + S\_2
++ S\_3 + S\_4}{S\_1 + \\frac{S\_2}{10} + S\_3 + \\frac{S\_4}{20}} \\\\
+&= \\frac{5 + 20 + 15 + 60}{5 + 2 + 15 + 3} \\\\ &= 4
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20S_C%20%26%3D%20%5Cfrac%7BT_1%7D%7BT_C%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20%5Cfrac%7BS_1%20%2B%20S_2%20%2B%20S_3%20%2B%20S_4%7D%7BS_1%20%2B%20%5Cfrac%7BS_2%7D%7B10%7D%20%2B%20S_3%20%2B%20%5Cfrac%7BS_4%7D%7B20%7D%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20%5Cfrac%7B5%20%2B%2020%20%2B%2015%20%2B%2060%7D%7B5%20%2B%202%20%2B%2015%20%2B%203%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                     S_C &= \frac{T_1}{T_C} \\
                     &= \frac{S_1 + S_2 + S_3 + S_4}{S_1 + \frac{S_2}{10} + S_3 + \frac{S_4}{20}} \\
                     &= \frac{5 + 20 + 15 + 60}{5 + 2 + 15 + 3} \\
                     &= 4
-                \end{aligned}$$
+                \end{aligned}")\
 
-Thus the overall speedup is by $4$ times.
+Thus the overall speedup is by
+![4](http://chart.apis.google.com/chart?cht=tx&chl=4 "4") times.
 
 Thread Creation {#sec:thread_creation}
 ---------------
 
 We need the following 3 things to adequately specify concurrency:
 
-1.  Thread creation[^6]
+1.  Thread creation[^6^](#fn6)
 
 2.  Synchronization between threads
 
 3.  Communication between threads
 
-In <span>$\mu$C++</span>, we use `_Task`s to emulate a cobegin
-segment.[^7]
+In
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++,
+we use `_Task`s to emulate a cobegin segment.[^7^](#fn7)
 
 The slowest path through all tasks synchronizing is called the
 **critical path**.
 
-### <span>$\mu$C++</span>\_Tasks {#sub:uc__tasks}
+### ![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++\_Tasks {#sub:uc__tasks}
 
-Tasks are threads in <span>$\mu$C++</span>. Calling the destructor
-causes the current thread to wait until the task completes execution.
+Tasks are threads in
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++.
+Calling the destructor causes the current thread to wait until the task
+completes execution.
 
     _Task T1 {
         void main() {}
@@ -809,9 +866,11 @@ A thread finishes when
 
 -   It throws an error
 
--   It is killed by its parent (not in <span>$\mu$C++</span>)
+-   It is killed by its parent (not in
+    ![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++)
 
--   The parent terminates (not in <span>$\mu$C++</span>)
+-   The parent terminates (not in
+    ![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++)
 
 We may trigger/react to termination to implement functionality.
 
@@ -839,7 +898,8 @@ Communication {#sec:communication}
 
 After synchronization, threads can transfer information many ways. In
 the same memory, the information can be transfered by value or address.
-In different memories[^8], transferring information by value is easiest.
+In different memories[^8^](#fn8), transferring information by value is
+easiest.
 
 Critical Section {#sec:critical_section}
 ----------------
@@ -861,8 +921,10 @@ Static variables are shared between all objects of that class, and may
 need mutual exclusion.
 
 The only exception for this is in task constructors, which are naturally
-mutually exclusive in <span>$\mu$C++</span>. It’s highly suggested not
-to use static variables in a concurrent program.
+mutually exclusive in
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++.
+It’s highly suggested not to use static variables in a concurrent
+program.
 
 Mutual Exclusion {#sec:mutual_exclusion}
 ----------------
@@ -877,7 +939,7 @@ Mutual exclusion requires that all the following clauses are true.
     executing critical sections.
 
 4.  We should always return to select a thread to enter a critical
-    section.[^9]
+    section.[^9^](#fn9)
 
 5.  The number of threads allowed to enter a critical section after a
     given thread requests to enter it should be capped, so there is no
@@ -1030,12 +1092,13 @@ section:
 While this doesn’t break any rules, it assumes atomicity in assignment,
 and fails when bits are scrambled during simultaneous assignment.
 
-### $n$-Thread Prioritized Entry {#sub:n_thread_prioritized_entry}
+### ![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n")-Thread Prioritized Entry {#sub:n_thread_prioritized_entry}
 
-In a case where $n$ threads want to enter a critical section, we modify
-the Peterson algorithm to use an array for priorities: We wait for all
-intents that are more important than us, then wait for all
-less-important coroutines to complete.
+In a case where
+![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n") threads want
+to enter a critical section, we modify the Peterson algorithm to use an
+array for priorities: We wait for all intents that are more important
+than us, then wait for all less-important coroutines to complete.
 
     foo() {
         // step 1: wait for intents with higher priority to run:
@@ -1059,10 +1122,11 @@ less-important coroutines to complete.
                     
 
 **This strategy breaks rule 5.** There are no algorithms that use only
-$n$ bits[^10], are deterministically (non-probabilistically) correct,
-and assume atomic assignment.
+![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n")
+bits[^10^](#fn10), are deterministically (non-probabilistically)
+correct, and assume atomic assignment.
 
-### $n$-Thread Bakery (Tickets) {#sub:n_thread_bakery_tickets}
+### ![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n")-Thread Bakery (Tickets) {#sub:n_thread_bakery_tickets}
 
 In this implementation, we find the maximum value as “ticket number” in
 the array, and set our value to that. We then wait until we have the
@@ -1088,9 +1152,12 @@ the lowest priority with that value.
                     
 
 Since tickets cannot increase indefinitely, this is probabilistically
-correct. This also takes $nm$ bits ($m = 32$ for an int, for example).
+correct. This also takes
+![nm](http://chart.apis.google.com/chart?cht=tx&chl=nm "nm") bits (![m =
+32](http://chart.apis.google.com/chart?cht=tx&chl=m%20%3D%2032 "m = 32")
+for an int, for example).
 
-### $N$-Thread Peterson {#sub:n_thread_peterson}
+### ![N](http://chart.apis.google.com/chart?cht=tx&chl=N "N")-Thread Peterson {#sub:n_thread_peterson}
 
 This modification of the Peterson algorithm uses a round-based race
 section to find the “loser”.
@@ -1108,9 +1175,13 @@ section to find the “loser”.
     }
                     
 
-There are $n-1$ rounds, and each round has a loser, which implies that
-$n - \text{round}$ winners are promoted. This can be implemented in only
-$2n\ceil{\lg n}$ bits, but assumes atomic assignments.
+There are
+![n-1](http://chart.apis.google.com/chart?cht=tx&chl=n-1 "n-1") rounds,
+and each round has a loser, which implies that ![n -
+\\text{round}](http://chart.apis.google.com/chart?cht=tx&chl=n%20-%20%5Ctext%7Bround%7D "n - \text{round}")
+winners are promoted. This can be implemented in only ![2n\\ceil{\\lg
+n}](http://chart.apis.google.com/chart?cht=tx&chl=2n%5Cceil%7B%5Clg%20n%7D "2n\ceil{\lg n}")
+bits, but assumes atomic assignments.
 
 ### Tournament (Taubenfeld-Buhr) {#sub:tournament_taubenfeld_buhr}
 
@@ -1172,8 +1243,8 @@ setting the value to the new value:
     }
                     
 
-In a multi-CPU computer, somewhere in hardware[^11] must guarantee
-multiple CPUs produce consistent output for this instruction.
+In a multi-CPU computer, somewhere in hardware[^11^](#fn11) must
+guarantee multiple CPUs produce consistent output for this instruction.
 
 ### Swap Instruction {#sub:swap_instruction}
 
@@ -1198,7 +1269,7 @@ The swap instruction performs a swap of two values:
 ### Compare/Assign Instruction {#sub:compare_assign_instruction}
 
 The compare and assign (caa) instruction does assignment only if the two
-values being compared are equal[^12].
+values being compared are equal[^12^](#fn12).
 
     bool caa(type& value, type comp, type newValue) {
         if (value == comp) {
@@ -1260,8 +1331,9 @@ There are a bunch of different types of lock:
 Spinning Locks
 :   busy wait until an event occurs. In uniprocessor systems, this lock
     can explicitly terminate its time slice by calling `yield`. In
-    multiprocessor systems, it’s better to begin `yield`ing after $n$
-    event checks fail.
+    multiprocessor systems, it’s better to begin `yield`ing after
+    ![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n") event
+    checks fail.
 
 Blocking (Queueing) Locks
 :   do not busy wait, but are unblocked by a mechanism until an event
@@ -1284,12 +1356,12 @@ efficiency by yielding after the checking fails:
                 
 
 Even better, adaptive spin-locks modify the number of times that they
-fail before they yield[^13].
+fail before they yield[^13^](#fn13).
 
 ### Implementation {#sub:implementation}
 
-<span>$\mu$C++</span>provides the non-yielding spin lock `uSpinLock` and
-a yielding spin lock `uLock`:
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++provides
+the non-yielding spin lock `uSpinLock` and a yielding spin lock `uLock`:
 
     class uSpinLock {
         public:
@@ -1310,8 +1382,8 @@ a yielding spin lock `uLock`:
 Starvation can theoretically occur, but it’s rarely a problem.
 
 Since `uSpinLock` is non-preemptive, no other tasks may execute on that
-processor once the lock is acquired[^14]. The `uLock` provided is
-non-preemptive and so can be used for both synchronization and mutual
+processor once the lock is acquired[^14^](#fn14). The `uLock` provided
+is non-preemptive and so can be used for both synchronization and mutual
 exclusion.
 
 The method `tryacquire` makes one attempt, but does not wait.
@@ -1375,12 +1447,13 @@ release the modification right inside the acquire method:
     }
                         
 
-This is so awkward, and can still be interrupted at point $A$.
+This is so awkward, and can still be interrupted at point
+![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A").
 
 #### uCondLock {#ssub:ucondlock}
 
-<span>$\mu$C++</span>provides an internal synchronization lock,
-`uCondLock`.
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++provides
+an internal synchronization lock, `uCondLock`.
 
     class uCondLock {
         public:
@@ -1440,9 +1513,9 @@ The implementation is really just a 3-tuple of:
 
 -   A spin lock to protect the state.
 
-<span>$\mu$C++</span>does not provide a binary semaphore, since all
-binary semaphores are really just counting semaphores that only count up
-to 1.
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++does
+not provide a binary semaphore, since all binary semaphores are really
+just counting semaphores that only count up to 1.
 
     BinSem::P() {
         lock.acquire();
@@ -1480,7 +1553,7 @@ Single Acquisition
 
 Multiple Acquisition
 :   locks are ones that can be acquired by the lock any number multiple
-    times[^15].
+    times[^15^](#fn15).
 
 #### Implementation {#ssub:implementation}
 
@@ -1490,8 +1563,8 @@ queue, but this is messier.
 
 #### uOwnerLock {#ssub:uownerlock}
 
-<span>$\mu$C++</span>provides a multiple-acquisition mutex-lock,
-`uOwnerLock`.
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++provides
+a multiple-acquisition mutex-lock, `uOwnerLock`.
 
     class uOwnerLock {
       public:
@@ -1526,9 +1599,9 @@ queue, but this is messier.
 
 #### Stream Locks {#ssub:stream_locks}
 
-<span>$\mu$C++</span>offers a special mutex for I/O based on
-`uOwnerLock` named `osacquire` and `isacquire` for output and input
-streams respectively.
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++offers
+a special mutex for I/O based on `uOwnerLock` named `osacquire` and
+`isacquire` for output and input streams respectively.
 
 The two are classes that acquire the object at the beginning of their
 lives (constructor), and release the object at the end of their lives
@@ -1539,9 +1612,12 @@ lives (constructor), and release the object at the end of their lives
 By changing the boolean in the binary semaphore to an integer that
 represents the number of remaining “events”, we can:
 
--   Have critical sections that allow $n$ simultaneous tasks.
+-   Have critical sections that allow
+    ![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n")
+    simultaneous tasks.
 
--   Allow $n$ tasks to execute only after a certain task has completed.
+-   Allow ![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n")
+    tasks to execute only after a certain task has completed.
 
 #### Implementation {#ssub:implementation}
 
@@ -1571,8 +1647,9 @@ increment it on release:
 
 #### uSemaphore {#ssub:usemaphore}
 
-<span>$\mu$C++</span>provides a counting semaphore named `uSemaphore`
-which offers more than just a binary semaphore:
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++provides
+a counting semaphore named `uSemaphore` which offers more than just a
+binary semaphore:
 
     class uSemaphore {
       public:
@@ -1614,17 +1691,21 @@ A barrier coordinates a group of tasks performing a concurrent operation
 surrounded by sequential operations. Thus, it is only for
 synchronization and not mutual exclusion.
 
-Barriers are initialized to $n$, the number of tasks they will hold
-before allowing them to continue.
+Barriers are initialized to
+![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n"), the number of
+tasks they will hold before allowing them to continue.
 
-Tasks call `block`. The $n$th task will allow all tasks to continue.
+Tasks call `block`. The
+![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n")th task will
+allow all tasks to continue.
 
 These can only be used for mutual exclusion.
 
 #### uBarrier {#ssub:ubarrier}
 
-<span>$\mu$C++</span>barriers are thread-safe coroutines where the main
-can be resumed by the final task arriving at the barrier[^16].
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++barriers
+are thread-safe coroutines where the main can be resumed by the final
+task arriving at the barrier[^16^](#fn16).
 
     _Cormonitor uBarrier {
       protected:
@@ -1781,7 +1862,7 @@ if they work faster than the producer.
 This is an instance where a semaphore is used for synchronization.
 
 The problem with unbounded buffers is that they take infinite
-memory[^17].
+memory[^17^](#fn17).
 
 #### Bounded Buffer {#ssub:bounded_buffer}
 
@@ -1819,7 +1900,7 @@ We want to implement a split binary semaphore - a collection of
 semaphores which at most one has the value 1.
 
 We use a technique named **baton passing** which passes a (conceptual)
-baton[^18] between different tasks that wait on it. The baton is
+baton[^18^](#fn18) between different tasks that wait on it. The baton is
 acquired in entry and exit protocol, and is passed from signaller to
 signalled task.
 
@@ -1870,7 +1951,8 @@ These solutions have various problems. Here is an itemized list:
 
 -   If we allow the readers to go first, it starves the writers.
 
--   If we allow the writers to go first, it starves the readers[^19].
+-   If we allow the writers to go first, it starves the
+    readers[^19^](#fn19).
 
 -   When tasks exit, they should activate the type that isn’t their own.
     The problem this creates is that due to the way that they can be
@@ -1879,17 +1961,16 @@ These solutions have various problems. Here is an itemized list:
 
 -   When groups arrive, we should concatenate spans readers with no
     writers in between. The textbook argues that *Now we lose kind of
-    waiting task!*. I’m unsure of what this means[^20].
+    waiting task!*. I’m unsure of what this means[^20^](#fn20).
 
--   If we create a “next up” chair... I don’t really understand this
-    one.
+-   If we create a “next up” chair… I don’t really understand this one.
 
 -   If we create a ticked method (See
     Sub-Section [sub:n~t~hread~b~akery~t~ickets]), we can get readers
     and writers to take a ticket before releasing the baton. Starvation
     is not an issue, but this isn’t efficient.
 
--   If we had a list of private semaphores... I don’t really understand
+-   If we had a list of private semaphores… I don’t really understand
     this one either.
 
 #### Solution 7 {#ssub:solution_7}
@@ -1968,8 +2049,11 @@ deals effectively with live-lock.
 
 ### Starvation {#sub:starvation}
 
-When a selection algorithm ignores $n\ge1$ tasks so they are never
-executed, the $n$ tasks are starved.
+When a selection algorithm ignores
+![n\\ge1](http://chart.apis.google.com/chart?cht=tx&chl=n%5Cge1 "n\ge1")
+tasks so they are never executed, the
+![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n") tasks are
+starved.
 
 While infinite starvation is very rare in real codebases, short-term
 starvation can occur and is problematic.
@@ -1980,13 +2064,15 @@ active, ready, and possibly blocked states.
 
 ### Dead-Lock {#sub:dead_lock}
 
-Deadlock is a state when $\ge1$ processes are waiting for an event that
-will never occur.
+Deadlock is a state when
+![\\ge1](http://chart.apis.google.com/chart?cht=tx&chl=%5Cge1 "\ge1")
+processes are waiting for an event that will never occur.
 
 #### Synchronization Deadlock {#ssub:synchronization_deadlock}
 
-This occurs when $\ge1$ processes are waiting for synchronization that
-will never occur.
+This occurs when
+![\\ge1](http://chart.apis.google.com/chart?cht=tx&chl=%5Cge1 "\ge1")
+processes are waiting for synchronization that will never occur.
 
 #### Mutual Exclusion Deadlock {#ssub:mutual_exclusion_deadlock}
 
@@ -2008,8 +2094,9 @@ exclusion. There are 5 conditions for mutex-based deadlock to happen:
 Deadlock Prevention {#sec:deadlock_prevention}
 -------------------
 
-We want to eliminate at least one[^21] of the conditions required for a
-deadlock from an algorithm to force deadlock to never occur.
+We want to eliminate at least one[^21^](#fn21) of the conditions
+required for a deadlock from an algorithm to force deadlock to never
+occur.
 
 ### Synchronization Prevention {#sub:synchronization_prevention}
 
@@ -2038,11 +2125,16 @@ Allow Preemption
 No Circular Wait
 :   We can prevent circular wait from happening by only acquiring
     resources according to an ordering. Threads can only acquire a
-    resource $R_j$ if they hold no resources $R_i$ where $i \ge j$.
+    resource
+    ![R\_j](http://chart.apis.google.com/chart?cht=tx&chl=R_j "R_j") if
+    they hold no resources
+    ![R\_i](http://chart.apis.google.com/chart?cht=tx&chl=R_i "R_i")
+    where ![i \\ge
+    j](http://chart.apis.google.com/chart?cht=tx&chl=i%20%5Cge%20j "i \ge j").
 
 Prevent Simultaneous Occurrence
 :   We can do this by proving that the four previous rules cannot occur
-    at the same time[^22].
+    at the same time[^22^](#fn22).
 
 Deadlock Avoidance {#sec:deadlock_avoidance}
 ------------------
@@ -2051,7 +2143,7 @@ Unlike deadlock prevention, deadlock avoidance monitors all blocking and
 allocation and detects the formation of deadlocks. This gives us better
 resource allocation at the expense of overhead.
 
-[t]<span>1</span>
+[t]1
 
 The difference between Deadlock Prevention and Deadlock Avoidance
 (Sections [sec:deadlock~p~revention] and  [sec:deadlock~a~voidance]) has
@@ -2059,11 +2151,12 @@ been on past exams.
 
 ### Banker’s Algorithm {#sub:banker_s_algorithm}
 
-The bankers algorithm is an iterative approach: We require threads $T_i$
-to declare the maximum number of each type of resource that they need to
-complete[^23] execution. Knowing the total available resources, we check
-that at least one thread is able to complete to execution[^24] every
-time we allocate a resource.
+The bankers algorithm is an iterative approach: We require threads
+![T\_i](http://chart.apis.google.com/chart?cht=tx&chl=T_i "T_i") to
+declare the maximum number of each type of resource that they need to
+complete[^23^](#fn23) execution. Knowing the total available resources,
+we check that at least one thread is able to complete to
+execution[^24^](#fn24) every time we allocate a resource.
 
 This algorithm works, but it is limited to instances where all threads
 will declare how much they need prior to execution.
@@ -2089,7 +2182,9 @@ The idea is instead of preventing deadlocks from happening, let’s just
 recover when they do.
 
 We only really have to check for a deadlock when a resource can’t be
-allocated immediately[^25]. Recovery involves preempting[^26] $\ge1$
+allocated immediately[^25^](#fn25). Recovery involves
+preempting[^26^](#fn26)
+![\\ge1](http://chart.apis.google.com/chart?cht=tx&chl=%5Cge1 "\ge1")
 processes, and restarting them at their beginning, or at a safe point.
 This isn’t safe, since the victim may have made changes prior to
 preemption.
@@ -2150,9 +2245,10 @@ Monitor {#sec:monitor}
 
 A monitor is an abstract data type that combines shared data with
 serializing modification. The key feature offered by a monitor is its
-differentiating set of **mutex members**[^27]. Of the mutex members,
-only one may be actively executed at a time. Managing tasks entering and
-exiting from the mutex is managed automatically by the mutex.
+differentiating set of **mutex members**[^27^](#fn27). Of the mutex
+members, only one may be actively executed at a time. Managing tasks
+entering and exiting from the mutex is managed automatically by the
+mutex.
 
 Basically, each monitor has a lock which is `P`ed on entry to a monitor
 member, and `V`ed on exit.
@@ -2178,7 +2274,7 @@ member, and `V`ed on exit.
                 
 
 Unhandled exceptions implicitly release the lock so the monitor can
-continue to function. Recursive entry is allowed[^28]. Also, the
+continue to function. Recursive entry is allowed[^28^](#fn28). Also, the
 destructor is blocked by a mutex, so threads can’t be caught inside a
 monitor.
 
@@ -2202,11 +2298,12 @@ In a nutshell, accept statements block the active task on the acceptor
 stack and makes a task ready from the specified mutex member queue.
 Signals move a task from the specified condition to the signaled stack.
 
-We use the <span>$\mu$C++</span>`_Accept` statement to control which
-mutex can accept calls. By preventing members from accepting calls at
-different times, we can control scheduling of tasks. The `_Accept`
-statement defines what cooperation must occur for the accepting task to
-proceed:
+We use the
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++`_Accept`
+statement to control which mutex can accept calls. By preventing members
+from accepting calls at different times, we can control scheduling of
+tasks. The `_Accept` statement defines what cooperation must occur for
+the accepting task to proceed:
 
     _Monitor BoundedBuffer {
         int front, back, count;
@@ -2242,20 +2339,20 @@ is simple because unblocking (signalling) is implicit.
 ### Internal Scheduling {#sub:internal_scheduling}
 
 In a nutshell, implict scheduling occurs when a task waits in or exits
-from a mutex member, and a new task is selected first from the A/S[^29]
-stack, then the entry queue. Scheduling occurs for tasks inside the
-monitor, where **condition**s are used to create a queue of waiting
-tasks. A task waits by waiting for a `uCondition x` to be true by
-calling `x.wait()`. This atomically puts it at the back of the condition
-queue, and allows another task into the monitor by releasing the monitor
-lock.
+from a mutex member, and a new task is selected first from the
+A/S[^29^](#fn29) stack, then the entry queue. Scheduling occurs for
+tasks inside the monitor, where **condition**s are used to create a
+queue of waiting tasks. A task waits by waiting for a `uCondition x` to
+be true by calling `x.wait()`. This atomically puts it at the back of
+the condition queue, and allows another task into the monitor by
+releasing the monitor lock.
 
 The `uCondition.empty` method returns false if there are tasks blocked
 on the queue. Similarly, the `uCondition.front` method returns an
 integer value stored with the task at the front of the condition queue.
 
 A task on a condition queue can be made ready by signaling the condition
-`x.signal()`[^30]. This readies the task, but it waits until the
+`x.signal()`[^30^](#fn30). This readies the task, but it waits until the
 currently executing task is out of the monitor before continuing. The
 dual of the `signal` method, `x.block()` unblocks the thread and blocks
 the signaler.
@@ -2347,7 +2444,7 @@ W
 
 S
 :   signaller threads are the ones that have signalled another thread
-    and released control until completion[^31].
+    and released control until completion[^31^](#fn31).
 
 To say that C \< W \< S means that when the mutex is choosing the next
 thread, it will choose the S threads before W, and before C threads.
@@ -2366,8 +2463,8 @@ control flow that are practically useful.
 
 [h] [tbl:useful-control-flow]
 
-<span>| c || l | l | p<span>3cm</span> | </span> **Signal Type** &
-**Priority** & **No Priority** & **notes**\
+| c || l | l | p3cm | **Signal Type** & **Priority** & **No Priority** &
+**notes**\
 Blocking & & & The blocking variant requires the signaller to recheck
 the waiting condition in the case of a barging task. The non-blocking
 variant requires the signalled task to check the waiting condition in
@@ -2390,7 +2487,7 @@ Threading Model {#sec:threading_model}
 
 It basically defines a thread that extends a runnable:
 
-``` {.java language="Java"}
+``` {.sourceCode .java language="Java"}
     interface Thread implements Runnable {
         public Thread();
         public Thread(String name);
@@ -2405,8 +2502,9 @@ It basically defines a thread that extends a runnable:
                 
 ```
 
-Similarly in <span>$\mu$C++</span>, we have the `uBaseTask` that all
-tasks inherit from:
+Similarly in
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++,
+we have the `uBaseTask` that all tasks inherit from:
 
         class myTask extends Thread {
             private int arg;
@@ -2495,11 +2593,11 @@ different constructs.
 
 [h] [tbl:exec-properties]
 
-<span>| l | l || r | r | </span> &\
-**Thread** & **Stack** & **No S/ME**[^32] & **S/ME**\
+| l | l || r | r | &\
+**Thread** & **Stack** & **No S/ME**[^32^](#fn32) & **S/ME**\
 No & No & class & monitor\
 No & Yes & coroutine & coroutine-monitor\
-Yes & No & *reject*[^33] & *reject*\
+Yes & No & *reject*[^33^](#fn33) & *reject*\
 Yes & Yes & *reject?* & coroutine-monitor\
 
 Scheduling {#sec:scheduling}
@@ -2549,7 +2647,8 @@ Whenever a thread accepts, this is what happens:
 -   Normal/implicit scheduling occurs according to C \< W \< S (See
     Section [sec:monitor~t~ypes] on monitor types/notation).
 
--   After that accept call has completed or the caller waits[^34]
+-   After that accept call has completed or the caller
+    waits[^34^](#fn34)
 
 ### Accepting the Destructor {#sub:accepting_the_destructor}
 
@@ -2591,8 +2690,10 @@ SubSection [sub:internal~s~cheduling].
 Increasing Concurrency {#sec:increasing_concurrency}
 ----------------------
 
-Given that you have $\ge2$ tasks involved in direct communication[^35],
-it is still possible to increase concurrency on both sides.
+Given that you have
+![\\ge2](http://chart.apis.google.com/chart?cht=tx&chl=%5Cge2 "\ge2")
+tasks involved in direct communication[^35^](#fn35), it is still
+possible to increase concurrency on both sides.
 
 ### Server Side {#sub:server_side}
 
@@ -2661,8 +2762,9 @@ all servers do it.
 We can overcome variable wait for the server to process a request by
 using asynchronous calls. These calls require implicit buffering between
 client and server to store the client’s arguments from the call. Though
-<span>$\mu$C++</span>doesn’t provide this functionality, we can
-(simply?) construct asynchronous from synchronous and vice versa.
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++doesn’t
+provide this functionality, we can (simply?) construct asynchronous from
+synchronous and vice versa.
 
 #### Returning Values {#ssub:returning_values}
 
@@ -2728,7 +2830,8 @@ Futures are guaranteed to return empty results immediately. They are
 lazily loaded by another thread in the future, when the result is ready.
 Callers using the future before it is filled are blocked implicitly.
 
-<span>$\mu$C++</span>implements two types of templated futures:
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++implements
+two types of templated futures:
 
 Explicit-Storage-Management future
 :   (`Future_ESM<T>`) must be allocated and deallocated by the client.
@@ -2817,7 +2920,8 @@ The header for `Future_ISM` is as follows:
 #### \_Select Statement {#ssub:_select_statement}
 
 Like `_Accept` statements, `_Select` statements are provided to
-<span>$\mu$C++</span>for our immense benefit.
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++for
+our immense benefit.
 
 Essentially, they wait for some boolean combination of futures to be
 true.
@@ -2856,11 +2960,12 @@ Go is a cool language:
 
 [h] [tbl:go~c~oncurrency]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes & goroutines are started with the go command\
 Synchronization & Yes & Channel with buffer size 0\
 Direct Communication & Yes & Channel with buffer size 0\
-Buffered communication & Yes & Channel with buffer size $n>0$\
+Buffered communication & Yes & Channel with buffer size
+![n\>0](http://chart.apis.google.com/chart?cht=tx&chl=n%3E0 "n>0")\
 Internal Scheduling & ??? &\
 External Scheduling & ??? &\
 
@@ -2907,11 +3012,12 @@ Languages With Concurrency Constructs {#sec:languages_with_concurrency_construct
 
 ### Ada 95 {#sub:ada_95}
 
-This language is like <span>$\mu$C++</span>.
+This language is like
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++.
 
 [h] [tbl:ada~c~oncurrency]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & Yes &\
 Buffered Communication & Yes &\
@@ -2923,7 +3029,7 @@ External Scheduling & Yes &\
 
 [h] [tbl:concurrent~c~pp]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & ?? &\
 Buffered Communication & No &\
@@ -2934,7 +3040,7 @@ External Scheduling & Yes &\
 
 [h] [tbl:linda]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & Yes &\
 Buffered Communication & Yes &\
@@ -2947,7 +3053,7 @@ Actors are administrators.
 
 [h] [tbl:actors]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & Yes &\
 Buffered Communication & Yes &\
@@ -2958,7 +3064,7 @@ External Scheduling & n/a &\
 
 [h] [tbl:scala]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & Yes &\
 Buffered Communication & Yes & Threads are tasks with a public atomic
@@ -2972,7 +3078,7 @@ Uses `#pragma` to communicate concurrency to the compiler.
 
 [h] [tbl:open~m~p]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & Yes &\
 Buffered Communication & Yes & This is a C++ extension - you can build
@@ -2987,7 +3093,7 @@ Threads and Locks Library {#sec:threads_and_locks_library}
 
 [h]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & Yes &\
 Buffered Communication & Yes &\
@@ -3001,12 +3107,13 @@ bother taking notes for this section.
 
 ### PThreads {#sub:pthreads}
 
-PThreads is to C as <span>$\mu$C++</span>is to C++. See
-Table [tbl:pthreads].
+PThreads is to C as
+![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++is
+to C++. See Table [tbl:pthreads].
 
 [h] [tbl:pthreads]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & Yes &\
 Buffered Communication & Self-implemented &\
@@ -3017,7 +3124,7 @@ External Scheduling & Self-implemented &\
 
 [h] [tbl:cpp~1~1]
 
-<span>| r || c | c |</span> Feature & Provided? & Notes\
+| r || c | c | Feature & Provided? & Notes\
 Threads & Yes &\
 Direct Communication & Yes &\
 Buffered Communication & Yes &\
@@ -3061,8 +3168,13 @@ so we need to identify concurrent code and restrict its optimization.
 
 ### Disjoint Reordering {#sub:disjoint_reordering}
 
-TODO: Not sure what all the $W \to R$, $W \to W$, $R \to W$ stuff is.
-It’s in section 10.2
+TODO: Not sure what all the ![W \\to
+R](http://chart.apis.google.com/chart?cht=tx&chl=W%20%5Cto%20R "W \to R"),
+![W \\to
+W](http://chart.apis.google.com/chart?cht=tx&chl=W%20%5Cto%20W "W \to W"),
+![R \\to
+W](http://chart.apis.google.com/chart?cht=tx&chl=R%20%5Cto%20W "R \to W")
+stuff is. It’s in section 10.2
 
 There are two concurrency model terms we need to know:
 
@@ -3073,11 +3185,22 @@ Atomically Consistent
     everyone must observe that A happens before B.
 
 Sequentially Consistent
-:   A sequence $S$ is said to be Sequentially Consistent (SC) if there
-    exists at least one sequential (serial) re-ordering $S'$ of tasks
-    such that an assignment of a variable $X$ by task $T_1 \in S$ then
-    read by task $T_2 \in S$ is the same as the value of $X$ written and
-    read by $T_1$ and $T_2$ in $S'$.
+:   A sequence ![S](http://chart.apis.google.com/chart?cht=tx&chl=S "S")
+    is said to be Sequentially Consistent (SC) if there exists at least
+    one sequential (serial) re-ordering
+    ![S'](http://chart.apis.google.com/chart?cht=tx&chl=S%27 "S'") of
+    tasks such that an assignment of a variable
+    ![X](http://chart.apis.google.com/chart?cht=tx&chl=X "X") by task
+    ![T\_1 \\in
+    S](http://chart.apis.google.com/chart?cht=tx&chl=T_1%20%5Cin%20S "T_1 \in S")
+    then read by task ![T\_2 \\in
+    S](http://chart.apis.google.com/chart?cht=tx&chl=T_2%20%5Cin%20S "T_2 \in S")
+    is the same as the value of
+    ![X](http://chart.apis.google.com/chart?cht=tx&chl=X "X") written
+    and read by
+    ![T\_1](http://chart.apis.google.com/chart?cht=tx&chl=T_1 "T_1") and
+    ![T\_2](http://chart.apis.google.com/chart?cht=tx&chl=T_2 "T_2") in
+    ![S'](http://chart.apis.google.com/chart?cht=tx&chl=S%27 "S'").
 
     In this model, there is a global ordering of writes, but no global
     clock of the time of the write. In a sequentially consistent model,
@@ -3092,7 +3215,7 @@ Sequentially Consistent
 
 Eliding (See the beginning of Chapter [cha:optimization]) can cause
 errors due to copying flags to registers, and removing sleeps necessary
-to wait for signals[^36].
+to wait for signals[^36^](#fn36).
 
 ### Overlapping {#sub:overlapping}
 
@@ -3112,22 +3235,35 @@ and modification.
 
 Reads and writes can arrive in any order, and the reordering we
 implement support must be no different than the range a time-slice
-reordering provides. To read $A$, we need to wait for writing $A$ to
-complete before this happens.
+reordering provides. To read
+![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A"), we need to
+wait for writing
+![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A") to complete
+before this happens.
 
 One way to do this is to buffer writes. CPUs wait on reads until data
 arrives.
 
-We can increase performance by disjointly reordering from $W \to R$ to
-$R \to W$. In fact, reads can bypass a buffer if the address is not
-waiting to write, which is bad.
+We can increase performance by disjointly reordering from ![W \\to
+R](http://chart.apis.google.com/chart?cht=tx&chl=W%20%5Cto%20R "W \to R")
+to ![R \\to
+W](http://chart.apis.google.com/chart?cht=tx&chl=R%20%5Cto%20W "R \to W").
+In fact, reads can bypass a buffer if the address is not waiting to
+write, which is bad.
 
 As the number of processors increase, we’d want to use more buffers, but
 this would allow parallel reads.
 
 To increase concurrency, we can eliminate serializing writes, which
-would allow $R \to W$ reordering from $W \to R$ and $W \to R$ reordering
-from $R \to W$. These are bad, so we can’t do it.
+would allow ![R \\to
+W](http://chart.apis.google.com/chart?cht=tx&chl=R%20%5Cto%20W "R \to W")
+reordering from ![W \\to
+R](http://chart.apis.google.com/chart?cht=tx&chl=W%20%5Cto%20R "W \to R")
+and ![W \\to
+R](http://chart.apis.google.com/chart?cht=tx&chl=W%20%5Cto%20R "W \to R")
+reordering from ![R \\to
+W](http://chart.apis.google.com/chart?cht=tx&chl=R%20%5Cto%20W "R \to W").
+These are bad, so we can’t do it.
 
 ### Cache {#sub:cache}
 
@@ -3182,99 +3318,115 @@ compiler-specific, and diverse.
 Refer to the course notes for the list of compiler-specific
 modifications.
 
-[^1]: Though relevant, a discussion with classmates came to the
-    conclusion that mentioned that he doesn’t know of any languages that
-    implement this feature.
+* * * * *
 
-[^2]: the three types are multithreading for multiple threads,
+1.  Though relevant, a discussion with classmates came to the conclusion
+    that mentioned that he doesn’t know of any languages that implement
+    this feature.[↩](#fnref1)
+
+2.  the three types are multithreading for multiple threads,
     multitasking for multiple tasks, and multiprocessing for multiple
-    processes
+    processes[↩](#fnref2)
 
-[^3]: also known as **Virtual Processes**
+3.  also known as **Virtual Processes**[↩](#fnref3)
 
-[^4]: Java works this way
+4.  Java works this way[↩](#fnref4)
 
-[^5]: <span>$\mu$C++</span>works this way
+5.  ![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++works
+    this way[↩](#fnref5)
 
-[^6]: Thread creation is a primitive operation that cannot be made by
-    fitting other operations together.
+6.  Thread creation is a primitive operation that cannot be made by
+    fitting other operations together.[↩](#fnref6)
 
-[^7]: These segments are effectively parallelism between threads.
+7.  These segments are effectively parallelism between
+    threads.[↩](#fnref7)
 
-[^8]: For example, they are in a distributed system.
+8.  For example, they are in a distributed system.[↩](#fnref8)
 
-[^9]: I’m not sure what this is about. The terms **Liveness** and
-    **indefinite postponement** are in this.
+9.  I’m not sure what this is about. The terms **Liveness** and
+    **indefinite postponement** are in this.[↩](#fnref9)
 
-[^10]: No, this is not $O(n)$
+10. No, this is not
+    ![O(n)](http://chart.apis.google.com/chart?cht=tx&chl=O%28n%29 "O(n)")[↩](#fnref10)
 
-[^11]: The hardware bus, specifically
+11. The hardware bus, specifically[↩](#fnref11)
 
-[^12]: Some alternate implementations use inequality instead of
-    equality.
+12. Some alternate implementations use inequality instead of
+    equality.[↩](#fnref12)
 
-[^13]: Apparently this is usually implemented using a \*shudder\* pid
-    controller.
+13. Apparently this is usually implemented using a \*shudder\* pid
+    controller.[↩](#fnref13)
 
-[^14]: Apparently it is used extensively in the
-    <span>$\mu$C++</span>kernel.
+14. Apparently it is used extensively in the
+    ![\\mu](http://chart.apis.google.com/chart?cht=tx&chl=%5Cmu "\mu")C++kernel.[↩](#fnref14)
 
-[^15]: Apparently some implementations can be released any number of
-    times, while some only need to be released once.
+15. Apparently some implementations can be released any number of times,
+    while some only need to be released once.[↩](#fnref15)
 
-[^16]: The macro named “\_Cormonitor” is defined to be “\_Mutex
+16. The macro named “\_Cormonitor” is defined to be “\_Mutex
     \_Coroutine”. Not that you’d know what a monitor is yet, see
-    Section [sec:monitor].
+    Section [sec:monitor].[↩](#fnref16)
 
-[^17]: A producer moving faster than a consumer will cause the buffer to
-    grow with respect to time. See Sub-Section [sub:buffering].
+17. A producer moving faster than a consumer will cause the buffer to
+    grow with respect to time. See
+    Sub-Section [sub:buffering].[↩](#fnref17)
 
-[^18]: The baton is implemented as a semaphore.
+18. The baton is implemented as a semaphore.[↩](#fnref18)
 
-[^19]: If it is 80% readers and 20% writers, course notes claim this
-    works experimentally.
+19. If it is 80% readers and 20% writers, course notes claim this works
+    experimentally.[↩](#fnref19)
 
-[^20]: I’d postulate that this means that we’ll have more waiters, but
-    I’m not sure.
+20. I’d postulate that this means that we’ll have more waiters, but I’m
+    not sure.[↩](#fnref20)
 
-[^21]: Hopefully we can eliminate more than only one of the conditions.
-    Doing this will increase concurrency.
+21. Hopefully we can eliminate more than only one of the conditions.
+    Doing this will increase concurrency.[↩](#fnref21)
 
-[^22]: There’s always one dumb rule.
+22. There’s always one dumb rule.[↩](#fnref22)
 
-[^23]: For example, $T_3$ needs 5 of $R_1$, 9 of $R_2$, 0 of $R_3$, and
-    1 of $R_4$.
+23. For example,
+    ![T\_3](http://chart.apis.google.com/chart?cht=tx&chl=T_3 "T_3")
+    needs 5 of
+    ![R\_1](http://chart.apis.google.com/chart?cht=tx&chl=R_1 "R_1"), 9
+    of ![R\_2](http://chart.apis.google.com/chart?cht=tx&chl=R_2 "R_2"),
+    0 of
+    ![R\_3](http://chart.apis.google.com/chart?cht=tx&chl=R_3 "R_3"),
+    and 1 of
+    ![R\_4](http://chart.apis.google.com/chart?cht=tx&chl=R_4 "R_4").[↩](#fnref23)
 
-[^24]: We check that releasing resources allows others to complete until
-    all threads are done.
+24. We check that releasing resources allows others to complete until
+    all threads are done.[↩](#fnref24)
 
-[^25]: Checking every $t$ seconds is a second option, but I scraig
-    postulates that a two-pronged approach is best. There is no comment
-    about a two-pronged approach in the course notes.
+25. Checking every
+    ![t](http://chart.apis.google.com/chart?cht=tx&chl=t "t") seconds is
+    a second option, but I scraig postulates that a two-pronged approach
+    is best. There is no comment about a two-pronged approach in the
+    course notes.[↩](#fnref25)
 
-[^26]: Preemption here means basically killing, restarting, or rewinding
-    to a *safe point*.
+26. Preemption here means basically killing, restarting, or rewinding to
+    a *safe point*.[↩](#fnref26)
 
-[^27]: Short for mutual-exclusion member.
+27. Short for mutual-exclusion member.[↩](#fnref27)
 
-[^28]: Otherwise monitors wouldn’t be able to call their own methods,
-    and recursion would be impossible without boilerplate code.
+28. Otherwise monitors wouldn’t be able to call their own methods, and
+    recursion would be impossible without boilerplate code.[↩](#fnref28)
 
-[^29]: I believe that A/S is accept/signal.
+29. I believe that A/S is accept/signal.[↩](#fnref29)
 
-[^30]: Empty signals are lost.
+30. Empty signals are lost.[↩](#fnref30)
 
-[^31]: This doesn’t make intuitive sense. TODO: verify.
+31. This doesn’t make intuitive sense. TODO: verify.[↩](#fnref31)
 
-[^32]: Synchronization/Mutual Exclusion
+32. Synchronization/Mutual Exclusion[↩](#fnref32)
 
-[^33]: This was marked with reject in the textbook, but it doesn’t have
+33. This was marked with reject in the textbook, but it doesn’t have
     justification behind what we’re rejecting. Maybe it’s the concept.
-    Maybe it’s the student.
+    Maybe it’s the student.[↩](#fnref33)
 
-[^34]: I don’t know of a reason. TODO: when does this happen? TODO: this
-    doesn’t make grammatical sense.
+34. I don’t know of a reason. TODO: when does this happen? TODO: this
+    doesn’t make grammatical sense.[↩](#fnref34)
 
-[^35]: A good example is a server-client relationship.
+35. A good example is a server-client relationship.[↩](#fnref35)
 
-[^36]: While it isn’t the best thing to do, it is still valid code.
+36. While it isn’t the best thing to do, it is still valid
+    code.[↩](#fnref36)

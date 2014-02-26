@@ -1,6 +1,5 @@
 ---
-authors:
-- Shale Craig
+generator: pandoc
 title: CS 348
 ...
 
@@ -132,7 +131,9 @@ Entity Types
     Attributes.
 
 Relationship Types
-:   are specified by diamonds. These connect $\ge$ two Entity Types.
+:   are specified by diamonds. These connect
+    ![\\ge](http://chart.apis.google.com/chart?cht=tx&chl=%5Cge "\ge")
+    two Entity Types.
 
 Attributes
 :   are specified by ellipses. These connect to single Entity Types.
@@ -156,18 +157,27 @@ Primary Keys
 #### Cardinality {#ssub:cardinality}
 
 We can force the number of entities (i.e. the cardinality of the ones
-involved) using UML-like $(x, y)$ notation on relationships.
+involved) using UML-like ![(x,
+y)](http://chart.apis.google.com/chart?cht=tx&chl=%28x%2C%20y%29 "(x, y)")
+notation on relationships.
 
-Generally, it’s expressed as $(\text{min}, \text{max})$. The
-restrictions are $0\le x$, and $y$ can be any number or a $*$[^1].
+Generally, it’s expressed as ![(\\text{min},
+\\text{max})](http://chart.apis.google.com/chart?cht=tx&chl=%28%5Ctext%7Bmin%7D%2C%20%5Ctext%7Bmax%7D%29 "(\text{min}, \text{max})").
+The restrictions are ![0\\le
+x](http://chart.apis.google.com/chart?cht=tx&chl=0%5Cle%20x "0\le x"),
+and ![y](http://chart.apis.google.com/chart?cht=tx&chl=y "y") can be any
+number or a
+![\*](http://chart.apis.google.com/chart?cht=tx&chl=%2A "*")[^1^](#fn1).
 
 The restrictions are written next to the corresponding entity.
 
 #### Existence Constraints {#ssub:existence_constraints}
 
-By designing our ERD properly, we can create an entity $A$ which is
-totally dependent if every existence of $A$ is always associated with
-another entity through a relationship.
+By designing our ERD properly, we can create an entity
+![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A") which is
+totally dependent if every existence of
+![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A") is always
+associated with another entity through a relationship.
 
 ### Extended ERM (EERM) {#sub:extended_erm}
 
@@ -176,7 +186,7 @@ another entity through a relationship.
 We can extend what ERM specifies by using inheritance.
 
 We can express the similar properties using the concept of
-**generalization**[^2].
+**generalization**[^2^](#fn2).
 
 By adding a tree-structure, we can specify our ERDs with a tree-like
 structure. Parent entities are connected to triangle blocks that say
@@ -184,10 +194,11 @@ structure. Parent entities are connected to triangle blocks that say
 
 #### Aggregation {#ssub:aggregation}
 
-Supposing that we want to construct relationships to relationships[^3].
-In this case, we can make a box around the elements from the first
-relation (almost like they’re an “entity”), and connect the relationship
-in the box to the external relationships desired.
+Supposing that we want to construct relationships to
+relationships[^3^](#fn3). In this case, we can make a box around the
+elements from the first relation (almost like they’re an “entity”), and
+connect the relationship in the box to the external relationships
+desired.
 
 Storage Systems and File Structures {#cha:storage_systems_and_file_structures}
 ===================================
@@ -218,14 +229,14 @@ surface. Tracks with the same diameter form a *cylinder*. Each track is
 divided into equal size units called *blocks* or *pages*.
 
 Pages are moved into main memory on demand. Since the access time is
- $30$ms, and the CPU takes nano-seconds to process things, I/O is the
-bottleneck.
+ ![30](http://chart.apis.google.com/chart?cht=tx&chl=30 "30")ms, and the
+CPU takes nano-seconds to process things, I/O is the bottleneck.
 
 Reducing Latency and Page Accesses {#sec:reducing_latency_and_page_accesses}
 ----------------------------------
 
 We store pages containing related information near to each other since
-applications are likely to read them next[^4].
+applications are likely to read them next[^4^](#fn4).
 
 ### Accessing Data Through a Cache {#sub:accessing_data_through_a_cache}
 
@@ -257,8 +268,8 @@ Introduction {#sec:introduction}
 
 Given an attribute value, we want to retrieve all records that match
 that attribute. Indexes are great, since when looking up according to an
-index we can get optimized lookup[^5]. This speedup is great, but it
-comes at cost of an index file.
+index we can get optimized lookup[^5^](#fn5). This speedup is great, but
+it comes at cost of an index file.
 
 Types of Indexes {#sec:types_of_indices}
 ----------------
@@ -271,44 +282,54 @@ Search Key
 
 Primary Index
 :   is the index that the index for a set of entities is built around.
-    Usually, this is the search key[^6].
+    Usually, this is the search key[^6^](#fn6).
 
 Ordered
 :   is a term referring to the search key ordering in the index file.
     Often they are ordered, but if they’re not the primary index, they
     are *unordered*.
 
-B$^+$ Trees {#sec:b_trees}
------------
+B![\^+](http://chart.apis.google.com/chart?cht=tx&chl=%5E%2B "^+") Trees {#sec:b_trees}
+------------------------------------------------------------------------
 
-B$^+$ trees are dynamic index-based data structures that are made up
-index and data blocks. They are a special type of tree optimized to
-reduce the number of page misses.
+B![\^+](http://chart.apis.google.com/chart?cht=tx&chl=%5E%2B "^+") trees
+are dynamic index-based data structures that are made up index and data
+blocks. They are a special type of tree optimized to reduce the number
+of page misses.
 
 ### Specification {#sub:specification}
 
-For a B$^+$ tree of order $m$ and a maximum data node size of $d$[^7],
-we work under the constraints:
+For a B![\^+](http://chart.apis.google.com/chart?cht=tx&chl=%5E%2B "^+")
+tree of order ![m](http://chart.apis.google.com/chart?cht=tx&chl=m "m")
+and a maximum data node size of
+![d](http://chart.apis.google.com/chart?cht=tx&chl=d "d")[^7^](#fn7), we
+work under the constraints:
 
 -   All values are in leaf (“data”) nodes.
 
 -   All leaves are on the same level.
 
 -   With the exception of the root, every node has
-    $[\floor{\frac{m-1}{2}}, m-1]$ keys, which are sorted in ascending
-    order.
+    ![[\\floor{\\frac{m-1}{2}},
+    m-1]](http://chart.apis.google.com/chart?cht=tx&chl=%5B%5Cfloor%7B%5Cfrac%7Bm-1%7D%7B2%7D%7D%2C%20m-1%5D "[\floor{\frac{m-1}{2}}, m-1]")
+    keys, which are sorted in ascending order.
 
--   An internal (“index”) node with $k$ keys has $k+1$ pointers to
-    children on the next level[^8].
+-   An internal (“index”) node with
+    ![k](http://chart.apis.google.com/chart?cht=tx&chl=k "k") keys has
+    ![k+1](http://chart.apis.google.com/chart?cht=tx&chl=k%2B1 "k+1")
+    pointers to children on the next level[^8^](#fn8).
 
--   Data nodes have $[\floor{\frac{d}{2}}, d]$ sorted records, and a
-    pointer to the next and previous data node.
+-   Data nodes have ![[\\floor{\\frac{d}{2}},
+    d]](http://chart.apis.google.com/chart?cht=tx&chl=%5B%5Cfloor%7B%5Cfrac%7Bd%7D%7B2%7D%7D%2C%20d%5D "[\floor{\frac{d}{2}}, d]")
+    sorted records, and a pointer to the next and previous data node.
 
 Modifying this tree runs in logarithmic time.
 
-The data nodes of a B$^+$ tree contain pointers to the next and previous
-data node for efficient iteration. The code to update this the next and
-previous data node would be found in the functions *split* and *merge*.
+The data nodes of a
+B![\^+](http://chart.apis.google.com/chart?cht=tx&chl=%5E%2B "^+") tree
+contain pointers to the next and previous data node for efficient
+iteration. The code to update this the next and previous data node would
+be found in the functions *split* and *merge*.
 
 ### Insertion {#sub:insertion}
 
@@ -333,20 +354,30 @@ structure).
 
 #### Split - Data Node {#ssub:split_data_node}
 
-In the case that we call split on a data (leaf) node $n_j$, we create a
-new node $n_{j+1}$ that will contain half the records of the old root
-node. For an odd number of records, keep the extra record in node $n_j$.
-Promote[^9] the largest key value to the parent index node.
+In the case that we call split on a data (leaf) node
+![n\_j](http://chart.apis.google.com/chart?cht=tx&chl=n_j "n_j"), we
+create a new node
+![n\_{j+1}](http://chart.apis.google.com/chart?cht=tx&chl=n_%7Bj%2B1%7D "n_{j+1}")
+that will contain half the records of the old root node. For an odd
+number of records, keep the extra record in node
+![n\_j](http://chart.apis.google.com/chart?cht=tx&chl=n_j "n_j").
+Promote[^9^](#fn9) the largest key value to the parent index node.
 
 #### Split - Index Node {#ssub:split_index_node}
 
-In the case that we call split on a index node with keys
-$k_j \to k_{j+n}$, we partition the values into
-$[k_j \cdots k_{j+ \lfloor\frac{n}{2}\rfloor - 1}]$ and
-$[k_{j+ \lfloor\frac{n}{2}\rfloor + 1} \cdots  k_{j+n}]$. For an odd
-number of records, keep the extra record in node $n_j$. Move[^10] the
-key $k_j$ to the parent node, and keep pointers to the left and right
-nodes in the data structure.
+In the case that we call split on a index node with keys ![k\_j \\to
+k\_{j+n}](http://chart.apis.google.com/chart?cht=tx&chl=k_j%20%5Cto%20k_%7Bj%2Bn%7D "k_j \to k_{j+n}"),
+we partition the values into ![[k\_j \\cdots k\_{j+
+\\lfloor\\frac{n}{2}\\rfloor -
+1}]](http://chart.apis.google.com/chart?cht=tx&chl=%5Bk_j%20%5Ccdots%20k_%7Bj%2B%20%5Clfloor%5Cfrac%7Bn%7D%7B2%7D%5Crfloor%20-%201%7D%5D "[k_j \cdots k_{j+ \lfloor\frac{n}{2}\rfloor - 1}]")
+and ![[k\_{j+ \\lfloor\\frac{n}{2}\\rfloor + 1} \\cdots
+k\_{j+n}]](http://chart.apis.google.com/chart?cht=tx&chl=%5Bk_%7Bj%2B%20%5Clfloor%5Cfrac%7Bn%7D%7B2%7D%5Crfloor%20%2B%201%7D%20%5Ccdots%20%20k_%7Bj%2Bn%7D%5D "[k_{j+ \lfloor\frac{n}{2}\rfloor + 1} \cdots  k_{j+n}]").
+For an odd number of records, keep the extra record in node
+![n\_j](http://chart.apis.google.com/chart?cht=tx&chl=n_j "n_j").
+Move[^10^](#fn10) the key
+![k\_j](http://chart.apis.google.com/chart?cht=tx&chl=k_j "k_j") to the
+parent node, and keep pointers to the left and right nodes in the data
+structure.
 
 ### Deletion {#sub:deletion}
 
@@ -399,15 +430,24 @@ Terminology {#sec:terminology}
 -----------
 
 We only have one data structuring tool - a **relation**. We can express
-relations as
-$D_1 \times \cdots \times D_n = \{ \langle a_1, \cdots, a_n \rangle | \forall i: a_i \in D_i\}$.
-We call $r = \langle a_1, \cdots a_n\rangle$ a relation on $n$-sets;
-i.e. $r$ is a set of **tuples** (often called **rows**). We call $D_j$
-the $j^{\text{th}}$ domain of $r$, where $r$ is of degree $n$.
+relations as ![D\_1 \\times \\cdots \\times D\_n = \\{ \\langle a\_1,
+\\cdots, a\_n \\rangle | \\forall i: a\_i \\in
+D\_i\\}](http://chart.apis.google.com/chart?cht=tx&chl=D_1%20%5Ctimes%20%5Ccdots%20%5Ctimes%20D_n%20%3D%20%5C%7B%20%5Clangle%20a_1%2C%20%5Ccdots%2C%20a_n%20%5Crangle%20%7C%20%5Cforall%20i%3A%20a_i%20%5Cin%20D_i%5C%7D "D_1 \times \cdots \times D_n = \{ \langle a_1, \cdots, a_n \rangle | \forall i: a_i \in D_i\}").
+We call ![r = \\langle a\_1, \\cdots
+a\_n\\rangle](http://chart.apis.google.com/chart?cht=tx&chl=r%20%3D%20%5Clangle%20a_1%2C%20%5Ccdots%20a_n%5Crangle "r = \langle a_1, \cdots a_n\rangle")
+a relation on
+![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n")-sets; i.e.
+![r](http://chart.apis.google.com/chart?cht=tx&chl=r "r") is a set of
+**tuples** (often called **rows**). We call
+![D\_j](http://chart.apis.google.com/chart?cht=tx&chl=D_j "D_j") the
+![j\^{\\text{th}}](http://chart.apis.google.com/chart?cht=tx&chl=j%5E%7B%5Ctext%7Bth%7D%7D "j^{\text{th}}")
+domain of ![r](http://chart.apis.google.com/chart?cht=tx&chl=r "r"),
+where ![r](http://chart.apis.google.com/chart?cht=tx&chl=r "r") is of
+degree ![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n").
 
 When writing databases, we use the **Closed World Assumption** to govern
 what exists - the assumption that everything not currently know to be
-true is false[^11].
+true is false[^11^](#fn11).
 
 **Relational schemes** define the composition (intension) of a relation.
 
@@ -455,15 +495,29 @@ We can use this “type” later:
 
 #### Foreign Key (Referential Integrity) Constraints {#ssub:foreign_key_referential_integrity_constraints}
 
-Given that a set of attributes $FK \subseteq R_1$ is a *foreign key*
-that references $R_2$, we have two constraints to satisfy:
+Given that a set of attributes ![FK \\subseteq
+R\_1](http://chart.apis.google.com/chart?cht=tx&chl=FK%20%5Csubseteq%20R_1 "FK \subseteq R_1")
+is a *foreign key* that references
+![R\_2](http://chart.apis.google.com/chart?cht=tx&chl=R_2 "R_2"), we
+have two constraints to satisfy:
 
-1.  The attributes of $FK$ are defined on the same domains as the
-    primary key $PK$ of $R_2$.
+1.  The attributes of
+    ![FK](http://chart.apis.google.com/chart?cht=tx&chl=FK "FK") are
+    defined on the same domains as the primary key
+    ![PK](http://chart.apis.google.com/chart?cht=tx&chl=PK "PK") of
+    ![R\_2](http://chart.apis.google.com/chart?cht=tx&chl=R_2 "R_2").
 
-2.  A value of $FK$ either occurs as a value of $PK$, or $FK$ is null.
+2.  A value of
+    ![FK](http://chart.apis.google.com/chart?cht=tx&chl=FK "FK") either
+    occurs as a value of
+    ![PK](http://chart.apis.google.com/chart?cht=tx&chl=PK "PK"), or
+    ![FK](http://chart.apis.google.com/chart?cht=tx&chl=FK "FK") is
+    null.
 
-We say that $R_1$ references $R_2$[^12]
+We say that
+![R\_1](http://chart.apis.google.com/chart?cht=tx&chl=R_1 "R_1")
+references
+![R\_2](http://chart.apis.google.com/chart?cht=tx&chl=R_2 "R_2")[^12^](#fn12)
 
 Tables {#sec:tables}
 ------
@@ -498,34 +552,42 @@ The SQL syntax is as follows:
         }
                     
 
-[^1]: The star indicates “any”.
+* * * * *
 
-[^2]: He tends to enjoy the “is-a” concept more than the phrase
-    “generalization”. I like the word “inheritance” more.
+1.  The star indicates “any”.[↩](#fnref1)
 
-[^3]: An example of this is that a *Student* may *Participate* in a
+2.  He tends to enjoy the “is-a” concept more than the phrase
+    “generalization”. I like the word “inheritance” more.[↩](#fnref2)
+
+3.  An example of this is that a *Student* may *Participate* in a
     *Project*. There is a relationship *Eval* between the *Student*,
     *Participate*, and *Project* and a *Report*. This is an example of
-    this idea.
+    this idea.[↩](#fnref3)
 
-[^4]: Is this called the principle of locality?
+4.  Is this called the principle of locality?[↩](#fnref4)
 
-[^5]: We don’t have optimized lookup for a non-index.
+5.  We don’t have optimized lookup for a non-index.[↩](#fnref5)
 
-[^6]: In the cases where the primary index isn’t the search key, the
-    search key is known as the secondary index.
+6.  In the cases where the primary index isn’t the search key, the
+    search key is known as the secondary index.[↩](#fnref6)
 
-[^7]: Often, $m \ne d$.
+7.  Often, ![m \\ne
+    d](http://chart.apis.google.com/chart?cht=tx&chl=m%20%5Cne%20d "m \ne d").[↩](#fnref7)
 
-[^8]: The children correspond to the partition induced on the key space
-    by the $k$ keys.
+8.  The children correspond to the partition induced on the key space by
+    the ![k](http://chart.apis.google.com/chart?cht=tx&chl=k "k")
+    keys.[↩](#fnref8)
 
-[^9]: Just clone the value, don’t remove it from the data node.
+9.  Just clone the value, don’t remove it from the data
+    node.[↩](#fnref9)
 
-[^10]: Move, not clone.
+10. Move, not clone.[↩](#fnref10)
 
-[^11]: i.e. if I don’t know about it, it must not exist.
+11. i.e. if I don’t know about it, it must not exist.[↩](#fnref11)
 
-[^12]: He took extra time to point out that $R_1$ is the *referencing*
-    relation, and that $R_2$ is the *referenced* relation with respect
-    to this foreign key constraint.
+12. He took extra time to point out that
+    ![R\_1](http://chart.apis.google.com/chart?cht=tx&chl=R_1 "R_1") is
+    the *referencing* relation, and that
+    ![R\_2](http://chart.apis.google.com/chart?cht=tx&chl=R_2 "R_2") is
+    the *referenced* relation with respect to this foreign key
+    constraint.[↩](#fnref12)

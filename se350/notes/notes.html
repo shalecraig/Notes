@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>SE 350 End of Term Notes</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">SE 350 End of Term Notes</h1>
+</div>
+<h1 id="cha:memory">Memory</h1>
+<h2 id="sec:paging_segmentation">Paging/Segmentation</h2>
+<h3 id="subsec:paging">Paging</h3>
+<p>Paging allows memory to be comprised of fixed-size blocks that are addressed by virtual addresses that are page numbers and an offset. Each page can be anywhere in main memory.</p>
+<h3 id="subsec:address_translation">Address Translation</h3>
+<p>Address translation (logical, not physical addresses) allow us to use non-contiguous memory layouts, which allows processes to run without being fully resident in memory.</p>
+<p>Execute code. Once program tries to read/exec instructions not in RAM, we page fault, block, read data, then resume.</p>
+<p>Virtual Addresses are tuples of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7B%5Censuremath%7B%5Cleft%20%5Clangle%20%5Ctext%7BPage%20%5C%23%7D%2C%20%5Ctext%7BOffset%7D%20%5Cright%20%5Crangle%20%7D%7D" alt="{\ensuremath{\left \langle \text{Page \#}, \text{Offset} \right \rangle }}" title="{\ensuremath{\left \langle \text{Page \#}, \text{Offset} \right \rangle }}" />. We look up the Page Number + Page Table Pointer in the Page Table, which gives us the Frame #. Combine (by a bitmask) the two points, and you get the physical address of the memory in main memory.</p>
+<p>Address Translation (i.e. a root page table) allows us to have large page tables, and keep some of the page tables in main memory while they are not being accessed.</p>
+<p>The downside of Page Tables is that Page Table size is proportional to the virtual address space.</p>
+<h3 id="subsec:segmentation">Segmentation</h3>
+<p>Allows the programmer to view memory as multiple address spaces or segments. We can now share data among processes, and protect segments from data modification.</p>
+<p>Segmentation is pretty much the same as virtual addressing, except the segment table contains the base address and is added to the offset.</p>
+<h3 id="subsec:combined_paging_and_segmentation">Combined Paging and Segmentation</h3>
+<p>Paging is transparent to the programmer while Segmentation is visible to the programmer.</p>
+<p>See figure [fig:address<sub>t</sub>ranslation<sub>a</sub>nd<sub>s</sub>egmentation] for more information.</p>
+<p>[fig:address<sub>t</sub>ranslation<sub>a</sub>nd<sub>s</sub>egmentation] <img src="images/address-translation-and-segmentation.png" alt="image" /></p>
+<h2 id="sec:replacement_allocation_strategies">Replacement Strategies</h2>
+<ul>
+<li><p>Least Recently Used</p></li>
+<li><p>First-in, First-Out</p></li>
+<li><p>Clock Policy</p></li>
+<li><p>Page Buffering</p></li>
+</ul>
+<h3 id="subsec:page_buffering">Page Buffering</h3>
+<p>Memory pages are cached and are placed into a “free page” or “modified” page list if they have or haven’t been modified respectively. This is done so the OS can revive these pages from the list if space becomes available.</p>
+<h2 id="sec:page_size_v_s_page_faults">Page Size v.s. Page Faults</h2>
+<p>By having an smaller page size, all parts of the pages in memory will be relevant to the process in recent references. If they are bigger, there will be “useless” portions that aren’t used</p>
+<h2 id="sec:working_set_v_s_resident_set">Working Set v.s. Resident Set</h2>
+<p>Resident set is the portion of a process that is in main memory. The smaller the resident set size, the higher number of processes that can be in memory. Once it is past a certain size, there is no real gain from a large resident set.</p>
+<p>The working set is the set of pages of the process that have been referenced in the last <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=t" alt="t" title="t" /> time.</p>
+<h2 id="sec:calculating_the_resident_set_size">Calculating the Resident Set Size</h2>
+<p>Variable allocation means the size of the working set for one process is fixed with respect to time. Variable allocation means the size of the working set for one process varies with respect to time.</p>
+<p>There are three main types of allocation strategies:</p>
+<ul>
+<li><p>Fixed Allocation, Local Scope:</p>
+<p>Decide before how big the working set should be, then execute under that decision.</p></li>
+<li><p>Variable Allocation, Local Scope:</p>
+<p>New processes get a working set size based on a heuristic. Page faults result in pages from the current (local) process’s working set being kicked out.</p></li>
+<li><p>Variable Allocation, Global Scope:</p>
+<p>New processes get a working set size based on a heuristic. Page faults result in pages from any (i.e. global) process’s working set being kicked out.</p></li>
+</ul>
+<h2 id="sec:principle_of_locality">Principle of Locality</h2>
+<p>Stuff you need in the future is close to stuff you needed in the past.</p>
+<h1 id="cha:simultaneous_execution">Simultaneous Execution</h1>
+<h2 id="sec:preconditions_for_deadlock">Preconditions for Deadlock</h2>
+<p>Preconditions for deadlock are as follows:</p>
+<ul>
+<li><p>Mutual Exclusion (i.e. no way to ensure processes use resources one at a time)</p></li>
+<li><p>Hold-And-Wait</p></li>
+<li><p>No preemption (with respect to resources)</p></li>
+<li><p>Circular wait</p></li>
+</ul>
+<h2 id="sec:semaphores_monitors_etc">Semaphores, Monitors, etc</h2>
+<h3 id="subsec:mutexes">Mutexes</h3>
+<p>Special machine instructions allow us to test and set a variable in a single machine instruction (atomically).</p>
+<pre><code>                boolean testSet(int i):
+                    if (i == 0):
+                        i = 1
+                        return true
+                    else:
+                        return false
+
+                void exchange(int register, int memory):
+                    temp = memory
+                    memory = register
+                    register = temp
+            </code></pre>
+<p>This is simple and applicable to any number of processes on single or multiple processors, but it does busy-waiting and can allow starvation if there are multiple waiting processes.</p>
+<h3 id="subsec:semaphores">Semaphores</h3>
+<p>Semaphores are special variables that are used for signaling. Semaphores are initialized to a nonnegative number, generally the maximum number of concurrent accesses. “semWait” decrements the value, “semSignal” increments the semaphore value.</p>
+<pre><code>                void semWait(semaphore s):
+                    s.count--
+                    if (s.count &lt; 0):
+                        s.queue.push(getCurrentProcess())
+
+                void semSignal(semaphore s):
+                    s.count++
+                    if (s.count &lt;= 0):
+                        p = s.queue.pop()
+                        p.makeReady()
+            </code></pre>
+<p>Binary semaphores are the same, but they only take on binary values.</p>
+<pre><code>                void semWaitB(binary_semaphore s):
+                    if (s.value == 1):
+                        s.value = 0
+                    else:
+                        s.queue.push(getCurrentProcess())
+
+                void semSignalB(binary_semaphore s):
+                    if (s.queue.isEmpty()):
+                        s.value = 1
+                    else:
+                        p = s.queue.pop()
+                        p.makeReady()
+            </code></pre>
+<h2 id="sec:amdhal_s_law">Amdhal’s Law</h2>
+<p>As the level of Multiprogramming increases, the returns will become asymptotically faster, but the limit will be constant. This is because there is a limited set of instructions that can be run at the same time.</p>
+<h2 id="sec:scheduling_algorithms">Scheduling Algorithms</h2>
+<ul>
+<li><p>Rate Monotonic</p>
+<p>Lower bound on schedulable utilization = 0.693. Highest-priority task is the one with the shortest period.</p></li>
+<li><p>Earliest Deadline First:</p>
+<p>Can schedule a CPU utilization of 1. Highest-priority task is the one with the next deadline.</p></li>
+</ul>
+<h1 id="cha:other">Other</h1>
+<h2 id="sec:states_for_processes">States for Processes</h2>
+<ul>
+<li><p>New</p></li>
+<li><p>Running</p></li>
+<li><p>Ready</p></li>
+<li><p>Blocked</p></li>
+<li><p>Ready-suspend</p></li>
+<li><p>Blocked-suspend</p></li>
+<li><p>Exit</p></li>
+</ul>
+</body>
+</html>

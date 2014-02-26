@@ -1,8 +1,5 @@
 ---
-authors:
-- |
-    Shale Craig\
-    Prof: Nafeez Fatima
+generator: pandoc
 title: ECON 101
 ...
 
@@ -71,8 +68,10 @@ Two Big Economic Questions Are:
             humans.
 
         1.  Goods and Services can be instrumented by the *factors of
-            production*. Doing this shows us how they are created.
-            $$Y = F ( L, T, K, H, A)$$ Where:
+            production*. Doing this shows us how they are created. \
+            ![Y = F ( L, T, K, H,
+            A)](http://chart.apis.google.com/chart?cht=tx&chl=Y%20%3D%20F%20%28%20L%2C%20T%2C%20K%2C%20H%2C%20A%29 "Y = F ( L, T, K, H, A)")\
+             Where:
 
             1.  is the profit
 
@@ -157,12 +156,12 @@ Two Big Economic Questions Are:
         Ex: Cost of skipping University and going directly to the
         workforce.
 
-          ---------------- ------------------- ------------
-                Type              Name            Value
-           Explicit Costs        Tuition        $8$ x [\$]
-           Explicit Costs   Books & Materials   $8$ x [\$]
-           Implicit Costs      Lost Salary      $4$ x [\$]
-          ---------------- ------------------- ------------
+          ---------------- ------------------- ------------------------------------------------------------------
+          Type             Name                Value
+          Explicit Costs   Tuition             ![8](http://chart.apis.google.com/chart?cht=tx&chl=8 "8") x [\$]
+          Explicit Costs   Books & Materials   ![8](http://chart.apis.google.com/chart?cht=tx&chl=8 "8") x [\$]
+          Implicit Costs   Lost Salary         ![4](http://chart.apis.google.com/chart?cht=tx&chl=4 "4") x [\$]
+          ---------------- ------------------- ------------------------------------------------------------------
 
         TODO: some of those should’ve been negative.
 
@@ -218,33 +217,49 @@ Three different types of graphs:
 Characterizing models: Assume models can be expressed as a function.
 
 Positive Relationships
-:   are when $\frac{dy}{dx} > 0$. i.e when the slope is positive.
+:   are when ![\\frac{dy}{dx} \>
+    0](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7Bdy%7D%7Bdx%7D%20%3E%200 "\frac{dy}{dx} > 0").
+    i.e when the slope is positive.
 
 Negative Relationships
-:   are when $\frac{dy}{dx} < 0$. i.e when the slope is negative. Also
-    known as inverse relationship.
+:   are when ![\\frac{dy}{dx} \<
+    0](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7Bdy%7D%7Bdx%7D%20%3C%200 "\frac{dy}{dx} < 0").
+    i.e when the slope is negative. Also known as inverse relationship.
 
 Convex Curve
-:   $|\frac{d^2y}{dx^2}| > 0$. i.e. the under-part creates a cave.
+:   ![|\\frac{d\^2y}{dx\^2}| \>
+    0](http://chart.apis.google.com/chart?cht=tx&chl=%7C%5Cfrac%7Bd%5E2y%7D%7Bdx%5E2%7D%7C%20%3E%200 "|\frac{d^2y}{dx^2}| > 0").
+    i.e. the under-part creates a cave.
 
 Concave Curve
-:   $|\frac{d^2y}{dx^2}| < 0$ i.e. the under-part doesn’t create a cave.
+:   ![|\\frac{d\^2y}{dx\^2}| \<
+    0](http://chart.apis.google.com/chart?cht=tx&chl=%7C%5Cfrac%7Bd%5E2y%7D%7Bdx%5E2%7D%7C%20%3C%200 "|\frac{d^2y}{dx^2}| < 0")
+    i.e. the under-part doesn’t create a cave.
 
 Linear
-:   (Curve) $\frac{d^2y}{dx^2} = 0$
+:   (Curve) ![\\frac{d\^2y}{dx\^2} =
+    0](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7Bd%5E2y%7D%7Bdx%5E2%7D%20%3D%200 "\frac{d^2y}{dx^2} = 0")
 
 Lines:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} y &= a + by
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20y%20%26%3D%20a%20%2B%20by%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         y &= a + by
-                    \end{aligned}$$
+                    \end{aligned}")\
 
-Where the parameters are: $a$ is the $y$-intercept and $b$ is the slope.
+Where the parameters are:
+![a](http://chart.apis.google.com/chart?cht=tx&chl=a "a") is the
+![y](http://chart.apis.google.com/chart?cht=tx&chl=y "y")-intercept and
+![b](http://chart.apis.google.com/chart?cht=tx&chl=b "b") is the slope.
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\text{Slope} &= \\frac{\\text{Rise}}{\\text{Run}}
+\\\\ &= \\frac{\\Delta y}{\\Delta x}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7BSlope%7D%20%26%3D%20%5Cfrac%7B%5Ctext%7BRise%7D%7D%7B%5Ctext%7BRun%7D%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20%5Cfrac%7B%5CDelta%20y%7D%7B%5CDelta%20x%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         \text{Slope} &= \frac{\text{Rise}}{\text{Run}} \\
                                      &= \frac{\Delta y}{\Delta x}
-                    \end{aligned}$$
+                    \end{aligned}")\
 
 The Economic Problem {#cha:the_economic_problem}
 ====================
@@ -256,11 +271,14 @@ Production of goods and services,
 
 1.  Inputs/factors of production
 
-    $$\begin{aligned}
+    \
+    ![\\begin{aligned} ( L, T, K, H, A)
+    \\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%28%20L%2C%20T%2C%20K%2C%20H%2C%20A%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                             ( L, T, K, H, A)
-                        \end{aligned}$$
+                        \end{aligned}")\
 
-2.  Existing technology, $A$
+2.  Existing technology,
+    ![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A")
 
 Opportunity Cost and Production Possibility Curve {#sec:opportunity_cost_and_production_possibility_curve}
 -------------------------------------------------
@@ -269,8 +287,12 @@ Production Possibility Frontier
 :   (PPF) shows all combinations of two goods producable using existing
     tech and available resources.
 
-    i.e. the tradeoff between $n$ of $x$ vs $m$ of $y$ that you can make
-    for a fixed total cost.
+    i.e. the tradeoff between
+    ![n](http://chart.apis.google.com/chart?cht=tx&chl=n "n") of
+    ![x](http://chart.apis.google.com/chart?cht=tx&chl=x "x") vs
+    ![m](http://chart.apis.google.com/chart?cht=tx&chl=m "m") of
+    ![y](http://chart.apis.google.com/chart?cht=tx&chl=y "y") that you
+    can make for a fixed total cost.
 
     Anything above the curve represents scarcity. Anything on the curve
     represents efficient resource use. Anything below the curve
@@ -388,7 +410,7 @@ Property Rights
     of resources
 
 Money
-:   is... money.
+:   is… money.
 
 Demand and Supply {#cha:demand_and_supply}
 =================
@@ -419,13 +441,18 @@ Supply and Demand {#sec:demand_curve}
 -----------------
 
 Quantity Demanded
-:   $Q_d$ is the amount that consumers plan to buy at a given price.
+:   ![Q\_d](http://chart.apis.google.com/chart?cht=tx&chl=Q_d "Q_d") is
+    the amount that consumers plan to buy at a given price.
 
 Quantity supplied
-:   $Q_s$ is the amount that producers can produce at a given price.
+:   ![Q\_s](http://chart.apis.google.com/chart?cht=tx&chl=Q_s "Q_s") is
+    the amount that producers can produce at a given price.
 
-The **Law of Demand** states that the higher a price $P$ of a good is,
-the smaller the quantity that is demanded $Q_d$; same with vice versa.
+The **Law of Demand** states that the higher a price
+![P](http://chart.apis.google.com/chart?cht=tx&chl=P "P") of a good is,
+the smaller the quantity that is demanded
+![Q\_d](http://chart.apis.google.com/chart?cht=tx&chl=Q_d "Q_d"); same
+with vice versa.
 
 Substitution Effect
 :   dictates that as the price of a good increases people seek
@@ -435,12 +462,16 @@ Income Effect
 :   dictates that as a price increases relative to income it becomes
     un-affordable; this causes quantity demand to decrease.
 
-When the price goes up, $Q_d$ decreases, and $Q_s$ increases. Same with
-vice versa.
+When the price goes up,
+![Q\_d](http://chart.apis.google.com/chart?cht=tx&chl=Q_d "Q_d")
+decreases, and
+![Q\_s](http://chart.apis.google.com/chart?cht=tx&chl=Q_s "Q_s")
+increases. Same with vice versa.
 
-The **Demand Curve** is the $\approx \frac{1}{x}$ curve that shows the
-relationship between the quantity demanded and its price; this can be
-tabulated in a *Demand schedule* instead of a graph.
+The **Demand Curve** is the ![\\approx
+\\frac{1}{x}](http://chart.apis.google.com/chart?cht=tx&chl=%5Capprox%20%5Cfrac%7B1%7D%7Bx%7D "\approx \frac{1}{x}")
+curve that shows the relationship between the quantity demanded and its
+price; this can be tabulated in a *Demand schedule* instead of a graph.
 
 Six main factors that change demand are:
 
@@ -471,13 +502,19 @@ Quantity Supplied
 
 The **Law of Supply** states:
 
-Other things remaining the same, a price $P$ increase leads to a
-increased $Q_s$. Similarly, reducing the price $P$ causes $Q_s$ to
+Other things remaining the same, a price
+![P](http://chart.apis.google.com/chart?cht=tx&chl=P "P") increase leads
+to a increased
+![Q\_s](http://chart.apis.google.com/chart?cht=tx&chl=Q_s "Q_s").
+Similarly, reducing the price
+![P](http://chart.apis.google.com/chart?cht=tx&chl=P "P") causes
+![Q\_s](http://chart.apis.google.com/chart?cht=tx&chl=Q_s "Q_s") to
 decrease as well.
 
-The **Supply Curve** is the $\approx x^2$ curve that shows the
-relationship between the quantity supplied and its price; this can be
-tabulated in a *Supply Schedule* instead of a graph.
+The **Supply Curve** is the ![\\approx
+x\^2](http://chart.apis.google.com/chart?cht=tx&chl=%5Capprox%20x%5E2 "\approx x^2")
+curve that shows the relationship between the quantity supplied and its
+price; this can be tabulated in a *Supply Schedule* instead of a graph.
 
 The lowest price that would be supplied is called the *marginal cost*.
 
@@ -527,9 +564,12 @@ measures how much demanders respond to a variable price.
 
 We can calculate elasticity as follows:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\frac{\\text{\\% change in quantity
+demanded}}{\\text{\\% change in price}}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cfrac%7B%5Ctext%7B%5C%25%20change%20in%20quantity%20demanded%7D%7D%7B%5Ctext%7B%5C%25%20change%20in%20price%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                     \frac{\text{\% change in quantity demanded}}{\text{\% change in price}}
-                \end{aligned}$$
+                \end{aligned}")\
 
 -   We express the change in price as a percentage of the *average
     price* - the average of the initial and the new price.
@@ -549,20 +589,24 @@ same elasticity value regardless of whether the price rises or falls.
 3.  The demand elasticity formula is negative because price and quantity
     move in different directions. This means we get to use
     magnitude/absolute value of the **price elasticity of demand**. We
-    don’t measure slope because the units may change (i.e. cents $\to$
+    don’t measure slope because the units may change (i.e. cents
+    ![\\to](http://chart.apis.google.com/chart?cht=tx&chl=%5Cto "\to")
     \$).
 
 Inelastic Demand
 :   is when the quantity demanded doesn’t change when the price changes.
-    Price Elasticity of demand $< 1$ is *inelastic demand*. The demand
-    curve is completely vertical.
+    Price Elasticity of demand ![\<
+    1](http://chart.apis.google.com/chart?cht=tx&chl=%3C%201 "< 1") is
+    *inelastic demand*. The demand curve is completely vertical.
 
 Elastic Demand
-:   is non-inelastic demand. Price Elasticity of demand $> 1$ is
+:   is non-inelastic demand. Price Elasticity of demand ![\>
+    1](http://chart.apis.google.com/chart?cht=tx&chl=%3E%201 "> 1") is
     *elastic demand*.
 
 Perfectly Elastic Demand
-:   is when the price elasticity of demand is $\infty$.
+:   is when the price elasticity of demand is
+    ![\\infty](http://chart.apis.google.com/chart?cht=tx&chl=%5Cinfty "\infty").
 
 Relationship Between Price Elasticity of Demand and Total Revenue {#sec:relationship_between_price_elasticity_of_demand_and_total_revenue}
 -----------------------------------------------------------------
@@ -572,18 +616,26 @@ Total Revenue
     by the quantity sold.
 
 -   *Elastic* demand means that a 1% price cut increases quantity sold
-    by $> 1 \%$, so total revenue increases.
+    by ![\> 1
+    \\%](http://chart.apis.google.com/chart?cht=tx&chl=%3E%201%20%5C%25 "> 1 \%"),
+    so total revenue increases.
 
 -   *Inelastic* demand means that a 1% price cut increases quantity sold
-    by $< 1 \%$, so total revenue decreases.
+    by ![\< 1
+    \\%](http://chart.apis.google.com/chart?cht=tx&chl=%3C%201%20%5C%25 "< 1 \%"),
+    so total revenue decreases.
 
 -   *Unit Elastic* demand means that a 1% price cut increases quantity
-    sold by exactly$ 1 \%$, so total revenue stays the same.
+    sold by exactly![ 1
+    \\%](http://chart.apis.google.com/chart?cht=tx&chl=%201%20%5C%25 " 1 \%"),
+    so total revenue stays the same.
 
 Total Revenue Test
 :   is a method of estimating the price elasticity of demand from the
     change in total revenue from a price change. Basically, we
-    reverse-engineer the $\delta$revenue to find the type of demand.
+    reverse-engineer the
+    ![\\delta](http://chart.apis.google.com/chart?cht=tx&chl=%5Cdelta "\delta")revenue
+    to find the type of demand.
 
 We can influence the elasticity of demand using one of these three:
 
@@ -612,13 +664,16 @@ complement.
 
 We can calculate it as follows:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\frac{\\text{ \\% change in quantity demanded
+}}{\\text{ \\% change in price of substitute or complement }}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cfrac%7B%5Ctext%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%25%20change%20in%20quantity%20demanded%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%7D%7B%5Ctext%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%25%20change%20in%20price%20of%20substitute%20or%20complement%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                     \frac{\text{
                     \% change in quantity demanded
                     }}{\text{
                     \% change in price of substitute or complement
                     }}
-                \end{aligned}$$
+                \end{aligned}")\
 
 In general, the cross elasticity is signed. For a **substitute**, it’s
 positive. For a **complement**, it’s negative.
@@ -632,39 +687,50 @@ change in income.
 
 It can be calculated as:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\frac{\\text{ \\% change in quantity demanded
+}}{\\text{ \\% change of income }}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cfrac%7B%5Ctext%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%25%20change%20in%20quantity%20demanded%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%7D%7B%5Ctext%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%25%20change%20of%20income%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                     \frac{\text{
                     \% change in quantity demanded
                     }}{\text{
                     \% change of income
                     }}
-                \end{aligned}$$
+                \end{aligned}")\
 
 Income Elastic
-:   goods have elasticity of demand $>1$, and are *normal goods*
+:   goods have elasticity of demand
+    ![\>1](http://chart.apis.google.com/chart?cht=tx&chl=%3E1 ">1"), and
+    are *normal goods*
 
 Income Inelastic
-:   goods have elasticity of demand is in $0<1$, and are *normal goods*
+:   goods have elasticity of demand is in
+    ![0\<1](http://chart.apis.google.com/chart?cht=tx&chl=0%3C1 "0<1"),
+    and are *normal goods*
 
 Inferior Goods
-:   goods have elasticity of demand of $<0$.
+:   goods have elasticity of demand of
+    ![\<0](http://chart.apis.google.com/chart?cht=tx&chl=%3C0 "<0").
 
 The **elasticity of supply** measures the how quantity supplied responds
 to a change in price of a good.
 
 It can be calculated as:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\frac{\\text{ \\% change in quantity supplied
+}}{\\text{ \\% change in price }}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cfrac%7B%5Ctext%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%25%20change%20in%20quantity%20supplied%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%7D%7B%5Ctext%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5C%25%20change%20in%20price%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                     \frac{\text{
                     \% change in quantity supplied
                     }}{\text{
                     \% change in price
                     }}
-                \end{aligned}$$
+                \end{aligned}")\
 
 Perfectly Inelastic
 :   supplyis if the supply curve is vertical and the elasticity of
-    supply is $0$
+    supply is ![0](http://chart.apis.google.com/chart?cht=tx&chl=0 "0")
 
 Unit Elastic
 :   supply is if the supply curve is linear and passes through the
@@ -760,19 +826,29 @@ Marginal Utility Per Dollar
 
 ### Utility-Maximizing Rule {#sub:utility_maximizing_rule}
 
-For good $x$, we call the marginal utility $MU_x$, and the price $P_x$.
+For good ![x](http://chart.apis.google.com/chart?cht=tx&chl=x "x"), we
+call the marginal utility
+![MU\_x](http://chart.apis.google.com/chart?cht=tx&chl=MU_x "MU_x"), and
+the price
+![P\_x](http://chart.apis.google.com/chart?cht=tx&chl=P_x "P_x").
 
 The marginal utility per dollar is:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\frac{MU\_x}{P\_x}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cfrac%7BMU_x%7D%7BP_x%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         \frac{MU_x}{P_x}
-                    \end{aligned}$$
+                    \end{aligned}")\
 
 When choosing between two goods, we want to pick choices to maximize the
-amount spent where $\frac{MU_a}{P_a} = \frac{MU_b}{P_b}$.
+amount spent where ![\\frac{MU\_a}{P\_a} =
+\\frac{MU\_b}{P\_b}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7BMU_a%7D%7BP_a%7D%20%3D%20%5Cfrac%7BMU_b%7D%7BP_b%7D "\frac{MU_a}{P_a} = \frac{MU_b}{P_b}").
 
-If $\frac{MU_a}{P_a} > \frac{MU_b}{P_b}$, then we are spending too much
-on $b$ and not enough on $a$.
+If ![\\frac{MU\_a}{P\_a} \>
+\\frac{MU\_b}{P\_b}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7BMU_a%7D%7BP_a%7D%20%3E%20%5Cfrac%7BMU_b%7D%7BP_b%7D "\frac{MU_a}{P_a} > \frac{MU_b}{P_b}"),
+then we are spending too much on
+![b](http://chart.apis.google.com/chart?cht=tx&chl=b "b") and not enough
+on ![a](http://chart.apis.google.com/chart?cht=tx&chl=a "a").
 
 Generally, we want t equalize the two marginal utilities per dollar.
 
@@ -790,11 +866,16 @@ Marginal Theory Predicts the change of demand:
 In 2-dimensional budgets, we can express budget constraints as the
 following equation:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} P\_\\alpha Q\_\\alpha + P\_\\beta Q\_\\beta = Y
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20P_%5Calpha%20Q_%5Calpha%20%2B%20P_%5Cbeta%20Q_%5Cbeta%20%3D%20Y%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         P_\alpha Q_\alpha + P_\beta Q_\beta = Y
-                    \end{aligned}$$
+                    \end{aligned}")\
 
-Where $P_x$ and $Q_x$ are the price and quantity of good $x$ sold,
+Where ![P\_x](http://chart.apis.google.com/chart?cht=tx&chl=P_x "P_x")
+and ![Q\_x](http://chart.apis.google.com/chart?cht=tx&chl=Q_x "Q_x") are
+the price and quantity of good
+![x](http://chart.apis.google.com/chart?cht=tx&chl=x "x") sold,
 respectively.
 
 ### Algorithm for Decision Making Using Marginal Utility {#sub:algorithm_for_decision_making_using_marginal_utility}
@@ -803,8 +884,10 @@ Given the table below,
 
 [h]
 
-<span> | l | l | l || l | l | l | </span> Quantity & MU &
-$\frac{MU}{\$}$ & Quantity & MU & $\frac{MU}{\$}$\
+| l | l | l || l | l | l | Quantity & MU &
+![\\frac{MU}{\\\$}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7BMU%7D%7B%5C%24%7D "\frac{MU}{\$}")
+& Quantity & MU &
+![\\frac{MU}{\\\$}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7BMU%7D%7B%5C%24%7D "\frac{MU}{\$}")\
 4 & 28 & 7.00 & 10 & 5 & 1.25\
 5 & 26 & 6.50 & 9 & 7 & 1.75\
 6 & 24 & 6.00 & 8 & 10 & 2.50\
@@ -814,17 +897,18 @@ $\frac{MU}{\$}$ & Quantity & MU & $\frac{MU}{\$}$\
 10 & 16 & 4.00 & 4 & 24 & 6.00\
 
 we begin iterating from 0 of each element, and choose the element that
-gives us (for each value) the best marginal utility per dollar. [^1]
+gives us (for each value) the best marginal utility per dollar.
+[^1^](#fn1)
 
 ### Predictions From Marginal Utility Theory {#sub:predictions_from_marginal_utility_theory}
 
 Well, we can tell a few things using that graph I referred to earlier:
 
 -   As the price decreases, the marginal utility per dollar increases.
-    More of that item will be purchased.[^2]
+    More of that item will be purchased.[^2^](#fn2)
 
--   As the amount available to spend[^3] increases, the amount purchased
-    will increase.[^4]
+-   As the amount available to spend[^3^](#fn3) increases, the amount
+    purchased will increase.[^4^](#fn4)
 
 Paradox of value {#sec:paradox_of_value}
 ----------------
@@ -902,9 +986,12 @@ always true.
 
 One could stipulate that an equation exists as follows:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\text{Environmental Impact} &=
+(\\text{Population})(\\text{Affluence})(\\text{Technology})
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7BEnvironmental%20Impact%7D%20%26%3D%20%28%5Ctext%7BPopulation%7D%29%28%5Ctext%7BAffluence%7D%29%28%5Ctext%7BTechnology%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         \text{Environmental Impact} &= (\text{Population})(\text{Affluence})(\text{Technology})
-                    \end{aligned}$$
+                    \end{aligned}")\
 
 Where:
 
@@ -923,7 +1010,8 @@ population, we’re `(@*\$&`’d.
 ### Easterlin Paradox {#sub:easterlin_paradox}
 
 The **Easterlin Paradox** prescribes that income and happiness are
-positively related, but the derivative of happiness is negative. [^5]
+positively related, but the derivative of happiness is negative.
+[^5^](#fn5)
 
 ### Social Motives for Consumption {#sub:social_motives_for_consumption}
 
@@ -947,8 +1035,9 @@ Preferences and Indifference Curve {#sec:preferences_and_indifference_curve}
 
 ### Preferences and Indifference Curve {#sub:preferences_and_indifference_curve}
 
-We can define an indifference curve as $f(x) \alpha \frac{1}{x}$. All
-points above the curve are preferred to points on (and below) the
+We can define an indifference curve as ![f(x) \\alpha
+\\frac{1}{x}](http://chart.apis.google.com/chart?cht=tx&chl=f%28x%29%20%5Calpha%20%5Cfrac%7B1%7D%7Bx%7D "f(x) \alpha \frac{1}{x}").
+All points above the curve are preferred to points on (and below) the
 indifference curve. A consumer is Indifferent to all points on one
 curve.
 
@@ -961,13 +1050,19 @@ one good for another.
 
 ### Marginal Rate of Substitution {#sub:marginal_rate_of_substitution}
 
-The rate a person is willing to give up good $y$ to get an additional
-good $x$ while remaining indifferent is called the **marginal rate of
-substitution** (MRS).[^6]
+The rate a person is willing to give up good
+![y](http://chart.apis.google.com/chart?cht=tx&chl=y "y") to get an
+additional good
+![x](http://chart.apis.google.com/chart?cht=tx&chl=x "x") while
+remaining indifferent is called the **marginal rate of substitution**
+(MRS).[^6^](#fn6)
 
-The fact that the MRS decreases as we increase $x$ (i.e.
-$\lim_{x \to \infty}$) is called the **diminishing marginal rate of
-substitution** - i.e. that the marginal rate of substitution diminishes.
+The fact that the MRS decreases as we increase
+![x](http://chart.apis.google.com/chart?cht=tx&chl=x "x") (i.e.
+![\\lim\_{x \\to
+\\infty}](http://chart.apis.google.com/chart?cht=tx&chl=%5Clim_%7Bx%20%5Cto%20%5Cinfty%7D "\lim_{x \to \infty}"))
+is called the **diminishing marginal rate of substitution** - i.e. that
+the marginal rate of substitution diminishes.
 
 ### Degree of Substitutability {#sub:degree_of_substitutability}
 
@@ -976,20 +1071,25 @@ be substituted for each other. We can categorize these as follows:
 
 Perfect Substitutes
 :   are substances that consumers are willing to substitute for one
-    another at a constant rate.[^7] This is categorized by the equation
-    for the utility:
+    another at a constant rate.[^7^](#fn7) This is categorized by the
+    equation for the utility:
 
-    $$\begin{aligned}
+    \
+    ![\\begin{aligned} U(x, y) &= ax + by
+    \\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20U%28x%2C%20y%29%20%26%3D%20ax%20%2B%20by%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                                 U(x, y) &= ax + by
-                            \end{aligned}$$
+                            \end{aligned}")\
 
 Perfect Complements
-:   are goods that are consumed in fixed proportions together.[^8] They
-    can be characterized by the utility equation:
+:   are goods that are consumed in fixed proportions
+    together.[^8^](#fn8) They can be characterized by the utility
+    equation:
 
-    $$\begin{aligned}
+    \
+    ![\\begin{aligned} U(x, y) &= \\min(ax, by)
+    \\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20U%28x%2C%20y%29%20%26%3D%20%5Cmin%28ax%2C%20by%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                                 U(x, y) &= \min(ax, by)
-                            \end{aligned}$$
+                            \end{aligned}")\
 
 Budget Schedule and Budget Line {#sec:budget_schedule_and_budget_line}
 -------------------------------
@@ -997,9 +1097,14 @@ Budget Schedule and Budget Line {#sec:budget_schedule_and_budget_line}
 ### Budget Line {#sub:budget_line}
 
 A **budget line** describes the limit to an organism’s consumption
-choices. Generally, the line is of the form of $y = mx + b$, where
-$m < 0$ and $b > 0$. A valid choice is any point at or below[^9] the
-line, and invalid ones are above the line[^10].
+choices. Generally, the line is of the form of ![y = mx +
+b](http://chart.apis.google.com/chart?cht=tx&chl=y%20%3D%20mx%20%2B%20b "y = mx + b"),
+where ![m \<
+0](http://chart.apis.google.com/chart?cht=tx&chl=m%20%3C%200 "m < 0")
+and ![b \>
+0](http://chart.apis.google.com/chart?cht=tx&chl=b%20%3E%200 "b > 0"). A
+valid choice is any point at or below[^9^](#fn9) the line, and invalid
+ones are above the line[^10^](#fn10).
 
 Divisible Goods
 :   can be bought at any point in a line (i.e. 3.564345 lb of flour)
@@ -1011,37 +1116,48 @@ Indivisible Goods
 
 In an efficient budget, we get the following:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\text{Expenditure} &= \\text{Income}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7BExpenditure%7D%20%26%3D%20%5Ctext%7BIncome%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         \text{Expenditure} &= \text{Income}
-                    \end{aligned}$$
+                    \end{aligned}")\
 
 If your only expenditure was movies and pop, this equation would look
 like (from prior):
 
-$$\begin{aligned}
+\
+![\\begin{aligned} P\_P Q\_P + P\_M Q\_M &= Y \\\\ Q\_P &=
+\\frac{Y}{P\_P} - \\frac{P\_M}{P\_P}Q\_M
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20P_P%20Q_P%20%2B%20P_M%20Q_M%20%26%3D%20Y%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Q_P%20%26%3D%20%5Cfrac%7BY%7D%7BP_P%7D%20-%20%5Cfrac%7BP_M%7D%7BP_P%7DQ_M%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         P_P Q_P + P_M Q_M &= Y \\
                         Q_P &= \frac{Y}{P_P} - \frac{P_M}{P_P}Q_M
-                    \end{aligned}$$
+                    \end{aligned}")\
 
-Equivalently, expressing $Q_P$ as the second line allows us to define
-the following terms:
+Equivalently, expressing
+![Q\_P](http://chart.apis.google.com/chart?cht=tx&chl=Q_P "Q_P") as the
+second line allows us to define the following terms:
 
 Real Income
-:   in terms of pop is $\frac{Y}{P_P}$. Equivalently, this is the point
-    on the budget line where it meets the $y$-axis (assuming $y$ is for
-    Pop).
+:   in terms of pop is
+    ![\\frac{Y}{P\_P}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7BY%7D%7BP_P%7D "\frac{Y}{P_P}").
+    Equivalently, this is the point on the budget line where it meets
+    the ![y](http://chart.apis.google.com/chart?cht=tx&chl=y "y")-axis
+    (assuming ![y](http://chart.apis.google.com/chart?cht=tx&chl=y "y")
+    is for Pop).
 
 Relative Price
-:   of a movie in terms of pop is $\frac{P_M}{P_P}$. Equivalently, this
-    is the magnitude of the slope of the budget line. It shows us how
-    many pops must be forgone for one movie.
+:   of a movie in terms of pop is
+    ![\\frac{P\_M}{P\_P}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cfrac%7BP_M%7D%7BP_P%7D "\frac{P_M}{P_P}").
+    Equivalently, this is the magnitude of the slope of the budget line.
+    It shows us how many pops must be forgone for one movie.
 
 Since the **relative price** is an **opportunity cost**, the relative
 price of a movie in terms of pops gives us the opportunity cost of a
 movie in terms of pops forgone.
 
 **Changes of Price** modify the slope of the budget line and the
-intercept of the line that the item being changed is plotted on. [^11]
+intercept of the line that the item being changed is plotted on.
+[^11^](#fn11)
 
 **Changes of Income** move the budget line to a parallel line that
 represents less or more money.
@@ -1052,18 +1168,18 @@ Deriving an Individuals Demand Curve to Predict Choices {#sec:deriving_an_indivi
 Efficient people tend to make the best choice by picking something on
 the budget line that is on the highest attainable indifference curve.
 Usually it follows that the marginal rate of substitution between the
-two goods is equal to the relative price of the two goods.[^12]
+two goods is equal to the relative price of the two goods.[^12^](#fn12)
 
 We know that the **MRS** is a measure of how much someone is willing to
 give up a good. Similarly, the **Relative Price** of two goods shows how
 much the user must give up of one good to get another.
 
-When the two are equal, the consumer is just[^13] willing to give up
-what they must give up to improve.
+When the two are equal, the consumer is just[^13^](#fn13) willing to
+give up what they must give up to improve.
 
 ### Changes in Price {#sub:changes_in_price}
 
-Changes of price is called the **Price Effect**[^14].
+Changes of price is called the **Price Effect**[^14^](#fn14).
 
 During price changes, the indifference curves don’t change, but the
 budget line rotates.
@@ -1075,7 +1191,7 @@ consumed.
 
 ### Changes on Income {#sub:changes_on_income}
 
-Changes of price is called the **Income Effect**[^15].
+Changes of price is called the **Income Effect**[^15^](#fn15).
 
 During price changes, the indifference curves don’t change, but the
 budget strafes sideways.
@@ -1084,8 +1200,8 @@ budget strafes sideways.
 
 The **Substitution Effect** is how a change in price modifies the
 quantity of items bought and the consumer remains on the same
-indifference curve.[^16] This means that when the relative price falls,
-the consumer always substitutes more of that good for others.
+indifference curve.[^16^](#fn16) This means that when the relative price
+falls, the consumer always substitutes more of that good for others.
 
 ### Income Effect {#sub:income_effect}
 
@@ -1110,7 +1226,7 @@ expensive and the person tends not to take leisure.
 
 As wages increase, we choose different indifference curves to attain. In
 fact, once wages increase past a certain point, people decide to spend
-less time at work[^17].
+less time at work[^17^](#fn17).
 
 Organizing Production {#cha:organizing_production}
 =====================
@@ -1125,14 +1241,18 @@ incentive of elimination or of acquisition drives this objective.
 Explicit and Implicit Cost {#sec:explicit_and_implicit_cost}
 --------------------------
 
-Profit is the difference between total revenue ($TR$) and total cost
-($TR$).
+Profit is the difference between total revenue
+(![TR](http://chart.apis.google.com/chart?cht=tx&chl=TR "TR")) and total
+cost (![TR](http://chart.apis.google.com/chart?cht=tx&chl=TR "TR")).
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\text{Profit} &= \\text{Total Revenue} -
+\\text{Total Cost} \\\\ &= TR - TC \\\\ TR &= P\_x Q\_x
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7BProfit%7D%20%26%3D%20%5Ctext%7BTotal%20Revenue%7D%20-%20%5Ctext%7BTotal%20Cost%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20TR%20-%20TC%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20TR%20%26%3D%20P_x%20Q_x%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                     \text{Profit} &= \text{Total Revenue} - \text{Total Cost} \\
                     &= TR - TC \\
                     TR &= P_x Q_x
-                \end{aligned}$$
+                \end{aligned}")\
 
 There is a difference between accounting profit and economic profit.
 
@@ -1158,7 +1278,7 @@ The opportunity cost of production is the sum of the cost of resources:
 
 3.  Supplied by the firm’s owner - since the owner supplies
     entrepreneurship || labor, this is how much they’re losing through
-    labor and expected entrepreneurship profit[^18]
+    labor and expected entrepreneurship profit[^18^](#fn18)
 
 ### Firm Decision Making Process {#sub:firm_decision_making_process}
 
@@ -1172,13 +1292,13 @@ Firms must make five basic decisions to maximize profit:
 
 4.  How to market and price products
 
-5.  What to produce, and what to buy from other firms[^19]
+5.  What to produce, and what to buy from other firms[^19^](#fn19)
 
 Similarly, a firm has the constraints of:
 
 Technology
 :   constrains what firms can accomplish using their capital and
-    labor[^20].
+    labor[^20^](#fn20).
 
 Information
 :   occludes what data a firm can use to predict the future.
@@ -1192,9 +1312,12 @@ Technological and Economic Efficiency {#sec:technological_and_economic_efficienc
 
 **Tech Efficiency** is the phenomenon that occurs when a firm produces a
 specified level of output by using minimal inputs. Better stated, a
-technology $A$ is inefficient if at least one other technology $B$ is
-“less expensive” than $A$ in at least one input, and is equal in all
-other inputs.
+technology ![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A") is
+inefficient if at least one other technology
+![B](http://chart.apis.google.com/chart?cht=tx&chl=B "B") is “less
+expensive” than
+![A](http://chart.apis.google.com/chart?cht=tx&chl=A "A") in at least
+one input, and is equal in all other inputs.
 
 **Economic Efficiency** is the phenomenon that occurs when a firm
 produces a given output at minimal cost, comparing the relative costs of
@@ -1220,7 +1343,7 @@ Incentive Systems
 ### Principal-Agent Problem {#sub:principal_agent_problem}
 
 The problem of devising compensation rules to induce an agent to act in
-the interests of a principal[^21] is named the **Principal-Agent
+the interests of a principal[^21^](#fn21) is named the **Principal-Agent
 Problem**.
 
 We can solve this problem with a combination of:
@@ -1252,7 +1375,7 @@ Partnerships
 
 Corporations
 :   are a type of firm owned by one or more stockholders who are only
-    liable for the amount of their initial investment[^22]
+    liable for the amount of their initial investment[^22^](#fn22)
 
 Markets and the Competitive Environment {#sec:markets_and_the_competitive_environment}
 ---------------------------------------
@@ -1286,16 +1409,26 @@ Four-Firm Concentration Ratio
     largest firms.
 
 Herfindahl-Hirschman Index
-:   (HHI) is the square percentage market share $MS_x$ of each firm $x$
-    over the largest $50$ firms in the industry.
+:   (HHI) is the square percentage market share
+    ![MS\_x](http://chart.apis.google.com/chart?cht=tx&chl=MS_x "MS_x")
+    of each firm
+    ![x](http://chart.apis.google.com/chart?cht=tx&chl=x "x") over the
+    largest ![50](http://chart.apis.google.com/chart?cht=tx&chl=50 "50")
+    firms in the industry.
 
-    $$\begin{aligned}
+    \
+    ![\\begin{aligned} \\text{HHI} &= \\frac{\\sum{MS\_x\^2}}{\\sum\_{r
+    \\in \\text { top 50 firms in the industry.}}{MS\_r}}
+    \\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7BHHI%7D%20%26%3D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cfrac%7B%5Csum%7BMS_x%5E2%7D%7D%7B%5Csum_%7Br%20%5Cin%20%5Ctext%20%7B%20top%2050%20firms%20in%20the%20industry.%7D%7D%7BMS_r%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                                     \text{HHI} &=
                                     \frac{\sum{MS_x^2}}{\sum_{r \in \text { top 50 firms in the industry.}}{MS_r}}
-                                \end{aligned}$$
+                                \end{aligned}")\
 
-    Lower scores $~0$ imply highly competitive markets. Higher scores
-    $~10,000$ imply a monopoly.
+    Lower scores
+    ![\~0](http://chart.apis.google.com/chart?cht=tx&chl=~0 "~0") imply
+    highly competitive markets. Higher scores
+    ![\~10,000](http://chart.apis.google.com/chart?cht=tx&chl=~10%2C000 "~10,000")
+    imply a monopoly.
 
 While the above methods establish a good measure of concentration, they
 fail to address geographical scope, barriers to entry, and the
@@ -1304,7 +1437,7 @@ correspondence between the market and firms in the industry.
 ### Markets vs Firms {#sub:markets_vs_firms}
 
 Firms coordinate production more effectively than markets since they are
-driven by efficiency gains vs the market. [^23]
+driven by efficiency gains vs the market. [^23^](#fn23)
 
 Firms can capitalize on:
 
@@ -1373,7 +1506,7 @@ reversed.
 
 The **long run** is the time frame in which the quantities of all
 resources can be varied. These decisions are generally irreversible, and
-involve **sunk cost**s that cannot be changed[^24]
+involve **sunk cost**s that cannot be changed[^24^](#fn24)
 
 ### Sunk Cost {#sub:sunk_cost}
 
@@ -1398,13 +1531,15 @@ and quantity of labor:
 
 -   Average Product
 
-We can create graphs[^25] of how the different products above change
-with respect to labor employed.
+We can create graphs[^25^](#fn25) of how the different products above
+change with respect to labor employed.
 
 ### Total Product Curve {#sub:total_product_curve}
 
-The **Total Product** ($TP$ or $Q$) is the total output produced in a
-given period.
+The **Total Product**
+(![TP](http://chart.apis.google.com/chart?cht=tx&chl=TP "TP") or
+![Q](http://chart.apis.google.com/chart?cht=tx&chl=Q "Q")) is the total
+output produced in a given period.
 
 The curve for this “product” evaluates production wrt labor employed.
 Points below the line are attainable but inefficient; points above the
@@ -1412,16 +1547,22 @@ line are unattainable. Points on the line are efficient and attainable.
 
 ### Marginal Product Curve {#sub:marginal_product_curve}
 
-The **Marginal Product** ($MP$, $\delta TP/\delta L$ or
-$\delta Q/ \delta L$) of labor is the change in total product that by
-increasing labor employed by one.
+The **Marginal Product**
+(![MP](http://chart.apis.google.com/chart?cht=tx&chl=MP "MP"), ![\\delta
+TP/\\delta
+L](http://chart.apis.google.com/chart?cht=tx&chl=%5Cdelta%20TP%2F%5Cdelta%20L "\delta TP/\delta L")
+or ![\\delta Q/ \\delta
+L](http://chart.apis.google.com/chart?cht=tx&chl=%5Cdelta%20Q%2F%20%5Cdelta%20L "\delta Q/ \delta L"))
+of labor is the change in total product that by increasing labor
+employed by one.
 
 As with all marginal `xyz`’s, this curve is effectively the derivative
 of the total product curve. Initially, there are increasing marginal
 returns, but there are diminishing marginal returns past a certain
 point.
 
-The increase is due to a specialization and a division of labor[^26].
+The increase is due to a specialization and a division of
+labor[^26^](#fn26).
 
 The diminishing return arises from the lack of capital and space to work
 in.
@@ -1437,7 +1578,7 @@ The law of diminishing returns states:
 ### Average Product Curve {#sub:average_product_curve}
 
 The **Average Product** of labor is equal to the average product per
-quantity of labor employed[^27].
+quantity of labor employed[^27^](#fn27).
 
 Short Run Cost Curves {#sec:short_run_cost_curves}
 ---------------------
@@ -1453,32 +1594,44 @@ concepts and types of cost curves:
 
 ### Total Cost Curve {#sub:total_cost_curve}
 
-Total cost $TC$ is the cost of *all* resources used. This is broken into
-fixed cost ($TFC$) which is the fixed inputs for all output quantities,
-and variable cost ($TVC$) which is the variable inputs that change with
-output quantities.
+Total cost ![TC](http://chart.apis.google.com/chart?cht=tx&chl=TC "TC")
+is the cost of *all* resources used. This is broken into fixed cost
+(![TFC](http://chart.apis.google.com/chart?cht=tx&chl=TFC "TFC")) which
+is the fixed inputs for all output quantities, and variable cost
+(![TVC](http://chart.apis.google.com/chart?cht=tx&chl=TVC "TVC")) which
+is the variable inputs that change with output quantities.
 
-$$\begin{aligned}
+\
+![\\begin{aligned} TC &= TFC + TVC
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20TC%20%26%3D%20TFC%20%2B%20TVC%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         TC &= TFC + TVC
-                    \end{aligned}$$
+                    \end{aligned}")\
 
 ### Marginal Cost Curves {#sub:marginal_cost_curves}
 
-The **Marginal Cost** ($MC$) is the increase in cost that results from a
-one-unit increase in total product. Over a range with **increasing
-marginal returns**, marginal cost falls as output increases due to
-specialization. Over a range with **decreasing marginal returns**,
-marginal cost rises as output increases.
+The **Marginal Cost**
+(![MC](http://chart.apis.google.com/chart?cht=tx&chl=MC "MC")) is the
+increase in cost that results from a one-unit increase in total product.
+Over a range with **increasing marginal returns**, marginal cost falls
+as output increases due to specialization. Over a range with
+**decreasing marginal returns**, marginal cost rises as output
+increases.
 
 ### Average Total Cost Curve {#sub:average_cost_curve}
 
-The average total cost is expressed as $ATC$. Similar to *total cost*,
-average cost can be separated into **average fixed cost** ($AFC$) and
-**average variable cost** ($AVC$). Similar to total cost,
+The average total cost is expressed as
+![ATC](http://chart.apis.google.com/chart?cht=tx&chl=ATC "ATC"). Similar
+to *total cost*, average cost can be separated into **average fixed
+cost** (![AFC](http://chart.apis.google.com/chart?cht=tx&chl=AFC "AFC"))
+and **average variable cost**
+(![AVC](http://chart.apis.google.com/chart?cht=tx&chl=AVC "AVC")).
+Similar to total cost,
 
-$$\begin{aligned}
+\
+![\\begin{aligned} ATC &= AFC + AVC
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ATC%20%26%3D%20AFC%20%2B%20AVC%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         ATC &= AFC + AVC
-                    \end{aligned}$$
+                    \end{aligned}")\
 
 ### Short-Run Cost {#sub:short_run_cost}
 
@@ -1497,10 +1650,16 @@ increase increase and variable costs decrease.
 
 ### The Affects of Prices of Factors of Production on Cost and Productivity Curves {#sub:the_affects_of_prices_of_factors_of_production_on_cost_and_productivity_curves}
 
-Increasing *fixed* cost increases $TC$, and $ATC$, but $MC$ remains the
+Increasing *fixed* cost increases
+![TC](http://chart.apis.google.com/chart?cht=tx&chl=TC "TC"), and
+![ATC](http://chart.apis.google.com/chart?cht=tx&chl=ATC "ATC"), but
+![MC](http://chart.apis.google.com/chart?cht=tx&chl=MC "MC") remains the
 same.
 
-Increasing *variable* cost increases $TC$, $ATC$, and $MC$ curves
+Increasing *variable* cost increases
+![TC](http://chart.apis.google.com/chart?cht=tx&chl=TC "TC"),
+![ATC](http://chart.apis.google.com/chart?cht=tx&chl=ATC "ATC"), and
+![MC](http://chart.apis.google.com/chart?cht=tx&chl=MC "MC") curves
 upward.
 
 Long Run Cost Curves {#sec:long_run_cost_curves}
@@ -1584,7 +1743,7 @@ Perfect competition arises when both these conditions are met:
 
 -   Firm’s minimum efficient scale is small relative to the market
     demand. We know that the minimum efficient scale is the smallest
-    output level at which the LRAC[^28] reaches the minimum.
+    output level at which the LRAC[^28^](#fn28) reaches the minimum.
 
 -   Each firm produce indistinguishable products.
 
@@ -1605,38 +1764,47 @@ normal profit.
 
 i.e.:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\text{economic profit} &= \\text{total revenue} -
+\\text{total cost} \\\\ \\text{total cost} &= \\text{opportunity cost of
+production} \\\\ \\text{total revenue} &=
+(\\text{price})(\\text{quantity}) \\\\ &= P Q \\\\ &= TR
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7Beconomic%20profit%7D%20%26%3D%20%5Ctext%7Btotal%20revenue%7D%20-%20%5Ctext%7Btotal%20cost%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7Btotal%20cost%7D%20%26%3D%20%5Ctext%7Bopportunity%20cost%20of%20production%7D%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7Btotal%20revenue%7D%20%26%3D%20%28%5Ctext%7Bprice%7D%29%28%5Ctext%7Bquantity%7D%29%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20P%20Q%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20TR%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         \text{economic profit} &= \text{total revenue} - \text{total cost} \\
                         \text{total cost} &= \text{opportunity cost of production} \\
                         \text{total revenue} &= (\text{price})(\text{quantity}) \\
                         &= P Q \\
                         &= TR
-                    \end{aligned}$$
+                    \end{aligned}")\
 
 The marginal revenue is the change in total revenue that results from a
 one-unit increase in quantity sold. Effectively,
 
-$$\begin{aligned}
+\
+![\\begin{aligned} MR &= \\frac{dTR}{dQ}
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20MR%20%26%3D%20%5Cfrac%7BdTR%7D%7BdQ%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                         MR &= \frac{dTR}{dQ}
-                    \end{aligned}$$
+                    \end{aligned}")\
 
 Profit Maximizing Condition {#sec:profit_maximizing_condition}
 ---------------------------
 
 Firms want to maximize their economic profit, so they must decide:
 
--   How to produce at a minimum cost[^29]
+-   How to produce at a minimum cost[^29^](#fn29)
 
 -   What quantity to output
 
 -   Whether to enter or exit a market
 
 A perfectly competitive firm chooses output that maximizes economic
-output. Said otherwise, they’re trying to maximize $TR - TC$.
+output. Said otherwise, they’re trying to maximize ![TR -
+TC](http://chart.apis.google.com/chart?cht=tx&chl=TR%20-%20TC "TR - TC").
 
 In a perfect competition, since the marginal cost (MC) eventually
 increases and the marginal revenue (MR) is constant, we can look for the
-point where $\textsc{MR} == \textsc{MC}$.
+point where ![\\textsc{MR} ==
+\\textsc{MC}](http://chart.apis.google.com/chart?cht=tx&chl=%5Ctextsc%7BMR%7D%20%3D%3D%20%5Ctextsc%7BMC%7D "\textsc{MR} == \textsc{MC}").
 
 On a table-like question, find the column that maximizes this profit.
 
@@ -1651,14 +1819,19 @@ must decide to either **shut down** temporarily, or to produce goods.
 These decision points will be based on the firm’s economic best
 interest. We can say that the economic cost can be tabulated as follows:
 
-$$\begin{aligned}
+\
+![\\begin{aligned} \\text{Economic loss} &= (\\text{Total fixed cost}) +
+(\\text{total variable cost}) - (\\text{total revenue}) \\\\ &=
+\\textsc{TFC} + \\textsc{Q}(\\textsc{AVC}) - \\textsc{Q}(\\textsc{P})
+\\end{aligned}](http://chart.apis.google.com/chart?cht=tx&chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Ctext%7BEconomic%20loss%7D%20%26%3D%20%28%5Ctext%7BTotal%20fixed%20cost%7D%29%20%2B%20%28%5Ctext%7Btotal%20variable%20cost%7D%29%20-%20%28%5Ctext%7Btotal%20revenue%7D%29%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%26%3D%20%5Ctextsc%7BTFC%7D%20%2B%20%5Ctextsc%7BQ%7D%28%5Ctextsc%7BAVC%7D%29%20-%20%5Ctextsc%7BQ%7D%28%5Ctextsc%7BP%7D%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D "\begin{aligned}
                     \text{Economic loss} &= (\text{Total fixed cost}) + (\text{total variable cost}) - (\text{total revenue}) \\
                     &= \textsc{TFC} + \textsc{Q}(\textsc{AVC}) - \textsc{Q}(\textsc{P})
-                \end{aligned}$$
+                \end{aligned}")\
 
-When a firm shuts down, $Q=0$ and the firm still needs to pay the TFC.
-Alternatively, if ATC exceeds the price, the loss exceeds the TFC, and
-the firm shuts down.
+When a firm shuts down,
+![Q=0](http://chart.apis.google.com/chart?cht=tx&chl=Q%3D0 "Q=0") and
+the firm still needs to pay the TFC. Alternatively, if ATC exceeds the
+price, the loss exceeds the TFC, and the firm shuts down.
 
 At the shutdown point (i.e. the economic advantage of production is 0),
 the firm is indifferent between producing and shutting down.
@@ -1674,7 +1847,7 @@ When the supply curve is equal to the AVC, some firms will produce the
 shutdown quantity, and others will produce zero. The market is perfectly
 elastic.
 
-By increasing the demand[^30], the price and quantity produced
+By increasing the demand[^30^](#fn30), the price and quantity produced
 increased. Vice versa holds.
 
 ### Profits and Losses in the Short Run {#sub:profits_and_losses_in_the_short_run}
@@ -1833,7 +2006,8 @@ Ownership
 
 Legal
 :   - When entrance to a market is restricted by a public
-    franchise[^31], Government License[^32], a Patent, or a Copyright.
+    franchise[^31^](#fn31), Government License[^32^](#fn32), a Patent,
+    or a Copyright.
 
 Price-Setting Strategies {#sec:price_setting_strategies}
 ------------------------
@@ -1850,10 +2024,13 @@ Price Discrimination
 The average revenue (AR) of a monopolist is the market demand curve.
 
 The total revenue (TR) is the price multiplied by the quantity sold
-($\textsc{TR} = PQ$) The marginal revenue (MR) is the change in total
-revenue that results from a one-unit increase in the quantity sold. For
-a single-price monopoly, the marginal revenue is less than the price at
-each level of output ($MR < P$).
+(![\\textsc{TR} =
+PQ](http://chart.apis.google.com/chart?cht=tx&chl=%5Ctextsc%7BTR%7D%20%3D%20PQ "\textsc{TR} = PQ"))
+The marginal revenue (MR) is the change in total revenue that results
+from a one-unit increase in the quantity sold. For a single-price
+monopoly, the marginal revenue is less than the price at each level of
+output (![MR \<
+P](http://chart.apis.google.com/chart?cht=tx&chl=MR%20%3C%20P "MR < P")).
 
 To sell more, monopolies must set a lower price. When this happens, we
 effect the TR by:
@@ -1877,7 +2054,8 @@ Price and Output Decision {#sec:price_and_output_decision}
 
 The monopoly sets the price where they can make the most profit.
 
-A monopoly makes profit when $\textsc{MR} = \textsc{MC}$.
+A monopoly makes profit when ![\\textsc{MR} =
+\\textsc{MC}](http://chart.apis.google.com/chart?cht=tx&chl=%5Ctextsc%7BMR%7D%20%3D%20%5Ctextsc%7BMC%7D "\textsc{MR} = \textsc{MC}").
 
 Monopolies may make economic profits in the long run, and ones that
 incur economic losses may shut down temporarily in the short run, or
@@ -1934,7 +2112,7 @@ To be able to price discriminate, a monopoly must:
 
 Firms can increase their profit through price discrimination. **Perfect
 price discrimination** occurs if a firm is able to sell each unit at the
-highest price anyone is willing to pay[^33].
+highest price anyone is willing to pay[^33^](#fn33).
 
 ### Rent Seeking with Price Discrimination {#sub:rent_seeking_with_price_discrimination}
 
@@ -1978,86 +2156,94 @@ monopoly’s marginal cost. Since the quantity demanded at the marginal
 cost price is the efficient quantity, this works. Comparing price and
 output between monopoly and perfect competition
 
-[^1]: This is an optimization problem. I think it’s called the integer
-    backpack problem, but our solution **should** work.
+* * * * *
 
-[^2]: Ok, duh. That’s obvious.
+1.  This is an optimization problem. I think it’s called the integer
+    backpack problem, but our solution **should** work.[↩](#fnref1)
 
-[^3]: This is usually income inside micro-economics
+2.  Ok, duh. That’s obvious.[↩](#fnref2)
 
-[^4]: Ok, duh. That’s obvious too.
+3.  This is usually income inside micro-economics[↩](#fnref3)
 
-[^5]: WTF how is this a paradox? Nobody knows, but this is math.
-    Anything goes, for the un-initiated and un-thinking public.
+4.  Ok, duh. That’s obvious too.[↩](#fnref4)
 
-[^6]: MRS is measured as the absolute derivative.
+5.  WTF how is this a paradox? Nobody knows, but this is math. Anything
+    goes, for the un-initiated and un-thinking public.[↩](#fnref5)
 
-[^7]: Think of gum brands.
+6.  MRS is measured as the absolute derivative.[↩](#fnref6)
 
-[^8]: Think of left/right shoes.
+7.  Think of gum brands.[↩](#fnref7)
 
-[^9]: This is called “inside” the budget line
+8.  Think of left/right shoes.[↩](#fnref8)
 
-[^10]: Similarly, this is called “outside” the budget line.
+9.  This is called “inside” the budget line[↩](#fnref9)
 
-[^11]: i.e. if Burgers are being plotted on the $x$-axis, then only the
-    $x$-intercept will be changed.
+10. Similarly, this is called “outside” the budget line.[↩](#fnref10)
 
-[^12]: That’s because the two lines must be tangential at this point.
-    Check out a graph (not included D: )
+11. i.e. if Burgers are being plotted on the
+    ![x](http://chart.apis.google.com/chart?cht=tx&chl=x "x")-axis, then
+    only the
+    ![x](http://chart.apis.google.com/chart?cht=tx&chl=x "x")-intercept
+    will be changed.[↩](#fnref11)
 
-[^13]: i.e. barely
+12. That’s because the two lines must be tangential at this point. Check
+    out a graph (not included D: )[↩](#fnref12)
 
-[^14]: Wtf, I know.
+13. i.e. barely[↩](#fnref13)
 
-[^15]: Wtf, I know.
+14. Wtf, I know.[↩](#fnref14)
 
-[^16]: Pictorially, this doesn’t make any sense to me. Since when the
+15. Wtf, I know.[↩](#fnref15)
+
+16. Pictorially, this doesn’t make any sense to me. Since when the
     prices change, the budget line rotates, it almost surely must
     intersect a new indifference curve. I suppose if both prices change
-    at the same time, this is possible.
+    at the same time, this is possible.[↩](#fnref16)
 
-[^17]: Make lots of money, work less. Sounds good to me.
+17. Make lots of money, work less. Sounds good to me.[↩](#fnref17)
 
-[^18]: This is also sometimes called the normal profit.
+18. This is also sometimes called the normal profit.[↩](#fnref18)
 
-[^19]: This decision is called the “make-buy” decision.
+19. This decision is called the “make-buy” decision.[↩](#fnref19)
 
-[^20]: Alternatively, it’s a function that converts labor and capital
-    into goods
+20. Alternatively, it’s a function that converts labor and capital into
+    goods[↩](#fnref20)
 
-[^21]: Stockholders of a firm are the principals, and the managers of a
-    firm are their agents.
+21. Stockholders of a firm are the principals, and the managers of a
+    firm are their agents.[↩](#fnref21)
 
-[^22]: This is usually in the form of the paper value of their stock.
+22. This is usually in the form of the paper value of their
+    stock.[↩](#fnref22)
 
-[^23]: It took me a while to understand this, but they’re talking about
-    how firms can coordinate their production more effectively than
-    markets due to the firms individual drive to be increasingly
-    efficient. For example, it’s hard for a market to move to outsourced
-    production, but individual firms may be able to do this to
-    consolidate their dealings with others. Of course, this is expressed
-    in four bullet points for reasons that escape me.
+23. It took me a while to understand this, but they’re talking about how
+    firms can coordinate their production more effectively than markets
+    due to the firms individual drive to be increasingly efficient. For
+    example, it’s hard for a market to move to outsourced production,
+    but individual firms may be able to do this to consolidate their
+    dealings with others. Of course, this is expressed in four bullet
+    points for reasons that escape me.[↩](#fnref23)
 
-[^24]: If an asset has no resale value, the amount paid is a sunk cost.
+24. If an asset has no resale value, the amount paid is a sunk
+    cost.[↩](#fnref24)
 
-[^25]: They call these curves. For whatever reason, the words “plot” and
-    “graph” are anathema to these people.
+25. They call these curves. For whatever reason, the words “plot” and
+    “graph” are anathema to these people.[↩](#fnref25)
 
-[^26]: The phrase “context switch” comes to mind.
+26. The phrase “context switch” comes to mind.[↩](#fnref26)
 
-[^27]: Obviously
+27. Obviously[↩](#fnref27)
 
-[^28]: What’s an LRAC?
+28. What’s an LRAC?[↩](#fnref28)
 
-[^29]: It does this by operating with the plant that minimizes LRAC
-    (TODO: What is LRAC?)
+29. It does this by operating with the plant that minimizes LRAC (TODO:
+    What is LRAC?)[↩](#fnref29)
 
-[^30]: By this, we shift the demand-curve to the right
+30. By this, we shift the demand-curve to the right[↩](#fnref30)
 
-[^31]: Like the Canada Post
+31. Like the Canada Post[↩](#fnref31)
 
-[^32]: Like a license to sell cell-phones, practice engineering, etc.
+32. Like a license to sell cell-phones, practice engineering,
+    etc.[↩](#fnref32)
 
-[^33]: Tweeted on [Nov
-    25](https://twitter.com/shalecraig/status/405013136597475329)
+33. Tweeted on [Nov
+    25](https://twitter.com/shalecraig/status/405013136597475329)[↩](#fnref33)

@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>CS 360 Term Notes</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">CS 360 Term Notes</h1>
+</div>
+<h1 id="introduction">Introduction</h1>
+<h2 id="countable-and-uncountable-sets">Countable and Uncountable sets</h2>
+<p>When talking about the size of a set, they can be infinite or finite. When talking about an order, sets can be countable (i.e. enumerable) or uncountable (i.e. innumerable).</p>
+<p>Iff some set <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> is enumerable, then there must exist an invertible function <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=f" alt="f" title="f" /> such that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=f%3A%5Cmathbbold%7BN%7D%20%5Cto%20A" alt="f:\mathbbold{N} \to A" title="f:\mathbbold{N} \to A" />.</p>
+<h2 id="alphabets-strings-and-languages">Alphabets, Strings, and Languages</h2>
+<p>Alphabets (usually denoted by <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CSigma" alt="\Sigma" title="\Sigma" />) are sets of unique characters. Strings are ordered sets of (possibly repeating characters in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CSigma" alt="\Sigma" title="\Sigma" />). Languages are defined sets of words.</p>
+<h1 id="regular-languages">Regular Languages</h1>
+<h2 id="regular-languages-1">Regular Languages</h2>
+<p>Regular Languages are languages recognizable by Regular Expressions.</p>
+<p>All finite languages are regular. Not all regular languages are finite.</p>
+<h2 id="state-machines">State Machines</h2>
+<h3 id="dfas">DFAs</h3>
+<p>DFA is short for Deterministic Finite State Machine.</p>
+<p>A DFA <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> is a <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=5" alt="5" title="5" />-tuple of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7B%5Censuremath%7B%5Cleft%20%5Clangle%20Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F%20%5Cright%20%5Crangle%20%7D%7D" alt="{\ensuremath{\left \langle Q, \Sigma, \delta, q_0, F \right \rangle }}" title="{\ensuremath{\left \langle Q, \Sigma, \delta, q_0, F \right \rangle }}" />. Where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Q" alt="Q" title="Q" /> is a set of possible states, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CSigma" alt="\Sigma" title="\Sigma" /> is the language, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta" alt="\delta" title="\delta" /> is a transfer function <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta%3A%20Q%2C%20%5CSigma%20%5Cto%20Q" alt="\delta: Q, \Sigma \to Q" title="\delta: Q, \Sigma \to Q" />.</p>
+<h3 id="nfas">NFAs</h3>
+<p>DFA is short for Non-deterministic Finite State Machine.</p>
+<p>A NFA <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> is a <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=5" alt="5" title="5" />-tuple of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7B%5Censuremath%7B%5Cleft%20%5Clangle%20Q%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F%20%5Cright%20%5Crangle%20%7D%7D" alt="{\ensuremath{\left \langle Q, \Sigma, \delta, q_0, F \right \rangle }}" title="{\ensuremath{\left \langle Q, \Sigma, \delta, q_0, F \right \rangle }}" />. Where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Q" alt="Q" title="Q" /> is a set of possible states, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CSigma" alt="\Sigma" title="\Sigma" /> is the language, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta" alt="\delta" title="\delta" /> is a transfer function <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta%3A%20Q%2C%20%5CSigma%20%5Cto%20P%28Q%29" alt="\delta: Q, \Sigma \to P(Q)" title="\delta: Q, \Sigma \to P(Q)" />. <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=P%28Q%29" alt="P(Q)" title="P(Q)" /> is the powerset of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Q" alt="Q" title="Q" /> (i.e. the set of all subsets of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Q" alt="Q" title="Q" />).</p>
+<h2 id="equivalence-of-nfas-and-dfas">Equivalence of NFAs and DFAs</h2>
+<p>NFAs and DFAs are equivalent.</p>
+<p>We can change an DFA into a NFA trivially.</p>
+<p>We can change a NFA into a DFA through the powerset construction - i.e. we can define <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta_%7BDFA%7D" alt="\delta_{DFA}" title="\delta_{DFA}" /> by calling each <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R%20%5Cin%20P%28Q_%7BNFA%7D%29" alt="R \in P(Q_{NFA})" title="R \in P(Q_{NFA})" /> a state of our new NFA. Transition functions will be <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R%2C%20%5CSigma%20%5Cto%20Q_%7BDFA%7D" alt="R, \Sigma \to Q_{DFA}" title="R, \Sigma \to Q_{DFA}" />.</p>
+<h2 id="regular-operations">Regular Operations</h2>
+<p>Given two languages <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />, there are three regular operations:</p>
+<ol>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C%20%3D%20A%20%5Ccup%20B" alt="C = A \cup B" title="C = A \cup B" />:</p>
+<p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> is defined to be the language that accepts any string in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> or <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> or both.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C%20%3D%20A%20%5Ccap%20B" alt="C = A \cap B" title="C = A \cap B" />:</p>
+<p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> is defined to be the language that accepts any string in both <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C%20%3D%20A%5E%2A" alt="C = A^*" title="C = A^*" />:</p>
+<p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> is defined to be the language that accepts any string in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5C%7B%20%5Cvarepsilon%20%5C%7D%20%5Ccup%20A%20%5Ccup%20AA%20%5Ccup%20AAA%20%5Ccup%20%5Cldots" alt="\{ \varepsilon \} \cup A \cup AA \cup AAA \cup \ldots" title="\{ \varepsilon \} \cup A \cup AA \cup AAA \cup \ldots" /></p>
+<p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cvarepsilon" alt="\varepsilon" title="\varepsilon" /> is the empty string.</p></li>
+</ol>
+<h2 id="closure-properties-of-regular-languages">Closure Properties of Regular Languages</h2>
+<p>Given that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> are regular:</p>
+<ol>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Ccup%20B" alt="A \cup B" title="A \cup B" /> is regular</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Ccap%20B" alt="A \cap B" title="A \cap B" /> is regular</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%5E%2A" alt="A^*" title="A^*" /> is regular</p></li>
+</ol>
+<h2 id="regular-expressions-and-their-equivalence-with-nfas-and-dfas">Regular Expressions and Their Equivalence with NFAs and DFAs</h2>
+<p>Regular expressions describe the same languages as NFAs/DFAs:</p>
+<p>Regular expressions can be turned into NFA’s trivially. NFAs can describe the same languages as DFAs, so that reduction works.</p>
+<p>Transitions in DFAs can be reduced to Regular Expressions by forcing transitions to have Regular Expressions, then removing state diagrams until a Regular Expression appears.</p>
+<h2 id="techniques-for-proving-certain-languages-are-non-regular">Techniques for Proving Certain Languages are Non-Regular</h2>
+<p>We can use a few techniques to prove certain languages are non-regular, but the main one seems to be that the pumping lemma holds for every regular language.</p>
+<p>The states:</p>
+<p>For every a Regular Language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" />, there is a <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=p%20%5Cge%201" alt="p \ge 1" title="p \ge 1" /> such that every <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=w%20%5Cin%20L" alt="w \in L" title="w \in L" /> where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7Cw%7C%20%5Cge%20p" alt="|w| \ge p" title="|w| \ge p" /> can be written as <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=w%20%3D%20xyz" alt="w = xyz" title="w = xyz" />. Where the following holds:</p>
+<ul>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7Cy%7C%20%5Cge%201" alt="|y| \ge 1" title="|y| \ge 1" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7Cxy%7C%20%5Cle%20p" alt="|xy| \le p" title="|xy| \le p" /></p></li>
+<li><p>for all <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=i%20%5Cge%200" alt="i \ge 0" title="i \ge 0" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=xy%5Eiz%20%5Cin%20L" alt="xy^iz \in L" title="xy^iz \in L" /></p></li>
+</ul>
+<p>i.e. every Regular Language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" /> has a pumping length <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=p" alt="p" title="p" /> such that every string <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=w" alt="w" title="w" /> where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7Cw%7C%5Cge%20p" alt="|w|\ge p" title="|w|\ge p" /> must have a portion that can be repeated indefinitely (or removed altogether).</p>
+<h2 id="further-discussion-of-regular-languages-finite-automata-and-regular-expressions">Further Discussion of Regular Languages, Finite Automata, and Regular Expressions</h2>
+<p>TODO: Not sure what we did here.</p>
+<h1 id="context-free-grammars-and-languages">Context-Free Grammars and Languages</h1>
+<h2 id="context-free-grammars-and-languages-1">Context-Free Grammars and Languages</h2>
+<p>A context-free grammar <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=G" alt="G" title="G" /> defines a context-free language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L%28G%29" alt="L(G)" title="L(G)" />.</p>
+<p>CFG’s are defined as a 4-tuple <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=G%20%3D%20%28V%2C%20%5CSigma%2C%20R%2C%20S%29" alt="G = (V, \Sigma, R, S)" title="G = (V, \Sigma, R, S)" />, where:</p>
+<ul>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=V" alt="V" title="V" /> is a finite set of non-terminal characters.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CSigma" alt="\Sigma" title="\Sigma" /> is a set of terminal characters that make up the language. As a rule, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=V%20%5Ccap%20%5CSigma%20%3D%20%5Cvarnothing" alt="V \cap \Sigma = \varnothing" title="V \cap \Sigma = \varnothing" />.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R" alt="R" title="R" /> is a relation <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R%3A%20V%20%5Cto%20%28V%20%5Ccup%20%5CSigma%29%5E%2A" alt="R: V \to (V \cup \Sigma)^*" title="R: V \to (V \cup \Sigma)^*" />.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S" alt="S" title="S" /> is the start variable (or start symbol. By definition, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S%20%5Cin%20V" alt="S \in V" title="S \in V" />.</p></li>
+</ul>
+<p>For example, this is a context-free grammar that accepts all strings that are odd length and contain a <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=1" alt="1" title="1" /> in the middle:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20S%20%26%5Cto%20USU%20%7C%201%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20U%20%26%5Cto%200%20%7C%201%20%5C%5C%0A%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+            S &amp;\to USU | 1 \\
+            U &amp;\to 0 | 1 \\
+        \end{aligned}" title="\begin{aligned}
+            S &amp;\to USU | 1 \\
+            U &amp;\to 0 | 1 \\
+        \end{aligned}" /><br /></p>
+<p>Every regular language can be expressed by a CFG.</p>
+<h2 id="parse-trees-and-ambiguity">Parse Trees and Ambiguity</h2>
+<p>Parse trees are simple, and they are ambiguous.</p>
+<p>For example, how many ways are there to parse <code>x+++x</code>? It’s probably defined in the language spec, but a CFG may mess up interpreting this line of code.</p>
+<h2 id="more-examples-of-context-free-grammars">More Examples of Context-Free Grammars</h2>
+<p>I can’t believe we spent a full class on this. It’s simple.</p>
+<h2 id="normal-forms-for-cfgs">Normal forms for CFGs</h2>
+<p><a href="http://en.wikipedia.org/wiki/Chomsky_normal_form">Chomsky Normal Form</a> is a form of writing CFGs. All CFGs can be written in CNF.</p>
+<p>A grammar is said to be in CNF if all production rules are in the form:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20A%20%26%5Cto%20BC%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20A%20%26%5Cto%20%5Calpha%20%5C%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20A%20%26%5Cto%20%5Cvarepsilon%0A%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+            A &amp;\to BC \\
+            A &amp;\to \alpha \\
+            A &amp;\to \varepsilon
+        \end{aligned}" title="\begin{aligned}
+            A &amp;\to BC \\
+            A &amp;\to \alpha \\
+            A &amp;\to \varepsilon
+        \end{aligned}" /><br /></p>
+<p>Where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> are nonterminal symbols, are not <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=S" alt="S" title="S" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Calpha" alt="\alpha" title="\alpha" /> is a terminal symbol. Of course, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cvarepsilon" alt="\varepsilon" title="\varepsilon" /> is the empty string.</p>
+<h2 id="closure-properties-for-cfls">Closure Properties for CFLs</h2>
+<p>Context-Free Languages are closed under the following operations: (Assume that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> are in CFL)</p>
+<ol>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Ccup%20B" alt="A \cup B" title="A \cup B" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=AB" alt="AB" title="AB" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Ctext%7Breverse%7D%28A%29" alt="\text{reverse}(A)" title="\text{reverse}(A)" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%5E%2A" alt="A^*" title="A^*" /></p></li>
+</ol>
+<p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmathsf%7BA%7D" alt="\mathsf{A}" title="\mathsf{A}" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Ccap%20B" alt="A \cap B" title="A \cap B" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Csetminus%20B" alt="A \setminus B" title="A \setminus B" /> are not CFLs.</p>
+<h2 id="techniques-for-proving-certain-languages-are-non-context-free">Techniques for Proving Certain Languages are Non-Context-Free</h2>
+<p>We can use a few techniques to prove certain languages are non-Context-Free, but the main one is the pumping lemma holds for every Context-Free language.</p>
+<p>The states:</p>
+<p>For every a Context-Free Language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" />, there exists a <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=p%20%5Cge%201" alt="p \ge 1" title="p \ge 1" /> such that for every <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=w%20%5Cin%20L" alt="w \in L" title="w \in L" /> where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7Cw%7C%20%5Cge%20p" alt="|w| \ge p" title="|w| \ge p" /> can be written as <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=w%20%3D%20uvxyz" alt="w = uvxyz" title="w = uvxyz" />. Where the following holds:</p>
+<ul>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7Cvxy%7C%20%5Cle%20p" alt="|vxy| \le p" title="|vxy| \le p" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=vx%20%5Cne%20%5Cvarepsilon" alt="vx \ne \varepsilon" title="vx \ne \varepsilon" /></p></li>
+<li><p>For all <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=i%20%5Cge%200" alt="i \ge 0" title="i \ge 0" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=uv%5Eixy%5Eiz%20%5Cin%20L" alt="uv^ixy^iz \in L" title="uv^ixy^iz \in L" />.</p></li>
+</ul>
+<p>i.e. every Context-Free Language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" /> has a pumping length <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=p" alt="p" title="p" /> such that every string <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=w" alt="w" title="w" /> where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7Cw%7C%20%5Cge%20p" alt="|w| \ge p" title="|w| \ge p" /> must have a rule (or chain of rules) such that indefinitely (or removed altogether).</p>
+<h2 id="further-discussion-of-context-free-languages-and-grammars">Further Discussion of Context-Free Languages and Grammars</h2>
+<p>TODO: Not sure what we did here.</p>
+<h1 id="turing-machines">Turing Machines</h1>
+<h2 id="pushdown-automata">Pushdown Automata</h2>
+<p>A machine that has a stack and reads input from a tape. It can recognize a superset of Context-Free Languages.</p>
+<p>A Pushdown Automata can be expressed as a 7-tuple:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20M%20%3D%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20Q%2C%20%5CSigma%2C%20%5CGamma%2C%20%5Cdelta%2C%20q_0%2C%20Z%2C%20F%20%5Cright%20%5Crangle%20%7D%7D%0A%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+            M = {\ensuremath{\left \langle Q, \Sigma, \Gamma, \delta, q_0, Z, F \right \rangle }}
+        \end{aligned}" title="\begin{aligned}
+            M = {\ensuremath{\left \langle Q, \Sigma, \Gamma, \delta, q_0, Z, F \right \rangle }}
+        \end{aligned}" /><br /></p>
+<p>Where:</p>
+<ul>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Q" alt="Q" title="Q" /> is a finite set of states.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CSigma" alt="\Sigma" title="\Sigma" /> is the alphabet.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CGamma" alt="\Gamma" title="\Gamma" /> is the stack alphabet. It’s the set of symbols that can go on the stack.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=q_0%20%5Cin%20Q" alt="q_0 \in Q" title="q_0 \in Q" /> is the start state.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Z%20%5Cin%20%5CGamma" alt="Z \in \Gamma" title="Z \in \Gamma" /> is the initial stack symbol. It’s the initial value in the stack.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=F%20%5Csubseteq%20Q" alt="F \subseteq Q" title="F \subseteq Q" /> is the set of accepting states.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta" alt="\delta" title="\delta" /> is the transition function that operates as follows:</p>
+<ul>
+<li><p>Pop <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Calpha%20%5Cin%20%5CGamma" alt="\alpha \in \Gamma" title="\alpha \in \Gamma" /> from the stack.</p></li>
+<li><p>Read input <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=r%20%5Cin%20%28%5CSigma%20%5Ccup%20%5C%7B%20%5Cvarepsilon%20%5C%7D%29" alt="r \in (\Sigma \cup \{ \varepsilon \})" title="r \in (\Sigma \cup \{ \varepsilon \})" />.</p></li>
+<li><p>See current state is <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=q%20%5Cin%20Q" alt="q \in Q" title="q \in Q" />.</p></li>
+<li><p>Move to a new state <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=q%27%20%5Cin%20Q" alt="q&#39; \in Q" title="q&#39; \in Q" />.</p></li>
+<li><p>Push a new variable on the stack: <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Calpha%27%20%5Cin%20%5CGamma" alt="\alpha&#39; \in \Gamma" title="\alpha&#39; \in \Gamma" />.</p></li>
+</ul>
+<p>i.e. <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta%3A%20%5CGamma%20%5Ctimes%20%28%5CSigma%20%5Ccup%20%5C%7B%20%5Cvarepsilon%20%5C%7D%29%20%5Ctimes%20Q%20%5Cto%20Q%20%5Ctimes%20%5CGamma%5E%2A" alt="\delta: \Gamma \times (\Sigma \cup \{ \varepsilon \}) \times Q \to Q \times \Gamma^*" title="\delta: \Gamma \times (\Sigma \cup \{ \varepsilon \}) \times Q \to Q \times \Gamma^*" /></p></li>
+</ul>
+<h2 id="the-turing-machine-model">The Turing machine model</h2>
+<p>Turing Machines are similar to PDAs but aren’t exactly the same thing. Turing-machines consist of an infinitely long tape, a tape head, a state register and a function.</p>
+<p>More formally, Turing Machines can be specified by a 7-Tuple:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20M%20%3D%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20Q%2C%20%5CGamma%2C%20b%2C%20%5CSigma%2C%20%5Cdelta%2C%20q_0%2C%20F%20%5Cright%20%5Crangle%20%7D%7D%0A%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+            M = {\ensuremath{\left \langle Q, \Gamma, b, \Sigma, \delta, q_0, F \right \rangle }}
+        \end{aligned}" title="\begin{aligned}
+            M = {\ensuremath{\left \langle Q, \Gamma, b, \Sigma, \delta, q_0, F \right \rangle }}
+        \end{aligned}" /><br /></p>
+<p>Where:</p>
+<ol>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Q" alt="Q" title="Q" /> is a set of states</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CGamma" alt="\Gamma" title="\Gamma" /> is the tape alphabet. Basically what the tape can store.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=b%20%5Cin%20%5CGamma" alt="b \in \Gamma" title="b \in \Gamma" /> is the blank symbol. It’s the “initial” value of most of the tape.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CSigma%20%5Cin%20%5CGamma" alt="\Sigma \in \Gamma" title="\Sigma \in \Gamma" /> is the set of input symbols.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=F%20%5Csubseteq%20Q" alt="F \subseteq Q" title="F \subseteq Q" /> is the set of accepting states.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta%3A%20Q%20%5Csetminus%20F%20%5Ctimes%20%5CGamma%20%5Cto%20Q%20%5Ctimes%20%5CGamma%20%5Ctimes%20%5C%7B%20L%2C%20R%20%5C%7D" alt="\delta: Q \setminus F \times \Gamma \to Q \times \Gamma \times \{ L, R \}" title="\delta: Q \setminus F \times \Gamma \to Q \times \Gamma \times \{ L, R \}" />. <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta" alt="\delta" title="\delta" /> is the transition function. It changes the state, writes to the tape, and moves the tape based on based on the value of the tape at the current location and starting state.</p></li>
+</ol>
+<h2 id="variants-of-turing-machines">Variants of Turing Machines</h2>
+<p>TODO: Not sure what we did here.</p>
+<h2 id="specifications-of-dtms">Specifications of DTMs</h2>
+<p>TODO: Not sure what we did here.</p>
+<h2 id="the-church-turing-thesis">The Church-Turing thesis</h2>
+<p>Basically, the thesis states that a function is algorithmically computable if and only if it is computable by a Turing machine.</p>
+<h2 id="encoding-schemes">Encoding schemes</h2>
+<p>We can encode anything as a set of 0’s and 1’s by serializing it. For example, we can denote an encoding of a DTM <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> as <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7B%5Censuremath%7B%5Cleft%20%5Clangle%20M%20%5Cright%20%5Crangle%20%7D%7D" alt="{\ensuremath{\left \langle M \right \rangle }}" title="{\ensuremath{\left \langle M \right \rangle }}" />.</p>
+<p>That’s all I believe I need to write.</p>
+<h1 id="decidable-and-recognizable-languages">Decidable and Recognizable Languages</h1>
+<h2 id="decidable-and-turing-recognizable-languages">Decidable and Turing-Recognizable Languages</h2>
+<p>Turing-Recognizable Languages are languages that can be “recognized” by a Turing Machine. i.e. A language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=P" alt="P" title="P" /> is said to be Turing Recognizable if there exists a Turing Machine <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> such that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L%28M%29%20%3D%20P" alt="L(M) = P" title="L(M) = P" />.</p>
+<p>Decidable Languages are languages that can be “decided” by a Turing Machine. i.e. A language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=P" alt="P" title="P" /> is said to be decidable if there exists a Turing Machine <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> such that for every input string <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=r%20%5Cin%20%5CSigma%5E%2A" alt="r \in \Sigma^*" title="r \in \Sigma^*" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> will halt and output “accept” or “reject”.</p>
+<h2 id="closure-properties-of-decidable-and-turing-recognizable-languages">Closure Properties of Decidable and Turing-Recognizable Languages</h2>
+<p>Decidable Languages are closed under:</p>
+<ul>
+<li><p>Union</p></li>
+<li><p>Intersection</p></li>
+<li><p>Complementation</p></li>
+<li><p>Concatenation</p></li>
+<li><p>Kleene Star</p></li>
+</ul>
+<p>Turing-Recognizable Languages are closed under:</p>
+<ul>
+<li><p>Union</p></li>
+<li><p>Intersection</p></li>
+<li><p>Concatenation</p></li>
+<li><p>Kleene Star</p></li>
+</ul>
+<h2 id="some-decidable-languages">Some Decidable Languages</h2>
+<ul>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A_%7BDFA%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20B%2C%20w%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20B%20%5Ctext%7Bis%20a%20DFA%20that%20accepts%20input%20string%20w%7D%20%5C%7D" alt="A_{DFA} = \{ {\ensuremath{\left \langle B, w \right \rangle }} | B \text{is a DFA that accepts input string w} \}" title="A_{DFA} = \{ {\ensuremath{\left \langle B, w \right \rangle }} | B \text{is a DFA that accepts input string w} \}" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A_%7BNFA%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20B%2C%20w%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20B%20%5Ctext%7Bis%20an%20NFA%20that%20accepts%20input%20string%20w%7D%20%5C%7D" alt="A_{NFA} = \{ {\ensuremath{\left \langle B, w \right \rangle }} | B \text{is an NFA that accepts input string w} \}" title="A_{NFA} = \{ {\ensuremath{\left \langle B, w \right \rangle }} | B \text{is an NFA that accepts input string w} \}" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A_%7BREX%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20B%2C%20w%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20B%20%5Ctext%7Bis%20a%20regular%20expression%20that%20accepts%20input%20string%20w%7D%20%5C%7D" alt="A_{REX} = \{ {\ensuremath{\left \langle B, w \right \rangle }} | B \text{is a regular expression that accepts input string w} \}" title="A_{REX} = \{ {\ensuremath{\left \langle B, w \right \rangle }} | B \text{is a regular expression that accepts input string w} \}" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=E_%7BDFA%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20A%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20A%20%5Ctext%7Bis%20a%20DFA%20and%20%7D%20L%28A%29%20%3D%20%5Cemptyset%20%5C%7D" alt="E_{DFA} = \{ {\ensuremath{\left \langle A \right \rangle }} | A \text{is a DFA and } L(A) = \emptyset \}" title="E_{DFA} = \{ {\ensuremath{\left \langle A \right \rangle }} | A \text{is a DFA and } L(A) = \emptyset \}" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=EQ_%7BDFA%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20A%2C%20B%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20A%20%5Ctext%7B%20and%20%7D%20B%20%5Ctext%7Bare%20DFAs%20and%20%7D%20L%28A%29%20%3D%20L%28B%29%20%5C%7D" alt="EQ_{DFA} = \{ {\ensuremath{\left \langle A, B \right \rangle }} | A \text{ and } B \text{are DFAs and } L(A) = L(B) \}" title="EQ_{DFA} = \{ {\ensuremath{\left \langle A, B \right \rangle }} | A \text{ and } B \text{are DFAs and } L(A) = L(B) \}" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A_%7BCFG%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20G%2C%20w%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20G%20%5Ctext%7B%20is%20a%20CFG%20that%20generates%20%7D%20w%20%5C%7D" alt="A_{CFG} = \{ {\ensuremath{\left \langle G, w \right \rangle }} | G \text{ is a CFG that generates } w \}" title="A_{CFG} = \{ {\ensuremath{\left \langle G, w \right \rangle }} | G \text{ is a CFG that generates } w \}" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A_%7BCFG%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20G%2C%20w%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20G%20%5Ctext%7B%20is%20a%20CFG%20that%20generates%20%7D%20w%20%5C%7D" alt="A_{CFG} = \{ {\ensuremath{\left \langle G, w \right \rangle }} | G \text{ is a CFG that generates } w \}" title="A_{CFG} = \{ {\ensuremath{\left \langle G, w \right \rangle }} | G \text{ is a CFG that generates } w \}" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=E_%7BCFG%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20G%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20G%20%5Ctext%7B%20is%20a%20CFG%20and%20%7D%20L%28G%29%20%3D%20%5Cemptyset%20%5C%7D" alt="E_{CFG} = \{ {\ensuremath{\left \langle G \right \rangle }} | G \text{ is a CFG and } L(G) = \emptyset \}" title="E_{CFG} = \{ {\ensuremath{\left \langle G \right \rangle }} | G \text{ is a CFG and } L(G) = \emptyset \}" /></p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=EQ_%7BCFG%7D%20%3D%20%5C%7B%20%7B%5Censuremath%7B%5Cleft%20%5Clangle%20G%2C%20H%20%5Cright%20%5Crangle%20%7D%7D%20%7C%20G%20%5Ctext%7B%20and%20%7D%20H%20%5Ctext%7Bare%20DFAs%20and%20%7D%20L%28G%29%20%3D%20L%28H%29%20%5C%7D" alt="EQ_{CFG} = \{ {\ensuremath{\left \langle G, H \right \rangle }} | G \text{ and } H \text{are DFAs and } L(G) = L(H) \}" title="EQ_{CFG} = \{ {\ensuremath{\left \langle G, H \right \rangle }} | G \text{ and } H \text{are DFAs and } L(G) = L(H) \}" /></p></li>
+<li><p>Every context-free language is decidable.</p></li>
+</ul>
+<h2 id="a-non-turing-recognizable-language">A Non-Turing-Recognizable Language</h2>
+<p>TODO: In this portion, I believe that we did the Halting Problem. Need to verify.</p>
+<h2 id="undecidability-of-the-halting-problem">Undecidability of the Halting Problem</h2>
+<p>Given a description of an arbitrary computer program, decide whether the program finishes running or continues forever. In other words, given a program and an input, please decide if the program eventually halts when run with that input? (or will it run forever)</p>
+<p>Suppose a solution to the halting problem <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=H" alt="H" title="H" /> “accepts” input <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=H%28P%2C%20I%29" alt="H(P, I)" title="H(P, I)" /> if and only if <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=P" alt="P" title="P" /> halts on <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=I" alt="I" title="I" />. Otherwise, it will always “reject”.</p>
+<p>Now we define the code <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Z" alt="Z" title="Z" /> as follows:</p>
+<pre><code>            Program(String x):
+                if Halt(x, x):
+                    Loop forever
+                else:
+                    Halt
+        </code></pre>
+<p>This is a pretty simple program, but if we run <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Z" alt="Z" title="Z" /> with input <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Z" alt="Z" title="Z" />, we have impossible conclusions:</p>
+<ul>
+<li><p>In the case that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Halt%28Z%2CZ%29" alt="Halt(Z,Z)" title="Halt(Z,Z)" /> is true, we will loop forever. This is a contradiction.</p></li>
+<li><p>In the case that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Halt%28Z%2CZ%29" alt="Halt(Z,Z)" title="Halt(Z,Z)" /> is false, we will halt. This is a contradiction.</p></li>
+</ul>
+<p>This function <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=H" alt="H" title="H" /> cannot exist.</p>
+<h2 id="reductions">Reductions</h2>
+<p>One of the easiest ways to prove something is not decidable or not Turing-Recognizable is to establish a mapping from some other language you already know to be undecidable or not to be Turing-Recognizable.</p>
+<p>We can define <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cle_m" alt="\le_m" title="\le_m" /> reductions (i.e. mapping reductions) as follows:</p>
+<p>Being able to reduce problem <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> by using a mapping reducibility means that a computable function <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=f" alt="f" title="f" /> exists that converts instances of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />. If we have this <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=f" alt="f" title="f" /> (called a reduction), we can solve <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> with a solver for <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />.</p>
+<p>We want to find a way to “translate” every problem in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> to a problem in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />.</p>
+<p>By finding <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Cle_m%20B" alt="A \le_m B" title="A \le_m B" /> and knowing some things about <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" />, we know some things about <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />:</p>
+<ul>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Cle_m%20B" alt="A \le_m B" title="A \le_m B" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> is not decidable, then <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> is not decidable.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Cle_m%20B" alt="A \le_m B" title="A \le_m B" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> is not Turing-Recognizable, then <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> is not Turing-Recognizable.</p></li>
+</ul>
+<h2 id="more-undecidable-and-non-turing-recognizable-languages">More Undecidable and Non-Turing-Recognizable Languages</h2>
+<p>TODO: Not sure what we did here.</p>
+<h2 id="further-discussion-of-turing-machines">Further Discussion of Turing Machines</h2>
+<p>TODO: Not sure what we did here.</p>
+<h1 id="computation-time">Computation Time</h1>
+<h2 id="time-bounded-computation">Time-Bounded Computation</h2>
+<p>TODO: Complete Me</p>
+<h2 id="the-time-hierarchy-theorem">The Time Hierarchy Theorem</h2>
+<p>I’m relatively sure it goes as follows:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Cmbox%7BP%7D%20%5Csubseteq%20%5Cmbox%7BNP%7D%20%5Csubseteq%20%5Cmbox%7BEXPTIME%7D%0A%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+            \mbox{P} \subseteq \mbox{NP} \subseteq \mbox{EXPTIME}
+        \end{aligned}" title="\begin{aligned}
+            \mbox{P} \subseteq \mbox{NP} \subseteq \mbox{EXPTIME}
+        \end{aligned}" /><br /></p>
+<p>TODO: Complete Me</p>
+<h2 id="boolean-circuits-and-their-relationship-to-turing-machines">Boolean Circuits and Their Relationship to Turing Machines</h2>
+<p>Any Turing Machine can be simulated by a boolean circuit, and every boolean circuit can be simulated by a Turing Machine.</p>
+<h2 id="p-and-exp">P and EXP</h2>
+<p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=P" alt="P" title="P" /> is the class of decision problems which can be solved by a DTM using a polynomial amount of computation time. i.e. Polytime or <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=P" alt="P" title="P" /> time.</p>
+<p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=EXP" alt="EXP" title="EXP" /> is the set of all decision problems solvable by a DTM in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=O%282%5E%7Bp%28n%29%7D%29" alt="O(2^{p(n)})" title="O(2^{p(n)})" /> time, where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=p%28n%29" alt="p(n)" title="p(n)" /> is a polynomial function of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" />.</p>
+<h2 id="nondeterministic-turing-machines">Nondeterministic Turing Machines</h2>
+<p>Nondeterministic Turing Machines (NDTMs) are defined as a 6-tuple:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20M%20%3D%20%28Q%2C%20%5CSigma%2C%20%5Ciota%2C%20%5Csqcup%2C%20A%2C%20%5Cdelta%29%0A%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+            M = (Q, \Sigma, \iota, \sqcup, A, \delta)
+        \end{aligned}" title="\begin{aligned}
+            M = (Q, \Sigma, \iota, \sqcup, A, \delta)
+        \end{aligned}" /><br /></p>
+<p>Where:</p>
+<ul>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Q" alt="Q" title="Q" /> is a finite set of states.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5CSigma" alt="\Sigma" title="\Sigma" /> is a finite set of symbols (the tape alphabet).</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Ciota%20%5Cin%20Q" alt="\iota \in Q" title="\iota \in Q" /> is the initial state.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Csqcup%20%5Cin%20%5CSigma" alt="\sqcup \in \Sigma" title="\sqcup \in \Sigma" /> is the blank symbol.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Csubseteq%20Q" alt="A \subseteq Q" title="A \subseteq Q" /> is the set of accepting states.</p></li>
+<li><p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cdelta" alt="\delta" title="\delta" /> is the transfer function <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=Q%20%5Csetminus%20A%20%5Ctimes%20%5CSigma%20%5Cto%20Q%20%5Ctimes%20%5CSigma%20%5Ctimes%20%5C%7B%20L%2C%20R%20%5C%7D" alt="Q \setminus A \times \Sigma \to Q \times \Sigma \times \{ L, R \}" title="Q \setminus A \times \Sigma \to Q \times \Sigma \times \{ L, R \}" /></p></li>
+</ul>
+<p>The difference between a NDTM (NTM?) and a DTM is that NDTMs inhabit a set of states instead of a single state. They accept the state if any of their current states are accepted.</p>
+<h2 id="np">NP</h2>
+<p>We say that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=NP" alt="NP" title="NP" /> is the set of problems that are defined as follows:</p>
+<p><br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cbegin%7Baligned%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%5Cmbox%7BNP%7D%20%26%3D%20%5Cbigcup_%7Bk%20%5Cin%20%5Cmathbbold%7BN%7D%7D%20%5Cmbox%7BNTIME%7D%28n%5Ek%29%0A%20%20%20%20%20%20%20%20%5Cend%7Baligned%7D" alt="\begin{aligned}
+            \mbox{NP} &amp;= \bigcup_{k \in \mathbbold{N}} \mbox{NTIME}(n^k)
+        \end{aligned}" title="\begin{aligned}
+            \mbox{NP} &amp;= \bigcup_{k \in \mathbbold{N}} \mbox{NTIME}(n^k)
+        \end{aligned}" /><br /></p>
+<p>Alternatively, we can define using DTMs. A language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" /> is in NP if and only if there exist polynomials <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=p" alt="p" title="p" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=q" alt="q" title="q" /> and a DTM <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> such that: [We call <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> a TODO what do we call <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" />?]</p>
+<ul>
+<li><p>For all <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=x" alt="x" title="x" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=y" alt="y" title="y" />, the machine <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> runs in time <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=p%28%7Cx%7C%29" alt="p(|x|)" title="p(|x|)" /> on input <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7B%5Censuremath%7B%5Cleft%20%5Clangle%20x%2C%20y%20%5Cright%20%5Crangle%20%7D%7D" alt="{\ensuremath{\left \langle x, y \right \rangle }}" title="{\ensuremath{\left \langle x, y \right \rangle }}" />.</p></li>
+<li><p>For all <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=x" alt="x" title="x" /> in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" />, there exists a string <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=y" alt="y" title="y" /> of length <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=q%28%7Cx%7C%29" alt="q(|x|)" title="q(|x|)" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> accepts <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7B%5Censuremath%7B%5Cleft%20%5Clangle%20x%2C%20y%20%5Cright%20%5Crangle%20%7D%7D" alt="{\ensuremath{\left \langle x, y \right \rangle }}" title="{\ensuremath{\left \langle x, y \right \rangle }}" />.</p></li>
+<li><p>For all <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=x" alt="x" title="x" /> not in <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" />, there exists a string <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=y" alt="y" title="y" /> of length <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=q%28%7Cx%7C%29" alt="q(|x|)" title="q(|x|)" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=M" alt="M" title="M" /> rejects <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%7B%5Censuremath%7B%5Cleft%20%5Clangle%20x%2C%20y%20%5Cright%20%5Crangle%20%7D%7D" alt="{\ensuremath{\left \langle x, y \right \rangle }}" title="{\ensuremath{\left \langle x, y \right \rangle }}" />.</p></li>
+</ul>
+<p>We can say that a language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" /> is NP-Complete if <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=L" alt="L" title="L" /> is NP and every <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> in NP is polynomial time reducible to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />.</p>
+<h2 id="polynomial-time-mapping-reductions">Polynomial-Time Mapping Reductions</h2>
+<p>Language <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> is polynomial time mapping reducible (or simply polytime reducible) to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" />, written <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Cle_p%20B" alt="A \le_p B" title="A \le_p B" /> if a polytime computable function <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=f%20%3A%20%5CSigma%5E%2A%20%5Cto%20%5CSigma%5E%2A" alt="f : \Sigma^* \to \Sigma^*" title="f : \Sigma^* \to \Sigma^*" /> exists such that for every <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=w" alt="w" title="w" />, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=w%20%5Cin%20A%20%5Cleftrightarrow%20f%28w%29%20%5Cin%20B" alt="w \in A \leftrightarrow f(w) \in B" title="w \in A \leftrightarrow f(w) \in B" />.</p>
+<p>If <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Cle_p%20B" alt="A \le_p B" title="A \le_p B" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B%20%5Cin%20P" alt="B \in P" title="B \in P" />, then <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A%20%5Cin%20P" alt="A \in P" title="A \in P" />.</p>
+<p><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmbox%7B3SAT%7D" alt="\mbox{3SAT}" title="\mbox{3SAT}" /> is polytime reducible to <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmbox%7BCLIQUE%7D" alt="\mbox{CLIQUE}" title="\mbox{CLIQUE}" />. This means that if <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmbox%7BCLIQUE%7D" alt="\mbox{CLIQUE}" title="\mbox{CLIQUE}" /> is solvable in polynomial time, so is <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cmbox%7B3SAT%7D" alt="\mbox{3SAT}" title="\mbox{3SAT}" />.</p>
+<p>Set of related notes:</p>
+<ul>
+<li><p>If <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> is NP-Complete and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B%20%5Cin%20P" alt="B \in P" title="B \in P" />, then P = NP</p></li>
+<li><p>If <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B" alt="B" title="B" /> is NP-Complete and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=B%20%5Cle_p%20C" alt="B \le_p C" title="B \le_p C" /> for <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> in NP, then <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=C" alt="C" title="C" /> is NP-Complete.</p></li>
+<li><p>3SAT, CLIQUE, SAT, Vertex Cover, HamPath, Subset-SUM are all NP-Complete.</p></li>
+</ul>
+<h2 id="the-cook-levin-theorem">The Cook-Levin Theorem</h2>
+<p>The Cook-Levin theorem states that boolean satisfiability is NP-Complete.</p>
+<p>That is, any problem in NP can be reduced to boolean satisfiability in polynomial time by a deterministic Turing Machine to the problem of determining whether a Boolean formula is satisfiable.</p>
+<h2 id="further-discussion-of-computability-and-complexity-theory">Further Discussion of Computability and Complexity theory</h2>
+</body>
+</html>

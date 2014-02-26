@@ -1,8 +1,5 @@
 ---
-authors:
-- |
-    Craig, Shale\
-    `sakcraig@uwaterloo.ca`
+generator: pandoc
 title: SE 350 End of Term Notes
 ...
 
@@ -27,8 +24,9 @@ being fully resident in memory.
 Execute code. Once program tries to read/exec instructions not in RAM,
 we page fault, block, read data, then resume.
 
-Virtual Addresses are tuples of
-${\ensuremath{\left \langle \text{Page \#}, \text{Offset} \right \rangle }}$.
+Virtual Addresses are tuples of ![{\\ensuremath{\\left \\langle
+\\text{Page \\\#}, \\text{Offset} \\right \\rangle
+}}](http://chart.apis.google.com/chart?cht=tx&chl=%7B%5Censuremath%7B%5Cleft%20%5Clangle%20%5Ctext%7BPage%20%5C%23%7D%2C%20%5Ctext%7BOffset%7D%20%5Cright%20%5Crangle%20%7D%7D "{\ensuremath{\left \langle \text{Page \#}, \text{Offset} \right \rangle }}").
 We look up the Page Number + Page Table Pointer in the Page Table, which
 gives us the Frame \#. Combine (by a bitmask) the two points, and you
 get the physical address of the memory in main memory.
@@ -94,7 +92,8 @@ be in memory. Once it is past a certain size, there is no real gain from
 a large resident set.
 
 The working set is the set of pages of the process that have been
-referenced in the last $t$ time.
+referenced in the last
+![t](http://chart.apis.google.com/chart?cht=tx&chl=t "t") time.
 
 Calculating the Resident Set Size {#sec:calculating_the_resident_set_size}
 ---------------------------------

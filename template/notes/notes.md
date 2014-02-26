@@ -1,6 +1,5 @@
 ---
-authors:
-- 'Shale Craig Prof: Nafeez Fatima'
+generator: pandoc
 title: ECON 101
 ...
 

@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>CS 348</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">CS 348</h1>
+</div>
+<h1 id="cha:introduction">Introduction</h1>
+<h2 id="sec:motivation">Motivation</h2>
+<p>We’re motivated to develop corporate databases in an increasingly information-oriented society. How do we do this? What does the fox say? Nobody knows.</p>
+<h2 id="sec:data_management">Data Management</h2>
+<p><em>Objective:</em> to represent (a part of) the world usefully while <em>abstracting</em> away the details.</p>
+<dl>
+<dt>Intension</dt>
+<dd><p>of data conceptually describes the schema of a database (or data).<br /><code>EMPLOYEE(SIN, NAME, ADDRESS, BIRTHDATE, SALARY)</code></p>
+</dd>
+<dt>Extension</dt>
+<dd><p>of data is actually instances of data.<br /><code>(1234, &quot;Foo Bar&quot;, &quot;123 Bar Street&quot;, Jan 1, 1970, 10$/h)</code></p>
+</dd>
+</dl>
+<h2 id="sec:components_of_a_database_system">Components of a Database System</h2>
+<ul>
+<li><p>Hardware</p></li>
+<li><p>Software</p>
+<ul>
+<li><p>Application Programs</p></li>
+<li><p>Utility programs</p></li>
+<li><p>OS</p></li>
+</ul></li>
+<li><p>Database Management System (DBMS)</p>
+<p>Dictates data structure with simple CRUD support through variety of concurrent access methods.</p></li>
+</ul>
+<ol>
+<li><p><em>Concurrency Control</em> exists so queries are externally consistent.</p></li>
+<li><p><em>Security</em> exists to protect data from unauthorized access (password controlled, etc).</p></li>
+<li><p><em>Integrity</em> exists as constraints to ensure that data in the database is accurate and meaningful.</p></li>
+<li><p><em>Recovery from Failures</em> protects the database from dying.</p></li>
+</ol>
+<h2 id="sec:data">Data</h2>
+<ul>
+<li><p>Is the content of the knowledge of the organization.</p></li>
+<li><p><em>Logical Files</em> as seen by application programmers - deals with the layout.</p></li>
+<li><p><em>Physical Files</em> as seen by system programmers - performance.</p></li>
+<li><p>Very often, the two types of files are related.</p></li>
+</ul>
+<h2 id="sec:dbms_architecture">DBMS Architecture</h2>
+<p>Exists within a dynamic environment where programs are highly linked, which leads to high maintenance cost.</p>
+<p>We’d like to introduce independence between data and the application programs that use them, so either can be changed.</p>
+<p>We’d like to maintain the ability to make logical changes (to the data) explicitly, without physical changes (storage media) affecting it.</p>
+<dl>
+<dt>Data Definition Language</dt>
+<dd><p>specifies the schemas and their mappings. (DDL)</p>
+</dd>
+<dt>Data Dictionary</dt>
+<dd><p>is the result of compilation of DDL statements in a schema.</p>
+</dd>
+<dt>Data Manipulation Language</dt>
+<dd><p>is the commands that are issued to the host program. (DML)</p>
+</dd>
+<dt>Query Language</dt>
+<dd><p>is a language for interactive data manipulation.</p>
+</dd>
+</dl>
+<h1 id="cha:data_models">Data Models</h1>
+<p>Data Models are guidelines and structure for organizing value-based or object-based data and executing operations within constraints.</p>
+<h2 id="sec:entity_relationship_model">Entity Relationship Model (ERM)</h2>
+<p><strong>Entity Sets</strong> are a thing or object that can be distinctly identified (an <em>entity</em>) grouped into sets.</p>
+<p>This section glosses over terms such as “entity”, “relationship”, and “relationship type”.</p>
+<p>This is the notation that goes as follows:</p>
+<dl>
+<dt>Librarian</dt>
+<dd><p>(, Name, Salary, Addr, Allowance, Union, LibraryName)</p>
+</dd>
+</dl>
+<p>This indicates that librarians have the primary key <em>Emp#</em>, and the attributes specified afterwards (Name, Salary, etc).</p>
+<h2 id="sec:entity_relationship_diagram_">Entity-Relationship Diagram (RD)</h2>
+<p>This is an extension of UML that we can quickly convert to something actually useful.</p>
+<h3 id="sub:structure">Structure</h3>
+<p>This is a UML-like graph. Since you probably don’t know about the dialect of UML that this professor wants us to know, here’s a quick primer of what you need to know:</p>
+<dl>
+<dt>Entity Types</dt>
+<dd><p>are specified by rectangles. These connect to Relationship Types and Attributes.</p>
+</dd>
+<dt>Relationship Types</dt>
+<dd><p>are specified by diamonds. These connect <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Cge" alt="\ge" title="\ge" /> two Entity Types.</p>
+</dd>
+<dt>Attributes</dt>
+<dd><p>are specified by ellipses. These connect to single Entity Types.</p>
+</dd>
+</dl>
+<h3 id="sub:constraints">Constraints</h3>
+<p>We can establish constraints on these as follows:</p>
+<h4 id="ssub:primary_keys">Primary Keys</h4>
+<p>There are two types of keys:</p>
+<dl>
+<dt>Candidate Keys</dt>
+<dd><p>are minimal sets of attributes whose values identify an entity at all times.</p>
+</dd>
+<dt>Primary Keys</dt>
+<dd><p>are the main way of identifying an entity. They must be a candidate key.</p>
+</dd>
+</dl>
+<h4 id="ssub:cardinality">Cardinality</h4>
+<p>We can force the number of entities (i.e. the cardinality of the ones involved) using UML-like <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%28x%2C%20y%29" alt="(x, y)" title="(x, y)" /> notation on relationships.</p>
+<p>Generally, it’s expressed as <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%28%5Ctext%7Bmin%7D%2C%20%5Ctext%7Bmax%7D%29" alt="(\text{min}, \text{max})" title="(\text{min}, \text{max})" />. The restrictions are <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=0%5Cle%20x" alt="0\le x" title="0\le x" />, and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=y" alt="y" title="y" /> can be any number or a <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%2A" alt="*" title="*" /><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>The restrictions are written next to the corresponding entity.</p>
+<h4 id="ssub:existence_constraints">Existence Constraints</h4>
+<p>By designing our ERD properly, we can create an entity <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> which is totally dependent if every existence of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=A" alt="A" title="A" /> is always associated with another entity through a relationship.</p>
+<h3 id="sub:extended_erm">Extended ERM (EERM)</h3>
+<h4 id="ssub:generalization_and_specialization">Generalization and Specialization</h4>
+<p>We can extend what ERM specifies by using inheritance.</p>
+<p>We can express the similar properties using the concept of <strong>generalization</strong><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p>By adding a tree-structure, we can specify our ERDs with a tree-like structure. Parent entities are connected to triangle blocks that say “IS-A” to their children.</p>
+<h4 id="ssub:aggregation">Aggregation</h4>
+<p>Supposing that we want to construct relationships to relationships<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. In this case, we can make a box around the elements from the first relation (almost like they’re an “entity”), and connect the relationship in the box to the external relationships desired.</p>
+<h1 id="cha:storage_systems_and_file_structures">Storage Systems and File Structures</h1>
+<h2 id="sec:introduction">Introduction</h2>
+<p>Data is stored on primary or secondary storage.</p>
+<h3 id="sub:primary_storage">Primary Storage</h3>
+<p>Primary storage tends to be faster (caches, dynamic random-access memory (DRAM)); it’s fast but expensive.</p>
+<h3 id="sub:secondary_storage">Secondary Storage</h3>
+<p>Secondary storage tends to be larger than large, but it’s also very slow.</p>
+<h3 id="sub:disk_storage_devices">Disk Storage Devices</h3>
+<p>Disks are the most common type of secondary storage, and can hold terabytes.</p>
+<p>They are constructed of <em>disk packs</em> of <em>magnetic disks</em> connected to a rotating spindle. The disks have concentric circular <em>tracks</em> on each surface. Tracks with the same diameter form a <em>cylinder</em>. Each track is divided into equal size units called <em>blocks</em> or <em>pages</em>.</p>
+<p>Pages are moved into main memory on demand. Since the access time is  <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=30" alt="30" title="30" />ms, and the CPU takes nano-seconds to process things, I/O is the bottleneck.</p>
+<h2 id="sec:reducing_latency_and_page_accesses">Reducing Latency and Page Accesses</h2>
+<p>We store pages containing related information near to each other since applications are likely to read them next<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</p>
+<h3 id="sub:accessing_data_through_a_cache">Accessing Data Through a Cache</h3>
+<p>Files are a sequence of records stored on disk blocks.</p>
+<p>Records can be <strong>fixed-length</strong> or <strong>variable</strong> length, and can span only one block.</p>
+<p>Physical disk blocks allocated to hold records of a file can be <em>contiguous</em>, <em>linked</em>, or <em>indexed</em>.</p>
+<h3 id="sub:ordered_files">Ordered Files</h3>
+<p>Ordered files (or <em>sequential files</em>) are records kept sorted by the values of an ordering field.</p>
+<p>Insertion can be expensive, so some implementations use an <em>overflow file</em> for new records to improve insertion. This is periodically merged with the ordered file.</p>
+<p>Binary searches are used within a file to find a record with a given value of the ordering field.</p>
+<h1 id="cha:indexing_structures_for_files">Indexing Structures for Files</h1>
+<h2 id="sec:introduction">Introduction</h2>
+<p>Given an attribute value, we want to retrieve all records that match that attribute. Indexes are great, since when looking up according to an index we can get optimized lookup<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. This speedup is great, but it comes at cost of an index file.</p>
+<h2 id="sec:types_of_indices">Types of Indexes</h2>
+<p>There are a few types of indexes:</p>
+<dl>
+<dt>Search Key</dt>
+<dd><p>is the set of attributes on which an index is built and not the one that’s always built.</p>
+</dd>
+<dt>Primary Index</dt>
+<dd><p>is the index that the index for a set of entities is built around. Usually, this is the search key<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>.</p>
+</dd>
+<dt>Ordered</dt>
+<dd><p>is a term referring to the search key ordering in the index file. Often they are ordered, but if they’re not the primary index, they are <em>unordered</em>.</p>
+</dd>
+</dl>
+<h2 id="sec:b_trees">B<img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5E%2B" alt="^+" title="^+" /> Trees</h2>
+<p>B<img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5E%2B" alt="^+" title="^+" /> trees are dynamic index-based data structures that are made up index and data blocks. They are a special type of tree optimized to reduce the number of page misses.</p>
+<h3 id="sub:specification">Specification</h3>
+<p>For a B<img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5E%2B" alt="^+" title="^+" /> tree of order <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=m" alt="m" title="m" /> and a maximum data node size of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=d" alt="d" title="d" /><a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>, we work under the constraints:</p>
+<ul>
+<li><p>All values are in leaf (“data”) nodes.</p></li>
+<li><p>All leaves are on the same level.</p></li>
+<li><p>With the exception of the root, every node has <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5B%5Cfloor%7B%5Cfrac%7Bm-1%7D%7B2%7D%7D%2C%20m-1%5D" alt="[\floor{\frac{m-1}{2}}, m-1]" title="[\floor{\frac{m-1}{2}}, m-1]" /> keys, which are sorted in ascending order.</p></li>
+<li><p>An internal (“index”) node with <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=k" alt="k" title="k" /> keys has <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=k%2B1" alt="k+1" title="k+1" /> pointers to children on the next level<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>.</p></li>
+<li><p>Data nodes have <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5B%5Cfloor%7B%5Cfrac%7Bd%7D%7B2%7D%7D%2C%20d%5D" alt="[\floor{\frac{d}{2}}, d]" title="[\floor{\frac{d}{2}}, d]" /> sorted records, and a pointer to the next and previous data node.</p></li>
+</ul>
+<p>Modifying this tree runs in logarithmic time.</p>
+<p>The data nodes of a B<img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5E%2B" alt="^+" title="^+" /> tree contain pointers to the next and previous data node for efficient iteration. The code to update this the next and previous data node would be found in the functions <em>split</em> and <em>merge</em>.</p>
+<h3 id="sub:insertion">Insertion</h3>
+<p>Insertion can be expressed as the following pseudocode:</p>
+<pre><code>    insert(node n, btree b):
+        node = b.findLeaf(n)
+        while (true):
+            node.insert(n)
+            if (!node.isOverflow())
+                return
+            if (node.isRoot()):
+                split(node)
+                return
+            n = split(node)
+            node = n.getParent;
+                    </code></pre>
+<p>Basically, we insert into the node. If we don’t have enough room inside the data node, we split it (and insert the split nodes into the parent structure).</p>
+<h4 id="ssub:split_data_node">Split - Data Node</h4>
+<p>In the case that we call split on a data (leaf) node <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n_j" alt="n_j" title="n_j" />, we create a new node <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n_%7Bj%2B1%7D" alt="n_{j+1}" title="n_{j+1}" /> that will contain half the records of the old root node. For an odd number of records, keep the extra record in node <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n_j" alt="n_j" title="n_j" />. Promote<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a> the largest key value to the parent index node.</p>
+<h4 id="ssub:split_index_node">Split - Index Node</h4>
+<p>In the case that we call split on a index node with keys <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=k_j%20%5Cto%20k_%7Bj%2Bn%7D" alt="k_j \to k_{j+n}" title="k_j \to k_{j+n}" />, we partition the values into <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Bk_j%20%5Ccdots%20k_%7Bj%2B%20%5Clfloor%5Cfrac%7Bn%7D%7B2%7D%5Crfloor%20-%201%7D%5D" alt="[k_j \cdots k_{j+ \lfloor\frac{n}{2}\rfloor - 1}]" title="[k_j \cdots k_{j+ \lfloor\frac{n}{2}\rfloor - 1}]" /> and <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%5Bk_%7Bj%2B%20%5Clfloor%5Cfrac%7Bn%7D%7B2%7D%5Crfloor%20%2B%201%7D%20%5Ccdots%20%20k_%7Bj%2Bn%7D%5D" alt="[k_{j+ \lfloor\frac{n}{2}\rfloor + 1} \cdots  k_{j+n}]" title="[k_{j+ \lfloor\frac{n}{2}\rfloor + 1} \cdots  k_{j+n}]" />. For an odd number of records, keep the extra record in node <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n_j" alt="n_j" title="n_j" />. Move<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> the key <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=k_j" alt="k_j" title="k_j" /> to the parent node, and keep pointers to the left and right nodes in the data structure.</p>
+<h3 id="sub:deletion">Deletion</h3>
+<p>Deletion seems like a pretty annoying algorithm because leaf height needs to be maintained, but it’s surprisingly simple:</p>
+<pre><code>    def delete(index idx, bTree b):
+        node toDelete = b.find(idx)
+        entry = toDelete.getEntry()
+        while (entry != null):
+            node parent = entry.parent
+            parent.remove(entry)
+            if (!parent.isUnderFlow()):
+                return
+            if (parent.isRoot()):
+                collapseRoot()
+            if (!parent.leftNeighbor.isMinimal()):
+                redistribute(parent, parent.leftNeighbor)
+            merge(parent, parent.leftNeighbor);
+            entry = parent.getEntry()
+                    </code></pre>
+<h4 id="ssub:redistribute_data">Redistribute - Data</h4>
+<p>Redistribute records as evenly as possible between two siblings, updating the parent key accordingly.</p>
+<h4 id="ssub:redistribute_index">Redistribute - Index</h4>
+<p>Redistribute indexes as evenly as possible between two siblings, updating the parent key accordingly.</p>
+<h4 id="ssub:merge_data">Merge - Data</h4>
+<p>Merge the two data blocks into one (move the records from right to left), and delete the parent entry that divided the two.</p>
+<h4 id="ssub:merge_index">Merge - Index</h4>
+<p>One sibling has below minimum, while the other has minimum. Merge the two, and delete the parent key separating the two.</p>
+<h1 id="cha:relational_model">Relational Model</h1>
+<p>Relational models are used to design and model relational databases, foo’!</p>
+<h2 id="sec:terminology">Terminology</h2>
+<p>We only have one data structuring tool - a <strong>relation</strong>. We can express relations as <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=D_1%20%5Ctimes%20%5Ccdots%20%5Ctimes%20D_n%20%3D%20%5C%7B%20%5Clangle%20a_1%2C%20%5Ccdots%2C%20a_n%20%5Crangle%20%7C%20%5Cforall%20i%3A%20a_i%20%5Cin%20D_i%5C%7D" alt="D_1 \times \cdots \times D_n = \{ \langle a_1, \cdots, a_n \rangle | \forall i: a_i \in D_i\}" title="D_1 \times \cdots \times D_n = \{ \langle a_1, \cdots, a_n \rangle | \forall i: a_i \in D_i\}" />. We call <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=r%20%3D%20%5Clangle%20a_1%2C%20%5Ccdots%20a_n%5Crangle" alt="r = \langle a_1, \cdots a_n\rangle" title="r = \langle a_1, \cdots a_n\rangle" /> a relation on <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" />-sets; i.e. <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=r" alt="r" title="r" /> is a set of <strong>tuples</strong> (often called <strong>rows</strong>). We call <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=D_j" alt="D_j" title="D_j" /> the <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=j%5E%7B%5Ctext%7Bth%7D%7D" alt="j^{\text{th}}" title="j^{\text{th}}" /> domain of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=r" alt="r" title="r" />, where <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=r" alt="r" title="r" /> is of degree <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=n" alt="n" title="n" />.</p>
+<p>When writing databases, we use the <strong>Closed World Assumption</strong> to govern what exists - the assumption that everything not currently know to be true is false<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a>.</p>
+<p><strong>Relational schemes</strong> define the composition (intension) of a relation.</p>
+<p><strong>Domains</strong> are the limited scope that an attribute is valid under.</p>
+<h2 id="sec:key_propogation">Key Propagation</h2>
+<p>For many:many relationships (i.e. many <code>doctor</code>s may be the <code>attendingDoctor</code> for a many <code>patient</code>s), it’s a good idea to keep keys joining the two in a separate relation.</p>
+<h2 id="sec:constraints">Constraints</h2>
+<h3 id="sub:inherent_constraints">Inherent Constraints</h3>
+<p>Inside a relationship, there are a few basic constraints:</p>
+<ul>
+<li><p>We need to have a <em>Candidate Key</em> that is a minimal set of attributes to uniquely identify tuples. This candidate key cannot be repeated.</p></li>
+<li><p>We need to have a <em>Primary Key</em> that cannot be updated, duplicated, nor contain nulls (<strong>entity integrity rule</strong>)</p></li>
+</ul>
+<h4 id="ssub:domain_constraints">Domain Constraints</h4>
+<p>In core SQL-99, we can limit attribute values using the <code>check</code> constraint or creating a new domain. The domain is used in schema declarations, and is a schema element:</p>
+<pre><code>    CREATE DOMAIN Grades CHAR(1)
+        CHECK (VALUE IN (&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;F&#39;));
+                    </code></pre>
+<p>We can use this “type” later:</p>
+<pre><code>    create table Transcript (
+        ...,
+        grade Grades,
+        ...
+    )
+                    </code></pre>
+<h4 id="ssub:foreign_key_referential_integrity_constraints">Foreign Key (Referential Integrity) Constraints</h4>
+<p>Given that a set of attributes <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=FK%20%5Csubseteq%20R_1" alt="FK \subseteq R_1" title="FK \subseteq R_1" /> is a <em>foreign key</em> that references <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_2" alt="R_2" title="R_2" />, we have two constraints to satisfy:</p>
+<ol>
+<li><p>The attributes of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=FK" alt="FK" title="FK" /> are defined on the same domains as the primary key <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=PK" alt="PK" title="PK" /> of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_2" alt="R_2" title="R_2" />.</p></li>
+<li><p>A value of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=FK" alt="FK" title="FK" /> either occurs as a value of <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=PK" alt="PK" title="PK" />, or <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=FK" alt="FK" title="FK" /> is null.</p></li>
+</ol>
+<p>We say that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_1" alt="R_1" title="R_1" /> references <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_2" alt="R_2" title="R_2" /><a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a></p>
+<h2 id="sec:tables">Tables</h2>
+<p>We use tables as our basic type of represent relations.</p>
+<p>The SQL syntax is as follows:</p>
+<pre><code>    create table &lt;tname&gt; (
+        (columnDec)+
+        [, (tableConstraint)]
+    );
+    columnDec =
+        &lt;colName&gt; &lt;colDataType&gt; [default &lt;value&gt;][(colConstraint)+];
+    colConstraint = {
+        not null |
+        [constraint &lt;name&gt;] unique |
+        primary key |
+        check (search_cond) |
+        references &lt;tname&gt; [&lt;colName&gt;] [(refEffect)]
+    }
+    tableConstraint = [constraint name] {
+        UNIQUE (&lt;colName&gt;+) |
+        foreign key (&lt;colName&gt;+) references &lt;tname&gt; [(refEffect)]
+    }
+    refEffect = on {update | delete} (effect)
+    effect = {
+        set null |
+        no action (restrict) |
+        cascade |
+        set default
+    }
+                </code></pre>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The star indicates “any”.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>He tends to enjoy the “is-a” concept more than the phrase “generalization”. I like the word “inheritance” more.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>An example of this is that a <em>Student</em> may <em>Participate</em> in a <em>Project</em>. There is a relationship <em>Eval</em> between the <em>Student</em>, <em>Participate</em>, and <em>Project</em> and a <em>Report</em>. This is an example of this idea.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Is this called the principle of locality?<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>We don’t have optimized lookup for a non-index.<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>In the cases where the primary index isn’t the search key, the search key is known as the secondary index.<a href="#fnref6">↩</a></p></li>
+<li id="fn7"><p>Often, <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=m%20%5Cne%20d" alt="m \ne d" title="m \ne d" />.<a href="#fnref7">↩</a></p></li>
+<li id="fn8"><p>The children correspond to the partition induced on the key space by the <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=k" alt="k" title="k" /> keys.<a href="#fnref8">↩</a></p></li>
+<li id="fn9"><p>Just clone the value, don’t remove it from the data node.<a href="#fnref9">↩</a></p></li>
+<li id="fn10"><p>Move, not clone.<a href="#fnref10">↩</a></p></li>
+<li id="fn11"><p>i.e. if I don’t know about it, it must not exist.<a href="#fnref11">↩</a></p></li>
+<li id="fn12"><p>He took extra time to point out that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_1" alt="R_1" title="R_1" /> is the <em>referencing</em> relation, and that <img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=R_2" alt="R_2" title="R_2" /> is the <em>referenced</em> relation with respect to this foreign key constraint.<a href="#fnref12">↩</a></p></li>
+</ol>
+</section>
+</body>
+</html>
