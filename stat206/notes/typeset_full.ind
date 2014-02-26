@@ -1,0 +1,86 @@
+\begin{theindex}
+
+  \item Bayes theorem, 8
+  \item Bernoulli Distribution, 11
+
+  \indexspace
+
+  \item categorial variable, 2
+  \item cdf, \see{cumulative distribution function}{9}
+  \item continuous variable, 3
+  \item cumulative distribution function, 9
+
+  \indexspace
+
+  \item descriptive statistics, 3
+  \item discrete variable, 2
+  \item dispersion, 3
+
+  \indexspace
+
+  \item estimator
+    \subitem bias, 35
+    \subitem standard error, 35
+  \item expected value, 9
+  \item experiment, 3
+
+  \indexspace
+
+  \item false negative, 8
+
+  \indexspace
+
+  \item inferential statistics, 3
+
+  \indexspace
+
+  \item mean, 3, 9
+  \item median, 3
+
+  \indexspace
+
+  \item pdf, \see{Probability Density Function}{9}, 
+		\see{Probability Density Function}{19}
+  \item Poisson Distribution, 14
+  \item Poisson Process, \see{Poisson Distribution}{14}
+  \item population, 2
+  \item Probability Density Function, 
+		\see{Probability Density Function}{9}, 19
+
+  \indexspace
+
+  \item range, 8
+  \item relative frequency, 3
+
+  \indexspace
+
+  \item s
+    \subitem $s^2$, 3
+  \item $s$, 3
+  \item sample, 3
+  \item sample error, 3
+  \item sample space, 3
+  \item standard deviation, 3, 10
+  \item study error, 3
+  \item subjective frequency, 3
+
+  \indexspace
+
+  \item trial, 3
+
+  \indexspace
+
+  \item Uniform Distribution
+    \subitem continuous, 21
+  \item unit, 2
+
+  \indexspace
+
+  \item variables, 2
+  \item variance, 3, 9
+
+  \indexspace
+
+  \item $\bar{x^*}$, 3
+
+\end{theindex}
