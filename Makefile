@@ -52,6 +52,18 @@ PHONY = list clean default all notes assignments labs wkrpts
 default:
 	@make all
 
+easter_egg:
+	@echo '                                                                 '
+	@echo '     ________   ________  _________  _______   ________          '
+	@echo '    |\   ___  \|\   __  \|\___   ___\\  ___ \ |\   ____\         '
+	@echo '    \ \  \\ \  \ \  \|\  \|___ \  \_\ \   __/|\ \  \___|_        '
+	@echo '     \ \  \\ \  \ \  \\\  \   \ \  \ \ \  \_|/_\ \_____  \       '
+	@echo '      \ \  \\ \  \ \  \\\  \   \ \  \ \ \  \_|\ \|____|\  \      '
+	@echo '       \ \__\\ \__\ \_______\   \ \__\ \ \_______\____\_\  \     '
+	@echo '        \|__| \|__|\|_______|    \|__|  \|_______|\_________\    '
+	@echo '                                                 \|_________|    '
+	@echo '                                                                 '
+
 list_notes:
 	@echo $(_typeset_note_pdfs)
 
@@ -67,7 +79,7 @@ assignments: $(_assignment_pdfs)
 list:
 	echo $(PHONY)
 
-all: $(_all_generated)
+all: easter_egg $(_all_generated)
 	@echo $^
 
 wkrpts: $(_wkrpt_pdfs)
